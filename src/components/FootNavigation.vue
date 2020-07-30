@@ -3,8 +3,8 @@
     v-model="bottomNav"
     id="foot-nav"
   >
-    <v-btn value="recent" width="33%" height="100%" id="foot-nav-box"> 
-      <v-menu top :offset-y="offset" >
+    <v-btn value="recent" width="33vw" height="100%" > 
+      <v-menu top :offset-y="offset" id="foot-nav-box">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           v-bind="attrs"
@@ -26,8 +26,8 @@
 </v-menu>
     </v-btn>
 
-    <v-btn value="recent" width="33%" height="100%" id="foot-nav-box"> 
-      <v-menu top :offset-y="offset" >
+    <v-btn value="recent"  width="40vw" height="100%" > 
+      <v-menu top :offset-y="offset" id="foot-nav-box">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           v-bind="attrs"
@@ -49,8 +49,8 @@
 </v-menu>
     </v-btn>
 
-    <v-btn value="recent" width="33%" height="100%" id="foot-nav-box"> 
-      <v-menu top :offset-y="offset" >
+    <v-btn value="recent" width="40vw" height="100%" > 
+      <v-menu top :offset-y="offset" id="foot-nav-box">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           v-bind="attrs"
@@ -62,7 +62,7 @@
       </template>
       <v-list>
         <v-list-item
-          v-for="(item, index) in items_person"
+          v-for="(item, index) in items_study"
           :key="index"
           @click="jump_study(item)"
         >
@@ -101,7 +101,7 @@ export default {
     items_study: [
       { title: '免费晒' },
       { title: '名帖字库' },
-      { title: '原帖于书论' },
+      { title: '原帖书论' },
       { title: '各地培训' },
       { title: '诗文查询' },
     ],
@@ -123,5 +123,8 @@ export default {
 </script>
 
 <style>
-@import '../style.css'
+#foot-nav-box{
+  float: left;
+}
+@import '../style.css';
 </style>

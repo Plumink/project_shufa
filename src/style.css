@@ -17,9 +17,9 @@
     width: 100%;
     height: 100%;
 }
-#foot-nav-box{
-    padding: 0%;
-}
+/* >>> #foot-nav-box{
+    background-color: red;
+} */
 element.style{
     left: 0px;
 }
