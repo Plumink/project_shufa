@@ -1,12 +1,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/"></router-link>
+      <Register />
+      <router-link to="/">Home</router-link>|
+      <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <!-- <router-view/> -->
   </div>
 </template>
 
+<script>
+import Register from './views/login/Register'
+export default {
+  components: {
+    Register
+  }
+}
+</script>
 <style lang="less">
 // #app {
 //   font-family: Avenir, Helvetica, Arial, sans-serif;
