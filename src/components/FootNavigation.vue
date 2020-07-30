@@ -1,0 +1,127 @@
+<template>
+ <v-bottom-navigation
+    v-model="bottomNav"
+    id="foot-nav"
+  >
+    <v-btn value="recent" width="33%" height="100%" id="foot-nav-box"> 
+      <v-menu top :offset-y="offset" >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+           id="foot-nav-btn"
+        >
+          {{dictionaries}}
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items_dictionaries"
+          :key="index"
+          @click="jump_dictionaries(item)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+</v-menu>
+    </v-btn>
+
+    <v-btn value="recent" width="33%" height="100%" id="foot-nav-box"> 
+      <v-menu top :offset-y="offset" >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+           id="foot-nav-btn"
+        >
+          {{person}}
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items_person"
+          :key="index"
+          @click="jump_person(item)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+</v-menu>
+    </v-btn>
+
+    <v-btn value="recent" width="33%" height="100%" id="foot-nav-box"> 
+      <v-menu top :offset-y="offset" >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+           id="foot-nav-btn"
+        >
+          {{study}}
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items_person"
+          :key="index"
+          @click="jump_study(item)"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+</v-menu>
+    </v-btn>
+  </v-bottom-navigation>
+</template>
+
+<script>
+import Vuetify from 'vuetify'
+export default {
+  vuetify: new Vuetify(),
+  data () {
+    return {
+      activeBtn: 1,
+      dictionaries:'草书',
+      person:'个人中心',
+      study:'书法学习',
+      items_dictionaries: [
+      { title: '草书' },
+      { title: '行书' },
+      { title: '楷书' },
+      { title: '隶书' },
+      { title: '篆书' },
+    ],
+    items_person: [
+      { title: '个人中心' },
+      { title: '微店入口' },
+      { title: '我要分享' },
+      { title: '我的保存' },
+      { title: '成为会员' },
+    ],
+    items_study: [
+      { title: '免费晒' },
+      { title: '名帖字库' },
+      { title: '原帖于书论' },
+      { title: '各地培训' },
+      { title: '诗文查询' },
+    ],
+    offset: true,
+    }
+  },
+  methods:{
+    jump_dictionaries(item){
+      this.dictionaries=item.title
+    },
+    jump_person(item){
+      this.person=item.title
+    },
+    jump_study(item){
+      this.study=item.title
+    },
+  }
+}
+</script>
+
+<style>
+@import '../style.css'
+</style>

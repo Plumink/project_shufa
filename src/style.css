@@ -1,0 +1,25 @@
+/*---------------------- FootNavigation-------------------------- */
+#foot-nav{
+    position: absolute;
+    bottom: 0;
+    margin: 0%;
+    padding: 0%;
+}
+.foot-nav-span{
+    background-color: red;
+    vertical-align:middle;
+    width:'33%';
+    
+}
+#foot-nav-btn{
+    padding: 0%;
+    margin: 0%;
+    width: 100%;
+    height: 100%;
+}
+#foot-nav-box{
+    padding: 0%;
+}
+element.style{
+    left: 0px;
+}
