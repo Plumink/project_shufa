@@ -37,8 +37,12 @@
       </v-form>
       <v-btn depressed large color="primary" class="login_btn" @click="getData()">登陆</v-btn>
    
-        <span class="jump_left">跳转忘记密码</span>
-        <span class="jump_right">跳转注册</span>
+        <span class="jump_left">
+          <router-link to='/'>del</router-link>
+        </span>
+        <span class="jump_right">
+          <router-link to='/register'>马上注册</router-link>
+        </span>
      
      </div>
     </div>
