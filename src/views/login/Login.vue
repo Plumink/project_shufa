@@ -14,12 +14,10 @@
           >
             <v-text-field
                 v-model='username'
-              :counter="10"
               label="用户名"
               required
             ></v-text-field>
           </v-col>
-  
           <v-col
             cols="12"
             md="4"
@@ -27,12 +25,10 @@
           >
             <v-text-field
               v-model='password'
-              :counter="10"
               label="密码"
               required
             ></v-text-field>
           </v-col>
-  
           <v-col
             cols="12"
             md="4"
@@ -49,11 +45,9 @@
     </v-form>
     </div>
       <v-btn depressed large color="primary" class="login_btn" @click="getData()">登陆</v-btn>
-      
     </div>
   </div>
 </template>
-
 <script>
 export default {
     data(){
