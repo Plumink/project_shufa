@@ -1,6 +1,5 @@
 <template>
  <v-bottom-navigation
-    v-model="bottomNav"
     id="foot-nav"
   >
     <v-btn value="recent" width="33vw" height="100%" > 

@@ -38,7 +38,7 @@
       <v-btn depressed large color="primary" class="login_btn" @click="getData()">登陆</v-btn>
    
         <span class="jump_left">
-          <router-link to='/'>del</router-link>
+          <router-link to='/'>返回首页</router-link>
         </span>
         <span class="jump_right">
           <router-link to='/register'>马上注册</router-link>

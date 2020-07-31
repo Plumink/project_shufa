@@ -62,7 +62,9 @@
         </v-col>
       </v-form>
       <v-btn depressed large color="primary" class="register_btn" @click="getData()">注册</v-btn>
-        <span class="jump_right">跳转登陆</span>
+        <span class="jump_right">
+          <router-link to='/login'>返回登陆</router-link>
+        </span>
      </div>
     </div>
   </div>

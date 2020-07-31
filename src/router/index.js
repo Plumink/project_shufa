@@ -3,13 +3,10 @@ import VueRouter from 'vue-router'
 import Login from '../views/login/Login.vue'
 import Home from '../App.vue'
 import Register from '../views/login/Register'
+import OriginalCopyCalligraphy from '../views/study/OriginalCopyCalligraphy.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '*',
-    component: Home
-  },
   {
     path: '/login',
     component: Login
@@ -17,7 +14,11 @@ const routes = [
    {
      path: '/register',
      component: Register
-   }
+   },
+   {
+    path: '/originalcopycalligraphy',
+    component: OriginalCopyCalligraphy
+  }
 ]
 
 const router = new VueRouter({
