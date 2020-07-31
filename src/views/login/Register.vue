@@ -9,6 +9,11 @@
         v-model="valid"
       :lazy-validation="lazy"
       >
+      <v-col
+            cols="12"
+            md="4"
+            class="register_input"
+          >
         <v-text-field
           v-model="username"
           :counter="10"
@@ -16,13 +21,25 @@
           label="用户名"
           required
         ></v-text-field>
+      </v-col>
+      <v-col
+            cols="12"
+            md="4"
+            class="register_input"
+          >
+          
         <v-text-field
           v-model="password"
           :rules="passwordRules"
           label="密码"
           required
         ></v-text-field>
-
+      </v-col>
+       <v-col
+            cols="12"
+            md="4"
+            class="register_input"
+          >
         <v-text-field
           v-model="phone"
           :rules="phoneRules"
@@ -30,15 +47,23 @@
           required
           lazy-validation="true"
         ></v-text-field>
+       </v-col>
+        <v-col
+            cols="12"
+            md="4"
+            class="register_input"
+          >
         <v-checkbox
           v-model="checkbox"
           :rules="[v => !!v || '请同意!']"
           label="同意赛大家书法网服务条款"
           required
         ></v-checkbox>
+        </v-col>
       </v-form>
-      </div>
       <v-btn depressed large color="primary" class="register_btn" @click="getData()">注册</v-btn>
+        <span class="jump_right">跳转登陆</span>
+     </div>
     </div>
   </div>
 </template>
@@ -91,7 +116,7 @@ vuetify: new Vuetify(),
 }
 #registerBox {
   width: 80%;
-  height: 60%;
+  height: 75%;
   position: absolute;
   top: 0;
   left: 0;
@@ -119,6 +144,12 @@ vuetify: new Vuetify(),
 }
 .register_btn {
   width: 100%;
+  margin-top: 30px;
 }
-
+ .register_input{
+     height: 12vh;
+ }
+  .jump_right{
+     float: right;
+ }
 </style>
