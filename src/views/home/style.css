@@ -5,7 +5,7 @@
 
 .total {
   width: 100vw;
-  height: 100vh;
+  height: auto;
   background-color: #F9F4E6;
 }
 
@@ -35,4 +35,31 @@
   height: 100vw;
   background-image: url('https://s1.ax1x.com/2020/07/31/albxkd.jpg');
   background-size: 100vw;
+}
+
+.middle_head {
+  width: 100vw;
+  height: 10vh;
+}
+
+.middle_m {
+  /* flex-direction: column; */
+  width: 100vw;
+  height: 3vh;
+}
+
+.middle_l {
+  width: 100vw;
+  height: 10vh;
+}
+
+.last {
+  width: 100vw;
+  height: 15vh;
+}
+
+.word {
+  width: 100vw;
+  height: auto;
+  background-color: #F9F4E6;
 }

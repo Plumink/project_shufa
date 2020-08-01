@@ -6,86 +6,147 @@
       <span class="font"><i style="font-size:10vw" class="iconfont  icon-menu-line"></i></span>
     </div>
     <div class="middle">
-      <template>
-        <v-form>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="3">
-                <v-text-field
-                  label="请输入文字"
-                  outlined
-                  background-color="#fff"
-                  light="true"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-form>
-      </template>
+      <div class="middle_head">
+        <template>
+          <v-form >
+            <v-container style="width:80vw;padding:0;">
+              <v-row >
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field
+                    label="请输入文字"
+                    outlined
+                    background-color="#fff"
+                    light="true"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
+        </template>
+      </div>
+      <div class="mt-4 middle_m d-flex flex-row justify-sm-space-around mb-6">
+        <v-select
+          style="width:10vw;height:8vh"
+          background-color="#fff"
+          class="ml-2 mr-2"
+          label="书法"
+          outlined
+          dense
+        >
+
+        </v-select>
+        <v-select 
+          style="width:10vw;height:8vh"
+          background-color="#fff"
+          class="ml-2 mr-2"
+          label="作者"
+          outlined
+          dense
+        >
+
+        </v-select>
+        <v-select
+          style="width:10vw;height:8vh"
+          background-color="#fff"
+          class="ml-2 mr-2"
+          label="次选"
+          outlined
+          dense
+        >
+        </v-select>
+      </div>
+      <div class="middle_l d-flex flex-row">
+        <template>
+        <v-col class="d-flex flex-row" style="width:20vw;padding-right:0;" cols="12" sm="6" md="4">
+          <div>
+          <v-text-field
+            label="竖排行数"
+            outlined
+            dense
+            type="number"
+            background-color="#fff"
+            style="width:40vw"
+          ></v-text-field>
+          </div>
+          <div style="margin-left:8vw" class="d-flex flex-column justify-sm-space-around">
+            <v-checkbox style="margin:0;height:5vh;" v-model="disabled" label="横排"></v-checkbox>
+            <v-checkbox style="margin:0" v-model="disabled" label="左起"></v-checkbox>
+          </div>
+        </v-col>
+        </template>
+      </div>
       <div>
         <template>
-        <div style="position: absolute;left: 0;width: 40vw;">
-          <v-container fluid>
-            <v-row align="center">
-              <v-col class="d-flex" cols="10" rows="6" sm="6">
-                <v-select
-                  :items="items"
-                  label="字体"
-                  outlined
-                  background-color="#fff"
-                ></v-select>
-              </v-col>
-            </v-row>
-          </v-container>
-        </div> 
-      </template>
-      <template>
-        <div style="position: absolute;right: -7vw;width: 40vw; height: 10vh;padding-right:0;">
-          <v-container fluid>
-            <v-row align="center">
-              <v-col class="d-flex" cols="10" rows="6" sm="6">
-                <v-select
-                  :items="items"
-                  label="次选"
-                  outlined
-                  background-color="#fff"
-                ></v-select>
-              </v-col>
-            </v-row>
-          </v-container>
-        </div> 
-      </template>
-      <template>
-        <div style="position: absolute;right: 27vw;width: 40vw; height: 10vh">
-          <v-container fluid>
-            <v-row align="center">
-              <v-col class="d-flex" cols="10" rows="6" sm="6">
-                <v-select
-                  :items="items"
-                  label="作者"
-                  outlined
-                  background-color="#fff"
-                ></v-select>
-              </v-col>
-            </v-row>
-          </v-container>
-        </div> 
-      </template>
-      
+          <div style="text-align:center;" class="my-2 mt-8">
+            <v-btn small color="primary">生成书法</v-btn>
+          </div>
+        </template>
       </div>
     </div>
-    
+    <div class="last d-flex flex-row justify-space-around">
+      <template>
+        <v-btn class="mt-8" small color="primary">登录</v-btn>
+        <v-btn class="mt-8" small color="primary">注册</v-btn>
+      </template>
+    </div>
+    <div class="word">
+      <template>
+        <v-card
+          class="mx-auto"
+          max-width="344"
+          outlined
+          color="#F9F4E6"
+        >
+          <v-card-text style="margin:0;padding:0;">
+            <p style="text-align:center;margin:0;font-size:14"><a style="text-decoration:none" href="">免费注册，</a>可一次查更多字</p>
+            <p style="text-align:center;margin:0;font-size:12px">可选更多的字体和背景颜色</p>
+            <br/>
+            <p style="text-align:center;margin:0;font-size:12px;font-weight:bold">使用本字典的集字效果</p>
+          </v-card-text>
+        </v-card>
+      </template>
+    </div>
+    <div style="width:90vw;text-align:center;margin: 0 auto;">
+      <template>
+        <v-carousel
+         cycle 
+         height="400" 
+         width="100vw"
+         hide-delimiters
+         :show-arrows="false"
+         >
+          <v-carousel-item
+            v-for="(item,i) in items"
+            :key="i"
+            :src="item.src"
+          ></v-carousel-item>
+        </v-carousel>
+      </template>
+    </div>
+    <div style="height:10vh"></div>
+      
   </div>
-  </v-app>
+</v-app>
 </template>
 
 <script>
-import Vuetify from 'vuetify'
-  export default {
-    vuetify: new Vuetify(),
-    data(){
-      return{
-        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+export default {
+    data () {
+      return {
+       items: [
+          {
+            src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
+          },
+          {
+            src: 'https://s1.ax1x.com/2020/08/01/a8WznJ.jpg',
+          },
+          {
+            src: 'https://s1.ax1x.com/2020/08/01/a8fCA1.jpg',
+          },
+          {
+            src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
+          }
+        ]
       }
     }
   }
