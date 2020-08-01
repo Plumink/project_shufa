@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-navigation id="foot-nav">
+  <v-bottom-navigation fixed="true" id="foot-nav" style="position:fixed;top:91.6vh">
     <v-btn value="recent" width="33vw" height="100%">
       <v-menu top :offset-y="offset" id="foot-nav-box">
         <template v-slot:activator="{ on, attrs }">
