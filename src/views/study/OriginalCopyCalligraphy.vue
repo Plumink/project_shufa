@@ -13,6 +13,7 @@
                 class="text"
                 v-for="(item,index) in items[0].content"
                 :key="index"
+                @click="getTime(item)"
               >{{ item }}</v-card-text>
             </v-card>
           </v-tab-item>
@@ -28,6 +29,7 @@
                         <v-col
                           class="grow"
                           v-for="(item,index) in item.title" :key="index"
+                          @click="getCalligraphy(item)"
                         >{{item}}</v-col>
                     </v-alert>
                   </div>
@@ -83,6 +85,14 @@ export default {
       ],
     };
   },
+  methods:{
+    getCalligraphy(name){
+      console.log(name)
+    },
+    getTime(time){
+      console.log(time)
+    }
+  }
 };
 </script>
 
