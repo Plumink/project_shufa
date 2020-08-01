@@ -4,17 +4,15 @@ import Login from '../views/login/Login.vue'
 import Home from '../views/home/home.vue'
 import Register from '../views/login/Register'
 import OriginalCopyCalligraphy from '../views/study/OriginalCopyCalligraphy.vue'
+import Show from '../views/study/Show.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
-<<<<<<< Updated upstream
-=======
     path: '/',
     component: Home
   },
   {
->>>>>>> Stashed changes
     path: '/login',
     component: Login
   },
@@ -25,6 +23,10 @@ const routes = [
    {
     path: '/originalcopycalligraphy',
     component: OriginalCopyCalligraphy
+  },
+  {
+    path:'/show',
+    component:Show
   }
 ]
 
