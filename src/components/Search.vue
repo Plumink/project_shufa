@@ -23,7 +23,7 @@ export default {
 }
 #search {
   width: 100%;
-  height: 30%;
+  height: 200px;
   background-image: url("../../images/search_background.jpg");
   background-size: 100% 100%;
   position: relative;
