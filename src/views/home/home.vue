@@ -1,9 +1,10 @@
 <template>
 <v-app id="inspire">
   <div class="total">
+    <TopNavigation />
     <div class="head">
-      <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt="">
-      <span class="font"><i style="font-size:10vw" class="iconfont  icon-menu-line"></i></span>
+      <!-- <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt="">
+      <span class="font"><i style="font-size:10vw" class="iconfont  icon-menu-line"></i></span> -->
     </div>
     <div class="middle">
       <div class="middle_head">
@@ -85,8 +86,16 @@
     </div>
     <div class="last d-flex flex-row justify-space-around">
       <template>
-        <v-btn class="mt-8" small color="primary">登录</v-btn>
-        <v-btn class="mt-8" small color="primary">注册</v-btn>
+        <v-btn class="mt-8" small color="primary">
+          <router-link to="/login">
+            <p style="color:#fff;margin:0 auto;">登录</p>
+          </router-link>
+        </v-btn>
+        <v-btn class="mt-8" small color="primary">
+          <router-link to="/register">
+            <p style="color:#fff;margin:0 auto;">注册</p>
+          </router-link>
+        </v-btn>
       </template>
     </div>
     <div class="word">
@@ -98,7 +107,7 @@
           color="#F9F4E6"
         >
           <v-card-text style="margin:0;padding:0;">
-            <p style="text-align:center;margin:0;font-size:14"><a style="text-decoration:none" href="">免费注册，</a>可一次查更多字</p>
+            <p style="text-align:center;margin:0;font-size:14"><a style="text-decoration:none" href="http://localhost:8080/#/login">免费注册，</a>可一次查更多字</p>
             <p style="text-align:center;margin:0;font-size:12px">可选更多的字体和背景颜色</p>
             <br/>
             <p style="text-align:center;margin:0;font-size:12px;font-weight:bold">使用本字典的集字效果</p>
@@ -123,33 +132,39 @@
         </v-carousel>
       </template>
     </div>
-    <div style="height:10vh"></div>
-      
+    <div style="height:15vh"></div>
+    <FootNavigation />
   </div>
 </v-app>
 </template>
 
 <script>
+import FootNavigation from "../../components/FootNavigation";
+import TopNavigation from "../../components/TopNavigation";
 export default {
-    data () {
-      return {
-       items: [
-          {
-            src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
-          },
-          {
-            src: 'https://s1.ax1x.com/2020/08/01/a8WznJ.jpg',
-          },
-          {
-            src: 'https://s1.ax1x.com/2020/08/01/a8fCA1.jpg',
-          },
-          {
-            src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
-          }
-        ]
-      }
+  components: {
+    FootNavigation,
+    TopNavigation
+  },
+  data () {
+    return {
+     items: [
+        {
+          src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
+        },
+        {
+          src: 'https://s1.ax1x.com/2020/08/01/a8WznJ.jpg',
+        },
+        {
+          src: 'https://s1.ax1x.com/2020/08/01/a8fCA1.jpg',
+        },
+        {
+          src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
+        }
+      ]
     }
   }
+}
 </script>
 
 <style scoped>

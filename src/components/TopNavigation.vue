@@ -53,6 +53,8 @@ export default {
   width: 100vw;
   height: 10vh;
   background-color: #f9f4e6;
+  position: fixed;
+  z-index: 1000;
 }
 
 .head img {
