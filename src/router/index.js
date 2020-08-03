@@ -8,6 +8,7 @@ import Show from '../views/study/Show.vue'
 import ShowInfo from '../views/study/ShowInfo.vue'
 import Train from '../views/study/Train.vue'
 import OriginalCopy from'../views/study/OriginalCopy.vue'
+import HomeLogin from '../views/home/HomeLogin'
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,6 +43,14 @@ const routes = [
   {
     path: '/originalcopy',
     component: OriginalCopy
+  },
+  {
+    path:'/show',
+    component:Show
+  },
+  {
+    path: '/homelogin',
+    component:HomeLogin
   }
 ]
 

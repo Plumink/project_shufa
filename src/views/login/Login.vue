@@ -35,7 +35,14 @@
         ></v-text-field>
       </v-col>
       </v-form>
+<<<<<<< Updated upstream
       <v-btn depressed large color="blue lighten-1" class="login_btn" @click="getData()">登陆</v-btn>
+=======
+      <v-btn depressed large color="primary" class="login_btn" @click="getData()">
+        
+        <router-link to="/homelogin"><p style="color:#000"> 登陆</p></router-link>
+      </v-btn>
+>>>>>>> Stashed changes
    
         <span class="jump_left">
           <router-link to='/'>返回首页</router-link>
@@ -113,6 +120,7 @@ vuetify: new Vuetify(),
 .login_btn {
   width: 100%;
   margin-top: 30px;
+  color: "#000";
 }
  .login_input{
      height: 12vh;
