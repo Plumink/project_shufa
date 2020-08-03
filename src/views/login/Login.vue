@@ -35,14 +35,10 @@
         ></v-text-field>
       </v-col>
       </v-form>
-<<<<<<< Updated upstream
-      <v-btn depressed large color="blue lighten-1" class="login_btn" @click="getData()">登陆</v-btn>
-=======
       <v-btn depressed large color="primary" class="login_btn" @click="getData()">
         
         <router-link to="/homelogin"><p style="color:#000"> 登陆</p></router-link>
       </v-btn>
->>>>>>> Stashed changes
    
         <span class="jump_left">
           <router-link to='/'>返回首页</router-link>
@@ -70,7 +66,21 @@ vuetify: new Vuetify(),
   methods: {
     getData(){
       this.$refs.form.validate()
-      console.log(this.username,this.phone,this.password,this.checkbox)
+      console.log(this.$md5(this.password))
+      fetch('http://175.24.100.139:8088/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                password:this.$md5(this.password),
+                phone:this.phone,
+              })
+            }).then(function(res){
+                res.json().then(function(obj){
+                   console.log(obj)
+                })
+            })
     }
   },
 };

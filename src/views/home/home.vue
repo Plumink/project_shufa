@@ -17,7 +17,7 @@
                     label="请输入文字"
                     outlined
                     background-color="#fff"
-                    light="true"
+                  
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -70,8 +70,8 @@
           ></v-text-field>
           </div>
           <div style="margin-left:8vw" class="d-flex flex-column justify-sm-space-around">
-            <v-checkbox style="margin:0;height:5vh;" v-model="disabled" label="横排"></v-checkbox>
-            <v-checkbox style="margin:0" v-model="disabled" label="左起"></v-checkbox>
+            <v-checkbox style="margin:0;height:5vh;"  label="横排"></v-checkbox>
+            <v-checkbox style="margin:0"  label="左起"></v-checkbox>
           </div>
         </v-col>
         </template>
