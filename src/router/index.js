@@ -7,6 +7,7 @@ import OriginalCopyCalligraphy from '../views/study/OriginalCopyCalligraphy.vue'
 import Show from '../views/study/Show.vue'
 import ShowInfo from '../views/study/ShowInfo.vue'
 import Train from '../views/study/Train.vue'
+import OriginalCopy from'../views/study/OriginalCopy.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -37,6 +38,10 @@ const routes = [
   {
     path: '/train',
     component: Train
+  },
+  {
+    path: '/originalcopy',
+    component: OriginalCopy
   }
 ]
 

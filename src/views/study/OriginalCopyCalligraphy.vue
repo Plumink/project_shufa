@@ -13,7 +13,7 @@
                 class="text"
                 v-for="(item,index) in items[0].content"
                 :key="index"
-                @click="getTime(item)"
+                @click="jumpOriginalCopy(item)"
               >{{ item }}</v-card-text>
             </v-card>
           </v-tab-item>
@@ -21,16 +21,17 @@
           <v-tab-item>
             <v-card>
               <v-list two-line>
-                <template >
-                  <div >
+                <template>
+                  <div>
                     <v-alert text color="info" v-for="(item,index) in items[1].list" :key="index">
                       <h3 class="headline">{{item.head}}</h3>
                       <v-divider class="my-4 info" style="opacity: 0.22"></v-divider>
-                        <v-col
-                          class="grow"
-                          v-for="(item,index) in item.title" :key="index"
-                          @click="getCalligraphy(item)"
-                        >{{item}}</v-col>
+                      <v-col
+                        class="grow"
+                        v-for="(item,index) in item.title"
+                        :key="index"
+                        @click="getCalligraphy(item)"
+                      >{{item}}</v-col>
                     </v-alert>
                   </div>
                 </template>
@@ -73,26 +74,41 @@ export default {
             "现代",
           ],
         },
-        { tab: "书论", list: [
-            { head: "两汉", 
-            title: ['许慎《说文解字序》','崔瑗《草书势》','赵壹《非草书》'] },
-             { head: "两汉", 
-            title: ['许慎《说文解字序》','崔瑗《草书势》','赵壹《非草书》'] },
-            { head: "两汉", 
-            title: ['许慎《说文解字序》','崔瑗《草书势》','赵壹《非草书》'] },
-            ] },
-            
+        {
+          tab: "书论",
+          list: [
+            {
+              head: "两汉",
+              title: ["许慎《说文解字序》", "崔瑗《草书势》", "赵壹《非草书》"],
+            },
+            {
+              head: "两汉",
+              title: ["许慎《说文解字序》", "崔瑗《草书势》", "赵壹《非草书》"],
+            },
+            {
+              head: "两汉",
+              title: ["许慎《说文解字序》", "崔瑗《草书势》", "赵壹《非草书》"],
+            },
+          ],
+        },
       ],
     };
   },
-  methods:{
-    getCalligraphy(name){
-      console.log(name)
+  methods: {
+    getCalligraphy(name) {
+      console.log(name);
     },
-    getTime(time){
-      console.log(time)
-    }
-  }
+
+    jumpOriginalCopy(time) {
+      // this.$router.push({ path: `/originalcopy/${time}` });
+      this.$router.push({
+        path: "/originalcopy",
+        query: {
+          time: time,
+        },
+      });
+    },
+  },
 };
 </script>
 
