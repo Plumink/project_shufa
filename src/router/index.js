@@ -5,6 +5,8 @@ import Home from '../views/home/home.vue'
 import Register from '../views/login/Register'
 import OriginalCopyCalligraphy from '../views/study/OriginalCopyCalligraphy.vue'
 import Show from '../views/study/Show.vue'
+import ShowInfo from '../views/study/ShowInfo.vue'
+import Train from '../views/study/Train.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,17 +18,25 @@ const routes = [
     path: '/login',
     component: Login
   },
-   {
-     path: '/register',
-     component: Register
-   },
-   {
+  {
+    path: '/register',
+    component: Register
+  },
+  {
     path: '/originalcopycalligraphy',
     component: OriginalCopyCalligraphy
   },
   {
-    path:'/show',
-    component:Show
+    path: '/show',
+    component: Show
+  },
+  {
+    path: '/show/info',
+    component: ShowInfo
+  },
+  {
+    path: '/train',
+    component: Train
   }
 ]
 

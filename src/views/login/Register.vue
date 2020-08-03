@@ -61,7 +61,7 @@
         ></v-checkbox>
         </v-col>
       </v-form>
-      <v-btn depressed large color="primary" class="register_btn" @click="getData()">注册</v-btn>
+      <v-btn depressed large color="blue lighten-1" class="register_btn" @click="getData()">注册</v-btn>
         <span class="jump_right">
           <router-link to='/login'>返回登陆</router-link>
         </span>

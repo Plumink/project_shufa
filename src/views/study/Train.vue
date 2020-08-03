@@ -2,7 +2,7 @@
   <v-app id="show">
     <TopNavigation />
     <Search />
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)">
+    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index">
       <div class="box-left">
         <img :src="item.image" alt />
       </div>
@@ -112,11 +112,6 @@ export default {
       return value;
     },
   },
-  methods:{
-    jump(id){
-      this.$router.push({ path: `show/info` });
-    }
-  }
 };
 </script>
 

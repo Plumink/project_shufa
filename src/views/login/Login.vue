@@ -35,7 +35,7 @@
         ></v-text-field>
       </v-col>
       </v-form>
-      <v-btn depressed large color="primary" class="login_btn" @click="getData()">登陆</v-btn>
+      <v-btn depressed large color="blue lighten-1" class="login_btn" @click="getData()">登陆</v-btn>
    
         <span class="jump_left">
           <router-link to='/'>返回首页</router-link>

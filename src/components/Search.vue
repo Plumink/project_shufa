@@ -23,15 +23,16 @@ export default {
 }
 #search {
   width: 100%;
-  height: 200px;
+  height: 180px;
   background-image: url("../../images/search_background.jpg");
   background-size: 100% 100%;
   position: relative;
   opacity: 0.6;
+  margin-top: 10vh;
 }
 .search_from {
   width: 80%;
-  height: 20%;
+  height: 18%;
   opacity: 0.6;
   display: block;
   margin-left: auto;

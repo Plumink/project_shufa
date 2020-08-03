@@ -3,7 +3,7 @@
     <div></div>
     <div>
       <v-card>
-        <v-tabs fixed-tabs="true" v-model="tab" background-color="primary" dark>
+        <v-tabs v-model="tab" background-color="primary" dark>
           <v-tab class="content" v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
         </v-tabs>
         <v-tabs-items v-model="tab">
