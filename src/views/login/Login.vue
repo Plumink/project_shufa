@@ -4,84 +4,71 @@
       <h3>登陆</h3>
       <p class="login_title">以汉字为载体,承载着传统文化和民族精神(･ω･)</p>
       <div>
-        <v-form
-        ref="form"
-        v-model="valid"
-      :lazy-validation="lazy"
-      > <v-col
-            cols="12"
-            md="4"
-            class="login_input"
-          >
-        <v-text-field
-          v-model="phone"
-          :rules=" [ v => !!v || '手机号不为空']"
-          label="手机号"
-          required
-          lazy-validation="true"
-        ></v-text-field>
-       </v-col>
-      <v-col
-            cols="12"
-            md="4"
-            class="login_input"
-          >
-          
-        <v-text-field
-          v-model="password"
-          :rules=" [v => !!v || '密码不为空']"
-          label="密码"
-          required
-        ></v-text-field>
-      </v-col>
-      </v-form>
-      <v-btn depressed large color="primary" class="login_btn" @click="getData()">
-        
-        <router-link to="/homelogin"><p style="color:#000"> 登陆</p></router-link>
-      </v-btn>
-   
+        <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+          <v-col cols="12" md="4" class="login_input">
+            <v-text-field
+              v-model="phone"
+              :rules=" [ v => !!v || '手机号不为空']"
+              label="手机号"
+              required
+              lazy-validation="true"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" md="4" class="login_input">
+            <v-text-field type="password" v-model="password" :rules=" [v => !!v || '密码不为空']" label="密码" required></v-text-field>
+          </v-col>
+        </v-form>
+        <v-btn depressed large color="primary" class="login_btn" @click="getData()">
+          <p style="color:#000">登陆</p>
+        </v-btn>
         <span class="jump_left">
-          <router-link to='/'>返回首页</router-link>
+          <router-link to="/">返回首页</router-link>
         </span>
         <span class="jump_right">
-          <router-link to='/register'>马上注册</router-link>
+          <router-link to="/register">马上注册</router-link>
         </span>
-     
-     </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Vuetify from 'vuetify'
+import Vuetify from "vuetify";
 export default {
-vuetify: new Vuetify(),
+  vuetify: new Vuetify(),
   data: () => ({
     valid: true,
-    password: '',
-    phone: '',
-    checkbox:'',
+    password: "",
+    phone: "",
+    checkbox: "",
     lazy: false,
   }),
   methods: {
-    getData(){
-      this.$refs.form.validate()
-      console.log(this.$md5(this.password))
-      fetch('http://175.24.100.139:8088/login', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                password:this.$md5(this.password),
-                phone:this.phone,
-              })
-            }).then(function(res){
-                res.json().then(function(obj){
-                   console.log(obj)
-                })
-            })
-    }
+    getData() {
+      if (this.$refs.form.validate()==false) {
+        this.$refs.form.validate()
+      } else {
+        fetch("http://175.24.100.139:8088/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password: this.$md5(this.password),
+            phone: this.phone,
+          })
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        if(res.success==false){
+
+        }
+        else{
+          this.$router.push({ path: `/homelogin` });
+        }
+      })
+      }
+    },
   },
 };
 </script>
@@ -95,7 +82,7 @@ vuetify: new Vuetify(),
   font-size: 16px;
   color: #fff;
   font-family: "Source Sans Pro";
-  background-image: url("../../../images/shuzhou2.jpg");
+  // background-image: url("../../../images/shuzhou2.jpg");
   background-size: 100% 100%;
   position: relative;
 }
@@ -132,13 +119,13 @@ vuetify: new Vuetify(),
   margin-top: 30px;
   color: "#000";
 }
- .login_input{
-     height: 12vh;
- }
- .jump_left{
-     float: left;
- }
- .jump_right{
-     float: right;
- }
+.login_input {
+  height: 12vh;
+}
+.jump_left {
+  float: left;
+}
+.jump_right {
+  float: right;
+}
 </style>

@@ -75,7 +75,7 @@ export default {
       ],
       items_study: [
         { title: "免费晒", link: "/show" },
-        { title: "名帖字库", link: "/Font" },
+        { title: "名帖字库", link: "/font" },
         { title: "原帖书论", link: "/originalcopycalligraphy" },
         { title: "各地培训", link: "/train" },
         { title: "诗文查询", link: "https://www.gushiwen.org/" },

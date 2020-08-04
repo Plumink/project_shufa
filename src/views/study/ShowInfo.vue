@@ -1,20 +1,26 @@
 <template>
-  <v-app id='show'>
+  <v-app id="show">
     <TopNavigation />
     <div class="box">
-        <span style="font-size:12px" @click="goBack()">返回免费晒</span>
-        <div class="d-flex flex-column content">
-            <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt="">
-            <br />
-            <p class='poem'>
-                故人西辞黄鹤楼，
-                烟花三月下扬州。
-                孤帆远影碧空尽，
-                不见长江滚滚来
-            </p>
-        </div>
-        <div class="comment">
-        </div>
+      <span style="font-size:12px" @click="goBack()">返回免费晒</span>
+      <div class="d-flex flex-column content">
+        <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt />
+        <br />
+        <p class="poem">
+          故人西辞黄鹤楼，
+          烟花三月下扬州。
+          孤帆远影碧空尽，
+          不见长江滚滚来
+        </p>
+      </div>
+      <br />
+      <!-- <div class="publisher">
+
+      </div>-->
+      <comment :comments="commentData"></comment>
+      <div style="margin-bottom:60px">
+      <v-pagination v-model="page" :length="6"></v-pagination>
+    </div>
     </div>
     <FootNavigation />
   </v-app>
@@ -23,21 +29,27 @@
 <script>
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
+import * as CommentData from "./mockdata";
+import comment from "../../components/Comment";
 export default {
-    data(){
-        return {
-
-        }
+  data() {
+    return {
+      commentData: [],
+    };
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
-    methods:{
-        goBack(){
-            this.$router.go(-1)
-        }
-    },
-    components:{
-        FootNavigation,
-        TopNavigation
-    }
+  },
+  components: {
+    FootNavigation,
+    TopNavigation,
+    comment,
+  },
+  created() {
+    this.commentData = CommentData.comment.data;
+  },
 };
 </script>
 
@@ -46,19 +58,19 @@ export default {
   width: 100%;
   height: 100%;
 }
-.box{
-    width: 100%;
-    margin-top: 10vh;
-    height: 100%;
+.box {
+  width: 100%;
+  margin-top: 10vh;
+  height: 100%;
 }
-.content{
-    width: 100%;
-    padding:5% 20% 5% 20%;
-    border-bottom: 1px dashed #BDBDBD;
+.content {
+  width: 100%;
+  padding: 5% 20% 5% 20%;
+  border-bottom: 1px dashed #bdbdbd;
 }
-.poem{
-    font-size: 12px;
-    font-weight: bold;
-    margin:10px;
+.poem {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 10px;
 }
 </style>

@@ -9,6 +9,7 @@ import ShowInfo from '../views/study/ShowInfo.vue'
 import Train from '../views/study/Train.vue'
 import OriginalCopy from'../views/study/OriginalCopy.vue'
 import HomeLogin from '../views/home/HomeLogin'
+import Font from '../views/study/Font.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,6 +52,10 @@ const routes = [
   {
     path: '/homelogin',
     component:HomeLogin
+  },
+  {
+    path: '/font',
+    component:Font
   }
 ]
 

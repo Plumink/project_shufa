@@ -50,7 +50,7 @@
 import FootNavigation from "../../components/FootNavigation";
 export default {
   components: {
-    FootNavigation: FootNavigation,
+    FootNavigation
   },
   data() {
     return {
