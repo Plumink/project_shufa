@@ -16,7 +16,6 @@
         </v-list>
       </v-menu>
     </v-btn>
-
     <v-btn value="recent" width="40vw" height="100%">
       <v-menu top :offset-y="offset" id="foot-nav-box">
         <template v-slot:activator="{ on, attrs }">
@@ -33,7 +32,6 @@
         </v-list>
       </v-menu>
     </v-btn>
-
     <v-btn value="recent" width="40vw" height="100%">
       <v-menu top :offset-y="offset" id="foot-nav-box">
         <template v-slot:activator="{ on, attrs }">

@@ -7,12 +7,14 @@
         <p style="color:#000;font-size:4vw;text-align:center;font-weight:800;" class="mt-5">
           个人中心
         </p>
-        <p style="">用户名：</p>
+        <p style="text-align:center">用户名：</p>
+        <p style="text-align:center">手机号码：</p>
+        <p style="text-align:center">（赛大家注册用户已达163785位）</p>
       </div>
       
     </div>
   </v-app>
-</template>
+</template> ]
 
 <script>
 import TopNavigation from '../../components/TopNavigation'

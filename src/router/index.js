@@ -11,6 +11,7 @@ import OriginalCopy from'../views/study/OriginalCopy.vue'
 import HomeLogin from '../views/home/HomeLogin'
 import Font from '../views/study/Font.vue'
 import Main from '../views/person/Main'
+import Member from '../views/person/Member.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -61,6 +62,10 @@ const routes = [
   {
     path: '/main',
     component: Main
+  },
+  {
+    path: '/member',
+    component:Member
   }
 ]
 

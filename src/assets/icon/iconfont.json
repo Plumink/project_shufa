@@ -1,0 +1,16 @@
+{
+  "id": "1986717",
+  "name": "shufa",
+  "font_family": "iconfont",
+  "css_prefix_text": "Calligraphy_icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1206327",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    }
+  ]
+}

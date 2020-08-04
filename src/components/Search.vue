@@ -2,7 +2,9 @@
   <div id="search" class>
     <form class="search_from" :opacity="0.2">
       <input type="text" placeholder="请输入您要搜索的内容..." class="search_input" />
-      <button type="submit" class="search_button">search</button>
+      <button type="submit" class="search_button ">
+        <span class="Calligraphy_iconsearch"></span>
+      </button>
     </form>
   </div>
 </template>
