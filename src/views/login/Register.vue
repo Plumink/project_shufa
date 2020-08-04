@@ -75,7 +75,7 @@ export default {
       if (this.valid == false) {
         this.$refs.form.validate();
       } else {
-        fetch("http://175.24.100.139:8088/register", {
+        fetch("http://192.168.21.159/user/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +83,8 @@ export default {
           body: JSON.stringify({
             password: this.$md5(this.password),
             phone: this.phone,  
-            username:this.username
+            username:this.username,
+            packageName:''
           }),
         })
           .then((res) => res.json())

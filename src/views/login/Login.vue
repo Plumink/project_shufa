@@ -48,20 +48,24 @@ export default {
       if (this.$refs.form.validate()==false) {
         this.$refs.form.validate()
       } else {
-        fetch("http://175.24.100.139:8088/login", {
+        fetch("http://127.0.0.1:9003/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+             'X-APP-ID ':'1',
+             'X-APP-KEY':'1',
+             'X-Request-ID': new Date().getTime()
           },
           body: JSON.stringify({
-            password: this.$md5(this.password),
-            phone: this.phone,
+            passWord:this.password,
+            userName: this.phone,
           })
       })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
         if(res.success==false){
-
+          
         }
         else{
           this.$router.push({ path: `/homelogin` });
