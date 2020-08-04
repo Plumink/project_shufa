@@ -9,7 +9,7 @@
           <div class="date">{{item.date}}</div>
         </div>
       </div>
-      <div class="content">{{item.acontent}}</div>
+      <div class="content">{{item.content}}</div>
       <div class="control">
         <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
           <i class="iconfont icon-like"></i>
@@ -65,68 +65,62 @@ export default {
 
 <style scoped lang="scss">
 @import "../../public/scss/index";
- .container {
-    padding: 0 10px;
-    box-sizing: border-box;
-    .comment {
+.container {
+  padding: 0 10px;
+  box-sizing: border-box;
+  .comment {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid $border-fourth;
+    .info_a {
       display: flex;
-      flex-direction: column;
-      padding: 10px;
-      border-bottom: 1px solid $border-fourth;
-      .info_a {
+      align-items: center;
+      .avatar {
+        border-radius: 50%;
+      }
+      .right {
         display: flex;
-        align-items: center;
-        .avatar {
-          border-radius: 50%;
+        flex-direction: column;
+        margin-left: 10px;
+        .name {
+          font-size: 16px;
+          color: $text-main;
+          margin-bottom: 5px;
+          font-weight: 500;
         }
-        .right {
-          display: flex;
-          flex-direction: column;
-          margin-left: 10px;
-          .name {
-            font-size: 16px;
-            color: $text-main;
-            margin-bottom: 5px;
-            font-weight: 500;
-          }
-          .date {
-            font-size: 12px;
-            color: $text-minor;
-          }
+        .date {
+          font-size: 12px;
+          color: $text-minor;
         }
       }
-      .content {
-        font-size: 16px;
-        color: $text-main;
-        line-height: 20px;
-        padding: 10px 0;
-      }
-      .control {
+    }
+    .content {
+      font-size: 16px;
+      color: $text-main;
+      line-height: 20px;
+      padding: 10px 0;
+    }
+    .control {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: $text-minor;
+      .like {
         display: flex;
         align-items: center;
-        font-size: 14px;
-        color: $text-minor;
-        .like {
-          display: flex;
-          align-items: center;
-          margin-right: 20px;
-          cursor: pointer;
-          &.active, &:hover {
-            color: $color-main;
-          }
-          .iconfont {
-            font-size: 14px;
-            margin-right: 5px;
-          }
+        margin-right: 20px;
+        cursor: pointer;
+        &.active,
+        &:hover {
+          color: $color-main;
         }
-       
-     
-        
-       
-        
-        
+        .iconfont {
+          font-size: 14px;
+          margin-right: 5px;
+        }
       }
     }
   }
-
+}
 </style>

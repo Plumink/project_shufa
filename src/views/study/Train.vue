@@ -4,18 +4,16 @@
     <Search />
     <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index">
       <div class="box-left">
-        <img :src="item.image" alt />
+        <img src="../../../images/train.jpg" alt />
       </div>
       <div class="d-flex flex-column justify-space-around box-right">
+        <p style="font-size:12px;margin:0px;color:#757575;">陶然书苑书法培训火热报名中</p>
+        <h4>{{'培训老师：'+'高新月，中书协会' | title}}</h4>
         <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:14px">{{item.number}}号 ：</span>
-          <h4 class="show_title">{{item.title | title}}</h4>
+          <span style="font-size:12px;margin-right:20px">书法</span>
+          <span style="font-size:12px">阅读 {{item.read}}</span>
         </div>
-        <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:14px;margin-right:20px">{{item.name}}</span>
-          <span style="font-size:14px">今日阅读：{{item.read}}</span>
-        </div>
-        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.content | content}}</span>
+        <span style="font-size:12px;margin:0;color:#BDBDBD;">{{'①厦门市思明区后语录143号1309室' | content}}</span>
       </div>
     </div>
     <div style="margin-bottom:60px">
@@ -100,7 +98,7 @@ export default {
     title(value) {
       if (!value) return "";
       if (value.length > 8) {
-        return value.slice(0, 8) + "...";
+        return value.slice(0, 12) + "...";
       }
       return value;
     },

@@ -13,14 +13,20 @@
           不见长江滚滚来
         </p>
       </div>
-      <br />
-      <!-- <div class="publisher">
-
-      </div>-->
-      <comment :comments="commentData"></comment>
+      <div class="publisher_box">
+        <div class="d-flex flex-row publisher">
+          <h4>发布者：</h4>
+          <p style="color:#42A5F5;">墨玉</p>
+        </div>
+        <div class="d-flex flex-row align-center justify-space-between" style="width:60%">
+          <p style="font-size:12px;color:#ECEFF1;">阅读：123</p>
+          <p style="font-size:12px;color:#ECEFF1;">点赞：123</p>
+        </div>
+      </div>
+      <comment :comments="commentData" />
       <div style="margin-bottom:60px">
-      <v-pagination v-model="page" :length="6"></v-pagination>
-    </div>
+        <v-pagination v-model="page" :length="6"></v-pagination>
+      </div>
     </div>
     <FootNavigation />
   </v-app>
@@ -35,6 +41,7 @@ export default {
   data() {
     return {
       commentData: [],
+      page: 1,
     };
   },
   methods: {
@@ -72,5 +79,16 @@ export default {
   font-size: 12px;
   font-weight: bold;
   margin: 10px;
+}
+.publisher_box {
+  width: 90%;
+  height: 80px;
+  background-color: #006064;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 5%;
+}
+.publisher{
+
 }
 </style>
