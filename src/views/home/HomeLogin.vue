@@ -3,8 +3,7 @@
   <div class="total">
     <TopNavigation />
     <div class="head">
-      <!-- <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt="">
-      <span class="font"><i style="font-size:10vw" class="iconfont  icon-menu-line"></i></span> -->
+      <p style="z-index">yongh</p>
     </div>
     <div class="middle">
       <div class="middle_head">
@@ -17,7 +16,6 @@
                     label="请输入文字"
                     outlined
                     background-color="#fff"
-                    
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -44,6 +42,7 @@
           outlined
           dense
         >
+
 
         </v-select>
         <v-select
@@ -91,7 +90,15 @@
             </div>
       </template>
     </div>
-    <div style="height:15vh"></div>
+    <div style="height:60vh">
+      <p style="text-align:center">(会员享有<span style="color:blue;font-size:5vw;">完整名帖字库</span>)</p>
+      <br/>
+      <p class="word_p">通篇集字，灵活排版</p>
+      <p class="word_p">置顶公众号，使用更方便</p>
+      <p style="text-align:center;margin-top:2em">
+        <img src="https://s1.ax1x.com/2020/08/03/aaYwUU.jpg" alt="">
+      </p>
+    </div>
     <FootNavigation />
   </div>
 </v-app>
@@ -128,4 +135,12 @@ export default {
 
 <style scoped>
  @import "./style.css";
+
+ .word_p {
+   text-align: center;
+   font-weight: 800;
+   font-size: 1em;
+   margin: 0;
+   padding: 0;
+ }
 </style>

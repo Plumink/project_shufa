@@ -57,7 +57,7 @@ export default {
     return {
       activeBtn: 1,
       dictionaries: "草书",
-      person: "个人中心",
+      person: "会员中心",
       study: "书法学习",
       items_dictionaries: [
         { title: "草书" },

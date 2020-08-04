@@ -10,6 +10,7 @@ import Train from '../views/study/Train.vue'
 import OriginalCopy from'../views/study/OriginalCopy.vue'
 import HomeLogin from '../views/home/HomeLogin'
 import Font from '../views/study/Font.vue'
+import Main from '../views/person/Main'
 Vue.use(VueRouter)
 
 const routes = [
@@ -55,7 +56,11 @@ const routes = [
   },
   {
     path: '/font',
-    component:Font
+    component: Font
+  },
+  {
+    path: '/main',
+    component: Main
   }
 ]
 
