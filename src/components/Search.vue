@@ -1,9 +1,9 @@
 <template>
   <div id="search" class>
-    <form class="search_from" :opacity="0.2">
+    <form class="search_from">
       <input type="text" placeholder="请输入您要搜索的内容..." class="search_input" />
       <button type="submit" class="search_button ">
-        <span class="Calligraphy_iconsearch"></span>
+        <span class="Calligraphy_icon_search"></span>
       </button>
     </form>
   </div>
@@ -35,7 +35,16 @@ export default {
 .search_from {
   width: 80%;
   height: 18%;
-  opacity: 0.6;
+  opacity: 1;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+}
+.search_from_a {
+  width: 80%;
+  height: 18%;
+  opacity: 1;
   display: block;
   margin-left: auto;
   margin-right: auto;

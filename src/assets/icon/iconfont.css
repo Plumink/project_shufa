@@ -1,21 +1,28 @@
-@font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1596541599035'); /* IE9 */
-  src: url('iconfont.eot?t=1596541599035#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAK8AAsAAAAABmAAAAJuAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcApsgQ4BNgIkAwgLBgAEIAWEbQcwG7QFyB6SJCUKSBCCsjhAICAe/tuPdt/8WROJezaJZjMg420j3kQTGUIlWyhk757J/7792tyBlzSvn3nCLOHt6+ze3vf5i3ppvKt4KtCoEJplNfW1AdfUj5UPJA9oLhFBUcmRgAObDqgbRyPbTCa+RXYRu4P4mECtQTmZrbmVdRiVwapA3FTSgtFcSJaNbLVQWXMwi5cqVKdH6RPwQnw//qnEKElFAep2L8+6MPGzDeUV5+V9lxghTFCOV6DAPJCJw9rUtgFhcAfUpgaNgn1VBz/bypI5xV5twvjroLIe9Mvye1IQ5a1WJpDj0VFgcdTFpJqe84vPj7vvyWf33z2ePf6sffwZOA/mPDHJ+eHGw6u3p0eHr1j/xi75L/ZUK5n+68O2nDmobm/XDu9kCZck1rtD+weqhzOyvdZ/02wCoPwrHqZSILi1UX43mpb+V9dl8GPnxr0IlH9ZPw/Vu3YHv0jRsyf7KnCk7CpqPcnoqJUJtWpRgupr9T3W3HE/uVCt4648VQZSFKqNk5k5jwp1FlCp2ipqzZk/XqcNGxC5BrNuJIRmb0gafUSh2QeZmV+o0OkHlZpjALWOo+3COpOhxjeZLE0u2geonCgU2KXHo+pVkju+xVmV4G0SpyqK5UKpmJ2nkHiOLemurGgtUHAU4Jz0HPl+hDFHPXJ0oat13CkWRd2bCk4UwLhNjFg04kK2A0hxREKCDdfGS59fRaQdPgu3NPTENxGWUuOjsoJSD3JeH/ZquJdXUrukCk0TkMAiATQnzSM+XwTF9fN6iEMr6I5IxDqKaJDoqy+sbww+oMxoASwp0KxC5TlZ7HQBAAAAAA==') format('woff2'),
-  url('iconfont.woff?t=1596541599035') format('woff'),
-  url('iconfont.ttf?t=1596541599035') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-  url('iconfont.svg?t=1596541599035#iconfont') format('svg'); /* iOS 4.1- */
+@font-face {
+  font-family: 'iconfont';  /* project id 1986717 */
+  src: url('//at.alicdn.com/t/font_1986717_k2i90m7sjk.eot');
+  src: url('//at.alicdn.com/t/font_1986717_k2i90m7sjk.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1986717_k2i90m7sjk.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1986717_k2i90m7sjk.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1986717_k2i90m7sjk.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1986717_k2i90m7sjk.svg#iconfont') format('svg');
 }
-
-.iconfont,[class^="Calligraphy_icon"],[class*=" Calligraphy_icon"]{
+.iconfont,[class^="Calligraphy_icon_"],[class*=" Calligraphy_icon_"]{
   font-family: "iconfont" !important;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.Calligraphy_iconsearch:before {
+.Calligraphy_icon_search:before {
   content: "\e613";
 }
+.Calligraphy_icon_fanhui:before{
+  content: '\e646';
+}
+.Calligraphy_icon_good:before{
+  content: '\e630';
+}
+
 

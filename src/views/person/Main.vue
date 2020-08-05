@@ -14,6 +14,7 @@
           </span>
         </div>
       </div>
+    </div>
       <div style="width:100%;height:10vh;">
         <div class="d-flex justify-lg-space-around" style="height:5vh;width:100%;">
           <span class="jinzi">我的关注</span>
@@ -27,10 +28,10 @@
         </div>
       </div>
       <div class="">
-
+            <FootNavigation />
+          
       </div>
-    </div>
-  </div>
+    </div>  
 </template>
 
 <script>

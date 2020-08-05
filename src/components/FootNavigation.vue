@@ -54,15 +54,15 @@ export default {
   data() {
     return {
       activeBtn: 1,
-      dictionaries: "草书",
+      dictionaries: "集字字典",
       person: "会员中心",
       study: "书法学习",
       items_dictionaries: [
-        { title: "草书" },
-        { title: "行书" },
-        { title: "楷书" },
-        { title: "隶书" },
-        { title: "篆书" },
+        { title: "草书",link: "/homelogin"  },
+        { title: "行书",link: "/homelogin" },
+        { title: "楷书",link: "/homelogin" },
+        { title: "隶书",link: "/homelogin" },
+        { title: "篆书",link: "/homelogin" },
       ],
       items_person: [
         { title: "个人中心" },
@@ -83,10 +83,17 @@ export default {
   },
   methods: {
     jump_dictionaries(item) {
-      this.dictionaries = item.title;
+      if (this.$route.path == item.link) {
+      } else {
+        if (item.title == "诗文查询") {
+          window.location.href = item.link;
+        } else {
+          this.$router.push({ path: item.link });
+        }
+      }
     },
     jump_person(item) {
-      this.person = item.title;
+      // this.person = item.title;
     },
     jump_study(item) {
       if (this.$route.path == item.link) {

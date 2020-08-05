@@ -13,7 +13,7 @@
     <v-dialog v-model="dialog" max-width="290">
       <v-card d-flex align-center mb-6 style="padding:10px">
         <div class="d-flex justify-space-around mb-6" v-for="(item,index) in jump" :key="index">
-          <span v-for="(item,index) in item.line" :key="index">
+          <span v-for="(item,index) in item.line" :key="index" @click="topJump(item.link)">
               {{item.name}}
           </span>
         </div>
@@ -35,11 +35,16 @@ export default {
       username: "未登录",
       dialog: false,
       jump: [
-          { line: [{ name: "字典首页", link: "" },{name:'升级会员',link: ""},{name:'开通辨析',link: ""}] },
-          { line: [{ name: "我的保存", link: "" },{name:'我的发布',link: ""},{name:'免费晒',link: ""}] },
+          { line: [{ name: "字典首页", link: "/" },{name:'个人首页',link: "/main"},{name:'开通辨析',link: ""}] },
+          { line: [{ name: "我的保存", link: "" },{name:'我的发布',link: ""},{name:'免费晒',link: "/show"}] },
           ],
     };
   },
+  methods:{
+    topJump(url){
+      this.$router.push(url)
+    }
+  }
 };
 </script>
 

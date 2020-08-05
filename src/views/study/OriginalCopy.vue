@@ -2,7 +2,7 @@
   <v-app>
     <TopNavigation />
     <div class="box">
-      <span style="font-size:12px" @click="goBack()">返回上一页</span>
+      <span style="font-size:14px" @click="goBack()"><span class="Calligraphy_icon_fanhui"></span>返回</span>
       <div class="d-flex flex-column ">
           <div class="d-flex flex-row justify-center title">
               <h2>{{time}}</h2>

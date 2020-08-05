@@ -2,7 +2,7 @@
   <v-app id="show">
     <TopNavigation />
     <div class="box">
-      <span style="font-size:12px" @click="goBack()">返回免费晒</span>
+      <span style="font-size:14px" @click="goBack()"><span class="Calligraphy_icon_fanhui"></span>返回</span>
       <div class="d-flex flex-column content">
         <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt />
         <br />
@@ -20,7 +20,9 @@
         </div>
         <div class="d-flex flex-row align-center justify-space-between" style="width:60%">
           <p style="font-size:12px;color:#ECEFF1;">阅读：123</p>
-          <p style="font-size:12px;color:#ECEFF1;">点赞：123</p>
+          <p style="font-size:12px;color:#ECEFF1;">
+            <span class="Calligraphy_icon_good"></span>
+            点赞：123</p>
         </div>
       </div>
       <comment :comments="commentData" />
@@ -86,7 +88,7 @@ export default {
   background-color: #006064;
   border-radius: 20px;
   margin: 20px;
-  padding: 5%;
+  padding: 10px;
 }
 .publisher{
 

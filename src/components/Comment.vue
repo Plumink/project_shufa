@@ -12,7 +12,7 @@
       <div class="content">{{item.content}}</div>
       <div class="control">
         <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
-          <i class="iconfont icon-like"></i>
+          <span class="Calligraphy_icon_good"></span>
           <span class="like-num">{{item.likeNum > 0 ? item.likeNum + '人赞' : '赞'}}</span>
         </span>
       </div>

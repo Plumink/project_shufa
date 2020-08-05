@@ -21,11 +21,11 @@
         <v-btn depressed large color="primary" class="login_btn" @click="getData()">
           <p style="color:#000">登陆</p>
         </v-btn>
-        <span class="jump_left">
-          <router-link to="/">返回首页</router-link>
+        <span class="jump_left" @click="jumpHome()">
+          返回首页
         </span>
-        <span class="jump_right">
-          <router-link to="/register">马上注册</router-link>
+        <span class="jump_right" @click="jumpRegister()">
+          马上注册
         </span>
       </div>
     </div>
@@ -44,6 +44,12 @@ export default {
     lazy: false,
   }),
   methods: {
+    jumpHome(){
+      this.$router.push('/')
+    },
+    jumpRegister(){
+      this.$router.push('/register')
+    },
     getData() {
       if (this.$refs.form.validate()==false) {
         this.$refs.form.validate()
@@ -59,6 +65,7 @@ export default {
           body: JSON.stringify({
             passWord:this.password,
             userName: this.phone,
+            
           })
       })
       .then((res) => res.json())
@@ -86,7 +93,7 @@ export default {
   font-size: 16px;
   color: #fff;
   font-family: "Source Sans Pro";
-  // background-image: url("../../../images/shuzhou2.jpg");
+  background-image: url("../../../images/login.jpg");
   background-size: 100% 100%;
   position: relative;
 }
@@ -122,12 +129,14 @@ export default {
   width: 100%;
   margin-top: 30px;
   color: "#000";
+  margin-bottom: 30px;
 }
 .login_input {
   height: 12vh;
 }
 .jump_left {
   float: left;
+  
 }
 .jump_right {
   float: right;

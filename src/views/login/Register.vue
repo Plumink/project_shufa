@@ -36,8 +36,8 @@
           </v-col>
         </v-form>
         <v-btn depressed large color="blue lighten-1" class="register_btn" @click="getData()">注册</v-btn>
-        <span class="jump_right">
-          <router-link to="/login">返回登陆</router-link>
+        <span class="jump_right" @click="jumpLogin()">
+          返回登陆
         </span>
       </div>
     </div>
@@ -71,6 +71,9 @@ export default {
     lazy: false,
   }),
   methods: {
+    jumpLogin(){
+      this.$router.push('/login')
+    },
     getData() {
       if (this.valid == false) {
         this.$refs.form.validate();
@@ -107,7 +110,7 @@ export default {
   font-size: 16px;
   color: #fff;
   font-family: "Source Sans Pro";
-  // background-image: url("../../../images/shuzhou2.jpg");
+  background-image: url("../../../images/login.jpg");
   background-size: 100% 100%;
   position: relative;
 }
@@ -142,6 +145,7 @@ export default {
 .register_btn {
   width: 100%;
   margin-top: 30px;
+  margin-bottom: 15px;
 }
 .register_input {
   height: 12vh;
