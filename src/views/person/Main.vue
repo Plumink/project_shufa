@@ -16,20 +16,36 @@
       </div>
     </div>
       <div style="width:100%;height:10vh;">
-        <div class="d-flex justify-lg-space-around" style="height:5vh;width:100%;">
+        <div class="main_little">
           <span class="jinzi">我的关注</span>
-          <span class="jinzi">我的收藏</span>
-          <span class="jinzi">我的发布</span>
+          <router-link to="/follow">
+            <div class="shuzi">0</div>
+          </router-link>
         </div>
-        <div class="d-flex justify-lg-space-around" style="height:5vh;width:100%;">
-          <div class="shuzi" style="margin-left:6vw">0</div>
-          <div class="shuzi" style="margin-left:12vw">0</div>
-          <div class="shuzi" style="margin-left:12vw">30</div>
+        <div class="main_little">
+          <span class="jinzi">我的收藏</span>
+          <router-link to="/colluction">
+            <div class="shuzi">23</div>
+          </router-link>
+        </div>
+        <div class="main_little">
+          <span class="jinzi">我的发布</span>
+          <router-link to="/follower">
+            <div class="shuzi">100</div>
+          </router-link>
         </div>
       </div>
+<<<<<<< Updated upstream
       <div class="">
             <FootNavigation />
           
+=======
+      <div class="huiyuan">
+        <span>成为会员</span>
+      </div>
+      <div class="show_main"> 
+        <router-view/>
+>>>>>>> Stashed changes
       </div>
     </div>  
 </template>
@@ -80,18 +96,43 @@ export default {
     float: left;
   }
 
+  .main_little {
+    width: 20%;
+    height: 100%;
+    float: left;
+    margin-left: 4vw;
+  }
+
   .jinzi {
     font-size: 2vw;
     color: #eac994;
-    margin-left:6vw;
+    margin-top: 1vh;
+    font-family:YouYuan;
+  }
+  .shuzi {
+    font-size: 4vw;
+    color: #ebf1f5;
+    margin-top: 2vh;
     font-family:YouYuan;
   }
 
-  .shuzi {
-    width: 6vw;
-    font-size: 4vw;
-    color: #ebf1f5;
-    float: left;
+  .huiyuan {
+    width: 90vw;
+    height: 10vh;
+    border-radius: 10vw;
+    margin-top: 4vh;
+    background-image: linear-gradient(#edce9d , #e5c187);
+    text-align: center;
     font-family:YouYuan;
+    line-height: 10vh;
   }
+
+  .show_main {
+    width: 90vw;
+    height: 20vh;
+    background-color: red;
+    margin-top: 3vh;
+    border-radius: 4vw;
+  }
+
 </style>

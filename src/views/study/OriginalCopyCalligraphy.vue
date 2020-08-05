@@ -41,7 +41,7 @@
         </v-tabs-items>
       </v-card>
     </div>
-
+    
     <FootNavigation />
   </v-app>
 </template>

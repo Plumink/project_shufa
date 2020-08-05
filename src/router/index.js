@@ -12,6 +12,9 @@ import HomeLogin from '../views/home/HomeLogin'
 import Font from '../views/study/Font.vue'
 import Main from '../views/person/Main'
 import Member from '../views/person/Member.vue'
+import Follow from '../views/person/Follow.vue'
+import Colluction from '../views/person/Colluction.vue'
+import Follower from '../views/person/Follower.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -61,7 +64,21 @@ const routes = [
   },
   {
     path: '/main',
-    component: Main
+    component: Main,
+    children: [
+      {
+        path: '/follow',
+        component: Follow
+      },
+      {
+        path: '/colluction',
+        component: Colluction
+      },
+      {
+        path: '/follower',
+        component: Follower 
+      }
+    ]
   },
   {
     path: '/member',
