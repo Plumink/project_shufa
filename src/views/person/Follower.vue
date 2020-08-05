@@ -1,6 +1,6 @@
 <template>
   <div class="follow_all">
-
+    <p>我的发布</p>
   </div>
 </template>
 

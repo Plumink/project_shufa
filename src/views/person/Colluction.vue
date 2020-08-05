@@ -1,6 +1,6 @@
 <template>
   <div class="follow_all">
-
+    <p>我的收藏</p>
   </div>
 </template>
 

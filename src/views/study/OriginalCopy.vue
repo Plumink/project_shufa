@@ -14,7 +14,6 @@
             </span>
           </div>
       </div>
-      
     </div>
   </v-app>
 </template>

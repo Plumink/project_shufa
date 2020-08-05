@@ -1,6 +1,6 @@
 <template>
   <div class="follow_all">
-
+  <p>我的关注</p>
   </div>
 </template>
 

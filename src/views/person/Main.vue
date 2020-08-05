@@ -18,19 +18,19 @@
       <div style="width:100%;height:10vh;">
         <div class="main_little">
           <span class="jinzi">我的关注</span>
-          <router-link to="/follow">
+          <router-link to="/main/follow">
             <div class="shuzi">0</div>
           </router-link>
         </div>
         <div class="main_little">
           <span class="jinzi">我的收藏</span>
-          <router-link to="/colluction">
+          <router-link to="/main/colluction">
             <div class="shuzi">23</div>
           </router-link>
         </div>
         <div class="main_little">
           <span class="jinzi">我的发布</span>
-          <router-link to="/follower">
+          <router-link to="/main/follower">
             <div class="shuzi">100</div>
           </router-link>
         </div>

@@ -67,15 +67,15 @@ const routes = [
     component: Main,
     children: [
       {
-        path: '/follow',
+        path: 'follow',
         component: Follow
       },
       {
-        path: '/colluction',
+        path: 'colluction',
         component: Colluction
       },
       {
-        path: '/follower',
+        path: 'follower',
         component: Follower 
       }
     ]
