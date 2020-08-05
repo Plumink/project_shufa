@@ -1,170 +1,96 @@
 <template>
-  <v-app id="inspire">
-    <div class="total_main">
-      <TopNavigation/>
-      <div style="height:10vh"></div>
-      <div>
-<<<<<<< Updated upstream
-        <p style="color:#000;font-size:4vw;text-align:center;font-weight:800;" class="mt-5">
-          个人中心
-        </p>
-        <p style="text-align:center">用户名：</p>
-        <p style="text-align:center">手机号码：</p>
-        <p style="text-align:center">（赛大家注册用户已达163785位）</p>
-=======
-        <div class="info">
-          <div style="width:50vw;float:left">
-            <p class="little_word">用户名：<span style="color:blue">{{}}</span></p>
-            <p class="little_word">手机号码：<span style="color:blue">{{}}</span></p>
-          </div>
-          <div style="width:50vw;float:left">
-            <p class="little_word">注册时间</p>
-            <p class="little_word">上次登陆时间</p>
-          </div>
+  <div class="all">
+    <div class="all_first">
+      <p class="main_title">个人中心</p>
+    </div>
+    <div class="all_second">
+      <div style="width:100%;height:10vh;">
+        <img src="https://s1.ax1x.com/2020/08/04/aDBQL8.jpg" alt="">
+        <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
+          <span style="color: #ebedee;font-size:4vw;">
+            <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">刘翠花</span>
+            <br/>
+            <span style="color: #b8a18c;font-size:3vw;font-family:YouYuan;">升级到会员享受更多特权</span>
+          </span>
         </div>
-        <!-- <p class="wenben_main">（名师书法注册用户已达<span style="color:red">88888</span>位）</p> -->
-        <!-- <div style="width:100vw;text-align:center;margin-top:4vh;margin-bottom:4vh">
-          <template>
-            <div>
-              <v-btn large color="amber darken-3">成为会员</v-btn>
-            </div>
-          </template>
-        </div> -->
-        <template>
-            <div style="text-align:center" class="my-2">
-              <v-btn large color="error">升级会员</v-btn>
-            </div>
-      </template>
-        <hr/>
-        <template>
-          <v-app>
-            <div></div>
-            <div justify="space-around">
-              <v-card>
-                <v-tabs v-model="tab" background-color="primary" dark>
-                  <v-tab class="content" v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
-                </v-tabs>
-                <v-tabs-items v-model="tab">
-                  <v-tab-item>
-                    <v-card flat>
-                      <v-card-text
-                        class="text"
-                        v-for="(item,index) in items[0].content"
-                        :key="index"
-                        @click="jumpOriginalCopy(item)"
-                      >{{ item }}</v-card-text>
-                    </v-card>
-                  </v-tab-item>
+      </div>
+      <div style="width:100%;height:10vh;">
+        <div class="d-flex justify-lg-space-around" style="height:5vh;width:100%;">
+          <span class="jinzi">我的关注</span>
+          <span class="jinzi">我的收藏</span>
+          <span class="jinzi">我的发布</span>
+        </div>
+        <div class="d-flex justify-lg-space-around" style="height:5vh;width:100%;">
+          <div class="shuzi" style="margin-left:6vw">0</div>
+          <div class="shuzi" style="margin-left:12vw">0</div>
+          <div class="shuzi" style="margin-left:12vw">30</div>
+        </div>
+      </div>
+      <div class="">
 
-                  <v-tab-item>
-                    <v-card>
-                      <v-list two-line>
-                        <template>
-                          <div>
-                            <v-alert text color="info" v-for="(item,index) in items[1].list" :key="index">
-                              <h3 class="headline">{{item.head}}</h3>
-                              <v-divider class="my-4 info" style="opacity: 0.22"></v-divider>
-                              <v-col
-                                class="grow"
-                                v-for="(item,index) in item.title"
-                                :key="index"
-                                @click="getCalligraphy(item)"
-                              >{{item}}</v-col>
-                            </v-alert>
-                          </div>
-                        </template>
-                      </v-list>
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs-items>
-              </v-card>
-            </div>
-
-            <FootNavigation />
-          </v-app>
-        </template>
->>>>>>> Stashed changes
       </div>
     </div>
-  </v-app>
-</template> ]
+  </div>
+</template>
 
 <script>
-import TopNavigation from '../../components/TopNavigation'
-import FootNavigation from '../../components/FootNavigation'
 export default {
-  components: {
-    TopNavigation,
-    FootNavigation
-  },
-  data() {
-    return {
-      tab: null,
-      items: [
-        {
-          tab: "我的关注",
-          content: [
-            "西周",
-            "秦朝"
-          ],
-        },
-        {
-          tab: "我的粉丝",
-          list: [
-            {
-              head: "两汉",
-              title: ["许慎《说文解字序》", "崔瑗《草书势》", "赵壹《非草书》"],
-            }
-          ]
-        }
-      ]
-    }
-  },
-  methods: {
-    getCalligraphy(name) {
-      console.log(name);
-    },
-  },
+
 }
 </script>
 
-<style scoped>
-  .total__main {
+<style lang="scss" scoped>
+  .main_title {
+    color: #ebedee;
+    text-align: center;
+    padding-top: 2vh;
+    font-family:YouYuan;
+  }
+
+  .all {
     width: 100vw;
-    height: auto;
+    height: 100vh;
     background-color: #F9F4E6;
   }
-
-  .head_main {
+  
+  .all_first {
     width: 100vw;
     height: 20vh;
-    background-color: red;
+    background-image: linear-gradient(to right, #0f1427 , #232941);
+    border-radius: 0 0 5vw 5vw;
   }
 
-  .wenben_main{
-    text-align: center;
-    font-size:14;
-    margin:0;
+  .all_second {
+    width: 90vw;
+    height: 20vh;
+    background-image: linear-gradient(to right, #232a44 , #474d65);
+    border-radius: 5vw;
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
   }
 
-.content {
-  width: 50%;
-}
-.text {
-  text-align: center;
-}
+  .all_second>div>img{
+    width: 12vw;
+    height: 12vw;
+    border-radius: 6vw;
+    margin-left: 3vw;
+    margin-top: 3vw;
+    float: left;
+  }
 
-.info {
-  width: 100vw;
-  height: 10vh;
-  background-color: red;
-  color: aliceblue;
-}
+  .jinzi {
+    font-size: 2vw;
+    color: #eac994;
+    margin-left:6vw;
+    font-family:YouYuan;
+  }
 
-.little_word {
-  font-size:3vw;
-  margin:0;
-  margin-top: 2vh;
-}  
-
+  .shuzi {
+    width: 6vw;
+    font-size: 4vw;
+    color: #ebf1f5;
+    float: left;
+    font-family:YouYuan;
+  }
 </style>
