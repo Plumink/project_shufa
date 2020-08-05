@@ -1,38 +1,38 @@
 <template>
-<v-app>
-  <div id="login">
-    <div id="loginBox">
-      <h3>登陆</h3>
-      <p class="login_title">以汉字为载体,承载着传统文化和民族精神(･ω･)</p>
-      <div>
-        <v-form ref="form" v-model="valid" :lazy-validation="lazy">
-          <v-col cols="12" md="4" class="login_input">
-            <v-text-field
-              v-model="phone"
-              :rules=" [ v => !!v || '手机号不为空']"
-              label="手机号"
-              required
-              lazy-validation="true"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="4" class="login_input">
-            <v-text-field type="password" v-model="password" :rules=" [v => !!v || '密码不为空']" label="密码" required></v-text-field>
-          </v-col>
-        </v-form>
-        <v-btn depressed large color="primary" class="login_btn" @click="getData()">
-          <p style="color:#000">登陆</p>
-        </v-btn>
-        <span class="jump_left" @click="jumpHome()">
-          返回首页
-        </span>
-        <span class="jump_right" @click="jumpRegister()">
-          马上注册
-        </span>
-        
+  <v-app>
+    <div id="login">
+      <div id="loginBox">
+        <h3>登陆</h3>
+        <p class="login_title">以汉字为载体,承载着传统文化和民族精神(･ω･)</p>
+        <div>
+          <v-form ref="form" v-model="valid" >
+            <v-col cols="12" md="4" class="login_input">
+              <v-text-field
+                v-model="phone"
+                :rules=" [ v => !!v || '手机号不为空']"
+                label="手机号"
+                required
+                lazy-validation="true"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="4" class="login_input">
+              <v-text-field
+                type="password"
+                v-model="password"
+                :rules=" [v => !!v || '密码不为空']"
+                label="密码"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-form>
+          <v-btn depressed large color="blue lighten-1" class="login_btn" @click="getData()">登陆</v-btn>
+          <span class="jump_left" @click="jumpHome()">返回首页</span>
+          <span class="jump_right" @click="jumpRegister()">马上注册</span>
+          <div class="text-center"></div>
+        </div>
       </div>
     </div>
-  </div>
-</v-app>
+  </v-app>
 </template>
 
 <script>
@@ -44,42 +44,39 @@ export default {
     password: "",
     phone: "",
     checkbox: "",
-    lazy: false,
   }),
   methods: {
-    jumpHome(){
-      this.$router.push('/')
+    jumpHome() {
+      this.$router.push("/");
     },
-    jumpRegister(){
-      this.$router.push('/register')
+    jumpRegister() {
+      this.$router.push("/register");
     },
     getData() {
-      if (this.$refs.form.validate()==false) {
-        this.$refs.form.validate()
+      if (this.$refs.form.validate() == false) {
+        this.$refs.form.validate();
       } else {
         fetch("http://127.0.0.1:9003/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-             'X-APP-ID ':'1',
-             'X-APP-KEY':'1',
-             'X-Request-ID': new Date().getTime()
+            "X-APP-ID ": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": new Date().getTime(),
           },
           body: JSON.stringify({
-            passWord:this.password,
+            passWord: this.password,
             userName: this.phone,
-          })
-      })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res)
-        if(res.success==false){
-          
-        }
-        else{
-          this.$router.push({ path: `/homelogin` });
-        }
-      })
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            if (res.success == false) {
+            } else {
+              this.$router.push({ path: `/homelogin` });
+            }
+          });
       }
     },
   },
@@ -138,7 +135,6 @@ export default {
 }
 .jump_left {
   float: left;
-  
 }
 .jump_right {
   float: right;

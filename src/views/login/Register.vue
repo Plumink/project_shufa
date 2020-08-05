@@ -1,10 +1,11 @@
 <template>
+<v-app>
   <div id="register">
     <div id="registerBox">
       <h3>注册</h3>
       <p class="register_title">快来加入我们吧(･ω･)</p>
       <div>
-        <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+        <v-form ref="form" v-model="valid">
           <v-col cols="12" md="4" class="register_input">
             <v-text-field
               v-model="username"
@@ -15,7 +16,7 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12" md="4" class="register_input">
-            <v-text-field type="password" v-model="password" :rules="passwordRules" label="密码" required></v-text-field>
+            <v-text-field  type="password" v-model="password" :rules="passwordRules" label="密码" required></v-text-field>
           </v-col>
           <v-col cols="12" md="4" class="register_input">
             <v-text-field
@@ -42,6 +43,7 @@
       </div>
     </div>
   </div>
+</v-app>
 </template>
 
 <script>
@@ -68,7 +70,6 @@ export default {
       (v) => /^1(3|4|5|6|7|8|9)\d{9}$/.test(v) || "手机号必须是有效的",
     ],
     checkbox: "",
-    lazy: false,
   }),
   methods: {
     jumpLogin(){
