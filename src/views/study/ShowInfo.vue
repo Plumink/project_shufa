@@ -16,7 +16,7 @@
       <div class="publisher_box">
         <div class="d-flex flex-row publisher">
           <h4>发布者：</h4>
-          <p style="color:#42A5F5;">墨玉</p>
+          <p style="color:#0277BD;">墨玉</p>
         </div>
         <div class="d-flex flex-row align-center justify-space-between" style="width:60%">
           <p style="font-size:12px;color:#ECEFF1;">阅读：123</p>
@@ -85,7 +85,7 @@ export default {
 .publisher_box {
   width: 90%;
   height: 80px;
-  background-color: #006064;
+  background-color: #4DD0E1;
   border-radius: 20px;
   margin: 20px;
   padding: 10px;

@@ -13,5 +13,11 @@ new Vue({
   router,
   store,
   vuetify,
+  data(){
+    return{
+      phone:'null',
+      username:'null'
+    }
+  },
   render: h => h(App)
 }).$mount('#app')

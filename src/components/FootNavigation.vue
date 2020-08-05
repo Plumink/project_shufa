@@ -66,7 +66,7 @@ export default {
       ],
       items_person: [
         { title: "个人中心" },
-        { title: "微店入口" },
+        { title: "微店入口",link:'https://weidian.com/?userid=932664957'},
         { title: "我要分享" },
         { title: "我的保存" },
         { title: "成为会员" },

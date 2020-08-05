@@ -1,8 +1,8 @@
 <template>
   <div id="search" class>
     <form class="search_from">
-      <input type="text" placeholder="请输入您要搜索的内容..." class="search_input" />
-      <button type="submit" class="search_button ">
+      <input type="text" v-model="search_main" placeholder="请输入您要搜索的内容..." class="search_input" />
+      <button type="submit" class="search_button " @click="commit()">
         <span class="Calligraphy_icon_search"></span>
       </button>
     </form>
@@ -14,8 +14,14 @@ export default {
   data() {
     return {
       transparency: 0,
+      search_main:''
     };
   },
+  methods:{
+    commit(){
+      console.log(this.search_main)
+    }
+  }
 };
 </script>
 
@@ -25,8 +31,8 @@ export default {
 }
 #search {
   width: 100%;
-  height: 180px;
-  background-image: url("../../images/search_background.jpg");
+  height: 130px;
+  background-image: url("../../images/search.jpg");
   background-size: 100% 100%;
   position: relative;
   opacity: 0.6;
@@ -34,16 +40,7 @@ export default {
 }
 .search_from {
   width: 80%;
-  height: 18%;
-  opacity: 1;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10%;
-}
-.search_from_a {
-  width: 80%;
-  height: 18%;
+  height: 25%;
   opacity: 1;
   display: block;
   margin-left: auto;

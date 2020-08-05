@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div id="login">
     <div id="loginBox">
       <h3>登陆</h3>
@@ -27,9 +28,11 @@
         <span class="jump_right" @click="jumpRegister()">
           马上注册
         </span>
+        
       </div>
     </div>
   </div>
+</v-app>
 </template>
 
 <script>
@@ -65,7 +68,6 @@ export default {
           body: JSON.stringify({
             passWord:this.password,
             userName: this.phone,
-            
           })
       })
       .then((res) => res.json())
