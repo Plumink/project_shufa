@@ -14,7 +14,7 @@
           </span>
         </div>
       </div>
-    </div>
+    
       <div style="width:100%;height:10vh;">
         <div class="main_little">
           <span class="jinzi">我的关注</span>
@@ -35,19 +35,15 @@
           </router-link>
         </div>
       </div>
-<<<<<<< Updated upstream
-      <div class="">
-            <FootNavigation />
-          
-=======
+        
       <div class="huiyuan">
         <span>成为会员</span>
       </div>
       <div class="show_main"> 
         <router-view/>
->>>>>>> Stashed changes
       </div>
-    </div>  
+    </div> 
+  </div>   
 </template>
 
 <script>
