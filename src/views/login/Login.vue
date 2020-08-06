@@ -37,6 +37,7 @@
 
 <script>
 import Vuetify from "vuetify";
+import qs from "qs"; 
 export default {
   vuetify: new Vuetify(),
   data: () => ({
@@ -53,34 +54,26 @@ export default {
       this.$router.push("/register");
     },
     getData() {
-      if (this.$refs.form.validate() == false) {
-        this.$refs.form.validate();
-      } else {
-        fetch("http://127.0.0.1:9003/user/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-APP-ID ": "1",
-            "X-APP-KEY": "1",
-            "X-Request-ID": new Date().getTime(),
-          },
-          body: JSON.stringify({
-            passWord: this.password,
-            userName: '测试',
-            phoneNumber:this.phone
-          }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res);
-            if (res.success == false) {
-            } else {
-              this.$router.push({ path: `/homelogin` });
-            }
-          });
+      let params = {
+        passWord: this.password,
+        userName: 'b',
+        phoneNumber:this.phone
       }
+      this.$axios.post("http://127.0.0.1:9003/user/login", params, {
+        headers: {
+            "X-APP-ID": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": "1",
+          }
+      }).then(response => {
+        if(response.data.code == 200){
+          console.log(response);
+        }else{
+          console.log(response.data);
+        }
+      })
     },
-  },
+  }
 };
 </script>
 
