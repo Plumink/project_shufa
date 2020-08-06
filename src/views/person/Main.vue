@@ -1,5 +1,6 @@
 <template>
-  <div class="all">
+<v-app>
+  <div class="all_main">
     <div class="all_first">
       <p class="main_title">个人中心</p>
     </div>
@@ -42,13 +43,19 @@
       <div class="show_main"> 
         <router-view/>
       </div>
+      <div style="width:100%;height:10vh"></div>
+      <FootNavigation />
     </div> 
   </div>   
+</v-app>
 </template>
 
 <script>
+import FootNavigation from '../../components/FootNavigation'
 export default {
-
+  components:{
+    FootNavigation
+  }
 }
 </script>
 
@@ -60,10 +67,10 @@ export default {
     font-family:YouYuan;
   }
 
-  .all {
+  .all_main {
     width: 100vw;
     height: 100vh;
-    background-color: #F9F4E6;
+    // background-color: #F9F4E6;
   }
   
   .all_first {
@@ -125,8 +132,8 @@ export default {
 
   .show_main {
     width: 90vw;
-    height: 20vh;
-    background-color: red;
+    height: auto;
+    // background-color: #F9F4E6;
     margin-top: 3vh;
     border-radius: 4vw;
   }

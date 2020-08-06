@@ -65,11 +65,11 @@ export default {
         { title: "篆书",link: "/homelogin" },
       ],
       items_person: [
-        { title: "个人中心" },
+        { title: "个人中心",link:'/main' },
         { title: "微店入口",link:'https://weidian.com/?userid=932664957'},
-        { title: "我要分享" },
-        { title: "我的保存" },
-        { title: "成为会员" },
+        { title: "我要分享",link:'/' },
+        { title: "我的保存",link:'/' },
+        { title: "成为会员",link:'/' },
       ],
       items_study: [
         { title: "免费晒", link: "/show" },
@@ -82,18 +82,22 @@ export default {
     };
   },
   methods: {
+
     jump_dictionaries(item) {
       if (this.$route.path == item.link) {
       } else {
-        if (item.title == "诗文查询") {
+          this.$router.push({ path: item.link });
+      }
+    },
+    jump_person(item) {
+      if (this.$route.path == item.link) {
+      } else {
+        if (item.title == "微店入口") {
           window.location.href = item.link;
         } else {
           this.$router.push({ path: item.link });
         }
       }
-    },
-    jump_person(item) {
-      // this.person = item.title;
     },
     jump_study(item) {
       if (this.$route.path == item.link) {

@@ -66,7 +66,8 @@ export default {
           },
           body: JSON.stringify({
             passWord: this.password,
-            userName: this.phone,
+            userName: '测试',
+            phoneNumber:this.phone
           }),
         })
           .then((res) => res.json())

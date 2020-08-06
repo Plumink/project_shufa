@@ -15,6 +15,7 @@ import Member from '../views/person/Member.vue'
 import Follow from '../views/person/Follow.vue'
 import Colluction from '../views/person/Colluction.vue'
 import Follower from '../views/person/Follower.vue'
+import Bevip from '../views/vip/Bevip.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -83,7 +84,12 @@ const routes = [
   {
     path: '/member',
     component:Member
+  },
+  {
+    path: '/bevip',
+    component: Bevip
   }
+
 ]
 
 const router = new VueRouter({
