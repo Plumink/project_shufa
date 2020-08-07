@@ -75,8 +75,8 @@ export default {
       this.$router.push("/register");
     },
     getData() {
-      this.sheet=!this.sheet
-      console.log(this.$root.phone)
+      
+      // console.log(this.$root.phone)
       if (this.valid == false) {
         this.$refs.form.validate();
       }
@@ -93,11 +93,12 @@ export default {
             "X-Request-ID": "1",
           }
       }).then(response => {
-        if(response.data.code == 200){
+        if(response.data.code == '0'){
           console.log(response);
-
+          this.$router.push('/homelogin')
         }else{
-          console.log(response.data);
+          // console.log(response.data);
+          this.sheet=!this.sheet
         }
       })
       }

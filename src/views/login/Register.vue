@@ -1,60 +1,59 @@
 <template>
-<v-app>
-  <div id="register">
-    <div id="registerBox">
-      <h3>注册</h3>
-      <p class="register_title">快来加入我们吧(･ω･)</p>
-      <div>
-        <v-form ref="form" v-model="valid">
-          <v-col cols="12" md="4" class="register_input">
-            <v-text-field
-              v-model="username"
-              :counter="10"
-              :rules="userNameRules"
-              label="用户名"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="4" class="register_input">
-            <v-text-field  type="password" v-model="password" :rules="passwordRules" label="密码" required></v-text-field>
-          </v-col>
-          <v-col cols="12" md="4" class="register_input">
-            <v-text-field
-              v-model="phone"
-              :rules="phoneRules"
-              label="手机号"
-              required
-              lazy-validation="true"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="4" class="register_input">
-            <v-checkbox
-              v-model="checkbox"
-              :rules="[v => !!v || '请同意!']"
-              label="同意赛大家书法网服务条款"
-              required
-            ></v-checkbox>
-          </v-col>
-        </v-form>
-        <v-btn depressed large color="blue lighten-1" class="register_btn" @click="getData()">注册</v-btn>
-        <span class="jump_right" @click="jumpLogin()">
-          返回登陆
-        </span>
+  <v-app>
+    <div id="register">
+      <div id="registerBox">
+        <h3>注册</h3>
+        <p class="register_title">快来加入我们吧(･ω･)</p>
+        <div>
+          <v-form ref="form" v-model="valid">
+            <v-col cols="12" md="4" class="register_input">
+              <v-text-field
+                v-model="username"
+                :counter="10"
+                :rules="userNameRules"
+                label="用户名"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="4" class="register_input">
+              <v-text-field
+                type="password"
+                v-model="password"
+                :rules="passwordRules"
+                label="密码"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="4" class="register_input">
+              <v-text-field
+                v-model="phone"
+                :rules="phoneRules"
+                label="手机号"
+                required
+                lazy-validation="true"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="4" class="register_input">
+              <v-checkbox
+                v-model="checkbox"
+                :rules="[v => !!v || '请同意!']"
+                label="同意赛大家书法网服务条款"
+                required
+              ></v-checkbox>
+            </v-col>
+          </v-form>
+          <v-btn depressed large color="blue lighten-1" class="register_btn" @click="getData()">注册</v-btn>
+          <span class="jump_right" @click="jumpLogin()">返回登陆</span>
+        </div>
       </div>
     </div>
-  </div>
-  <v-bottom-sheet v-model="sheet" persistent>
-        <v-sheet class="text-center" height="150px">
-          <v-btn
-            class="mt-6"
-            text
-            color="error"
-            @click="sheet = !sheet"
-          >关闭</v-btn>
-          <div class="py-3">注册失败</div>
-        </v-sheet>
-      </v-bottom-sheet>
-</v-app>
+    <v-bottom-sheet v-model="sheet" persistent>
+      <v-sheet class="text-center" height="150px">
+        <v-btn class="mt-6" text color="error" @click="sheet = !sheet">关闭</v-btn>
+        <div class="py-3">注册失败</div>
+      </v-sheet>
+    </v-bottom-sheet>
+  </v-app>
 </template>
 
 <script>
@@ -62,7 +61,7 @@ import Vuetify from "vuetify";
 export default {
   vuetify: new Vuetify(),
   data: () => ({
-    sheet:false,
+    sheet: false,
     valid: true,
     username: "",
     userNameRules: [
@@ -84,31 +83,37 @@ export default {
     checkbox: "",
   }),
   methods: {
-    jumpLogin(){
-      this.$router.push('/login')
+    jumpLogin() {
+      this.$router.push("/login");
     },
     getData() {
       if (this.valid == false) {
         this.$refs.form.validate();
       } else {
-        fetch("http://192.168.21.159/user/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            password: this.$md5(this.password),
-            phone: this.phone,  
-            username:this.username,
-            packageName:''
-          }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-              this.$router.push({ path: `/login` });
+        let params = {
+          passWord: this.password,
+          phoneNumber: this.phone,
+          registerTime: '2020/8/7 5:15:10',
+          userName: this.username,
+        };
+        this.$axios
+          .post("http://127.0.0.1:9003/user/register", params, {
+            headers: {
+              "X-APP-ID": "1",
+              "X-APP-KEY": "1",
+              "X-Request-ID": "1",
+            },
+          })
+          .then((response) => {
+            if (response.data.code == "0") {
+              console.log(response);
+              this.$router.push("/login");
+            } else {
+              // console.log(response.data);
+              this.sheet = !this.sheet;
+            }
           });
       }
-      // console.log(this.username, this.phone, this.password, this.checkbox);
     },
   },
 };
