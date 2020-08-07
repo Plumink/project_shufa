@@ -43,6 +43,17 @@
       </div>
     </div>
   </div>
+  <v-bottom-sheet v-model="sheet" persistent>
+        <v-sheet class="text-center" height="150px">
+          <v-btn
+            class="mt-6"
+            text
+            color="error"
+            @click="sheet = !sheet"
+          >关闭</v-btn>
+          <div class="py-3">注册失败</div>
+        </v-sheet>
+      </v-bottom-sheet>
 </v-app>
 </template>
 
@@ -51,6 +62,7 @@ import Vuetify from "vuetify";
 export default {
   vuetify: new Vuetify(),
   data: () => ({
+    sheet:false,
     valid: true,
     username: "",
     userNameRules: [
@@ -117,7 +129,7 @@ export default {
 }
 #registerBox {
   width: 80%;
-  height: 75%;
+  height: 80%;
   position: absolute;
   top: 0;
   left: 0;

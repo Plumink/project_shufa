@@ -9,7 +9,7 @@
             <v-col cols="12" md="4" class="login_input">
               <v-text-field
                 v-model="phone"
-                :rules=" [ v => !!v || '手机号不为空']"
+                :rules="phoneRules"
                 label="手机号"
                 required
                 lazy-validation="true"
@@ -28,23 +28,44 @@
           <v-btn depressed large color="blue lighten-1" class="login_btn" @click="getData()">登陆</v-btn>
           <span class="jump_left" @click="jumpHome()">返回首页</span>
           <span class="jump_right" @click="jumpRegister()">马上注册</span>
-          <div class="text-center"></div>
+          <!-- <Popup /> -->
         </div>
       </div>
     </div>
+    <v-bottom-sheet v-model="sheet" persistent>
+        <v-sheet class="text-center" height="150px">
+          <v-btn
+            class="mt-6"
+            text
+            color="error"
+            @click="sheet = !sheet"
+          >关闭</v-btn>
+          <div class="py-3">用户名或密码输入错误</div>
+        </v-sheet>
+      </v-bottom-sheet>
   </v-app>
 </template>
 
 <script>
+import Popup from '../../components/Popup'
 import Vuetify from "vuetify";
 import qs from "qs"; 
 export default {
   vuetify: new Vuetify(),
+  components:{
+    Popup
+  },
   data: () => ({
+    sheet:false,
+     isPopupVisible: false,
     valid: true,
     password: "",
     phone: "",
     checkbox: "",
+     phoneRules: [
+      (v) => !!v || "手机号不为空",
+      (v) => /^1(3|4|5|6|7|8|9)\d{9}$/.test(v) || "手机号必须是有效的",
+    ],
   }),
   methods: {
     jumpHome() {
@@ -54,10 +75,16 @@ export default {
       this.$router.push("/register");
     },
     getData() {
+      this.sheet=!this.sheet
+      console.log(this.$root.phone)
+      if (this.valid == false) {
+        this.$refs.form.validate();
+      }
+      else{
       let params = {
         passWord: this.password,
-        userName: 'b',
-        phoneNumber:this.phone
+        phoneNumber:this.phone,
+        userName:'a'
       }
       this.$axios.post("http://127.0.0.1:9003/user/login", params, {
         headers: {
@@ -68,10 +95,12 @@ export default {
       }).then(response => {
         if(response.data.code == 200){
           console.log(response);
+
         }else{
           console.log(response.data);
         }
       })
+      }
     },
   }
 };

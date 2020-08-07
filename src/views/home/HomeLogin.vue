@@ -28,7 +28,7 @@
           style="width:10vw;height:8vh"
           background-color="#fff"
           class="ml-2 mr-2"
-          label="书法"
+          :label='font'
           outlined
           dense
         >
@@ -78,7 +78,7 @@
       <div>
         <template>
           <div style="text-align:center;" class="my-2 mt-8">
-            <v-btn small color="primary">生成书法</v-btn>
+            <v-btn small color="primary" >生成书法</v-btn>
           </div>
         </template>
       </div>
@@ -99,7 +99,7 @@
         <img src="https://s1.ax1x.com/2020/08/03/aaYwUU.jpg" alt="">
       </p>
     </div>
-    <FootNavigation />
+    <FootNavigation @fontChange='upFont' />
   </div>
 </v-app>
 </template>
@@ -114,6 +114,7 @@ export default {
   },
   data () {
     return {
+      font:'书法',
      items: [
         {
           src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
@@ -128,6 +129,11 @@ export default {
           src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
         }
       ]
+    }
+  },
+  methods:{
+    upFont(title){
+      this.font=title
     }
   }
 }

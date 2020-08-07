@@ -84,6 +84,7 @@ export default {
   methods: {
 
     jump_dictionaries(item) {
+      this.$emit('fontChange',item.title)
       if (this.$route.path == item.link) {
       } else {
           this.$router.push({ path: item.link });
