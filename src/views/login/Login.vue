@@ -84,7 +84,6 @@ export default {
       let params = {
         passWord: this.password,
         phoneNumber:this.phone,
-        userName:'a'
       }
       this.$axios.post("http://127.0.0.1:9003/user/login", params, {
         headers: {
@@ -94,7 +93,8 @@ export default {
           }
       }).then(response => {
         if(response.data.code == '0'){
-          console.log(response);
+          console.log(response.data);
+          this.$root.phone=response.data.data.phoneNumber
           this.$router.push('/homelogin')
         }else{
           // console.log(response.data);
