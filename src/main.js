@@ -22,9 +22,7 @@ new Vue({
   vuetify,
   data(){
     return{
-      state:'null',
-      phone:'null',
-      username:'null'
+       
     }
   },
   render: h => h(App)
