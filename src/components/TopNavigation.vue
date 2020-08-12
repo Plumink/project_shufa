@@ -13,9 +13,11 @@
     <v-dialog v-model="dialog" max-width="290">
       <v-card d-flex align-center mb-6 style="padding:10px">
         <div class="d-flex justify-space-around mb-6" v-for="(item,index) in jump" :key="index">
-          <span v-for="(item,index) in item.line" :key="index" @click="topJump(item.link)">
-              {{item.name}}
-          </span>
+          <span
+            v-for="(item,index) in item.line"
+            :key="index"
+            @click="topJump(item.link)"
+          >{{item.name}}</span>
         </div>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -35,16 +37,37 @@ export default {
       username: this.$store.state.phone,
       dialog: false,
       jump: [
-          { line: [{ name: "字典首页", link: "/" },{name:'个人首页',link: "/main"},{name:'开通辨析',link: ""}] },
-          { line: [{ name: "我的保存", link: "" },{name:'我的发布',link: ""},{name:'免费晒',link: "/show"}] },
+        {
+          line: [
+            { name: "字典首页", link: "/homelogin" },
+            { name: "个人首页", link: "/main" },
+            { name: "开通辨析", link: "" },
           ],
+        },
+        {
+          line: [
+            { name: "我的保存", link: "" },
+            { name: "退出登陆", link: "/" },
+            { name: "免费晒", link: "/show" },
+          ],
+        },
+      ],
     };
   },
-  methods:{
-    topJump(url){
-      this.$router.push(url)
-    }
-  }
+  methods: {
+    topJump(url) {
+      if (url == "/") {
+        var signOut={
+          isLogin:false,
+          phone:''
+        }
+        this.$store.commit('islogin',signOut);
+        this.$router.push(url);
+      } else {
+        this.$router.push(url);
+      }
+    },
+  },
 };
 </script>
 

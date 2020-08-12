@@ -94,13 +94,13 @@ export default {
       }).then(response => {
         if(response.data.code == '0'){
           var loginMessage={
-            isLogin:true,
+            login:true,
             phone:response.data.data.phoneNumber
           }
           console.log(response.data);
           // this.$root.phone=response.data.data.phoneNumber
-          this.$store.commit('login',loginMessage)
-          // console.log(JSON.parse(localStorage.getItem("loginMessage")))
+          this.$store.commit('islogin',loginMessage)
+          console.log(JSON.parse(localStorage.getItem("logina")))
           this.$router.push('/homelogin')
         }else{
           // console.log(response.data);
