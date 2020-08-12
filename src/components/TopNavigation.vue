@@ -32,7 +32,7 @@ export default {
   vuetify: new Vuetify(),
   data() {
     return {
-      username: this.$root.phone,
+      username: this.$store.state.phone,
       dialog: false,
       jump: [
           { line: [{ name: "字典首页", link: "/" },{name:'个人首页',link: "/main"},{name:'开通辨析',link: ""}] },

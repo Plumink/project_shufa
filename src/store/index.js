@@ -5,10 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    login:false,
-    phone:''
+    isLogin: JSON.parse(localStorage.getItem("loginMessage")).isLogin || {},
+    phone:JSON.parse(localStorage.getItem("loginMessage")).phone || {},
   },
   mutations: {
+    login(state,message){
+      localStorage.setItem('loginMessage', JSON.stringify(message));
+      state.islogin=message.isLogin
+      state.phone=message.phone
+    }
   },
   actions: {
   },
