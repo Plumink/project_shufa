@@ -67,9 +67,9 @@ export default {
       items_person: [
         { title: "个人中心",link:'/main' },
         { title: "微店入口",link:'https://weidian.com/?userid=932664957'},
-        { title: "我要分享",link:'/' },
-        { title: "我的保存",link:'/' },
-        { title: "成为会员",link:'/' },
+        { title: "我的关注",link:'/main/follow' },
+        { title: "我的收藏",link:'/main/colluction' },
+        { title: "我的发布",link:'/main/follower' },
       ],
       items_study: [
         { title: "免费晒", link: "/show" },
