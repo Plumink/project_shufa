@@ -81,6 +81,20 @@ export default {
       offset: true,
     };
   },
+  mounted(){
+    this.$axios.get("http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",{
+      headers: {
+        "X-APP-ID": "1",
+        "X-APP-KEY": "1",
+        "X-Request-ID": "1"
+      },
+    }).then(function(res){
+      var a = res.data.data.CalligraphyTypes;
+      var that = this;
+      console.log(a);
+      that.items_dictionaries = a;
+    })
+  },
   methods: {
     jump_dictionaries(item) {
       this.$emit("fontChange", item.title);
@@ -113,6 +127,7 @@ export default {
         }
       }
     },
+
   },
 };
 </script>

@@ -12,9 +12,7 @@ Vue.prototype.qs = qs           //全局注册，使用方法为:this.qs
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5
 
-axios.defaults.baseURL = "http://127.0.0.1:9003"
-
-
+// axios.defaults.baseURL = "http://127.0.0.1:9003"
 
 new Vue({
   router,
