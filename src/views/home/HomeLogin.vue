@@ -13,7 +13,7 @@
               <v-row >
                 <v-col cols="12" sm="6" md="3">
                   <v-text-field
-                  v-model="a"
+                  v-model="content"
                     label="请输入文字"
                     outlined
                     background-color="#fff"
@@ -30,16 +30,22 @@
           background-color="#fff"
           class="ml-2 mr-2"
           :label='font'
+          :items="ziti[0]"
+          item-text="calligraphyName"
+          item-value="calligraphyId"
           outlined
           dense
         >
-          {{ziti.calligraphyName}}
+          <!-- {{ziti.calligraphyName}} -->
         </v-select>
         <v-select 
           style="width:10vw;height:8vh"
           background-color="#fff"
           class="ml-2 mr-2"
           label="作者"
+          :items="author[0]"
+          item-text="authorName"
+          item-value="authorId"
           outlined
           dense
         >
@@ -51,6 +57,9 @@
           background-color="#fff"
           class="ml-2 mr-2"
           label="次选"
+          :items="author[0]"
+          item-text="authorName"
+          item-value="authorId"
           outlined
           dense
         >
@@ -61,6 +70,7 @@
         <v-col class="d-flex flex-row" style="width:20vw;padding-right:0;" cols="12" sm="6" md="4">
           <div>
           <v-text-field
+          v-model="row_num"
             label="竖排行数"
             outlined
             dense
@@ -115,8 +125,12 @@ export default {
   },
   data () {
     return {
-      font:'书法',
-      a:'',
+      content:'',
+      font:'',
+      word:'',
+      row_num:'',
+      ziti: [],
+      author: [],
       items: [
         {
           src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
@@ -131,22 +145,24 @@ export default {
           src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
         }
       ],
-      ziti: '',
-      author: '',
+      
     }
   },
   methods:{
+
     upFont(title){
       console.log(title.calligraphyId)
       this.font=title.calligraphyName
     },
     toChildren() {
-      this.$router.push({
-        path: '/generate',
-        query: {
-          word: this.a
-        }
-      })
+      // this.content
+      console.log(this.font)
+    // this.$router.push({
+      //   path: '/generate',
+      //   query: {
+      //     word: this.a
+      //   }
+      // })
     }
   },
   mounted(){
@@ -159,9 +175,9 @@ export default {
       },
     }).then(function(res){
       var a = res.data.data;
-      that.ziti = a.CalligraphyTypes;
-      that.author = a.Authors;
-      // console.log(that.items_dictionaries);
+      that.ziti.push(a.CalligraphyTypes);
+      that.author.push(a.Authors);
+      console.log(that.author[0]);
     })
   }
 }
