@@ -33,7 +33,7 @@
           outlined
           dense
         >
-
+          {{ziti.calligraphyName}}
         </v-select>
         <v-select 
           style="width:10vw;height:8vh"
@@ -117,7 +117,7 @@ export default {
     return {
       font:'书法',
       a:'',
-     items: [
+      items: [
         {
           src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
         },
@@ -130,12 +130,15 @@ export default {
         {
           src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
         }
-      ]
+      ],
+      ziti: '',
+      author: '',
     }
   },
   methods:{
     upFont(title){
-      this.font=title
+      console.log(title.calligraphyId)
+      this.font=title.calligraphyName
     },
     toChildren() {
       this.$router.push({
@@ -145,6 +148,21 @@ export default {
         }
       })
     }
+  },
+  mounted(){
+    var that = this;
+    this.$axios.get("http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",{
+      headers: {
+        "X-APP-ID": "1",
+        "X-APP-KEY": "1",
+        "X-Request-ID": "1"
+      },
+    }).then(function(res){
+      var a = res.data.data;
+      that.ziti = a.CalligraphyTypes;
+      that.author = a.Authors;
+      // console.log(that.items_dictionaries);
+    })
   }
 }
 </script>

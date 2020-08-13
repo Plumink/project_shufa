@@ -11,7 +11,7 @@
             :key="index"
             @click="jump_dictionaries(item)"
           >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.calligraphyName }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -57,13 +57,7 @@ export default {
       dictionaries: "集字字典",
       person: "会员中心",
       study: "书法学习",
-      items_dictionaries: [
-        { title: "草书", link: "/homelogin" },
-        { title: "行书", link: "/homelogin" },
-        { title: "楷书", link: "/homelogin" },
-        { title: "隶书", link: "/homelogin" },
-        { title: "篆书", link: "/homelogin" },
-      ],
+      items_dictionaries: '',
       items_person: [
         { title: "个人中心", link: "/main" },
         { title: "微店入口", link: "https://weidian.com/?userid=932664957" },
@@ -93,15 +87,16 @@ export default {
       var a = res.data.data.CalligraphyTypes;
       console.log(a);
       that.items_dictionaries = a;
+      console.log(that.items_dictionaries);
     })
   },
   methods: {
     jump_dictionaries(item) {
-      this.$emit("fontChange", item.title);
-      if (this.$route.path == item.link) {
-      } else {
-        this.$router.push({ path: item.link });
-      }
+      this.$emit("fontChange", item);
+      // if (this.$route.path == item.link) {
+      // } else {
+      //   this.$router.push({ path: item.link });
+      // }
     },
     jump_person(item) {
       if (this.$route.path == item.link) {
