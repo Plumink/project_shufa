@@ -57,7 +57,7 @@ export default {
       dictionaries: "集字字典",
       person: "会员中心",
       study: "书法学习",
-      items_dictionaries: '',
+      items_dictionaries: "",
       items_person: [
         { title: "个人中心", link: "/main" },
         { title: "微店入口", link: "https://weidian.com/?userid=932664957" },
@@ -75,20 +75,26 @@ export default {
       offset: true,
     };
   },
-  mounted(){
+  mounted() {
     var that = this;
-    this.$axios.get("http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",{
-      headers: {
-        "X-APP-ID": "1",
-        "X-APP-KEY": "1",
-        "X-Request-ID": "1"
-      },
-    }).then(function(res){
-      var a = res.data.data.CalligraphyTypes;
-      console.log(a);
-      that.items_dictionaries = a;
-      console.log(that.items_dictionaries);
-    })
+    this.$axios
+      .get(
+        "http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",
+        {
+          headers: {
+            "X-APP-ID": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": "1",
+          },
+          params: {},
+        }
+      )
+      .then(function (res) {
+        var a = res.data.data.CalligraphyTypes;
+        console.log(a);
+        that.items_dictionaries = a;
+        console.log(that.items_dictionaries);
+      });
   },
   methods: {
     jump_dictionaries(item) {
@@ -105,7 +111,7 @@ export default {
           window.location.href = item.link;
         } else {
           if (this.$store.state.land == null) {
-            this.$message.error('尚未登陆');
+            this.$message.error("尚未登陆");
           } else {
             this.$router.push({ path: item.link });
           }
@@ -122,7 +128,6 @@ export default {
         }
       }
     },
-
   },
 };
 </script>
