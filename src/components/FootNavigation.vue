@@ -82,6 +82,7 @@ export default {
     };
   },
   mounted(){
+    var that = this;
     this.$axios.get("http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",{
       headers: {
         "X-APP-ID": "1",
@@ -90,7 +91,6 @@ export default {
       },
     }).then(function(res){
       var a = res.data.data.CalligraphyTypes;
-      var that = this;
       console.log(a);
       that.items_dictionaries = a;
     })
@@ -110,7 +110,7 @@ export default {
           window.location.href = item.link;
         } else {
           if (this.$store.state.land == null) {
-            alert("请先登陆");
+            this.$message.error('尚未登陆');
           } else {
             this.$router.push({ path: item.link });
           }
