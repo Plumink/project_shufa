@@ -6,10 +6,10 @@
     </div>
     <div class="all_second">
       <div style="width:100%;height:10vh;">
-        <img src="https://s1.ax1x.com/2020/08/04/aDBQL8.jpg" alt="">
+        <img :src='data.customerImgHead' alt="">
         <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
           <span style="color: #ebedee;font-size:4vw;">
-            <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">刘翠花</span>
+            <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{data.userName}}</span>
             <br/>
             <span style="color: #b8a18c;font-size:3vw;font-family:YouYuan;">升级到会员享受更多特权</span>
           </span>
@@ -55,6 +55,11 @@ import FootNavigation from '../../components/FootNavigation'
 export default {
   components:{
     FootNavigation
+  },
+  data(){
+    return{
+      data:JSON.parse(localStorage.getItem("loginMessage"))
+    }
   }
 }
 </script>

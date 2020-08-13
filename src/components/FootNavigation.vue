@@ -58,18 +58,18 @@ export default {
       person: "会员中心",
       study: "书法学习",
       items_dictionaries: [
-        { title: "草书",link: "/homelogin"  },
-        { title: "行书",link: "/homelogin" },
-        { title: "楷书",link: "/homelogin" },
-        { title: "隶书",link: "/homelogin" },
-        { title: "篆书",link: "/homelogin" },
+        { title: "草书", link: "/homelogin" },
+        { title: "行书", link: "/homelogin" },
+        { title: "楷书", link: "/homelogin" },
+        { title: "隶书", link: "/homelogin" },
+        { title: "篆书", link: "/homelogin" },
       ],
       items_person: [
-        { title: "个人中心",link:'/main' },
-        { title: "微店入口",link:'https://weidian.com/?userid=932664957'},
-        { title: "我的关注",link:'/main/follow' },
-        { title: "我的收藏",link:'/main/colluction' },
-        { title: "我的发布",link:'/main/follower' },
+        { title: "个人中心", link: "/main" },
+        { title: "微店入口", link: "https://weidian.com/?userid=932664957" },
+        { title: "我的关注", link: "/main/follow" },
+        { title: "我的收藏", link: "/main/colluction" },
+        { title: "我的发布", link: "/main/follower" },
       ],
       items_study: [
         { title: "免费晒", link: "/show" },
@@ -82,12 +82,11 @@ export default {
     };
   },
   methods: {
-
     jump_dictionaries(item) {
-      this.$emit('fontChange',item.title)
+      this.$emit("fontChange", item.title);
       if (this.$route.path == item.link) {
       } else {
-          this.$router.push({ path: item.link });
+        this.$router.push({ path: item.link });
       }
     },
     jump_person(item) {
@@ -96,7 +95,11 @@ export default {
         if (item.title == "微店入口") {
           window.location.href = item.link;
         } else {
-          this.$router.push({ path: item.link });
+          if (this.$store.state.land == null) {
+            alert("请先登陆");
+          } else {
+            this.$router.push({ path: item.link });
+          }
         }
       }
     },

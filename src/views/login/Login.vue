@@ -95,12 +95,13 @@ export default {
         if(response.data.code == '0'){
           var loginMessage={
             login:true,
-            phone:response.data.data.phoneNumber
+            phone:response.data.data.phoneNumber,
+            customerImgHead:response.data.data.customerImgHead,
+            customerLastTime:response.data.data.customerLastTime,
+            userName:response.data.data.userName
           }
           console.log(response.data);
-          // this.$root.phone=response.data.data.phoneNumber
           this.$store.commit('islogin',loginMessage)
-          console.log(JSON.parse(localStorage.getItem("logina")))
           this.$router.push('/homelogin')
         }else{
           // console.log(response.data);
