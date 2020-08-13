@@ -16,6 +16,7 @@ import Follow from '../views/person/Follow.vue'
 import Colluction from '../views/person/Colluction.vue'
 import Follower from '../views/person/Follower.vue'
 import Bevip from '../views/vip/Bevip.vue'
+import Generate from '../views/home/Generate.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -88,6 +89,11 @@ const routes = [
   {
     path: '/bevip',
     component: Bevip
+  },
+  {
+    path: '/generate',
+    name: 'generate',
+    component: Generate
   }
 
 ]

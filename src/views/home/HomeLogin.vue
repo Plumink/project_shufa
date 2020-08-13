@@ -9,10 +9,11 @@
       <div class="middle_head">
         <template>
           <v-form >
-            <v-container style="width:80vw;padding:0;">
+            <v-container style="width:80vw;padding:0;" ref="in">
               <v-row >
                 <v-col cols="12" sm="6" md="3">
                   <v-text-field
+                  v-model="a"
                     label="请输入文字"
                     outlined
                     background-color="#fff"
@@ -78,7 +79,7 @@
       <div>
         <template>
           <div style="text-align:center;" class="my-2 mt-8">
-            <v-btn small color="primary" >生成书法</v-btn>
+            <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
           </div>
         </template>
       </div>
@@ -86,7 +87,7 @@
     <div class="upvip">
       <template>
             <div style="text-align:center" class="my-2">
-              <v-btn large color="error">升级会员</v-btn>
+              <v-btn large color="error">生成书法</v-btn>
             </div>
       </template>
     </div>
@@ -115,6 +116,7 @@ export default {
   data () {
     return {
       font:'书法',
+      a:'',
      items: [
         {
           src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
@@ -134,6 +136,14 @@ export default {
   methods:{
     upFont(title){
       this.font=title
+    },
+    toChildren() {
+      this.$router.push({
+        path: '/generate',
+        query: {
+          word: this.a
+        }
+      })
     }
   }
 }
