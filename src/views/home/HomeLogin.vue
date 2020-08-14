@@ -24,7 +24,7 @@
             style="width:10vw;height:8vh"
             background-color="#fff"
             class="ml-2 mr-2"
-            :label="font"
+            label="字体"
             :items="ziti[0]"
             v-model="fontId"
             item-text="calligraphyName"
@@ -128,13 +128,13 @@ export default {
   },
   data() {
     return {
-      fontId:'',
-      first:'',
-      second:'',
+      fontId: "",
+      first: "",
+      second: "",
       content: "",
       font: "",
       word: "",
-      row_num: "",
+      row_num: '',
       fontId: "",
       ziti: [],
       author: [],
@@ -160,20 +160,29 @@ export default {
       this.font = title.calligraphyName;
     },
     toChildren() {
-      // console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
+      console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
       var message={
         text:this.content,
         calligraphyTypeId:this.ziti[0][this.fontId-1].calligraphyId,
         firstAuthorId:this.author[0][this.first-1].authorId,
         secondAuthorId:this.author[0][this.second-1].authorId,
-        thirdAuthorId:'0'
+        thirdAuthorId:'0',
+        row_num:this.row_num
       }
+    //  var message={
+    //     text:'白日依山尽,黄河入海流',
+    //     calligraphyTypeId:1,
+    //     firstAuthorId:16,
+    //     secondAuthorId:54,
+    //     thirdAuthorId:'87',
+    //     row_num:this.row_num
+    //   }
       this.$router.push({
-        path: '/generate',
+        path: "/generate",
         query: {
-          message:message
-        }
-      })
+          message: message,
+        },
+      });
     },
   },
   mounted() {
