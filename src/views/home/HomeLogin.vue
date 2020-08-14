@@ -187,25 +187,21 @@ export default {
   },
   mounted() {
     var that = this;
-    this.$axios
-      .get(
-        "http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",
-        {
-          headers: {
-            "X-APP-ID": "1",
-            "X-APP-KEY": "1",
-            "X-Request-ID": "1",
-          },
-        }
-      )
-      .then(function (res) {
-        var a = res.data.data;
-        that.ziti.push(a.CalligraphyTypes);
-        that.author.push(a.Authors);
-        console.log(that.author[0]);
-      });
-  },
-};
+    this.$axios.get("http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",{
+      headers: {
+        "X-APP-ID": "1",
+        "X-APP-KEY": "1",
+        "X-Request-ID": "1"
+      },
+    }).then(function(res){
+      var a = res.data.data;
+      that.ziti.push(a.CalligraphyTypes);
+      that.author.push(a.Authors);
+      console.log(that.author[0]);
+      
+    })
+  }
+}
 </script>
 
 <style scoped>
