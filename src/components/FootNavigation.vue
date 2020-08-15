@@ -91,18 +91,19 @@ export default {
       )
       .then(function (res) {
         var a = res.data.data.CalligraphyTypes;
-        console.log(a);
         that.items_dictionaries = a;
-        console.log(that.items_dictionaries);
+        for(var i=0;i<a.length;i++){
+          a[i].link='/'
+        }
       });
   },
   methods: {
     jump_dictionaries(item) {
       this.$emit("fontChange", item);
-      // if (this.$route.path == item.link) {
-      // } else {
-      //   this.$router.push({ path: item.link });
-      // }
+      if (this.$route.path == item.link) {
+      } else {
+        this.$router.push({ path: item.link });
+      }
     },
     jump_person(item) {
       if (this.$route.path == item.link) {

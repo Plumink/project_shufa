@@ -132,7 +132,7 @@ export default {
       first: "",
       second: "",
       content: "",
-      font: "",
+      font: "字体",
       word: "",
       row_num: '',
       fontId: "",
@@ -156,7 +156,8 @@ export default {
   },
   methods: {
     upFont(title) {
-      // console.log(title.calligraphyId);
+      console.log(this.author);
+      // console.log(title.calligraphyName);
       this.font = title.calligraphyName;
     },
     toChildren() {
@@ -170,7 +171,7 @@ export default {
         row_num:this.row_num
       }
     //  var message={
-    //     text:'白日依山尽,黄河入海流',
+    //     text:'白日依山尽,黄河入海流，远近高低各不同',
     //     calligraphyTypeId:1,
     //     firstAuthorId:16,
     //     secondAuthorId:54,

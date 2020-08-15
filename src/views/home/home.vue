@@ -3,8 +3,6 @@
   <div class="total">
     <TopNavigation />
     <div class="head">
-      <!-- <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt="">
-      <span class="font"><i style="font-size:10vw" class="iconfont  icon-menu-line"></i></span> -->
     </div>
     <div class="middle">
       <div class="middle_head">
