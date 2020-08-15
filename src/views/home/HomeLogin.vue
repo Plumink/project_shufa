@@ -9,10 +9,15 @@
         <div class="middle_head">
           <template>
             <v-form>
-              <v-container style="width:80vw;padding:0;" ref="in">
+              <v-container style="width: 80vw; padding: 0;" ref="in">
                 <v-row>
                   <v-col cols="12" sm="6" md="3">
-                    <v-text-field v-model="content" label="请输入文字" outlined background-color="#fff"></v-text-field>
+                    <v-text-field
+                      v-model="content"
+                      label="请输入文字"
+                      outlined
+                      background-color="#fff"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -21,7 +26,7 @@
         </div>
         <div class="mt-4 middle_m d-flex flex-row justify-sm-space-around mb-6">
           <v-select
-            style="width:10vw;height:8vh"
+            style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
             label="字体"
@@ -35,7 +40,7 @@
             <!-- {{ziti.calligraphyName}} -->
           </v-select>
           <v-select
-            style="width:10vw;height:8vh"
+            style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
             v-model="first"
@@ -47,7 +52,7 @@
             dense
           ></v-select>
           <v-select
-            style="width:10vw;height:8vh"
+            style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
             label="次选"
@@ -63,7 +68,7 @@
           <template>
             <v-col
               class="d-flex flex-row"
-              style="width:20vw;padding-right:0;"
+              style="width: 20vw; padding-right: 0;"
               cols="12"
               sm="6"
               md="4"
@@ -76,40 +81,49 @@
                   dense
                   type="number"
                   background-color="#fff"
-                  style="width:40vw"
+                  style="width: 40vw;"
                 ></v-text-field>
               </div>
-              <div style="margin-left:8vw" class="d-flex flex-column justify-sm-space-around">
-                <v-checkbox style="margin:0;height:5vh;" label="横排"></v-checkbox>
-                <v-checkbox style="margin:0" label="左起"></v-checkbox>
+              <div
+                style="margin-left: 8vw;"
+                class="d-flex flex-column justify-sm-space-around"
+              >
+                <v-checkbox
+                  style="margin: 0; height: 5vh;"
+                  label="横排"
+                ></v-checkbox>
+                <v-checkbox style="margin: 0;" label="左起"></v-checkbox>
               </div>
             </v-col>
           </template>
         </div>
         <div>
           <template>
-            <div style="text-align:center;" class="my-2 mt-8">
-              <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
+            <div style="text-align: center;" class="my-2 mt-8">
+              <v-btn small color="primary" @click="toChildren()">
+                生成书法
+              </v-btn>
             </div>
           </template>
         </div>
       </div>
       <div class="upvip">
         <template>
-          <div style="text-align:center" class="my-2">
+          <div style="text-align: center;" class="my-2">
             <v-btn large color="error">生成书法</v-btn>
           </div>
         </template>
       </div>
-      <div style="height:60vh">
-        <p style="text-align:center">
+      <div style="height: 60vh;">
+        <p style="text-align: center;">
           (会员享有
-          <span style="color:blue;font-size:5vw;">完整名帖字库</span>)
+          <span style="color: blue; font-size: 5vw;">完整名帖字库</span>
+          )
         </p>
         <br />
         <p class="word_p">通篇集字，灵活排版</p>
         <p class="word_p">置顶公众号，使用更方便</p>
-        <p style="text-align:center;margin-top:2em">
+        <p style="text-align: center; margin-top: 2em;">
           <img src="https://s1.ax1x.com/2020/08/03/aaYwUU.jpg" alt />
         </p>
       </div>
@@ -119,8 +133,8 @@
 </template>
 
 <script>
-import FootNavigation from "../../components/FootNavigation";
-import TopNavigation from "../../components/TopNavigation";
+import FootNavigation from '../../components/FootNavigation'
+import TopNavigation from '../../components/TopNavigation'
 export default {
   components: {
     FootNavigation,
@@ -128,48 +142,70 @@ export default {
   },
   data() {
     return {
+<<<<<<< Updated upstream
       fontId: "",
       first: "",
       second: "",
       content: "",
       font: "字体",
       word: "",
+=======
+      fontId: '',
+      first: '',
+      second: '',
+      content: '',
+      font: '',
+      word: '',
+>>>>>>> Stashed changes
       row_num: '',
-      fontId: "",
+      fontId: '',
       ziti: [],
       author: [],
       items: [
         {
-          src: "https://s1.ax1x.com/2020/08/01/a8fdNq.jpg",
+          src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
         },
         {
-          src: "https://s1.ax1x.com/2020/08/01/a8WznJ.jpg",
+          src: 'https://s1.ax1x.com/2020/08/01/a8WznJ.jpg',
         },
         {
-          src: "https://s1.ax1x.com/2020/08/01/a8fCA1.jpg",
+          src: 'https://s1.ax1x.com/2020/08/01/a8fCA1.jpg',
         },
         {
-          src: "https://s1.ax1x.com/2020/08/01/a8fVje.jpg",
+          src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
         },
       ],
-    };
+    }
   },
   methods: {
     upFont(title) {
+<<<<<<< Updated upstream
       console.log(this.author);
       // console.log(title.calligraphyName);
       this.font = title.calligraphyName;
+=======
+      // console.log(title.calligraphyId);
+      this.font = title.calligraphyName
+>>>>>>> Stashed changes
     },
     toChildren() {
-      console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
-      var message={
-        text:this.content,
-        calligraphyTypeId:this.ziti[0][this.fontId-1].calligraphyId,
-        firstAuthorId:this.author[0][this.first-1].authorId,
-        secondAuthorId:this.author[0][this.second-1].authorId,
-        thirdAuthorId:'0',
+      // console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
+      // var message = {
+      //   text: this.content,
+      //   calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
+      //   firstAuthorId: this.author[0][this.first - 1].authorId,
+      //   secondAuthorId: this.author[0][this.second - 1].authorId,
+      //   thirdAuthorId: '0',
+      // }
+     var message={
+        text:'白日依山尽,黄河入海流',
+        calligraphyTypeId:1,
+        firstAuthorId:16,
+        secondAuthorId:54,
+        thirdAuthorId:'87',
         row_num:this.row_num
       }
+<<<<<<< Updated upstream
     //  var message={
     //     text:'白日依山尽,黄河入海流，远近高低各不同',
     //     calligraphyTypeId:1,
@@ -178,35 +214,41 @@ export default {
     //     thirdAuthorId:'87',
     //     row_num:this.row_num
     //   }
+=======
+>>>>>>> Stashed changes
       this.$router.push({
         path: "/generate",
         query: {
           message: message,
         },
-      });
+      })
     },
   },
   mounted() {
-    var that = this;
-    this.$axios.get("http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage",{
-      headers: {
-        "X-APP-ID": "1",
-        "X-APP-KEY": "1",
-        "X-Request-ID": "1"
-      },
-    }).then(function(res){
-      var a = res.data.data;
-      that.ziti.push(a.CalligraphyTypes);
-      that.author.push(a.Authors);
-      console.log(that.author[0]);
-      
-    })
-  }
+    var that = this
+    this.$axios
+      .get(
+        'http://www.mocking.space:9003/common/getInitParameter?packageName=mobileHomePage',
+        {
+          headers: {
+            'X-APP-ID': '1',
+            'X-APP-KEY': '1',
+            'X-Request-ID': '1',
+          },
+        },
+      )
+      .then(function (res) {
+        var a = res.data.data
+        that.ziti.push(a.CalligraphyTypes)
+        that.author.push(a.Authors)
+        console.log(that.author[0])
+      })
+  },
 }
 </script>
 
 <style scoped>
-@import "./style.css";
+@import './style.css';
 
 .word_p {
   text-align: center;

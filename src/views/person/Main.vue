@@ -6,7 +6,7 @@
       </div>
       <div class="all_second">
         <div style="width:100%;height:10vh;">
-          <img :src="data.customerImgHead" alt @click="updateImage()" />
+          <img :src="data.customerImgHead" alt="头像" id="my-img" @click="toChange()"/>
           <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
             <span style="color: #ebedee;font-size:4vw;">
               <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{data.userName}}</span>
@@ -63,19 +63,43 @@ export default {
   },
   methods:{
     updateImage(){
-       this.$axios.post("http://127.0.0.1:9003/common/uploadFile", {
-        headers: {
-            "X-APP-ID": "1",
-            "X-APP-KEY": "1",
-            "X-Request-ID": "1",
-          },
-          params:{
-            uploadFile:'search_background.jpg'
-          }
-      }).then(response=>{
-        // console.log(response)
+      var path = $('#img-upload')[0].value;
+      var arr = path.split("\\");
+      console.log(arr[arr.length-1]);
+       
+    },
+    toChange(){
+      this.$router.push({
+        path:"/change"
       })
     }
+  },
+  mounted(){
+    $('#my-img').click(function(){
+        $('#img-upload').click();
+    })
+  },
+  updated(){
+    var path = $('#img-upload').files[0];
+    var arr = path.split("\\");
+    console.log(arr[arr.length-1]);
+    console.log(path);
+    this.$axios.post("http://127.0.0.1:9003/common/uploadFile", {
+      headers: {
+          "content-type": "multipart/form-data",
+          "X-APP-ID": "1",
+          "X-APP-KEY": "1",
+          "X-Request-ID": "1",
+        },
+        params:{
+          // uploadFile:arr[arr.length-1]
+          uploadFile:path
+
+        }
+    }).then(response=>{
+      console.log(response)
+    })
+    console.log('1')
   }
 };
 </script>
@@ -157,5 +181,9 @@ export default {
   // background-color: #F9F4E6;
   margin-top: 3vh;
   border-radius: 4vw;
+}
+
+#img-upload{
+    display: none;
 }
 </style>

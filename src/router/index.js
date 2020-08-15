@@ -17,6 +17,8 @@ import Colluction from '../views/person/Colluction.vue'
 import Follower from '../views/person/Follower.vue'
 import Bevip from '../views/vip/Bevip.vue'
 import Generate from '../views/home/Generate.vue'
+import Test from '../views/person/test.vue'
+import Change from '../views/person/Change.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -94,6 +96,10 @@ const routes = [
     path: '/generate',
     name: 'generate',
     component: Generate
+  },
+  {
+    path: '/change',
+    component: Change
   }
 
 ]
