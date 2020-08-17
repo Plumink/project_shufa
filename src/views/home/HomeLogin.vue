@@ -142,21 +142,12 @@ export default {
   },
   data() {
     return {
-<<<<<<< Updated upstream
-      fontId: "",
-      first: "",
-      second: "",
-      content: "",
-      font: "字体",
-      word: "",
-=======
       fontId: '',
       first: '',
       second: '',
       content: '',
       font: '',
       word: '',
->>>>>>> Stashed changes
       row_num: '',
       fontId: '',
       ziti: [],
@@ -179,14 +170,8 @@ export default {
   },
   methods: {
     upFont(title) {
-<<<<<<< Updated upstream
-      console.log(this.author);
-      // console.log(title.calligraphyName);
-      this.font = title.calligraphyName;
-=======
       // console.log(title.calligraphyId);
       this.font = title.calligraphyName
->>>>>>> Stashed changes
     },
     toChildren() {
       // console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
@@ -205,17 +190,6 @@ export default {
         thirdAuthorId:'87',
         row_num:this.row_num
       }
-<<<<<<< Updated upstream
-    //  var message={
-    //     text:'白日依山尽,黄河入海流，远近高低各不同',
-    //     calligraphyTypeId:1,
-    //     firstAuthorId:16,
-    //     secondAuthorId:54,
-    //     thirdAuthorId:'87',
-    //     row_num:this.row_num
-    //   }
-=======
->>>>>>> Stashed changes
       this.$router.push({
         path: "/generate",
         query: {
