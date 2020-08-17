@@ -97,7 +97,7 @@ export default {
           userName: this.username,
         };
         this.$axios
-          .post("http://127.0.0.1:9003/user/register", params, {
+          .post("http://www.mocking.space:9003/v2/api-docs/CalligraphyService/user/register", params, {
             headers: {
               "X-APP-ID": "1",
               "X-APP-KEY": "1",

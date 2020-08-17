@@ -84,7 +84,7 @@ export default {
     var arr = path.split("\\");
     console.log(arr[arr.length-1]);
     console.log(path);
-    this.$axios.post("http://127.0.0.1:9003/common/uploadFile", {
+    this.$axios.post("http://www.mocking.space:9003/v2/api-docs/CalligraphyService/common/uploadFile", {
       headers: {
           "content-type": "multipart/form-data",
           "X-APP-ID": "1",

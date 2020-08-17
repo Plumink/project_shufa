@@ -57,7 +57,7 @@ export default {
           'X-Request-ID':'1'
         }
       };
-      this.$axios.post("http://127.0.0.1:9003/common/uploadFile",formdata1,config).then(response =>{
+      this.$axios.post("http://www.mocking.space:9003/v2/api-docs/CalligraphyService/common/uploadFile",formdata1,config).then(response =>{
         console.log(reponse);
       })
     }
