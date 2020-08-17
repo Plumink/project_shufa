@@ -170,26 +170,26 @@ export default {
   },
   methods: {
     upFont(title) {
-      // console.log(title.calligraphyId);
       this.font = title.calligraphyName
     },
     toChildren() {
-      // console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
-      // var message = {
-      //   text: this.content,
-      //   calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
-      //   firstAuthorId: this.author[0][this.first - 1].authorId,
-      //   secondAuthorId: this.author[0][this.second - 1].authorId,
-      //   thirdAuthorId: '0',
-      // }
-     var message={
-        text:'白日依山尽,黄河入海流',
-        calligraphyTypeId:1,
-        firstAuthorId:16,
-        secondAuthorId:54,
-        thirdAuthorId:'87',
+      console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
+      var message = {
+        text: this.content,
+        calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
+        firstAuthorId: this.author[0][this.first - 1].authorId,
+        secondAuthorId: this.author[0][this.second - 1].authorId,
+        thirdAuthorId: '0',
         row_num:this.row_num
       }
+    //  var message={
+    //     text:'白日依山尽,黄河入海流',
+    //     calligraphyTypeId:1,
+    //     firstAuthorId:16,
+    //     secondAuthorId:54,
+    //     thirdAuthorId:'87',
+    //     row_num:this.row_num
+    //   }
       this.$router.push({
         path: "/generate",
         query: {
@@ -202,7 +202,7 @@ export default {
     var that = this
     this.$axios
       .get(
-        'http://www.mocking.space:9003/CalligraphyService/common/getInitParameter?packageName=mobileHomePage',
+        'https://www.mocking.space/CalligraphyService/common/getInitParameter?packageName=mobileHomePage',
         {
           headers: {
             'X-APP-ID': '1',

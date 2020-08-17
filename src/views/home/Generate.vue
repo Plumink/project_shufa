@@ -39,7 +39,7 @@ export default {
     var arr = str.match(/[\u4e00-\u9fa5]/g);
     let params = this.$route.query.message;
     this.$axios
-      .post("http://127.0.0.1:9003/dictionaries/query", params, {
+      .post("https://www.mocking.space/CalligraphyService/dictionaries/query", params, {
         headers: {
           "X-APP-ID": "1",
           "X-APP-KEY": "1",
