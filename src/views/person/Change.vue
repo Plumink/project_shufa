@@ -29,15 +29,6 @@
           </div>
             </el-input>
           </div>
-          <div style="width:95vw;height:10vh;background-color:#fff;border-radius:2vw;margin-top:3vh">
-            <span style="float:left;line-height:10vh;font-size:4vw;margin-left:4vw">手机号：</span>
-            <el-input
-              style="float：left;width:70vw;line-height:10vh"
-              v-model="username"
-              placeholder="请输入内容"
-              clearable>
-            </el-input>
-          </div>
           <div>
             <el-row>
               <el-button type="primary" @click="submit">提交修改</el-button>
@@ -55,8 +46,9 @@ import TopNavigation from '../../components/TopNavigation'
 export default {
   data() {
     return {
+      userId:this.$store.state.id,
       username:'',
-      userImageHead:'',
+      userImageHead:''
     }
   },
   methods: {
@@ -65,10 +57,8 @@ export default {
     },
     submit() {
       var file = document.getElementById("upload_file").files[0];
-      console.log(file);
       var formdata1=new FormData();
       formdata1.append('uploadFile',file);
-      console.log(formdata1)
       this.$axios.post("https://www.mocking.space/CalligraphyService/common/uploadFile",formdata1,{
         headers:{
           'Content-Type':'multipart/form-data',
@@ -79,10 +69,27 @@ export default {
       }).then(response =>{
         console.log(response.data.data);
         this.userImageHead = response.data.data;
+        if(response.data.data != ''){
+          let params = {
+            "customerId": this.userId,
+            "customerImgHead": this.userImageHead,
+            "userName": this.username
+          }
+          this.$axios.post("https://www.mocking.space/CalligraphyService/user/updateUserInfo",params,{
+            header:{
+              'X-APP-ID':'1',
+              'X-APP-KEY':'1',
+              'X-Request-ID':'1'
+            }
+          }).then(response =>{
+            console.log("修改成功");
+          })
+        }
       })
     }
   },
   updated(){
+    console.log(this.$store.state.id)
     console.log(data.userImageHead)
   }
 }
