@@ -34,7 +34,7 @@ export default {
   vuetify: new Vuetify(),
   data() {
     return {
-      username: this.$store.state.phone,
+      username: this.$store.state.userName,
       dialog: false,
       jump: [
         {

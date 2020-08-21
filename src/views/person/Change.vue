@@ -7,7 +7,7 @@
         <div class="demo-input-suffix" style="text-align: center">
           <div style="width:95vw;height:10vh;background-color:#fff;border-radius:2vw;">
             <span style="float:left;line-height:10vh;font-size:4vw;margin-left:4vw">头像</span>
-            <img style="float:right;width:14vw;height:14vw;border-radius:2vw;line-height:10vh;margin-top:1vh;margin-right:5vw" src="https://s1.ax1x.com/2020/08/15/dkCcef.jpg" alt="">
+            <img style="float:right;width:14vw;height:14vw;border-radius:2vw;line-height:10vh;margin-top:1vh;margin-right:5vw" :src="this.$store.state.customerImgHead" alt="">
           </div>
           <div style="margin">
             <input accept="image/*" name="img" id="upload_file" type="file">

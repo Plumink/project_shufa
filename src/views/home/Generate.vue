@@ -2,17 +2,21 @@
   <v-app>
     <div class="total_gen">
       <TopNavigation />
-      <div class="d-flex flex-row-reverse justify-space-around mb-6" style="margin-top:100px;width:100%;height:80%">
-        <div class="d-flex flex-column mb-6" v-for="(items,index) in show" :key="index" :style="{ width: width+ '%', height:height+'%' }">
-          <img
-            :src="item.url"
-            alt
-            style=" width:100%;height:auto;background-color:#f9f4e6"
-            v-for="(item,index) in items"
-            :key="index"
-          />
+      <div style="height:10vh;width:100vw"></div>
+      <div style="background-color:#f9f4e6;width:100vw;height:auto">
+        <div class="d-flex flex-row-reverse justify-space-around" style="margin:0 auto;width:80%;height:80%">
+          <div class="d-flex flex-column mb-6" v-for="(items,index) in show" :key="index" :style="{ width: width+ '%', height:height+'%' }">
+            <img
+              :src="item.url"
+              alt
+              style=" width:100%;height:auto;background-color:#f9f4e6"
+              v-for="(item,index) in items"
+              :key="index"
+            />
+          </div>
         </div>
       </div>
+      <!-- <div style="width:100vw;height:20vh;background-color:red"></div> -->
     </div>
   </v-app>
 </template>
