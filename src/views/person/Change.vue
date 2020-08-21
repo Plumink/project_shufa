@@ -18,6 +18,23 @@
               style="float：left;width:70vw;line-height:10vh"
               v-model="username"
               placeholder="请输入内容"
+              clearable><div style="width:95vw;height:10vh;background-color:#fff;border-radius:2vw;margin-top:3vh">
+            <span style="float:left;line-height:10vh;font-size:4vw;margin-left:4vw">用户名：</span>
+            <el-input
+              style="float：left;width:70vw;line-height:10vh"
+              v-model="username"
+              placeholder="请输入内容"
+              clearable>
+            </el-input>
+          </div>
+            </el-input>
+          </div>
+          <div style="width:95vw;height:10vh;background-color:#fff;border-radius:2vw;margin-top:3vh">
+            <span style="float:left;line-height:10vh;font-size:4vw;margin-left:4vw">手机号：</span>
+            <el-input
+              style="float：left;width:70vw;line-height:10vh"
+              v-model="username"
+              placeholder="请输入内容"
               clearable>
             </el-input>
           </div>
@@ -38,7 +55,8 @@ import TopNavigation from '../../components/TopNavigation'
 export default {
   data() {
     return {
-      username:''
+      username:'',
+      userImageHead:'',
     }
   },
   methods: {
@@ -47,20 +65,25 @@ export default {
     },
     submit() {
       var file = document.getElementById("upload_file").files[0];
+      console.log(file);
       var formdata1=new FormData();
-      formdata1.append('uploadFile',file,file.name);
-      let config = {
+      formdata1.append('uploadFile',file);
+      console.log(formdata1)
+      this.$axios.post("https://www.mocking.space/CalligraphyService/common/uploadFile",formdata1,{
         headers:{
           'Content-Type':'multipart/form-data',
           'X-APP-ID':'1',
           'X-APP-KEY':'1',
           'X-Request-ID':'1'
         }
-      };
-      this.$axios.post("https://www.mocking.space/CalligraphyService/common/uploadFile",formdata1,config).then(response =>{
-        console.log(reponse);
+      }).then(response =>{
+        console.log(response.data.data);
+        this.userImageHead = response.data.data;
       })
     }
+  },
+  updated(){
+    console.log(data.userImageHead)
   }
 }
 </script>
