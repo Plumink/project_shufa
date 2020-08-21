@@ -20,7 +20,7 @@
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
-              <div class="shuzi">0</div>
+              <div class="shuzi">{{follow.length}}</div>
             </router-link>
           </div>
           <div class="main_little">
@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       data: JSON.parse(localStorage.getItem("loginMessage")),
+      follow:[]
     };
   },
   methods:{
@@ -94,7 +95,32 @@ export default {
     },
 
   },
+  created() {
+    this.$axios
+      .post("https://www.mocking.space/CalligraphyService/user/getCatchInfo", {
+          customerId: this.$store.state.id,
+          customerImgHead: "string",
+          customerLastTime: "2020-08-21T03:02:35.606Z",
+          ifValid: 0,
+          phoneNumber: "string",
+          sessionId: "string",
+          userName: "string",
+        },{
+        headers: {
+          "X-APP-ID": "1",
+          "X-APP-KEY": "1",
+          "X-Request-ID": "1",
+        },
+      })
+      .then((response) => {
+        var n=response.data.data.length
+        for(var i=0;i<n;i++){
+          this.follow.push(response.data.data[i])
+          console.log(this.follow)
+        }
 
+      });
+  },
   mounted(){
     $('#my-img').click(function(){
         $('#img-upload').click();
@@ -134,6 +160,7 @@ export default {
     })
     console.log('1')
   }
+  
 };
 </script>
 

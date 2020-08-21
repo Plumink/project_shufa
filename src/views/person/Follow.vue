@@ -23,7 +23,11 @@ export default {
       items: [],
     };
   },
-  methods: {},
+  methods: {
+    delete(){
+      
+    }
+  },
   created() {
     this.$axios
       .post("https://www.mocking.space/CalligraphyService/user/getCatchInfo", {
