@@ -110,7 +110,7 @@
       <div class="upvip">
         <template>
           <div style="text-align: center;" class="my-2">
-            <v-btn large color="error">生成书法</v-btn>
+            <v-btn large color="error">成为会员</v-btn>
           </div>
         </template>
       </div>
@@ -124,7 +124,7 @@
         <p class="word_p">通篇集字，灵活排版</p>
         <p class="word_p">置顶公众号，使用更方便</p>
         <p style="text-align: center; margin-top: 2em;">
-          <img src="https://s1.ax1x.com/2020/08/03/aaYwUU.jpg" alt />
+          <img src="https://www.mocking.space/zimg/f8606a167fc4cd430b725a4489cfb719?p=0&w=200&h=250" alt />
         </p>
       </div>
       <FootNavigation @fontChange="upFont" />
@@ -148,22 +148,22 @@ export default {
       content: '',
       font: '',
       word: '',
-      row_num: '',
+      row_num: '4',
       fontId: '',
       ziti: [],
       author: [],
       items: [
         {
-          src: 'https://s1.ax1x.com/2020/08/01/a8fdNq.jpg',
+          src: 'https://www.mocking.space/zimg/fa91d3c069b6377c2771b696f21d955f?p=0',
         },
         {
-          src: 'https://s1.ax1x.com/2020/08/01/a8WznJ.jpg',
+          src: 'https://www.mocking.space/zimg/cb7789e8d73d2654f4e055d54a8d0136?p=0',
         },
         {
-          src: 'https://s1.ax1x.com/2020/08/01/a8fCA1.jpg',
+          src: 'https://www.mocking.space/zimg/48372f575e542e87ebe3f1a3eb0cb407?p=0',
         },
         {
-          src: 'https://s1.ax1x.com/2020/08/01/a8fVje.jpg',
+          src: 'https://www.mocking.space/zimg/f8606a167fc4cd430b725a4489cfb719?p=0',
         },
       ],
     }
@@ -173,7 +173,7 @@ export default {
       this.font = title.calligraphyName
     },
     toChildren() {
-      console.log(this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
+      console.log(this.row_num,this.content,this.ziti[0][this.fontId-1].calligraphyName,this.author[0][this.first-1].authorId,this.author[0][this.second-1].authorId);
       var message = {
         text: this.content,
         calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,

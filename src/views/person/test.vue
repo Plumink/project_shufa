@@ -1,26 +1,14 @@
 <template>
-  <div>
-    <input id="in" type="file">
+  <div style="display:flex;width:90vw;height:10vh;background-color:red;flex-direction:row;justify-content:space-around;">
+    <div style="width:10vw;height:5vh;background-color:blue;">1</div>
+    <div style="width:10vw;height:5vh;background-color:blue;">2</div>
+    <div style="width:10vw;height:5vh;background-color:blue;">3</div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      textarea: ''
-    }
-  },
-  methods: {
-    openFile: function () {
-      document.getElementById('open').click()
-    },
-    showRealPath: function () {
-      document.getElementById('input01').value = document.getElementById('open').files[0].path
-    }
-  },
-  mounted() {
-    console.log(document.getElementById('in').value)
-  }
+ 
+  
 }
 </script>

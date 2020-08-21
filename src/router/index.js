@@ -17,6 +17,7 @@ import Follower from '../views/person/Follower.vue'
 import Bevip from '../views/vip/Bevip.vue'
 import Generate from '../views/home/Generate.vue'
 import Change from '../views/person/Change.vue'
+import Test from '../views/person/test.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -94,6 +95,10 @@ const routes = [
   {
     path: '/change',
     component: Change
+  },
+  {
+    path: '/test',
+    component: Test
   }
 
 ]

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="all_main">
+    <div >
       <div class="all_first">
         <p class="main_title">个人中心</p>
       </div>
@@ -36,9 +36,23 @@
             </router-link>
           </div>
         </div>
-
+        <div class="pay" >
+          <!-- <p>充值类型</p> -->
+          <div tabindex="1" class="pay_first">
+            <p class="pay_second">12个月</p>
+            <p class="pay_third">￥88</p>
+          </div>
+          <div tabindex="2" class="pay_first">
+            <p class="pay_second">1个月</p>
+            <p class="pay_third">￥15</p>
+          </div>
+          <div tabindex="3" class="pay_first">
+            <p class="pay_second">连续包月</p>
+            <p class="pay_third">￥10</p>
+          </div>
+        </div>
         <div class="huiyuan">
-          <span>成为会员</span>
+          <span @click="JumpVip()">成为会员</span>
         </div>
         <div class="show_main">
           <router-view />
@@ -72,12 +86,31 @@ export default {
       this.$router.push({
         path:"/change"
       })
-    }
+    },
+    JumpVip(){
+      this.$router.push({
+        path:"/bevip"
+      })
+    },
+
   },
+
   mounted(){
     $('#my-img').click(function(){
         $('#img-upload').click();
-    })
+    });
+
+    var brr = $('.pay_first');
+    var tag;
+    console.log(brr)
+    for(var i=0;i<brr.length;i++){
+      (function(i) {
+            brr[i].onclick = function() {
+                tag = i;
+                console.log(tag);
+            }
+        })(i)
+    }
   },
   updated(){
     var path = $('#img-upload').files[0];
@@ -186,4 +219,42 @@ export default {
 #img-upload{
     display: none;
 }
+
+.pay{
+  margin-top:2vh;
+  display:flex;
+  width:90vw;
+  height:30vh;
+  flex-direction:row;
+  justify-content:space-around;
+}
+
+.pay_first {
+  border: 1px solid grey;
+  border-radius: 2vw;
+  width:30%;
+  height:70%;
+  background-color:#ffffff;
+  float:left;
+  margin-top:4vh
+}
+
+.pay_first:focus{
+  background-color: #f9f1e4;
+}
+
+.pay_second{
+  text-align: center;
+  margin-top: 2vh;
+}
+.pay_third{
+  text-align: center;
+  margin-top: 3vh;
+  font-size: 6vw;
+  color: #e5c194;
+}
+
+// .active{
+//   background-color: #f9f1e4;
+// }
 </style>
