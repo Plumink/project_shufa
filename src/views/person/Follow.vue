@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="follow_all" v-for="(item,index) in items" :key="index">
-      <img src="https://s1.ax1x.com/2020/08/04/aDBQL8.jpg" alt="">
+      <img :src='item.customerImgHead' alt />
       <div style="padding-top:2vh;">
-        <span class="ziti_follow" style="margin-left:2vw;">用户名：</span>
-        <br/>
-        <div style="width:20vw;float:left;">
-          <span class="ziti_follow" style="margin-left:2vw;">关注数：</span>
+        <span class="ziti_follow" style="margin-left:2vw;">用户名：{{item.userName}}</span>
+        <br />
+        <div style="width:50vw;float:left;">
+          <span class="ziti_follow" style="margin-left:2vw;">手机号：{{item.phoneNumber.substr(0, 3) + '****' + item.phoneNumber.substr(7)}}</span>
         </div>
         <div style="float:left">
-          <span class="ziti_follow" style="margin-left:8vw;">粉丝数：</span>
+          <span class="ziti_follow" style="margin-left:8vw;">取消关注</span>
         </div>
       </div>
     </div>
@@ -18,37 +18,61 @@
 
 <script>
 export default {
-  data(){
-    return{
-      items: [1,2,3,4,5,6]
-    }
+  data() {
+    return {
+      items: [],
+    };
   },
-  methods:{
+  methods: {},
+  created() {
+    this.$axios
+      .post("https://www.mocking.space/CalligraphyService/user/getCatchInfo", {
+          customerId: this.$store.state.id,
+          customerImgHead: "string",
+          customerLastTime: "2020-08-21T03:02:35.606Z",
+          ifValid: 0,
+          phoneNumber: "string",
+          sessionId: "string",
+          userName: "string",
+        },{
+        headers: {
+          "X-APP-ID": "1",
+          "X-APP-KEY": "1",
+          "X-Request-ID": "1",
+        },
+      })
+      .then((response) => {
+        var n=response.data.data.length
+        for(var i=0;i<n;i++){
+          this.items.push(response.data.data[i])
+          console.log(this.items)
+        }
 
-  }
-}
+      });
+  },
+};
 </script>
 
 <style>
-  .follow_all {
-    width: 100%;
-    height: 13vh;
-    background-color: #F9F4E6;
-    margin-top: 2vh;
-    border-radius: 2vw;
-  }
+.follow_all {
+  width: 100%;
+  height: 11vh;
+  background-color: #f9f4e6;
+  margin-top: 2vh;
+  border-radius: 2vw;
+}
 
-  .follow_all>img {
-    width: 12vw;
-    height: 12vw;
-    border-radius: 6vw;
-    margin-left: 3vw;
-    margin-top: 3vw;
-    float: left;
-  }
+.follow_all > img {
+  width: 12vw;
+  height: 12vw;
+  border-radius: 6vw;
+  margin-left: 3vw;
+  margin-top: 3vw;
+  float: left;
+}
 
-  .ziti_follow {
-    font-size: 3vw;
-    font-family:YouYuan;
-  }
+.ziti_follow {
+  font-size: 3vw;
+  font-family: YouYuan;
+}
 </style>

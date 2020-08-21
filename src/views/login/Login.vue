@@ -93,7 +93,9 @@ export default {
           }
       }).then(response => {
         if(response.data.code == '0'){
+          // console.log(response.data.data)
           var loginMessage={
+            id:response.data.data.customerId,
             login:true,
             phone:response.data.data.phoneNumber,
             customerImgHead:response.data.data.customerImgHead,
@@ -104,7 +106,6 @@ export default {
           this.$store.commit('islogin',loginMessage)
           this.$router.push('/homelogin')
         }else{
-          // console.log(response.data);
           this.sheet=!this.sheet
         }
       })

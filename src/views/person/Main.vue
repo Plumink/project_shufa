@@ -201,7 +201,7 @@ export default {
   width: 90vw;
   height: 10vh;
   border-radius: 10vw;
-  margin-top: 4vh;
+  // margin-top: 4vh;
   background-image: linear-gradient(#edce9d, #e5c187);
   text-align: center;
   font-family: YouYuan;
