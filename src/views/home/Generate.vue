@@ -3,6 +3,7 @@
     <div class="total_gen">
       <TopNavigation />
       <div style="height:10vh;width:100vw"></div>
+      <div style="width:100vw;height:10vh;background-color:red"></div>
       <div style="background-color:#f9f4e6;width:100vw;height:auto">
         <div class="d-flex flex-row-reverse justify-space-around" style="margin:0 auto;width:80%;height:80%">
           <div class="d-flex flex-column mb-6" v-for="(items,index) in show" :key="index" :style="{ width: width+ '%', height:height+'%' }">
@@ -16,7 +17,7 @@
           </div>
         </div>
       </div>
-      <!-- <div style="width:100vw;height:20vh;background-color:red"></div> -->
+      <div style="width:100vw;height:20vh;background-color:red"></div>
     </div>
   </v-app>
 </template>
