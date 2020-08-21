@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="follow_all" v-for="(item,index) in items" :key="index">
+    <div class="follow_all" v-for="(item,index) in follow" :key="index">
       <img :src='item.customerImgHead' alt />
       <div style="padding-top:2vh;">
         <span class="ziti_follow" style="margin-left:2vw;">用户名：{{item.userName}}</span>
@@ -9,7 +9,7 @@
           <span class="ziti_follow" style="margin-left:2vw;">手机号：{{item.phoneNumber.substr(0, 3) + '****' + item.phoneNumber.substr(7)}}</span>
         </div>
         <div style="float:left">
-          <span class="ziti_follow" style="margin-left:8vw;">取消关注</span>
+          <span @click="unfollow(item)" class="ziti_follow" style="margin-left:8vw;">取消关注</span>
         </div>
       </div>
     </div>
@@ -20,12 +20,18 @@
 export default {
   data() {
     return {
-      items: [],
+      follow: [],
     };
   },
   methods: {
-    delete(){
-      
+    unfollow(item){
+      // console.log(item.customerId)
+      for(var i=0;i<this.follow.length;i++){
+        if(this.follow[i].customerId==item.customerId){
+          this.follow.splice(i,1)
+        }
+        else{}
+      }
     }
   },
   created() {
@@ -48,8 +54,7 @@ export default {
       .then((response) => {
         var n=response.data.data.length
         for(var i=0;i<n;i++){
-          this.items.push(response.data.data[i])
-          console.log(this.items)
+          this.follow.push(response.data.data[i])
         }
 
       });
