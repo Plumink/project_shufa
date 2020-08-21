@@ -64,14 +64,14 @@ export default {
           var a = [];
           for (var n = i * j; n < (i + 1) * j; n++) {
             if (this.data[n] == undefined) {
-              break;
+              a.push({url:'https://www.mocking.space/zimg/ae5759b1e7d6bef4aed4a87806e739a4'})
             } else {
               a.push(this.data[n]);
             }
           }
           this.show.push(a);
         }
-        // console.log(this.show[0].length);
+        console.log(this.show);
         this.width=Math.round(100/this.show.length)
         this.height=Math.round(100/this.show[0].length)
 
