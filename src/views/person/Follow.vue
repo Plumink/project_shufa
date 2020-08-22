@@ -36,7 +36,7 @@ export default {
   },
   created() {
     this.$axios
-      .post("https://www.mocking.space/CalligraphyService/user/getCatchInfo", {
+      .post("/user/getCatchInfo", {
           customerId: this.$store.state.id,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",

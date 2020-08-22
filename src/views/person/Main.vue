@@ -97,7 +97,7 @@ export default {
   },
   created() {
     this.$axios
-      .post("https://www.mocking.space/CalligraphyService/user/getCatchInfo", {
+      .post("/user/getCatchInfo", {
           customerId: this.$store.state.id,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
@@ -143,7 +143,7 @@ export default {
     var arr = path.split("\\");
     console.log(arr[arr.length-1]);
     console.log(path);
-    this.$axios.post("http://www.mocking.space:9003/v2/api-docs/CalligraphyService/common/uploadFile", {
+    this.$axios.post("/common/uploadFile", {
       headers: {
           "content-type": "multipart/form-data",
           "X-APP-ID": "1",

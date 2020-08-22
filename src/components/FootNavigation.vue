@@ -79,7 +79,7 @@ export default {
     var that = this;
     this.$axios
       .get(
-        "https://www.mocking.space/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
+        "/common/getInitParameter?packageName=mobileHomePage",
         {
           headers: {
             "X-APP-ID": "1",

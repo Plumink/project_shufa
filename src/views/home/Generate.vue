@@ -28,7 +28,7 @@ import TopNavigation from "../../components/TopNavigation";
 export default {
   components: {
     FootNavigation,
-    TopNavigation,
+    TopNavigation
   },
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
     var arr = str.match(/[\u4e00-\u9fa5]/g);
     let params = this.$route.query.message;
     this.$axios
-      .post("https://www.mocking.space/CalligraphyService/dictionaries/query", params, {
+      .post("/dictionaries/query", params, {
         headers: {
           "X-APP-ID": "1",
           "X-APP-KEY": "1",
