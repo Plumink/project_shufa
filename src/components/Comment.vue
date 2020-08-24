@@ -10,12 +10,12 @@
         </div>
       </div>
       <div class="content">{{item.content}}</div>
-      <div class="control">
+      <!-- <div class="control">
         <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
           <span class="Calligraphy_icon_good"></span>
           <span class="like-num">{{item.likeNum > 0 ? item.likeNum + '人赞' : '赞'}}</span>
         </span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

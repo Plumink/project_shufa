@@ -13,7 +13,7 @@
           不见长江滚滚来
         </p>
       </div>
-      <div class="publisher_box">
+      <!-- <div class="publisher_box">
         <div class="d-flex flex-row publisher">
           <h4>发布者：</h4>
           <p style="color:#0277BD;">墨玉</p>
@@ -24,7 +24,7 @@
             <span class="Calligraphy_icon_good"></span>
             点赞：123</p>
         </div>
-      </div>
+      </div> -->
       <comment :comments="commentData" />
       <div style="margin-bottom:60px">
         <v-pagination v-model="page" :length="6"></v-pagination>
