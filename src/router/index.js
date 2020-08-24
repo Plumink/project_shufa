@@ -18,6 +18,7 @@ import Bevip from '../views/vip/Bevip.vue'
 import Generate from '../views/home/Generate.vue'
 import Change from '../views/person/Change.vue'
 import Test from '../views/person/test.vue'
+import OtherHome from '../views/person/OtherHome.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -64,6 +65,10 @@ const routes = [
   {
     path: '/font',
     component: Font
+  },
+  {
+    path: '/otherhome',
+    component: OtherHome
   },
   {
     path: '/main',

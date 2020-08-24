@@ -217,14 +217,6 @@ export default {
         thirdAuthorId: "0",
         row_num: this.row_num,
       };
-      //  var message={
-      //     text:'白日依山尽,黄河入海流',
-      //     calligraphyTypeId:1,
-      //     firstAuthorId:16,
-      //     secondAuthorId:54,
-      //     thirdAuthorId:'87',
-      //     row_num:this.row_num
-      //   }
       this.$router.push({
         path: "/generate",
         query: {
@@ -233,7 +225,6 @@ export default {
       });
       }
     }
-    
   },
   mounted() {
     var that = this;
