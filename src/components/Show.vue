@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)">
-      <div class="box-left">
-        <img :src="item.image" alt />
-      </div>
+      
       <div class="d-flex flex-column justify-space-around box-right">
         <div class="d-flex flex-row justify-start align-center">
           <span style="font-size:14px">{{item.number}}号 ：</span>
@@ -86,14 +84,14 @@ export default {
     title(value) {
       if (!value) return "";
       if (value.length > 8) {
-        return value.slice(0, 8) + "...";
+        return value.slice(0, 10) + "...";
       }
       return value;
     },
     content(value) {
       if (!value) return "";
       if (value.length > 8) {
-        return value.slice(0, 14) + "...";
+        return value.slice(0, 16) + "...";
       }
       return value;
     },
@@ -130,18 +128,13 @@ export default {
 .box {
   width: 100%;
   height: 90px;
-  border-bottom: 1px solid #00838f;
-}
-.box-left {
-  width: 25%;
-  padding: 20px;
 }
 .box-right {
-  width: 75%;
+  width: 90%;
   padding: 10px;
+   border-radius: 10px;
+   margin-bottom:8px;
+   background-image: linear-gradient(to right, #5c636e, #cdccce);
 }
-.box-left img {
-  width: 100%;
-  height: 100%;
-}
+
 </style>
