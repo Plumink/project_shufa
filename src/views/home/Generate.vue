@@ -1,11 +1,8 @@
 <template>
   <v-app>
     <div class="total_gen">
-      <!-- <TopNavigation /> -->
-      
       <div style="width:100vw;height:10vh;position: fixed;z-index: 1000;background-color:#f9f4e6">
         <i class="iconfont icon-back icon-style" @click="backHome()"></i>
-        <el-button type="primary" style="float:right;margin-top:2vh;margin-right:4vw">分享作品</el-button>
       </div>
       <div style="height:10vh;width:100vw"></div>
       <div class="sec_input">
@@ -24,6 +21,9 @@
             />
           </div>
         </div>
+      </div>
+      <div style="width:100%;height:10vh;text-align: center;">
+        <el-button type="primary">分享作品</el-button>
       </div>
     </div>
   </v-app>

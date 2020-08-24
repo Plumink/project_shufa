@@ -1,6 +1,5 @@
 <template>
   <v-app id="show">
-    <TopNavigation />
     <div class="box">
       <span style="font-size:14px" @click="goBack()"><span class="Calligraphy_icon_fanhui"></span>返回</span>
       <div class="d-flex flex-column content">
@@ -13,21 +12,32 @@
           不见长江滚滚来
         </p>
       </div>
-      <!-- <div class="publisher_box">
-        <div class="d-flex flex-row publisher">
-          <h4>发布者：</h4>
-          <p style="color:#0277BD;">墨玉</p>
+      <div class="pinglun">
+        <div style="width:90%;height:18vh;margin:0 auto;border-radius: 2vw;">
+          <i class="iconfont icon-talk-line">
+            <span style="color:grey">我来说两句</span>
+          </i>
+          <span style="float:right;margin-right: 2vw;margin-top: 1vh;"> <span style="color:blues">{{number}}</span>条评论</span>
+          <el-input
+            type="textarea"
+            style="height:10vh"
+            placeholder="写下你的评论"
+            v-model="textarea1">
+          </el-input>
+          <el-button 
+            type="primary"
+            size="mini"
+            style="float:right;margin-top:0.5vh;margin-right:2vw;width:30vw"
+          >
+            评论
+          </el-button>
         </div>
-        <div class="d-flex flex-row align-center justify-space-between" style="width:60%">
-          <p style="font-size:12px;color:#ECEFF1;">阅读：123</p>
-          <p style="font-size:12px;color:#ECEFF1;">
-            <span class="Calligraphy_icon_good"></span>
-            点赞：123</p>
-        </div>
-      </div> -->
-      <comment :comments="commentData" />
-      <div style="margin-bottom:60px">
-        <v-pagination v-model="page" :length="6"></v-pagination>
+      </div>
+      <div style="margin-top:4vh">
+        <comment :comments="commentData" />
+      </div>
+      <div style="margin-bottom:60px;border-radius:4vw">
+        <v-pagination v-model="page" :length="3"></v-pagination>
       </div>
     </div>
     <FootNavigation />
@@ -44,6 +54,8 @@ export default {
     return {
       commentData: [],
       page: 1,
+      textarea1:'',
+      number: '3'
     };
   },
   methods: {
@@ -69,7 +81,7 @@ export default {
 }
 .box {
   width: 100%;
-  margin-top: 10vh;
+  margin-top: 3vh;
   height: 100%;
 }
 .content {
@@ -90,7 +102,22 @@ export default {
   margin: 20px;
   padding: 10px;
 }
-.publisher{
-
+.pinglun {
+  width: 100%;
+  height: 24vh;
+  border-bottom: 1px dashed #bdbdbd;
+}
+.iconfont{
+  font-size:8vw;
+  text-align: center;
+  float: left;
+  margin-left:2vw;
+}
+.iconfont span{
+  font-size:4vw;
+  margin-bottom:2vh;
+  line-height: 20%;
+  position: relative;
+  bottom:1vh;
 }
 </style>

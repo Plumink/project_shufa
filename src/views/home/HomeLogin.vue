@@ -145,7 +145,7 @@ export default {
     return {
       overlayText:'输入有误',
       absolute: true,
-    overlay: false,
+      overlay: false,
       fontId: "",
       first: "",
       second: "",
