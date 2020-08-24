@@ -4,11 +4,12 @@
     <span class="font">
       <i style="font-size:10vw" class="iconfont icon-menu-line" @click.stop="dialog = true"></i>
     </span>
-    <div>
+    <!-- 去除用户信息-太丑 -->
+    <!-- <div>
       <router-link to="/main">
         <p style="color:blue;text-align:center;margin-top:4vh">{{username}}</p>
       </router-link>
-    </div>
+    </div> -->
 
     <v-dialog v-model="dialog" max-width="290">
       <v-card d-flex align-center mb-6 style="padding:10px">
