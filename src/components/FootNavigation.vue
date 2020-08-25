@@ -121,7 +121,7 @@ export default {
         if (item.title == "微店入口") {
           window.location.href = item.link;
         } else {
-          if (this.$store.state.land == null) {
+          if (this.$store.state.land == null || this.$store.state.land==false ) {
             this.$message.error("尚未登陆");
           } else {
             this.$router.push({ path: item.link });

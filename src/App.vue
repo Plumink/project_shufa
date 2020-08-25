@@ -19,6 +19,16 @@ export default {
             onAbort => {}
          )
     }
+    else{
+      if(this.$route.path=='/main'){
+        this.$message.error("尚未登陆");
+        this.$router.push(
+            {path: '/'},
+            onComplete => {},
+            onAbort => {}
+         )
+      }
+    }
   }
 }
 </script>
