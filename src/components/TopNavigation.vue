@@ -34,77 +34,92 @@ export default {
       jump: [
         {
           line: [
-            { name: "字典首页", link: this.$store.state.land ? "/homelogin" : "/",login:this.$store.state.land },
-            { name: "个人首页", link: "/main" ,login:this.$store.state.land},
-            { name: "我的展厅", link: "/show",login:this.$store.state.land },
+            {
+              name: "字典首页",
+              link: this.$store.state.land ? "/homelogin" : "/",
+              login: this.$store.state.land,
+            },
+            { name: "个人首页", link: "/main", login: this.$store.state.land },
+            { name: "我的展厅", link: "/show", login: this.$store.state.land },
           ],
         },
         {
           line: [
-            { name: "名帖字库", link: "/font",login:this.$store.state.land },
-            { name: "诗文查询", link: "https://m.gushiwen.org/default_1.aspx",login:this.$store.state.land},
-            { name: "原帖书论", link: "/originalcopycalligraphy",login:this.$store.state.land },
+            { name: "名帖字库", link: "/font", login: this.$store.state.land },
+            {
+              name: "诗文查询",
+              link: "https://m.gushiwen.org/default_1.aspx",
+              login: this.$store.state.land,
+            },
+            {
+              name: "原帖书论",
+              link: "/originalcopycalligraphy",
+              login: this.$store.state.land,
+            },
           ],
         },
         {
           line: [
-            { name: "微店入口", link: "https://weidian.com/?userid=932664957",login:this.$store.state.land },
-            { name: "赛培资讯", link: "/train" ,login:this.$store.state.land},
-            { name: "退出登陆", link: "/",login:this.$store.state.land },
+            {
+              name: "微店入口",
+              link: "https://weidian.com/?userid=932664957",
+              login: this.$store.state.land,
+            },
+            { name: "赛培资讯", link: "/train", login: this.$store.state.land },
+            { name: "退出登陆", link: "/", login: this.$store.state.land },
           ],
         },
       ],
     };
   },
   methods: {
-    topJump( name,url,login) {
-        if(name=='字典首页'){
-          if(this.$route.path==url){}
-          else{this.$router.push(url);}
+    topJump(name, url, login) {
+      if (name == "字典首页") {
+        if (this.$route.path == url) {
+        } else {
+          this.$router.push(url);
         }
-        else if(name=='个人首页'){
-          if(this.$route.path==url){}
-          else{
-            if(login==false || login==null){
-              this.$message.error("尚未登陆,请登录");
-            }
-            else{
-              this.$router.push(url)
-            }
-          }
-          
-        }
-        else if(name=='诗文查询'){
-          window.location.href = url
-        }
-        else if(name=='微店入口'){
-          window.location.href = url
-        }
-        else if(name=='退出登陆'){
-          if(this.$route.path==url){}
-          else{
-             if(login==false || login==null){
-              this.$message.error("尚未登陆,请登录");
-            }
-            else{
-              var signOut={
-              login:false,
-              phone:'',
-              userName:'',
-              customerImgHead:'',
-              id:''
-            }
-            this.$store.commit('islogin',signOut);
-              this.$router.push(url)
-            }
+      } 
+      else if (name == "个人首页") {
+        if (this.$route.path == url) {
+        } else {
+          if (login == false || login == null) {
+            this.$message.error("尚未登陆,请登录");
+          } else {
+            this.$router.push(url);
           }
         }
-        else{
-          if(this.$route.path==url){}
-          else{
-            this.$router.push(url)
+      }
+      else if (name == "诗文查询") {
+        window.location.href = url;
+      }
+      else if (name == "微店入口") {
+        window.location.href = url;
+      }
+      else if (name == "退出登陆") {
+        if (this.$route.path == url) {
+        } else {
+          if (login == false || login == null) {
+            this.$message.error("尚未登陆,请登录");
+          } else {
+            var signOut = {
+              login: false,
+              phone: "",
+              userName: "",
+              customerImgHead: "",
+              id: "",
+            };
+            this.$store.commit("islogin", signOut);
+            this.$router.push(url);
           }
         }
+      }
+      else {
+        if (this.$route.path == url) {
+        } else {
+          this.$router.push(url);
+        }
+      }
     },
   },
 };

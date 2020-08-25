@@ -20,7 +20,7 @@ export default {
          )
     }
     else{
-      if(this.$route.path=='/main'){
+      if(this.$route.path=='/main' || this.$route.path=='/main/follow' || this.$route.path=='/main/follower' ){
         this.$message.error("尚未登陆");
         this.$router.push(
             {path: '/'},
