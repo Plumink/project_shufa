@@ -1,7 +1,11 @@
 <template>
   <v-app id="show">
     <div class="box">
-      <span style="font-size:14px" @click="goBack()"><span class="Calligraphy_icon_fanhui"></span>返回</span>
+      <div class="top d-flex justify-space-between align-center mb-6">
+        <span style="font-size:14px" @click="goBack()"><span class="Calligraphy_icon_fanhui"></span>返回</span>
+        <span><h3>作品详情</h3></span>
+        <div style="width:40px;height:20px"></div>
+      </div>
       <div class="d-flex flex-column content">
         <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt />
         <br />
@@ -81,8 +85,11 @@ export default {
 }
 .box {
   width: 100%;
-  margin-top: 3vh;
   height: 100%;
+}
+.top{
+  width: 100%;
+  height: 6%;
 }
 .content {
   width: 100%;

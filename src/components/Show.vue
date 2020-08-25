@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)">
-      
       <div class="d-flex flex-column justify-space-around box-right">
         <div class="d-flex flex-row justify-start align-center">
           <span style="font-size:14px">{{item.number}}号 ：</span>
