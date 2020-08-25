@@ -4,12 +4,6 @@
     <span class="font">
       <i style="font-size:10vw" class="iconfont icon-menu-line" @click.stop="dialog = true"></i>
     </span>
-    <!-- 去除用户信息-太丑 -->
-    <!-- <div>
-      <router-link to="/main">
-        <p style="color:blue;text-align:center;margin-top:4vh">{{username}}</p>
-      </router-link>
-    </div> -->
 
     <v-dialog v-model="dialog" max-width="290">
       <v-card d-flex align-center mb-6 style="padding:10px">
@@ -17,7 +11,7 @@
           <span
             v-for="(item,index) in item.line"
             :key="index"
-            @click="topJump(item.link)"
+            @click="topJump(item.name,item.link)"
           >{{item.name}}</span>
         </div>
         <v-card-actions>
@@ -40,8 +34,8 @@ export default {
       jump: [
         {
           line: [
-            { name: "字典首页", link: "/homelogin" },
-            { name: "个人首页", link: "/main" },
+            { name: "字典首页", link: this.$store.state.land ? "/homelogin" : "/" },
+            { name: "个人首页", link: "" },
             { name: "开通辨析", link: "" },
           ],
         },
@@ -56,7 +50,7 @@ export default {
     };
   },
   methods: {
-    topJump(url) {
+    topJump( name,url) {
       if (url == "/") {
         var signOut={
           isLogin:false,
@@ -66,6 +60,12 @@ export default {
         this.$router.push(url);
       } else {
         this.$router.push(url);
+      }
+
+      if(name == "个人首页" && (this.$store.state.land == null || this.$store.state.land==false) ){
+        this.$message.error("尚未登陆,请登录");
+      }else if(name == "个人首页" && this.$store.state.land == true){
+        this.$router.push("/main")
       }
     },
   },

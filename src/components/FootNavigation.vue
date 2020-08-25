@@ -102,7 +102,7 @@ export default {
       this.$emit("fontChange", item);
       if (this.$route.path == item.link) {
       } else {
-        // this.$router.push({ path: item.link });
+        this.$router.push({ path: item.link });
         if(this.$store.state.land==true){
       this.$router.push(
             {path: '/homelogin'},
