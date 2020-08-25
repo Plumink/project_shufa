@@ -7,7 +7,7 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="(item, index) in items_dictionaries"
+            v-for="(item, index) in itemles_dictionaries"
             :key="index"
             @click="jump_dictionaries(item)"
           >
