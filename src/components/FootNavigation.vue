@@ -7,13 +7,13 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="(item, index) in itemles_dictionaries"
+            v-for="(item, index) in items_dictionaries"
             :key="index"
             @click="jump_dictionaries(item)"
           >
             <v-list-item-title>{{ item.calligraphyName }}</v-list-item-title>
           </v-list-item>
-        </v-list>
+        </v-list> 
       </v-menu>
     </v-btn>
     <v-btn value="recent" width="40vw" height="100%">
