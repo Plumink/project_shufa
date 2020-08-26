@@ -91,7 +91,6 @@
             <div style="text-align: center;" class="my-2 mt-8">
               <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
               <v-overlay
-            
             :value="overlay"
           >
             <v-btn

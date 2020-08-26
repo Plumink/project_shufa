@@ -10,7 +10,7 @@
         <el-input v-model="input" placeholder="请输入内容" style="width:60%;margin-left:2vw"></el-input>
       </div>
       <div style="background-color:#f9f4e6;width:100vw;height:auto">
-        <div class="d-flex flex-row-reverse justify-space-around" style="margin:0 auto;width:80%;height:80%">
+        <div class="d-flex flex-row-reverse justify-space-around" style="margin:0 auto;width:80%;height:80%"  ref='box' >
           <div class="d-flex flex-column mb-6" v-for="(items,index) in show" :key="index" :style="{ width: width+ '%', height:height+'%' }">
             <img
               :src="item.url"
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div style="width:100%;height:10vh;text-align: center;">
-        <el-button type="primary">分享作品</el-button>
+        <el-button type="primary" @click="a()" >分享作品</el-button>
       </div>
     </div>
   </v-app>
@@ -43,12 +43,31 @@ export default {
       show: [],
       width:'0',
       height:'0',
-      input:''
+      input:'',
+      ddd:''
     };
   },
   methods: {
     backHome() {
       this.$router.push('/homelogin')
+    },
+    a(){
+      
+var scrollY = $(document).scrollTop();
+var scrollX = $(document).scrollLeft();
+
+      this.html2canvas(this.$refs.box, {
+      backgroundColor: null,
+      useCORS: true, // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题,
+      scrollY: -300, 
+    scrollX: 0,
+    }).then(canvas => {
+    
+      let url = canvas.toDataURL("image/png");
+      // this.htmlUrl = url;
+      // 把生成的base64位图片上传到服务器,生成在线图片地址
+      console.log(url)
+    });
     }
   },
   created() {
