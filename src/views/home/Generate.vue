@@ -9,9 +9,17 @@
         <span>标题</span>
         <el-input v-model="input" placeholder="请输入内容" style="width:60%;margin-left:2vw"></el-input>
       </div>
-      <div style="background-color:#f9f4e6;width:100vw;height:auto">
-        <div class="d-flex flex-row-reverse justify-space-around" style="margin:0 auto;width:80%;height:80%"  ref='box' >
-          <div class="d-flex flex-column mb-6" v-for="(items,index) in show" :key="index" :style="{ width: width+ '%', height:height+'%' }">
+      <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
+        <div
+          class="d-flex flex-row-reverse justify-space-around"
+          style="margin:0 auto;width:80%;height:80%"
+        >
+          <div
+            class="d-flex flex-column mb-6"
+            v-for="(items,index) in show"
+            :key="index"
+            :style="{ width: width+ '%', height:height+'%' }"
+          >
             <img
               :src="item.url"
               alt
@@ -23,7 +31,7 @@
         </div>
       </div>
       <div style="width:100%;height:10vh;text-align: center;">
-        <el-button type="primary" @click="a()" >分享作品</el-button>
+        <el-button type="primary" @click="a()">分享作品</el-button>
       </div>
     </div>
   </v-app>
@@ -35,40 +43,38 @@ import TopNavigation from "../../components/TopNavigation";
 export default {
   components: {
     FootNavigation,
-    TopNavigation
+    TopNavigation,
   },
   data() {
     return {
       data: [],
       show: [],
-      width:'0',
-      height:'0',
-      input:'',
-      ddd:''
+      width: "0",
+      height: "0",
+      input: "",
+      ddd: "",
     };
   },
   methods: {
     backHome() {
-      this.$router.push('/homelogin')
+      this.$router.push("/homelogin");
     },
-    a(){
-      
-var scrollY = $(document).scrollTop();
-var scrollX = $(document).scrollLeft();
-
+    a() {
+      //防止HTML2canvas截图不完整
+       window.pageYOffset = 0
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
       this.html2canvas(this.$refs.box, {
-      backgroundColor: null,
-      useCORS: true, // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题,
-      scrollY: -300, 
-    scrollX: 0,
-    }).then(canvas => {
-    
-      let url = canvas.toDataURL("image/png");
-      // this.htmlUrl = url;
-      // 把生成的base64位图片上传到服务器,生成在线图片地址
-      console.log(url)
-    });
-    }
+        backgroundColor: null,
+        tainttest: true,
+        useCORS: true, // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题,
+      }).then((canvas) => {
+        let url = canvas.toDataURL("image/png");
+        // this.htmlUrl = url;
+        // 把生成的base64位图片上传到服务器,生成在线图片地址
+        console.log(url);
+      });
+    },
   },
   created() {
     var str = this.$route.query.message.text;
@@ -100,7 +106,10 @@ var scrollX = $(document).scrollLeft();
           var a = [];
           for (var n = i * j; n < (i + 1) * j; n++) {
             if (this.data[n] == undefined) {
-              a.push({url:'https://www.mocking.space/zimg/ae5759b1e7d6bef4aed4a87806e739a4'})
+              a.push({
+                url:
+                  "https://www.mocking.space/zimg/ae5759b1e7d6bef4aed4a87806e739a4",
+              });
             } else {
               a.push(this.data[n]);
             }
@@ -108,11 +117,9 @@ var scrollX = $(document).scrollLeft();
           this.show.push(a);
         }
         console.log(this.show);
-        this.width=Math.round(100/this.show.length)
-        this.height=Math.round(100/this.show[0].length)
-
+        this.width = Math.round(100 / this.show.length);
+        this.height = Math.round(100 / this.show[0].length);
       });
-    
   },
 };
 </script>
