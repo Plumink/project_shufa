@@ -33,10 +33,18 @@
       <el-button type="primary" @click="a()">分享作品</el-button>
     </div>
     <div class='popContainer d-flex justify-center align-center' v-if='pop'>
-        <div class=" d-flex align-center justify-center flex-column">
+        <div class="popbox d-flex align-center justify-center flex-column">
           <div class="d-flex align-content-space-around justify-center flex-wrap">
             <div v-for='(item,index) in otherfont' :key='index'>
+              <v-badge
+            color="green"
+            content="vip"
+            offset-y="15"
+            offset-x="15"
+            :value="item.isVip+1"
+          >
               <img style="width:50px;height:50px" :src="item.url" alt="">
+              </v-badge>
             </div>
         </div>
         <el-button type="primary" @click="pop=!pop">取消</el-button>
@@ -66,8 +74,8 @@ export default {
     },
     showStore(item) {
       this.otherfont=item;
+      console.log(item[0].isVip)
       this.otherfontpop= Math.round(100/(item.length/5))
-      
       this.pop=!this.pop
     },
     // a() {
@@ -152,12 +160,11 @@ export default {
   background: rgba(0, 0, 0, 0.3);
 }
 .popbox{
-  width:90%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
   position:absolute;
-  background-color: white;
-  border-radius: 20px;
+  background-color: #f9f4e6;
    overflow:scroll;
-   padding: 10px;
+   padding-top:60px
 }
 </style>
