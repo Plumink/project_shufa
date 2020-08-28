@@ -4,10 +4,8 @@
     <span class="font">
       <i style="font-size:10vw" class="iconfont icon-menu-line" @click.stop="dialog = true"></i>
     </span>
-      <div>
-      <router-link to="/main">
+      <div @click="jumpmain()">
         <p style="color:blue;text-align:center;margin-top:4vh">{{username}}</p>
-      </router-link>
     </div>
     <v-dialog v-model="dialog" max-width="290">
       <v-card d-flex align-center mb-6 style="padding:10px">
@@ -77,6 +75,9 @@ export default {
     };
   },
   methods: {
+    jumpmain(){
+      this.$router.push('./main')
+    },
     topJump(name, url, login) {
       if (name == "字典首页") {
         if (this.$route.path == url) {

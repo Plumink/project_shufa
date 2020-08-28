@@ -52,6 +52,7 @@ export default {
         },
       })
       .then((response) => {
+        console.log(response)
         var n=response.data.data.length
         for(var i=0;i<n;i++){
           this.follow.push(response.data.data[i])

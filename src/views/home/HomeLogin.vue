@@ -2,10 +2,10 @@
   <v-app id="inspire">
     <div class="total">
       <TopNavigation />
-      <div class="head">
+      <div class="middle">
+        <div class="head">
         <p style="z-index">yongh</p>
       </div>
-      <div class="middle">
         <div class="middle_head">
           <template>
             <v-form>
