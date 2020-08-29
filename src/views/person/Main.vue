@@ -159,6 +159,30 @@ export default {
       console.log(response)
     })
     console.log('1')
+    this.$axios
+      .post("/user/getCatchInfo", {
+          customerId: this.$store.state.id,
+          customerImgHead: "string",
+          customerLastTime: "2020-08-21T03:02:35.606Z",
+          ifValid: 0,
+          phoneNumber: "string",
+          sessionId: "string",
+          userName: "string",
+        },{
+        headers: {
+          "X-APP-ID": "1",
+          "X-APP-KEY": "1",
+          "X-Request-ID": "1",
+        },
+      })
+      .then((response) => {
+        // console.log(response)
+        var n=response.data.data.length
+        for(var i=0;i<n;i++){
+          this.follow.push(response.data.data[i])
+        }
+
+      });
   }
   
 };

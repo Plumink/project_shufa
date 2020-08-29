@@ -41,7 +41,7 @@
             content="vip"
             offset-y="15"
             offset-x="15"
-            :value="item.isVip+1"
+            :value="item.isVip"
           >
               <img style="width:50px;height:50px" :src="item.url" alt="">
               </v-badge>

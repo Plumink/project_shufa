@@ -1,12 +1,15 @@
 <template>
   <div>
     <div class="follow_all" v-for="(item,index) in follow" :key="index">
-      <img :src='item.customerImgHead' alt />
+      <img :src="item.customerImgHead" alt />
       <div style="padding-top:2vh;">
         <span class="ziti_follow" style="margin-left:2vw;">用户名：{{item.userName}}</span>
         <br />
         <div style="width:50vw;float:left;">
-          <span class="ziti_follow" style="margin-left:2vw;">手机号：{{item.phoneNumber.substr(0, 3) + '****' + item.phoneNumber.substr(7)}}</span>
+          <span
+            class="ziti_follow"
+            style="margin-left:2vw;"
+          >手机号：{{item.phoneNumber.substr(0, 3) + '****' + item.phoneNumber.substr(7)}}</span>
         </div>
         <div style="float:left">
           <span @click="unfollow(item)" class="ziti_follow" style="margin-left:8vw;">取消关注</span>
@@ -24,19 +27,46 @@ export default {
     };
   },
   methods: {
-    unfollow(item){
+    unfollow(item) {
+      console.log(item);
+      this.$axios
+        .post(
+          "/user/unfollow",
+          {
+            custId: this.$store.state.id,
+            followCatchId: item.customerId,
+          },
+          {
+            headers: {
+              "X-APP-ID": "1",
+              "X-APP-KEY": "1",
+              "X-Request-ID": "1",
+            },
+          }
+        )
+        .then((response) => {
+          this.$emit("deleteFans");
+          console.log(response);
+          if (response.data.code == "0") {
+            for (var i = 0; i < this.follow.length; i++) {
+              if (this.follow[i].customerId == item.customerId) {
+                this.follow.splice(i, 1);
+              } else {
+              }
+            }
+          }
+          else{
+            alert('删除失败')
+          }
+        });
       // console.log(item.customerId)
-      for(var i=0;i<this.follow.length;i++){
-        if(this.follow[i].customerId==item.customerId){
-          this.follow.splice(i,1)
-        }
-        else{}
-      }
-    }
+    },
   },
   created() {
     this.$axios
-      .post("/user/getCatchInfo", {
+      .post(
+        "/user/getCatchInfo",
+        {
           customerId: this.$store.state.id,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
@@ -44,20 +74,21 @@ export default {
           phoneNumber: "string",
           sessionId: "string",
           userName: "string",
-        },{
-        headers: {
-          "X-APP-ID": "1",
-          "X-APP-KEY": "1",
-          "X-Request-ID": "1",
         },
-      })
-      .then((response) => {
-        console.log(response)
-        var n=response.data.data.length
-        for(var i=0;i<n;i++){
-          this.follow.push(response.data.data[i])
+        {
+          headers: {
+            "X-APP-ID": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": "1",
+          },
         }
-
+      )
+      .then((response) => {
+        console.log(response);
+        var n = response.data.data.length;
+        for (var i = 0; i < n; i++) {
+          this.follow.push(response.data.data[i]);
+        }
       });
   },
 };
