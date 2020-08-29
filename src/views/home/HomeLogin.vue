@@ -4,8 +4,8 @@
       <TopNavigation />
       <div class="middle">
         <div class="head">
-        <p style="z-index">yongh</p>
-      </div>
+          <p style="z-index">yongh</p>
+        </div>
         <div class="middle_head">
           <template>
             <v-form>
@@ -34,7 +34,7 @@
           >
             <!-- {{ziti.calligraphyName}} -->
           </v-select>
-          <v-select
+          <!-- <v-select
             style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
@@ -45,19 +45,25 @@
             item-value="authorId"
             outlined
             dense
-          ></v-select>
-          <v-select
-            style="width: 10vw; height: 8vh;"
-            background-color="#fff"
-            class="ml-2 mr-2"
-            label="次选"
-            v-model="second"
-            :items="author[0]"
-            item-text="authorName"
-            item-value="authorId"
-            outlined
-            dense
-          ></v-select>
+          ></v-select>-->
+          <el-select v-model="first" filterable placeholder="作者" style="width:30%;margin-right:10px">
+            <el-option
+            style="padding: 0 0px 0 20px;width:80%;margin:0px"
+              v-for="(item,index) in author[0]"
+              :key="index"
+              :label="item.authorName"
+              :value="item.authorId"
+            ></el-option>
+          </el-select>
+           <el-select v-model="second" filterable placeholder="次选" style="width:30%">
+            <el-option
+            style="padding: 0 0px 0 20px;width:80%;margin:0px"
+              v-for="(item,index) in author[0]"
+              :key="index"
+              :label="item.authorName"
+              :value="item.authorId"
+            ></el-option>
+          </el-select>
         </div>
         <div class="middle_l d-flex flex-row">
           <template>
@@ -90,16 +96,9 @@
           <template>
             <div style="text-align: center;" class="my-2 mt-8">
               <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
-              <v-overlay
-            :value="overlay"
-          >
-            <v-btn
-              color="#616161"
-              @click="overlay = false"
-            >
-              {{overlayText}}
-            </v-btn>
-          </v-overlay>
+              <v-overlay :value="overlay">
+                <v-btn color="#616161" @click="overlay = false">{{overlayText}}</v-btn>
+              </v-overlay>
             </div>
           </template>
         </div>
@@ -142,7 +141,7 @@ export default {
   },
   data() {
     return {
-      overlayText:'输入有误',
+      overlayText: "输入有误",
       absolute: true,
       overlay: false,
       fontId: "",
@@ -173,6 +172,7 @@ export default {
             "https://www.mocking.space/zimg/f8606a167fc4cd430b725a4489cfb719?p=0",
         },
       ],
+      value:''
     };
   },
   methods: {
@@ -180,50 +180,47 @@ export default {
       this.font = title.calligraphyName;
     },
     toChildren() {
-      if(this.content==''){
-        this.overlayText='内容不为空'
-        this.overlay = !this.overlay
+      console.log(this.value)
+      console.log(this.second)
+      if (this.content == "") {
+        this.overlayText = "内容不为空";
+        this.overlay = !this.overlay;
+      } else if (this.fontId == "") {
+        this.overlayText = "请选择字体";
+        this.overlay = !this.overlay;
+      } else if (this.first == "") {
+        this.overlayText = "请选择作者";
+        this.overlay = !this.overlay;
+      } else if (this.second == "") {
+        this.overlayText = "请选择次选";
+        this.overlay = !this.overlay;
+      } else if (this.row_num == "") {
+        this.overlayText = "请输入竖排行数";
+        this.overlay = !this.overlay;
+      } else {
+        // console.log(
+        //   this.row_num,
+        //   this.content,
+        //   this.ziti[0][this.fontId - 1].calligraphyName,
+        //   this.author[0][this.first - 1].authorId,
+        //   this.author[0][this.second - 1].authorId
+        // );
+        var message = {
+          text: this.content,
+          calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
+          firstAuthorId: this.author[0][this.first - 1].authorId,
+          secondAuthorId: this.author[0][this.second - 1].authorId,
+          thirdAuthorId: "0",
+          row_num: this.row_num,
+        };
+        this.$router.push({
+          path: "/generate",
+          query: {
+            message: message,
+          },
+        });
       }
-      else if(this.fontId==''){
-        this.overlayText='请选择字体'
-        this.overlay = !this.overlay
-      }
-      else if(this.first==''){
-        this.overlayText='请选择作者'
-        this.overlay = !this.overlay
-      }
-      else if(this.second==''){
-        this.overlayText='请选择次选'
-        this.overlay = !this.overlay
-      }
-       else if(this.row_num==''){
-        this.overlayText='请输入竖排行数'
-        this.overlay = !this.overlay
-      }
-      else{
-      console.log(
-        this.row_num,
-        this.content,
-        this.ziti[0][this.fontId - 1].calligraphyName,
-        this.author[0][this.first - 1].authorId,
-        this.author[0][this.second - 1].authorId
-      );
-      var message = {
-        text: this.content,
-        calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
-        firstAuthorId: this.author[0][this.first - 1].authorId,
-        secondAuthorId: this.author[0][this.second - 1].authorId,
-        thirdAuthorId: "0",
-        row_num: this.row_num,
-      };
-      this.$router.push({
-        path: "/generate",
-        query: {
-          message: message,
-        },
-      });
-      }
-    }
+    },
   },
   mounted() {
     var that = this;

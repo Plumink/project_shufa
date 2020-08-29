@@ -19,6 +19,7 @@ import Generate from '../views/home/Generate.vue'
 import Change from '../views/person/Change.vue'
 import Test from '../views/person/test.vue'
 import OtherHome from '../views/person/OtherHome.vue'
+import Release from '../views/person/Release.vue'
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -73,6 +74,10 @@ const routes = [
   {
     path: '/otherhome',
     component: OtherHome
+  },
+  {
+    path:'/release',
+    component:Release
   },
   {
     path: '/main',

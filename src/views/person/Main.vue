@@ -20,7 +20,7 @@
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
-              <div class="shuzi">{{follow.length}}</div>
+              <div class="shuzi" ref='guanzu'>{{follow.length}}</div>
             </router-link>
           </div>
           <div class="main_little">

@@ -63,6 +63,7 @@ export default {
     },
   },
   created() {
+    console.log(this.$refs.guanzu)
     this.$axios
       .post(
         "/user/getCatchInfo",
