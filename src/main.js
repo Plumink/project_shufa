@@ -18,6 +18,23 @@ Vue.prototype.html2canvas = html2canvas
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5
 
+// router.beforeEach((to, from, next) => {
+//   const openid = localStorage.getItem('openId');
+//   if (!openid) {
+//     if (to.path === '/auth') {
+//       next()
+//     } else {
+//       if (to.path === '/') {
+//         next('/auth')
+//         return
+//       }
+//       localStorage.setItem('now_url', to.fullPath) //当前页url与参数放入缓存
+//       next('/auth')
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 axios.defaults.baseURL = "https://www.mocking.space/CalligraphyService"
 

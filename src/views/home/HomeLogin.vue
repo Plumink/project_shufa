@@ -2,10 +2,8 @@
   <v-app id="inspire">
     <div class="total">
       <TopNavigation />
-      <div class="middle">
-        <div class="head">
-          <p style="z-index">yongh</p>
-        </div>
+      <div class="head">
+      </div>
         <div class="middle_head">
           <template>
             <v-form>
@@ -127,7 +125,6 @@
         </p>
       </div>
       <FootNavigation @fontChange="upFont" />
-    </div>
   </v-app>
 </template>
 
