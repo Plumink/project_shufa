@@ -97,7 +97,7 @@ export default {
   },
   created() {
     this.$axios
-      .post("/user/getCatchInfo", {
+      .post("/CalligraphyService/user/getCatchInfo", {
           customerId: this.$store.state.id,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
@@ -143,7 +143,7 @@ export default {
     var arr = path.split("\\");
     console.log(arr[arr.length-1]);
     console.log(path);
-    this.$axios.post("/common/uploadFile", {
+    this.$axios.post("/CalligraphyService/common/uploadFile", {
       headers: {
           "content-type": "multipart/form-data",
           "X-APP-ID": "1",
@@ -160,7 +160,7 @@ export default {
     })
     console.log('1')
     this.$axios
-      .post("/user/getCatchInfo", {
+      .post("/CalligraphyService/user/getCatchInfo", {
           customerId: this.$store.state.id,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",

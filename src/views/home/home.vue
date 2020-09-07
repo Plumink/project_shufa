@@ -160,7 +160,7 @@ export default {
   mounted() {
     var that = this;
     this.$axios
-      .get("/common/getInitParameter?packageName=mobileHomePage", {
+      .get("/CalligraphyService/common/getInitParameter?packageName=mobileHomePage", {
         headers: {
           "X-APP-ID": "1",
           "X-APP-KEY": "1",

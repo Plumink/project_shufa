@@ -79,7 +79,7 @@ export default {
     var that = this;
     this.$axios
       .get(
-        "/common/getInitParameter?packageName=mobileHomePage",
+        "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
         {
           headers: {
             "X-APP-ID": "1",

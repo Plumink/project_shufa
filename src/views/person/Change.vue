@@ -59,7 +59,7 @@ export default {
       var file = document.getElementById("upload_file").files[0];
       var formdata1=new FormData();
       formdata1.append('uploadFile',file);
-      this.$axios.post("/common/uploadFile",formdata1,{
+      this.$axios.post("https://www.mocking.space/CalligraphyService/common/uploadFile",formdata1,{
         headers:{
           'Content-Type':'multipart/form-data',
           'X-APP-ID':'1',
@@ -75,7 +75,7 @@ export default {
             "customerImgHead": this.userImageHead,
             "userName": this.username
           }
-          this.$axios.post("/user/updateUserInfo",params,{
+          this.$axios.post("/CalligraphyService/user/updateUserInfo",params,{
             header:{
               'X-APP-ID':'1',
               'X-APP-KEY':'1',

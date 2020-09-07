@@ -32,7 +32,7 @@
           >
             <!-- {{ziti.calligraphyName}} -->
           </v-select>
-          <!-- <v-select
+          <v-select
             style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
@@ -43,8 +43,20 @@
             item-value="authorId"
             outlined
             dense
-          ></v-select>-->
-          <el-select v-model="first" filterable placeholder="作者" style="width:30%;margin-right:10px">
+          ></v-select>
+          <v-select
+            style="width: 10vw; height: 8vh;"
+            background-color="#fff"
+            class="ml-2 mr-2"
+            v-model="second"
+            label="次选"
+            :items="author[0]"
+            item-text="authorName"
+            item-value="authorId"
+            outlined
+            dense
+          ></v-select>
+          <!-- <el-select v-model="first" filterable placeholder="作者" style="width:30%;margin-right:10px">
             <el-option
             style="padding: 0 0px 0 20px;width:80%;margin:0px"
               v-for="(item,index) in author[0]"
@@ -61,7 +73,7 @@
               :label="item.authorName"
               :value="item.authorId"
             ></el-option>
-          </el-select>
+          </el-select> -->
         </div>
         <div class="middle_l d-flex flex-row">
           <template>
@@ -131,6 +143,8 @@
 <script>
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
+import Cookies from 'js-cookie'
+
 export default {
   components: {
     FootNavigation,
@@ -141,6 +155,7 @@ export default {
       overlayText: "输入有误",
       absolute: true,
       overlay: false,
+      openid:'',
       fontId: "",
       first: "",
       second: "",
@@ -151,6 +166,7 @@ export default {
       fontId: "",
       ziti: [],
       author: [],
+      code:'',
       items: [
         {
           src:
@@ -173,6 +189,14 @@ export default {
     };
   },
   methods: {
+    setCookie:function(cname, cvalue, exdays){
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toUTCString();
+      console.info(cname + "=" + cvalue + "; " + expires);
+      document.cookie = cname + "=" + cvalue + "; " + expires;
+      console.info(document.cookie);
+    },
     upFont(title) {
       this.font = title.calligraphyName;
     },
@@ -199,8 +223,7 @@ export default {
         //   this.row_num,
         //   this.content,
         //   this.ziti[0][this.fontId - 1].calligraphyName,
-        //   this.author[0][this.first - 1].authorId,
-        //   this.author[0][this.second - 1].authorId
+        //   this.author[0][this.first - s 1].authorId
         // );
         var message = {
           text: this.content,
@@ -220,9 +243,11 @@ export default {
     },
   },
   mounted() {
+    var code;
+    var url = document.URL;
     var that = this;
     this.$axios
-      .get("/common/getInitParameter?packageName=mobileHomePage", {
+      .get("/CalligraphyService/common/getInitParameter?packageName=mobileHomePage", {
         headers: {
           "X-APP-ID": "1",
           "X-APP-KEY": "1",
@@ -235,6 +260,22 @@ export default {
         that.author.push(a.Authors);
         console.log(that.author[0]);
       });
+    code = url.match(/=(\S*)&/)[1];
+    console.log(code);
+    this.code = code;
+    this.$axios.get("/CalligraphyService/user/getOpenId", {
+      params: {
+        "X-Request-ID": "1",
+        "code": this.code
+      }
+    })
+    .then(function(res) {
+      console.log(res.data.data.openid);
+      that.openid = res.data.data.openid;
+      a= res.data.data.openid;
+      
+    })
+    setCookie("openid",this.openid,360);
   },
 };
 </script>

@@ -103,7 +103,7 @@ export default {
     var arr = str.match(/[\u4e00-\u9fa5]/g);
     let params = this.$route.query.message;
     this.$axios
-      .post("/dictionaries/query", params, {
+      .post("/CalligraphyService/dictionaries/query", params, {
         headers: {
           "X-APP-ID": "1",
           "X-APP-KEY": "1",

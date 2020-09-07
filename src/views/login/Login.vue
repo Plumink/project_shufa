@@ -85,7 +85,7 @@ export default {
         passWord: this.password,
         phoneNumber:this.phone,
       }
-      this.$axios.post("/user/login", params, {
+      this.$axios.post("/CalligraphyService/user/login", params, {
         headers: {
             "X-APP-ID": "1",
             "X-APP-KEY": "1",

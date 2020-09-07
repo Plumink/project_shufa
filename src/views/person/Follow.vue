@@ -31,7 +31,7 @@ export default {
       console.log(item);
       this.$axios
         .post(
-          "/user/unfollow",
+          "/CalligraphyService/user/unfollow",
           {
             custId: this.$store.state.id,
             followCatchId: item.customerId,
@@ -66,7 +66,7 @@ export default {
     console.log(this.$refs.guanzu)
     this.$axios
       .post(
-        "/user/getCatchInfo",
+        "/CalligraphyService/user/getCatchInfo",
         {
           customerId: this.$store.state.id,
           customerImgHead: "string",
