@@ -43,7 +43,7 @@
             <p class="pay_third">￥88</p>
           </div>
           <div tabindex="2" class="pay_first">
-            <p class="pay_second">1个月</p>
+            <p class="pay_second">1个 月</p>
             <p class="pay_third">￥15</p>
           </div>
           <div tabindex="3" class="pay_first">
@@ -73,7 +73,9 @@ export default {
   data() {
     return {
       data: JSON.parse(localStorage.getItem("loginMessage")),
-      follow:[]
+      follow:[],
+      num: '',
+      detail: ''
     };
   },
   methods:{
@@ -93,9 +95,37 @@ export default {
         path:"/bevip"
       })
     },
-    beVip(){ 
-      
-    }
+    // 在你需要的地方复制下面代码
+ // 这里需要的签名等字段，前端开发者只需要调用后端指定的接口返回即可。
+// 如果你全干，那也是OK的。 
+// 你是大佬。
+// onBridgeReady(){
+//  window.WeixinJSBridge.invoke(
+//    'getBrandWCPayRequest', {
+//      'appId': res.data.appId, // 公众号名称，由商户传入
+//      'timeStamp': res.data.timeStamp, // 时间戳，自1970年以来的秒数
+//      'nonceStr': res.data.nonceStr, // 随机串
+//      'package': res.data.package,
+//      'signType': res.data.signType, // 微信签名方式：
+//      'paySign': res.data.paySign // 微信签名
+//    },
+//    function (res) {
+//      alert(JSON.stringify(res))
+//      if (res.err_msg === 'get_brand_wcpay_request:ok') {
+//        // 使用以上方式判断前端返回,微信团队郑重提示：
+//        // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+//     }
+//  })
+// }
+
+
+
+
+
+
+
+
+
 
   },
   created() {
@@ -126,28 +156,12 @@ export default {
   },
   mounted(){
     $('.pay_first').on('click', function(e) {
-          console.log($(this).index());
-          // console.log($(this).value());
-          // console.log($(this).index(0))
+          this.num = $(this)[0].innerText.substring(7,9);
+          this.detail = $(this)[0].innerText.substring(0,4);
       });
-  //   $('#my-img').click(function(){
-  //       $('#img-upload').click();
-  //   });
-
-  //   var brr = $('.pay_first');
-  //   var crr = $('.pay_second');
-  //   var drr = $('.pay_third');
-  //   var tag;
-    
-  //   for(var i=0;i<brr.length;i++){
-  //     (function(i) {
-  //           brr[i].onclick = function() {
-  //               tag = i;
-  //               console.log(tag);
-  //               console.log(crr[i].value)
-  //           }
-  //       })(i)
-  //   }
+    $('#my-img').click(function(){
+        $('#img-upload').click();
+    });
   },
   updated(){
     var path = $('#img-upload').files[0];
