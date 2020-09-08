@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="huiyuan">
-          <span @click="JumpVip()">成为会员</span>
+          <span @click="beVip()">成为会员</span>
         </div>
         <div class="show_main">
           <router-view />
@@ -93,6 +93,9 @@ export default {
         path:"/bevip"
       })
     },
+    beVip(){ 
+      
+    }
 
   },
   created() {
@@ -122,21 +125,29 @@ export default {
       });
   },
   mounted(){
-    $('#my-img').click(function(){
-        $('#img-upload').click();
-    });
+    $('.pay_first').on('click', function(e) {
+          console.log($(this).index());
+          // console.log($(this).value());
+          // console.log($(this).index(0))
+      });
+  //   $('#my-img').click(function(){
+  //       $('#img-upload').click();
+  //   });
 
-    var brr = $('.pay_first');
-    var tag;
-    console.log(brr)
-    for(var i=0;i<brr.length;i++){
-      (function(i) {
-            brr[i].onclick = function() {
-                tag = i;
-                console.log(tag);
-            }
-        })(i)
-    }
+  //   var brr = $('.pay_first');
+  //   var crr = $('.pay_second');
+  //   var drr = $('.pay_third');
+  //   var tag;
+    
+  //   for(var i=0;i<brr.length;i++){
+  //     (function(i) {
+  //           brr[i].onclick = function() {
+  //               tag = i;
+  //               console.log(tag);
+  //               console.log(crr[i].value)
+  //           }
+  //       })(i)
+  //   }
   },
   updated(){
     var path = $('#img-upload').files[0];

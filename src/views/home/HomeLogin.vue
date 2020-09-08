@@ -189,13 +189,11 @@ export default {
     };
   },
   methods: {
-    setCookie:function(cname, cvalue, exdays){
-      var d = new Date();
-      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-      var expires = "expires=" + d.toUTCString();
-      console.info(cname + "=" + cvalue + "; " + expires);
-      document.cookie = cname + "=" + cvalue + "; " + expires;
-      console.info(document.cookie);
+    setCookie: function (cname, cvalue, exdays) {
+      let d = new Date()
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+      let expires = 'expires=' + d.toUTCString()
+      document.cookie = cname + '=' + cvalue + '; ' + expires
     },
     upFont(title) {
       this.font = title.calligraphyName;
@@ -241,6 +239,7 @@ export default {
         });
       }
     },
+    
   },
   mounted() {
     var code;
@@ -272,10 +271,10 @@ export default {
     .then(function(res) {
       console.log(res.data.data.openid);
       that.openid = res.data.data.openid;
-      a= res.data.data.openid;
-      
+      var id= res.data.data.openid;
+      that.setCookie("openid",id,360);
     })
-    setCookie("openid",this.openid,360);
+    // this.setCookie("openid",this.openid,360);
   },
 };
 </script>
