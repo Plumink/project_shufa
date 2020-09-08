@@ -18,44 +18,7 @@
       </div>
       <div style="margin-top:15px">
         
-        <!-- <v-select
-            style="width: 10vw; height: 8vh;"
-            background-color="#fff"
-            class="ml-2 mr-2"
-            label="字体"
-            :items="ziti[0]"
-            v-model="fontId"
-            item-text="calligraphyName"
-            item-value="calligraphyId"
-            outlined
-            dense
-          >
-           {{ziti.calligraphyName}}
-        </v-select>-->
-        <!-- <v-select
-            style="width: 10vw; height: 8vh;"
-            background-color="#fff"
-            class="ml-2 mr-2"
-            v-model="first"
-            label="作者"
-            :items="author[0]"
-            item-text="authorName"
-            item-value="authorId"
-            outlined
-            dense
-        ></v-select>-->
-        <!-- <v-select
-            style="width: 10vw; height: 8vh;"
-            background-color="#fff"
-            class="ml-2 mr-2"
-            v-model="second"
-            label="次选"
-            :items="author[0]"
-            item-text="authorName"
-            item-value="authorId"
-            outlined
-            dense
-        ></v-select>-->
+      
         <div class="d-flex flex-row justify-space-around align-center" >
           <div style="width:30%">
              <v-select
@@ -74,7 +37,7 @@
               <v-autocomplete v-model="first" :items="author" dense filled label="作者"> </v-autocomplete>
             </div>
             <div style="width:30%;margin-right:10px">
-              <v-autocomplete v-model="second" :items="author" dense filled label="作者"> </v-autocomplete>
+              <v-autocomplete v-model="second" :items="author" dense filled label="次选"> </v-autocomplete>
             </div>
         </div>  
         </div>

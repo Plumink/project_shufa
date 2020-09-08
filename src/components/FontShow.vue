@@ -1,5 +1,6 @@
 <template>
   <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
+    <img :src="img" v-if="img" class="share"/>
     <div
       class="d-flex flex-row-reverse justify-space-around"
       style="margin:0 auto;width:80%;height:80%"
@@ -25,31 +26,26 @@
               style=" width:100%;height:auto;background-color:#f9f4e6"
             />
           </v-badge>
-          
         </div>
       </div>
     </div>
+    
     <div style="width:100%;height:10vh;text-align: center;">
-      <el-button type="primary" @click="a()">分享作品</el-button>
+      <el-button type="primary" @click="a()">保存作品</el-button>
     </div>
-    <div class='popContainer d-flex justify-center align-center' v-if='pop'>
-        <div class="popbox d-flex align-center justify-center flex-column">
-          <div class="d-flex align-content-space-around justify-center flex-wrap">
-            <div v-for='(item,index) in otherfont' :key='index'>
-              <v-badge
-            color="green"
-            content="vip"
-            offset-y="15"
-            offset-x="15"
-            :value="item.isVip"
-          >
-              <img style="width:50px;height:50px" :src="item.url" alt="">
-              </v-badge>
-            </div>
+    
+    <div class="popContainer d-flex justify-center align-center" v-if="pop">
+      <div class="popbox d-flex align-center justify-center flex-column">
+        <div class="d-flex align-content-space-around justify-center flex-wrap">
+          <div v-for="(item,index) in otherfont" :key="index">
+            <v-badge color="green" content="vip" offset-y="15" offset-x="15" :value="item.isVip">
+              <img style="width:50px;height:50px" :src="item.url" alt />
+            </v-badge>
+          </div>
         </div>
         <el-button type="primary" @click="pop=!pop">取消</el-button>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -63,9 +59,10 @@ export default {
       width: "0",
       height: "0",
       input: "",
-      pop:false,
-      otherfont:[],
-      otherfontpop:''
+      pop: false,
+      otherfont: [],
+      otherfontpop: "",
+      img:''
     };
   },
   methods: {
@@ -73,30 +70,41 @@ export default {
       this.$router.push("/homelogin");
     },
     showStore(item) {
-      this.otherfont=item;
-      console.log(item[0].isVip)
-      this.otherfontpop= Math.round(100/(item.length/5))
-      this.pop=!this.pop
+      this.otherfont = item;
+      console.log(item[0].isVip);
+      this.otherfontpop = Math.round(100 / (item.length / 5));
+      this.pop = !this.pop;
     },
     // a() {
     //   //防止HTML2canvas截图不完整
     //    window.pageYOffset = 0
     //   document.documentElement.scrollTop = 0
     //   document.body.scrollTop = 0
-
     //   this.html2canvas(this.$refs.box, {
+    //     allowTaint: true,
     //     backgroundColor: null,
     //     tainttest: true,
     //     useCORS: true, // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题,
-    //     // windowWidth: this.$refs.box.scrollWidth,
-    //     // windowHeight: this.$refs.box.scrollHeight
+    //     windowWidth: this.$refs.box.scrollWidth,
+    //     windowHeight: this.$refs.box.scrollHeight
     //   }).then((canvas) => {
-    //   canvas.width = 300;
-    //   canvas.height = 300;
     //     let url = canvas.toDataURL("image/png");
-    //     console.log(url);
+    //     this.img=url
     //   });
     // },
+    a(){
+       var height = this.$refs.box.scrollHeight;
+       var width = document.body.scrollWidth;
+       console.log(height)
+       console.log(width)
+      this.domtoimage.toPng(this.$refs.box,{width: width,height: height})
+        .then((dataUrl) => {
+          this.img=dataUrl
+        })
+        .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+        });
+    }
   },
   created() {
     var str = this.$route.query.message.text;
@@ -159,12 +167,12 @@ export default {
   bottom: 0;
   background: rgba(0, 0, 0, 0.3);
 }
-.popbox{
+.popbox {
   width: 100%;
   height: 100%;
-  position:absolute;
+  position: absolute;
   background-color: #f9f4e6;
-   overflow:scroll;
-   padding-top:60px
+  overflow: scroll;
+  padding-top: 60px;
 }
 </style>
