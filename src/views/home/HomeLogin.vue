@@ -2,23 +2,23 @@
   <v-app id="inspire">
     <div class="total">
       <TopNavigation />
-      <div class="head">
+      <div class="head"></div>
+      <div class="middle_head">
+        <template>
+          <v-form>
+            <v-container style="width: 80vw; padding: 0;" ref="in">
+              <v-row>
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field v-model="content" label="请输入文字" outlined background-color="#fff"></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
+        </template>
       </div>
-        <div class="middle_head">
-          <template>
-            <v-form>
-              <v-container style="width: 80vw; padding: 0;" ref="in">
-                <v-row>
-                  <v-col cols="12" sm="6" md="3">
-                    <v-text-field v-model="content" label="请输入文字" outlined background-color="#fff"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-form>
-          </template>
-        </div>
-        <div class="mt-4 middle_m d-flex flex-row justify-sm-space-around mb-6">
-          <v-select
+      <div style="margin-top:15px">
+        
+        <!-- <v-select
             style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
@@ -30,9 +30,9 @@
             outlined
             dense
           >
-            <!-- {{ziti.calligraphyName}} -->
-          </v-select>
-          <v-select
+           {{ziti.calligraphyName}}
+        </v-select>-->
+        <!-- <v-select
             style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
@@ -43,8 +43,8 @@
             item-value="authorId"
             outlined
             dense
-          ></v-select>
-          <v-select
+        ></v-select>-->
+        <!-- <v-select
             style="width: 10vw; height: 8vh;"
             background-color="#fff"
             class="ml-2 mr-2"
@@ -55,95 +55,98 @@
             item-value="authorId"
             outlined
             dense
-          ></v-select>
-          <!-- <el-select v-model="first" filterable placeholder="作者" style="width:30%;margin-right:10px">
-            <el-option
-            style="padding: 0 0px 0 20px;width:80%;margin:0px"
-              v-for="(item,index) in author[0]"
-              :key="index"
-              :label="item.authorName"
-              :value="item.authorId"
-            ></el-option>
-          </el-select>
-           <el-select v-model="second" filterable placeholder="次选" style="width:30%">
-            <el-option
-            style="padding: 0 0px 0 20px;width:80%;margin:0px"
-              v-for="(item,index) in author[0]"
-              :key="index"
-              :label="item.authorName"
-              :value="item.authorId"
-            ></el-option>
-          </el-select> -->
-        </div>
-        <div class="middle_l d-flex flex-row">
-          <template>
-            <v-col
-              class="d-flex flex-row"
-              style="width: 20vw; padding-right: 0;"
-              cols="12"
-              sm="6"
-              md="4"
-            >
-              <div>
-                <v-text-field
-                  v-model="row_num"
-                  label="竖排行数"
-                  outlined
-                  dense
-                  type="number"
-                  background-color="#fff"
-                  style="width: 40vw;"
-                ></v-text-field>
-              </div>
-              <div style="margin-left: 8vw;" class="d-flex flex-column justify-sm-space-around">
-                <v-checkbox style="margin: 0; height: 5vh;" label="横排"></v-checkbox>
-                <v-checkbox style="margin: 0;" label="左起"></v-checkbox>
-              </div>
-            </v-col>
-          </template>
-        </div>
-        <div>
-          <template>
-            <div style="text-align: center;" class="my-2 mt-8">
-              <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
-              <v-overlay :value="overlay">
-                <v-btn color="#616161" @click="overlay = false">{{overlayText}}</v-btn>
-              </v-overlay>
+        ></v-select>-->
+        <div class="d-flex flex-row justify-space-around align-center" >
+          <div style="width:30%">
+             <v-select
+              background-color="#fff"
+              label="字体"
+              class="ml-2 mr-2"
+              :items="ziti[0]"
+              v-model="fontId"
+              item-text="calligraphyName"
+              item-value="calligraphyId"
+              outlined
+              dense
+            >{{ziti.calligraphyName}}</v-select>
+          </div>
+           <div style="width:30%">
+              <v-autocomplete v-model="first" :items="author" dense filled label="作者"> </v-autocomplete>
             </div>
-          </template>
+            <div style="width:30%;margin-right:10px">
+              <v-autocomplete v-model="second" :items="author" dense filled label="作者"> </v-autocomplete>
+            </div>
+        </div>  
         </div>
-      </div>
-      <div class="upvip">
+      <div class="middle_l d-flex flex-row">
         <template>
-          <div style="text-align: center;" class="my-2">
-            <v-btn large color="error" @click="imperfect()">成为会员</v-btn>
+          <v-col
+            class="d-flex flex-row"
+            style="width: 20vw; padding-right: 0;"
+            cols="12"
+            sm="6"
+            md="4"
+          >
+            <div>
+              <v-text-field
+                v-model="row_num"
+                label="竖排行数"
+                outlined
+                dense
+                type="number"
+                background-color="#fff"
+                style="width: 40vw;"
+              ></v-text-field>
+            </div>
+            <div style="margin-left: 8vw;" class="d-flex flex-column justify-sm-space-around">
+              <v-checkbox style="margin: 0; height: 5vh;" label="横排"></v-checkbox>
+              <v-checkbox style="margin: 0;" label="左起"></v-checkbox>
+            </div>
+          </v-col>
+        </template>
+      </div>
+      <div>
+        <template>
+          <div style="text-align: center;" class="my-2 mt-8">
+            <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
+            <v-overlay :value="overlay">
+              <v-btn color="#616161" @click="overlay = false">{{overlayText}}</v-btn>
+            </v-overlay>
           </div>
         </template>
       </div>
-      <div style="height: 60vh;">
-        <p style="text-align: center;">
-          (会员享有
-          <span style="color: blue; font-size: 5vw;">完整名帖字库</span>
-          )
-        </p>
-        <br />
-        <p class="word_p">通篇集字，灵活排版</p>
-        <p class="word_p">置顶公众号，使用更方便</p>
-        <p style="text-align: center; margin-top: 2em;">
-          <img
-            src="https://www.mocking.space/zimg/f8606a167fc4cd430b725a4489cfb719?p=0&w=200&h=250"
-            alt
-          />
-        </p>
-      </div>
-      <FootNavigation @fontChange="upFont" />
+    </div>
+    <div class="upvip">
+      <template>
+        <div style="text-align: center;" class="my-2">
+          <v-btn large color="error" @click="imperfect()">成为会员</v-btn>
+        </div>
+      </template>
+    </div>
+    <div style="height: 60vh;">
+      <p style="text-align: center;">
+        (会员享有
+        <span style="color: blue; font-size: 5vw;">完整名帖字库</span>
+        )
+      </p>
+      <br />
+      <p class="word_p">通篇集字，灵活排版</p>
+      <p class="word_p">置顶公众号，使用更方便</p>
+      <p style="text-align: center; margin-top: 2em;">
+        <img
+          src="https://www.mocking.space/zimg/f8606a167fc4cd430b725a4489cfb719?p=0&w=200&h=250"
+          alt
+        />
+      </p>
+    </div>
+    <FootNavigation @fontChange="upFont" />
   </v-app>
 </template>
 
 <script>
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export default {
   components: {
@@ -155,18 +158,18 @@ export default {
       overlayText: "输入有误",
       absolute: true,
       overlay: false,
-      openid:'',
+      openid: "",
       fontId: "",
       first: "",
       second: "",
       content: "",
       font: "",
+      dataAuthor:[],
       word: "",
       row_num: "4",
-      fontId: "",
       ziti: [],
       author: [],
-      code:'',
+      code: "",
       items: [
         {
           src:
@@ -185,22 +188,23 @@ export default {
             "https://www.mocking.space/zimg/f8606a167fc4cd430b725a4489cfb719?p=0",
         },
       ],
-      value:''
+      value: "",
     };
   },
   methods: {
     setCookie: function (cname, cvalue, exdays) {
-      let d = new Date()
-      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
-      let expires = 'expires=' + d.toUTCString()
-      document.cookie = cname + '=' + cvalue + '; ' + expires
+      let d = new Date();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + "; " + expires;
     },
     upFont(title) {
       this.font = title.calligraphyName;
     },
     toChildren() {
-      console.log(this.value)
-      console.log(this.second)
+      
+      console.log(this.first);
+      console.log(this.second);
       if (this.content == "") {
         this.overlayText = "内容不为空";
         this.overlay = !this.overlay;
@@ -217,17 +221,33 @@ export default {
         this.overlayText = "请输入竖排行数";
         this.overlay = !this.overlay;
       } else {
-        // console.log(
-        //   this.row_num,
-        //   this.content,
-        //   this.ziti[0][this.fontId - 1].calligraphyName,
-        //   this.author[0][this.first - s 1].authorId
-        // );
+        var firstAuthorId
+        var secondAuthorId
+        for(var i=0;i<this.dataAuthor[0].length;i++){
+          if(this.first==this.dataAuthor[0][i].authorName){
+            firstAuthorId=this.dataAuthor[0][i].authorId
+            break;
+          }
+        }
+        for(var i=0;i<this.dataAuthor[0].length;i++){
+          if(this.second==this.dataAuthor[0][i].authorName){
+            console.log(this.dataAuthor[0][i].authorId)
+            secondAuthorId=this.dataAuthor[0][i].authorId
+            break;
+          }
+        }
+        console.log(
+          this.row_num,
+          this.content,
+          this.ziti[0][this.fontId - 1].calligraphyName,
+          firstAuthorId,
+          secondAuthorId,
+        );
         var message = {
           text: this.content,
           calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
-          firstAuthorId: this.author[0][this.first - 1].authorId,
-          secondAuthorId: this.author[0][this.second - 1].authorId,
+          firstAuthorId: firstAuthorId,
+          secondAuthorId: secondAuthorId,
           thirdAuthorId: "0",
           row_num: this.row_num,
         };
@@ -239,41 +259,47 @@ export default {
         });
       }
     },
-    
   },
   mounted() {
     var code;
     var url = document.URL;
     var that = this;
     this.$axios
-      .get("/CalligraphyService/common/getInitParameter?packageName=mobileHomePage", {
-        headers: {
-          "X-APP-ID": "1",
-          "X-APP-KEY": "1",
-          "X-Request-ID": "1",
-        },
-      })
+      .get(
+        "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
+        {
+          headers: {
+            "X-APP-ID": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": "1",
+          },
+        }
+      )
       .then(function (res) {
         var a = res.data.data;
         that.ziti.push(a.CalligraphyTypes);
-        that.author.push(a.Authors);
-        console.log(that.author[0]);
+        that.dataAuthor.push(a.Authors)
+        for(var i=0;i<a.Authors.length;i++){
+          that.author.push(a.Authors[i].authorName);
+        }
+        // console.log(that.author[0][0].authorName);
       });
     code = url.match(/=(\S*)&/)[1];
     console.log(code);
     this.code = code;
-    this.$axios.get("/CalligraphyService/user/getOpenId", {
-      params: {
-        "X-Request-ID": "1",
-        "code": this.code
-      }
-    })
-    .then(function(res) {
-      console.log(res.data.data.openid);
-      that.openid = res.data.data.openid;
-      var id= res.data.data.openid;
-      that.setCookie("openid",id,360);
-    })
+    this.$axios
+      .get("/CalligraphyService/user/getOpenId", {
+        params: {
+          "X-Request-ID": "1",
+          code: this.code,
+        },
+      })
+      .then(function (res) {
+        console.log(res.data.data.openid);
+        that.openid = res.data.data.openid;
+        var id = res.data.data.openid;
+        that.setCookie("openid", id, 360);
+      });
     // this.setCookie("openid",this.openid,360);
   },
 };
