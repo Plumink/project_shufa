@@ -103,7 +103,7 @@ export default {
       if (this.$route.path == item.link) {
       } else {
         this.$router.push({ path: item.link });
-        if(this.$store.state.land==true){
+        if( (this.$store.state.land==true) || (this.getCookie('openid')!=null)){
       this.$router.push(
             {path: '/homelogin'},
             onComplete => {},

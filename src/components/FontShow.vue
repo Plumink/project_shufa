@@ -33,7 +33,6 @@
     <div style="width:100%;height:10vh;text-align: center;">
       <el-button type="primary" @click="save()">保存作品</el-button>
     </div>
-
     <div class="popContainer d-flex justify-center align-center" v-if="pop">
       <div class="popbox d-flex align-center justify-center flex-column">
         <div class="d-flex align-content-space-around justify-center flex-wrap">
@@ -105,7 +104,7 @@ export default {
           .then((dataUrl) => {
             this.img = dataUrl;
             //在截完图后，徽章正常显示
-            this.badges = "";
+            // this.badges = "";
           })
           .catch(function (error) {
             console.error("oops, something went wrong!", error);
