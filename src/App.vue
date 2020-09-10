@@ -15,30 +15,30 @@ export default {
     var openid=this.getCookie('openid')
     this.$axios.post('/CalligraphyService/user/getUserInfo',
     {
-      headers:{'X-Request-ID':'1'}
+      "openId": openid
     },
     {
-      "openId": openid
+      headers:{'X-Request-ID':'1'}
     }
     )
     .then((response)=>{
       console.log(response)
-      var userData={
-        custId:response.data.data.custId,
-        custTel:response.data.data.custTel,
-        custName:response.data.data.custName,
-        custPass:response.data.data.custPass,
-        custImgHead:response.data.data.custPass,
-        tag:response.data.data.tag,
-        custLastTime:response.data.data.custLastTime,
-        vipEffDate:response.data.data.vipEffDate,
-        openid:response.data.data.openId,
-        isVip:response.data.data.isVip,
-        vipExpDate:response.data.data.vipExpDate,
-        invalidTime:response.data.data.invalidTime,
-        ifValid:response.data.data.ifValid
-      }
-      this.$store.commit('wechatLogin',userData)
+      // var userData={
+      //   custId:response.data.data.custId,
+      //   custTel:response.data.data.custTel,
+      //   custName:response.data.data.custName,
+      //   custPass:response.data.data.custPass,
+      //   custImgHead:response.data.data.custPass,
+      //   tag:response.data.data.tag,
+      //   custLastTime:response.data.data.custLastTime,
+      //   vipEffDate:response.data.data.vipEffDate,
+      //   openid:response.data.data.openId,
+      //   isVip:response.data.data.isVip,
+      //   vipExpDate:response.data.data.vipExpDate,
+      //   invalidTime:response.data.data.invalidTime,
+      //   ifValid:response.data.data.ifValid
+      // }
+      // this.$store.commit('wechatLogin',userData)
     })
     if(this.$store.state.land==true || openid!=''){
       if(this.$route.path=='/main'){
