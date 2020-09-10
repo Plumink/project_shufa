@@ -1,6 +1,6 @@
 <template>
   <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
-    <img :src="img" v-if="img" class="share"/>
+    <img :src="img" v-if="img" class="share" />
     <div
       class="d-flex flex-row-reverse justify-space-around"
       style="margin:0 auto;width:80%;height:80%"
@@ -17,7 +17,7 @@
             :content="item.length-1"
             offset-y="15"
             offset-x="15"
-            :value="item.length-1"
+            :value="badges==''?(item.length-1):0"
           >
             <img
               @click="showStore(item)"
@@ -29,17 +29,17 @@
         </div>
       </div>
     </div>
-    
+
     <div style="width:100%;height:10vh;text-align: center;">
-      <el-button type="primary" @click="a()">保存作品</el-button>
+      <el-button type="primary" @click="save()">保存作品</el-button>
     </div>
-    
+
     <div class="popContainer d-flex justify-center align-center" v-if="pop">
       <div class="popbox d-flex align-center justify-center flex-column">
         <div class="d-flex align-content-space-around justify-center flex-wrap">
           <div v-for="(item,index) in otherfont" :key="index">
             <v-badge color="green" content="vip" offset-y="15" offset-x="15" :value="item.isVip">
-              <img style="width:50px;height:50px" :src="item.url" alt />
+              <img @click="replace(index)" style="width:50px;height:50px" :src="item.url" alt />
             </v-badge>
           </div>
         </div>
@@ -62,7 +62,9 @@ export default {
       pop: false,
       otherfont: [],
       otherfontpop: "",
-      img:''
+      img: "",
+      badges: "",
+      replacetext:''
     };
   },
   methods: {
@@ -71,7 +73,7 @@ export default {
     },
     showStore(item) {
       this.otherfont = item;
-      console.log(item[0].isVip);
+      this.replacetext=item[0].text
       this.otherfontpop = Math.round(100 / (item.length / 5));
       this.pop = !this.pop;
     },
@@ -92,18 +94,40 @@ export default {
     //     this.img=url
     //   });
     // },
-    a(){
-       var height = this.$refs.box.scrollHeight;
-       var width = document.body.scrollWidth;
-       console.log(height)
-       console.log(width)
-      this.domtoimage.toPng(this.$refs.box,{width: width,height: height})
-        .then((dataUrl) => {
-          this.img=dataUrl
-        })
-        .catch(function (error) {
-          console.error('oops, something went wrong!', error);
-        });
+    save() {
+      this.badges = 0;
+        var height = this.$refs.box.scrollHeight;
+        var width = document.body.scrollWidth;
+        console.log(height);
+        console.log(width);
+        this.domtoimage
+          .toPng(this.$refs.box, { width: width, height: height })
+          .then((dataUrl) => {
+            this.img = dataUrl;
+            //在截完图后，徽章正常显示
+            this.badges = "";
+          })
+          .catch(function (error) {
+            console.error("oops, something went wrong!", error);
+          });
+
+    },
+    // 替换字体
+    replace(item){
+      // 替换字体
+      // 将选中的字体和数组中现在展示的字体替换位置即可
+      for(var i=0;i<this.show.length;i++){
+        for(var n=0;n<this.show[i].length;n++){
+          if(this.replacetext==this.show[i][n][0].text){
+            var fontone=this.show[i][n][item]
+            var fonttwo=this.show[i][n][0]
+            this.show[i][n][0]=fontone
+            this.show[i][n][item]=fonttwo
+          }
+        }
+      }
+      // 退出替换字体界面
+      this.pop = !this.pop;
     }
   },
   created() {
@@ -155,6 +179,7 @@ export default {
         this.height = Math.round(100 / this.show[0].length);
       });
   },
+  mounted: {},
 };
 </script>
 
