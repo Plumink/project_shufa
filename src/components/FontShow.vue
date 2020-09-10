@@ -95,7 +95,7 @@ export default {
     //   });
     // },
     save() {
-      this.badges = 0;
+        this.badges = '0';
         var height = this.$refs.box.scrollHeight;
         var width = document.body.scrollWidth;
         console.log(height);
@@ -110,7 +110,6 @@ export default {
           .catch(function (error) {
             console.error("oops, something went wrong!", error);
           });
-
     },
     // 替换字体
     replace(item){
