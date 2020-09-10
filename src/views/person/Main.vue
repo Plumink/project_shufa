@@ -75,7 +75,10 @@ export default {
       data: JSON.parse(localStorage.getItem("loginMessage")),
       follow:[],
       num: '',
-      detail: ''
+      detail: '',
+      out_trade_no:new Date().getTime()+"MSSF720",
+      // openid:this.getcookie(openid)
+      package:''
     };
   },
   methods:{
@@ -110,48 +113,50 @@ export default {
     beVip(){
       let str1 = this.detail + this.num + '元';
       let str2 = this.detail + "会员";
-      let oid = this.getCookie(openid);
+      
+      // let oid = this.getCookie(openid);
       let params={
         "attach": "支付",
-        "body": str1,
-        "detail": str2,
+        "body": '一个月会员 15元',
+        "detail": "一个月会员",
         "feeType": "CNY",
         "limitPay": "no_credit",
         "notifyUrl": "https://www.mocking.space/CalligraphyService/WXPay/notify",
-        "openid": oid,
-        "outTradeNo": "string",
+        "openid": this.$store.state.openid,
+        "outTradeNo": this.out_trade_no,
         "productId": "001",
-        "totalFee": this.num,
+        "totalFee": '15',
         "tradeType": "JSAPI"
       }
+      console.log(params);
       this.$axios.post("/CalligraphyService/WXPay/unifiedOrder",params)
       .then((res)=>{
-        console.log(res)
+        console.log(res.data.data)
       })
     },
     // 在你需要的地方复制下面代码
- // 这里需要的签名等字段，前端开发者只需要调用后端指定的接口返回即可。
-// 如果你全干，那也是OK的。 
-// 你是大佬。
-onBridgeReady(){
- window.WeixinJSBridge.invoke(
-   'getBrandWCPayRequest', {
-     'appId': wx284c1a8307ed35ef, // 公众号名称，由商户传入
-     'timeStamp': new Date().getTime(), // 时间戳，自1970年以来的秒数
-     'nonceStr': res.data.nonceStr, // 随机串
-     'package': res.data.package,
-     'signType': res.data.signType, // 微信签名方式：
-     'paySign': res.data.paySign // 微信签名
-   },
-   function (res) {
-     alert(JSON.stringify(res))
-     if (res.err_msg === 'get_brand_wcpay_request:ok') {
-       // 使用以上方式判断前端返回,微信团队郑重提示：
-       // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-       console.log('success');
+    // 这里需要的签名等字段，前端开发者只需要调用后端指定的接口返回即可。
+    // 如果你全干，那也是OK的。 
+    // 你是大佬。
+    onBridgeReady(){
+    window.WeixinJSBridge.invoke(
+      'getBrandWCPayRequest', {
+        'appId': wx284c1a8307ed35ef, // 公众号名称，由商户传入
+        'timeStamp': new Date().getTime(), // 时间戳，自1970年以来的秒数
+        'nonceStr': res.data.nonceStr, // 随机串
+        'package': res.data.package,
+        'signType': res.data.signType, // 微信签名方式：
+        'paySign': res.data.paySign // 微信签名
+      },
+      function (res) {
+        alert(JSON.stringify(res))
+        if (res.err_msg === 'get_brand_wcpay_request:ok') {
+          // 使用以上方式判断前端返回,微信团队郑重提示：
+          // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+          console.log('success');
+        }
+    })
     }
- })
-}
 
 
 
