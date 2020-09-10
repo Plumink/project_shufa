@@ -38,21 +38,21 @@
         </div>
         <div class="pay" >
           <!-- <p>充值类型</p> -->
-          <div tabindex="1" class="pay_first">
+          <div tabindex="1" class="pay_first" @click="one()">
             <p class="pay_second">12个月</p>
             <p class="pay_third">￥88</p>
           </div>
-          <div tabindex="2" class="pay_first">
+          <div tabindex="2" class="pay_first" @click="two()">
             <p class="pay_second">1个 月</p>
             <p class="pay_third">￥15</p>
           </div>
-          <div tabindex="3" class="pay_first">
+          <div tabindex="3" class="pay_first" @click="three()">
             <p class="pay_second">连续包月</p>
             <p class="pay_third">￥10</p>
           </div>
         </div>
-        <div class="huiyuan">
-          <span @click="beVip()">成为会员</span>
+        <div class="huiyuan" @click="beVip()">
+          <span>成为会员</span>
         </div>
         <div class="show_main">
           <router-view />
@@ -78,7 +78,8 @@ export default {
       detail: '',
       out_trade_no:new Date().getTime()+"MSSF720",
       // openid:this.getcookie(openid)
-      package:''
+      package:'',
+      selects:''
     };
   },
   methods:{
@@ -110,30 +111,40 @@ export default {
         path:"/change"
       })
     },
+    one(){
+      this.selects='one'
+    },
+    tow(){
+      this.selects='two'
+    },
+    three(){
+      this.selects='three'
+    },
     beVip(){
-      let str1 = this.detail + this.num + '元';
-      let str2 = this.detail + "会员";
+      console.log(this.selects)
+      // let str1 = this.detail + this.num + '元';
+      // let str2 = this.detail + "会员";
       
-      // let oid = this.getCookie(openid);
-      let params={
-        "attach": "支付",
-        "body": '一个月会员 15元',
-        "detail": "一个月会员",
-        "feeType": "CNY",
-        "limitPay": "no_credit",
-        "notifyUrl": "https://www.mocking.space/CalligraphyService/WXPay/notify",
-        "openid": this.$store.state.openid,
-        "outTradeNo": this.out_trade_no,
-        "productId": "001",
-        "totalFee": '15',
-        "tradeType": "JSAPI"
-      }
-      console.log(params);
-      this.$axios.post("/CalligraphyService/WXPay/unifiedOrder",params)
-      .then((res)=>{
-        console.log(res.data.data)
-        this.package=res.data.data;
-      })
+      // // let oid = this.getCookie(openid);
+      // let params={
+      //   "attach": "支付", 
+      //   "body": '一个月会员 15元',
+      //   "detail": "一个月会员",
+      //   "feeType": "CNY",
+      //   "limitPay": "no_credit",
+      //   "notifyUrl": "https://www.mocking.space/CalligraphyService/WXPay/notify",
+      //   "openid": this.$store.state.openid,
+      //   "outTradeNo": this.out_trade_no,
+      //   "productId": "001",
+      //   "totalFee": '15',
+      //   "tradeType": "JSAPI"
+      // }
+      // console.log(params);
+      // this.$axios.post("/CalligraphyService/WXPay/unifiedOrder",params)
+      // .then((res)=>{
+      //   console.log(res.data.data)
+      //   this.package=res.data.data;
+      // })
     },
     // 在你需要的地方复制下面代码
     // 这里需要的签名等字段，前端开发者只需要调用后端指定的接口返回即可。
