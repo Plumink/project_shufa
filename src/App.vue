@@ -22,7 +22,7 @@ export default {
     }
     )
     .then((response)=>{
-      console.log(response.data.data)
+      console.log(response)
       var userData={
         custId:response.data.data.custId,
         custTel:response.data.data.custTel,
