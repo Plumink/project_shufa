@@ -70,8 +70,7 @@ export default {
   },
   methods: {
     goBack() {
-      // this.$router.go(-1);
-      console.log(this.image);
+      this.$router.go(-1);
     },
   },
 };

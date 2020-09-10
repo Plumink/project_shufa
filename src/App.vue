@@ -7,11 +7,13 @@
 <script>
 
 export default {
-  name: "app",
+  name: "app", 
   data: () => ({
     //
   }),
   created: function(){
+    var openid=this.getCookie('openid')
+    console.log('cookie:'+openid)
     if(this.$store.state.land==true){
       if(this.$route.path=='/main'){
         this.$router.push(
