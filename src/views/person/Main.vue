@@ -132,6 +132,7 @@ export default {
       this.$axios.post("/CalligraphyService/WXPay/unifiedOrder",params)
       .then((res)=>{
         console.log(res.data.data)
+        this.package=res.data.data;
       })
     },
     // 在你需要的地方复制下面代码
