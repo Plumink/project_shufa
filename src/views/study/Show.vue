@@ -117,7 +117,10 @@ export default {
       this.$router.push({ path: `show/info` });
     },
      a(){
-      console.log('debug store'+this.$store.state.openid)
+      console.log('debug store')
+      console.log(this.$store.state.openid)
+      console.log('localstorage')
+      console.log(JSON.parse(localStorage.getItem("wechatLogin")))
     },
   }
 };
