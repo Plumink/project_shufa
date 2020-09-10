@@ -106,7 +106,7 @@ export default {
       else if (name == "退出登陆") {
         if (this.$route.path == url) {
         } else {
-          if (login == false || login == null || openid=='') {
+          if ((login == false || login == null) && openid=='') {
             this.$message.error("尚未登陆,请登录");
           } else {
             var signOut = {
