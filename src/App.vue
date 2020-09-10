@@ -13,7 +13,17 @@ export default {
   }),
   created: function(){
     var openid=this.getCookie('openid')
-    console.log('cookie:'+openid)
+    this.$axiox.post('/CalligraphyService/user/getUserInfo',
+    {
+      headers:{'X-Request-ID':'1'}
+    },
+    {
+      "openId": openid
+    }
+    )
+    .then((response)=>{
+      console.log(response)
+    })
     if(this.$store.state.land==true || openid!=''){
       if(this.$route.path=='/main'){
         this.$router.push(
