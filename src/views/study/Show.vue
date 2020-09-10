@@ -119,6 +119,7 @@ export default {
      a(){
       console.log('debug store')
       console.log(this.$store.state.openid)
+      console.log(this.$store.state)
       console.log('localstorage')
       console.log(JSON.parse(localStorage.getItem("wechatLogin")))
     },
