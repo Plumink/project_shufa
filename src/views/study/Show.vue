@@ -2,8 +2,8 @@
   <v-app id="show">
     <TopNavigation />
     <Search />
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)">
-      <div class="box-left">
+    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)" >
+      <div class="box-left" @click="a()">
         <img :src="item.image" alt />
       </div>
       <div class="d-flex flex-column justify-space-around box-right">
@@ -115,7 +115,10 @@ export default {
   methods:{
     jump(id){
       this.$router.push({ path: `show/info` });
-    }
+    },
+     a(){
+      console.log('debug store'+this.$store.state.openid)
+    },
   }
 };
 </script>
