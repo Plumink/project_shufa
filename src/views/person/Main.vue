@@ -79,6 +79,23 @@ export default {
     };
   },
   methods:{
+    getCookie: function (cname) {
+      let name = cname + '='
+      let ca = document.cookie.split(';')
+      // console.log("获取cookie,现在循环")
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i]
+        // console.log(c)
+        while (c.charAt(0) === ' ') c = c.substring(1)
+        if (c.indexOf(name) !== -1) {
+          return c.substring(name.length, c.length)
+        }
+      }
+      return ''
+    },
+    clearCookie: function (cname) {
+      this.setCookie(cname, '', -1)
+    },
     updateImage(){
       var path = $('#img-upload')[0].value;
       var arr = path.split("\\");
@@ -90,9 +107,26 @@ export default {
         path:"/change"
       })
     },
-    JumpVip(){
-      this.$router.push({
-        path:"/bevip"
+    beVip(){
+      let str1 = this.detail + this.num + '元';
+      let str2 = this.detail + "会员";
+      let oid = this.getCookie(openid);
+      let params={
+        "attach": "支付",
+        "body": str1,
+        "detail": str2,
+        "feeType": "CNY",
+        "limitPay": "no_credit",
+        "notifyUrl": "https://www.mocking.space/CalligraphyService/WXPay/notify",
+        "openid": oid,
+        "outTradeNo": "string",
+        "productId": "001",
+        "totalFee": this.num,
+        "tradeType": "JSAPI"
+      }
+      this.$axios.post("/CalligraphyService/WXPay/unifiedOrder",params)
+      .then((res)=>{
+        console.log(res)
       })
     },
     // 在你需要的地方复制下面代码
@@ -102,8 +136,8 @@ export default {
 onBridgeReady(){
  window.WeixinJSBridge.invoke(
    'getBrandWCPayRequest', {
-     'appId': res.data.appId, // 公众号名称，由商户传入
-     'timeStamp': res.data.timeStamp, // 时间戳，自1970年以来的秒数
+     'appId': wx284c1a8307ed35ef, // 公众号名称，由商户传入
+     'timeStamp': new Date().getTime(), // 时间戳，自1970年以来的秒数
      'nonceStr': res.data.nonceStr, // 随机串
      'package': res.data.package,
      'signType': res.data.signType, // 微信签名方式：
@@ -139,6 +173,7 @@ onBridgeReady(){
           phoneNumber: "string",
           sessionId: "string",
           userName: "string",
+
         },{
         headers: {
           "X-APP-ID": "1",
@@ -159,6 +194,8 @@ onBridgeReady(){
     $('.pay_first').on('click', function(e) {
           this.num = $(this)[0].innerText.substring(7,9);
           this.detail = $(this)[0].innerText.substring(0,4);
+          console.log(this.num);
+          console.log(this.detail);
       });
     $('#my-img').click(function(){
         $('#img-upload').click();
@@ -256,10 +293,10 @@ onBridgeReady(){
 }
 
 .main_little {
-  width: 20%;
+  // width: 20vw;
   height: 100%;
   float: left;
-  margin-left: 4vw;
+  // margin-left: 4vw;
 }
 
 .jinzi {
