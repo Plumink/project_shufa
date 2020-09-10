@@ -20,6 +20,9 @@ Vue.prototype.html2canvas = html2canvas
 Vue.prototype.domtoimage = domtoimage
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5
+
+// 全局函数
+// 获取cookie
 Vue.prototype.getCookie = function (cname) {
   let name = cname + '='
   let ca = document.cookie.split(';')

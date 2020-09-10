@@ -14,7 +14,7 @@ export default {
   created: function(){
     var openid=this.getCookie('openid')
     console.log('cookie:'+openid)
-    if(this.$store.state.land==true){
+    if(this.$store.state.land==true || openid!=''){
       if(this.$route.path=='/main'){
         this.$router.push(
             {path: '/main'},
@@ -22,7 +22,7 @@ export default {
             onAbort => {}
          )
       }
-      else if(this.$route.path=='/main/follow'){
+      else if(this.$route.path=='/main/follow' ){
         this.$router.push(
             {path: '/main/follow'},
             onComplete => {},
