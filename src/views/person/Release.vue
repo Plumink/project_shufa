@@ -38,8 +38,8 @@
         <div class="filebox d-flex flex-column align-center justify-center">
           <span class="Calligraphy_icon_push" style="font-size:30px" />
            <div class="file">
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <v-file-input v-model="image[0].one" multiple label="上传图片"></v-file-input>
+            <v-textarea style="margin:0px;paddinf:0px" v-model="release[0].comment" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -48,10 +48,10 @@
               </template>
             </v-textarea>
           </div>
-          <div class="file" v-if="num>1">
+            <div class="file" v-if="num>1">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <v-file-input v-model="release[1].img" multiple label="上传图片"></v-file-input>
+            <v-textarea style="margin:0px;paddinf:0px" v-model="release[1].comment" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -60,7 +60,7 @@
               </template>
             </v-textarea>
           </div>
-          <div class="file" v-if="num>2">
+          <!-- <div class="file" v-if="num>2">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
@@ -131,7 +131,7 @@
                 </div>
               </template>
             </v-textarea>
-          </div>
+          </div> -->
           <div style="margin-top:10px">
             <v-btn color="primary" dark @click="num=num+1" :disabled='num==8?true:false'>继续发布</v-btn>
           </div>
@@ -151,7 +151,7 @@ export default {
         (v) => !!v || "邮箱不为空",
         (v) => /.+@.+/.test(v) || "电子邮箱必须有效",
       ],
-      image: "",
+      release:[{img:'',comment:''},{img:'',comment:''}],
       bio: "",
     };
   },

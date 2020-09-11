@@ -12,6 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import html2canvas from 'html2canvas'
 import cookie from 'vue-cookie'
 import domtoimage from 'dom-to-image';
+import wx from "weixin-js-sdk";
+Vue.prototype.wx=wx
 Vue.prototype.$cookie = cookie;
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios    //全局注册，使用方法为:this.$axios

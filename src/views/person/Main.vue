@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <div >
+    <div>
       <div class="all_first">
         <p class="main_title">个人中心</p>
       </div>
       <div class="all_second">
         <div style="width:100%;height:10vh;">
-          <img :src="data.customerImgHead" alt="头像" id="my-img" @click="toChange()"/>
+          <img :src="data.customerImgHead" alt="头像" id="my-img" @click="toChange()" />
           <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
             <span style="color: #ebedee;font-size:4vw;">
               <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{data.userName}}</span>
@@ -20,7 +20,7 @@
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
-              <div class="shuzi" ref='guanzu'>{{follow.length}}</div>
+              <div class="shuzi" ref="guanzu">{{follow.length}}</div>
             </router-link>
           </div>
           <div class="main_little">
@@ -36,7 +36,7 @@
             </router-link>
           </div>
         </div>
-        <div class="pay" >
+        <div class="pay">
           <!-- <p>充值类型</p> -->
           <div tabindex="1" class="pay_first">
             <p class="pay_second">12个月</p>
@@ -74,138 +74,136 @@ export default {
   data() {
     return {
       data: JSON.parse(localStorage.getItem("loginMessage")),
-      follow:[],
-      num: '',
-      detail: '',
-      out_trade_no:new Date().getTime()+"MSSF720",
+      follow: [],
+      num: "",
+      detail: "",
+      out_trade_no: new Date().getTime() + "MSSF720",
       // openid:this.getcookie(openid)
-      package:'',
-      pwd:'',
-      timeStamp: '',
-      sign:''
+      package: "",
+      pwd: "",
+      timeStamp: "",
+      sign: "",
     };
   },
-  methods:{
+  methods: {
     getCookie: function (cname) {
-      let name = cname + '='
-      let ca = document.cookie.split(';')
+      let name = cname + "=";
+      let ca = document.cookie.split(";");
       // console.log("获取cookie,现在循环")
       for (let i = 0; i < ca.length; i++) {
-        let c = ca[i]
+        let c = ca[i];
         // console.log(c)
-        while (c.charAt(0) === ' ') c = c.substring(1)
+        while (c.charAt(0) === " ") c = c.substring(1);
         if (c.indexOf(name) !== -1) {
-          return c.substring(name.length, c.length)
+          return c.substring(name.length, c.length);
         }
       }
-      return ''
+      return "";
     },
     clearCookie: function (cname) {
-      this.setCookie(cname, '', -1)
+      this.setCookie(cname, "", -1);
     },
-    updateImage(){
-      var path = $('#img-upload')[0].value;
+    updateImage() {
+      var path = $("#img-upload")[0].value;
       var arr = path.split("\\");
-      console.log(arr[arr.length-1]);
-       
+      console.log(arr[arr.length - 1]);
     },
-    toChange(){
+    toChange() {
       this.$router.push({
-        path:"/change"
-      })
+        path: "/change",
+      });
     },
-    beVip(){
-      let str1 = this.detail + this.num + '元';
+    beVip() {
+      let str1 = this.detail + this.num + "元";
       let str2 = this.detail + "会员";
-      var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+      var $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
       var maxPos = $chars.length;
 
-      var pwd = '';
+      var pwd = "";
       for (var i = 0; i < 32; i++) {
-          pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
       }
       this.pwd = pwd;
 
       console.log(this.pwd);
       // let oid = this.getCookie(openid);
-      let params={
-        "attach": "支付",
-        "body": '一个月会员 15元',
-        "detail": "一个月会员",
-        "feeType": "CNY",
-        "limitPay": "no_credit",
-        "notifyUrl": "https://www.mocking.space/CalligraphyService/WXPay/notify",
-        "openid": this.$store.state.openid,
-        "outTradeNo": this.out_trade_no,
-        "productId": "001",
-        "totalFee": '15',
-        "tradeType": "JSAPI"
-      }
+      let params = {
+        attach: "支付",
+        body: "一个月会员 15元",
+        detail: "一个月会员",
+        feeType: "CNY",
+        limitPay: "no_credit",
+        notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
+        openid: this.$store.state.openid,
+        outTradeNo: this.out_trade_no,
+        productId: "001",
+        totalFee: "15",
+        tradeType: "JSAPI",
+      };
       console.log(params);
 
-      this.$axios.post("/CalligraphyService/WXPay/unifiedOrder",params)
-      .then((res)=>{
-        console.log(res.data.data)
-        this.package=res.data.data;
-        var time = new Date().getTime();
-        this.timeStamp = time;
-        
-        let par = {
-          'appId': 'wx284c1a8307ed35ef', // 公众号名称，由商户传入
-          'timeStamp': "'"+this.timeStamp+"'", // 时间戳，自1970年以来的秒数
-          'nonceStr': this.pwd, // 随机串
-          'package': this.package,
-        }
+      this.$axios
+        .post("/CalligraphyService/WXPay/unifiedOrder", params)
+        .then((res) => {
+          console.log(res.data.data);
+          this.package = res.data.data;
+          var time = new Date().getTime();
+          this.timeStamp = time;
 
-        this.$axios.post("/CalligraphyService/common/paySign",par)
-        .then((res)=>{
-          console.log(res);
-          this.sign = res.data.data;
-        })
-      function onBridgeReady() {
-        window.WeixinJSBridge.invoke(
-          'getBrandWCPayRequest', {
-            'appId': wx284c1a8307ed35ef, // 公众号名称，由商户传入
-            'timeStamp': this.timeStamp, // 时间戳，自1970年以来的秒数
-            'nonceStr': this.pwd, // 随机串
-            'package': this.package,
-            'signType': "RSA", // 微信签名方式：
-            'paySign': res.data.paySign // 微信签名
-          },
-          function (res) {
-            alert(JSON.stringify(res))
-            if (res.err_msg === 'get_brand_wcpay_request:ok') {
-              // 使用以上方式判断前端返回,微信团队郑重提示：
-              // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-              console.log('success');
+          let par = {
+            appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+            timeStamp: "'" + this.timeStamp + "'", // 时间戳，自1970年以来的秒数
+            nonceStr: this.pwd, // 随机串
+            package: this.package,
+          };
+
+          this.$axios
+            .post("/CalligraphyService/common/paySign", par)
+            .then((res) => {
+              console.log(res);
+              this.sign = res.data.data;
+            });
+
+          if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+              document.addEventListener(
+                "WeixinJSBridgeReady",
+                onBridgeReady,
+                false
+              );
+            } else if (document.attachEvent) {
+              document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+              document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
             }
-          })
-        }
-      if (typeof WeixinJSBridge == "undefined") {
-    if (document.addEventListener) {
-        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-    } else if (document.attachEvent) {
-        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-    }
-} else {
-    onBridgeReady();
-}
-      })
+          } else {
+            window.WeixinJSBridge.invoke(
+              "getBrandWCPayRequest",
+              {
+                appId: wx284c1a8307ed35ef, // 公众号名称，由商户传入
+                timeStamp: this.timeStamp, // 时间戳，自1970年以来的秒数
+                nonceStr: this.pwd, // 随机串
+                package: this.package,
+                signType: "RSA", // 微信签名方式：
+                paySign: res.data.paySign, // 微信签名
+              },
+              function (res) {
+                alert(JSON.stringify(res));
+                if (res.err_msg === "get_brand_wcpay_request:ok") {
+                  // 使用以上方式判断前端返回,微信团队郑重提示：
+                  // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                  console.log("success");
+                }
+              }
+            );
+          }
+        });
     },
-
-
-
-
-
-
-
-
-
   },
   created() {
     this.$axios
-      .post("/CalligraphyService/user/getCatchInfo", {
+      .post(
+        "/CalligraphyService/user/getCatchInfo",
+        {
           customerId: this.$store.state.id,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
@@ -213,73 +211,76 @@ export default {
           phoneNumber: "string",
           sessionId: "string",
           userName: "string",
-
-        },{
-        headers: {
-          "X-APP-ID": "1",
-          "X-APP-KEY": "1",
-          "X-Request-ID": "1",
         },
-      })
+        {
+          headers: {
+            "X-APP-ID": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": "1",
+          },
+        }
+      )
       .then((response) => {
         // console.log(response)
-        var n=response.data.data.length
-        for(var i=0;i<n;i++){
-          this.follow.push(response.data.data[i])
+        var n = response.data.data.length;
+        for (var i = 0; i < n; i++) {
+          this.follow.push(response.data.data[i]);
         }
-
       });
   },
-  mounted(){
-    $('.pay_first').on('click', function(e) {
-          this.num = $(this)[0].innerText.substring(7,9);
-          this.detail = $(this)[0].innerText.substring(0,4);
-          console.log(this.num);
-          console.log(this.detail);
-      });
-    $('#my-img').click(function(){
-        $('#img-upload').click();
+  mounted() {
+    $(".pay_first").on("click", function (e) {
+      this.num = $(this)[0].innerText.substring(7, 9);
+      this.detail = $(this)[0].innerText.substring(0, 4);
+      console.log(this.num);
+      console.log(this.detail);
     });
-    
+    $("#my-img").click(function () {
+      $("#img-upload").click();
+    });
   },
-  updated(){
-    var path = $('#img-upload').files[0];
+  updated() {
+    var path = $("#img-upload").files[0];
     var arr = path.split("\\");
-    console.log(arr[arr.length-1]);
+    console.log(arr[arr.length - 1]);
     console.log(path);
-    this.$axios.post("/CalligraphyService/common/uploadFile", {
-      headers: {
+    this.$axios
+      .post("/CalligraphyService/common/uploadFile", {
+        headers: {
           "content-type": "multipart/form-data",
           "X-APP-ID": "1",
           "X-APP-KEY": "1",
           "X-Request-ID": "1",
         },
-        params:{
+        params: {
           // uploadFile:arr[arr.length-1]
-          uploadFile:path
-
-        }
-    }).then(response=>{
-      console.log(response)
-    })
-    console.log('1')
-    this.$axios
-      .post("/CalligraphyService/user/getCatchInfo", {
-          openid:this.getcookie(openid)
-        },{
-        headers: {
-          "X-Request-ID": "1",
+          uploadFile: path,
         },
       })
       .then((response) => {
-        console.log(response)
-        var n=response.data.data.length
-        for(var i=0;i<n;i++){
-          this.follow.push(response.data.data[i])
+        console.log(response);
+      });
+    console.log("1");
+    this.$axios
+      .post(
+        "/CalligraphyService/user/getCatchInfo",
+        {
+          openid: this.getcookie(openid),
+        },
+        {
+          headers: {
+            "X-Request-ID": "1",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        var n = response.data.data.length;
+        for (var i = 0; i < n; i++) {
+          this.follow.push(response.data.data[i]);
         }
       });
-  }
-  
+  },
 };
 </script>
 
@@ -362,38 +363,38 @@ export default {
   border-radius: 4vw;
 }
 
-#img-upload{
-    display: none;
+#img-upload {
+  display: none;
 }
 
-.pay{
-  margin-top:2vh;
-  display:flex;
-  width:90vw;
-  height:30vh;
-  flex-direction:row;
-  justify-content:space-around;
+.pay {
+  margin-top: 2vh;
+  display: flex;
+  width: 90vw;
+  height: 30vh;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .pay_first {
   border: 1px solid grey;
   border-radius: 2vw;
-  width:30%;
-  height:70%;
-  background-color:#ffffff;
-  float:left;
-  margin-top:4vh
+  width: 30%;
+  height: 70%;
+  background-color: #ffffff;
+  float: left;
+  margin-top: 4vh;
 }
 
-.pay_first:focus{
+.pay_first:focus {
   background-color: #f9f1e4;
 }
 
-.pay_second{
+.pay_second {
   text-align: center;
   margin-top: 2vh;
 }
-.pay_third{
+.pay_third {
   text-align: center;
   margin-top: 3vh;
   font-size: 6vw;

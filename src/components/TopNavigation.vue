@@ -32,7 +32,7 @@ export default {
   vuetify: new Vuetify(),
   data() {
     return {
-      username: this.$store.state.userName,
+      username: this.$store.state.userName||this.$store.state.custName,
       dialog: false,
       jump: [
         {
