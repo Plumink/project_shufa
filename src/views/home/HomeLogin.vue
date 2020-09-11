@@ -155,12 +155,6 @@ export default {
     };
   },
   methods: {
-    setCookie: function (cname, cvalue, exdays) {
-      let d = new Date();
-      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-      let expires = "expires=" + d.toUTCString();
-      document.cookie = cname + "=" + cvalue + "; " + expires;
-    },
     upFont(title) {
       this.font = title.calligraphyName;
     },
@@ -224,11 +218,8 @@ export default {
     },
   },
   mounted() {
-    var code;
-    var url = document.URL;
-    var that = this;
-    this.$axios
-      .get(
+    
+    this.$axios.get(
         "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
         {
           headers: {
@@ -239,31 +230,14 @@ export default {
         }
       )
       .then(function (res) {
+        var that = this;
         var a = res.data.data;
         that.ziti.push(a.CalligraphyTypes);
         that.dataAuthor.push(a.Authors)
         for(var i=0;i<a.Authors.length;i++){
           that.author.push(a.Authors[i].authorName);
         }
-        // console.log(that.author[0][0].authorName);
       });
-    code = url.match(/=(\S*)&/)[1];
-    console.log(code);
-    this.code = code;
-    this.$axios
-      .get("/CalligraphyService/user/getOpenId", {
-        params: {
-          "X-Request-ID": "1",
-          code: this.code,
-        },
-      })
-      .then(function (res) {
-        console.log(res.data.data.openid);
-        that.openid = res.data.data.openid;
-        var id = res.data.data.openid;
-        that.setCookie("openid", id, 360);
-      });
-    // this.setCookie("openid",this.openid,360);
   },
 };
 </script>

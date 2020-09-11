@@ -8,7 +8,7 @@
 export default {
   name: "app",
   data: () => ({
-    //
+    openid:''
   }),
   created: function () {
     var code;
@@ -29,7 +29,8 @@ export default {
         that.openid = res.data.data.openid;
         var id = res.data.data.openid;
         that.setCookie("openid", id, 360);
-        this.$axios
+        console.log('以获取openid，并写入cookie')
+        that.$axios
           .post(
             "/CalligraphyService/user/getUserInfo",
             {
@@ -40,6 +41,7 @@ export default {
             }
           )
           .then((response) => {
+            console.log('通过openid获取信息并打印')
             console.log(response);
             var userData = {
               custId: response.data.data.custId,
@@ -56,10 +58,11 @@ export default {
               invalidTime: response.data.data.invalidTime,
               ifValid: response.data.data.ifValid,
             };
-            this.$store.commit("wechatLogin", userData);
+            that.$store.commit("wechatLogin", userData);
           });
       });
-    // this.setCookie("openid",this.openid,360);
+    console.log("从本地获取用户信息")
+    console.log(JSON.parse(localStorage.getItem("wechatLogin")).custName)
 
     if (this.$store.state.land == true || this.$store.state.openid != "") {
       if (this.$route.path == "/main") {
