@@ -218,7 +218,7 @@ export default {
     },
   },
   mounted() {
-    
+    var that = this;
     this.$axios.get(
         "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
         {
@@ -230,7 +230,7 @@ export default {
         }
       )
       .then(function (res) {
-        var that = this;
+        
         var a = res.data.data;
         that.ziti.push(a.CalligraphyTypes);
         that.dataAuthor.push(a.Authors)
