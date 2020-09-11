@@ -46,7 +46,7 @@ export default {
               custTel: response.data.data.custTel,
               custName: response.data.data.custName,
               custPass: response.data.data.custPass,
-              custImgHead: response.data.data.custPass,
+              custImgHead: response.data.data.custImgHead,
               tag: response.data.data.tag,
               custLastTime: response.data.data.custLastTime,
               vipEffDate: response.data.data.vipEffDate,
