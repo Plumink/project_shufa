@@ -6,7 +6,7 @@
       </div>
       <div class="all_second">
         <div style="width:100%;height:10vh;">
-          <img :src="data.customerImgHead" alt="头像" id="my-img" @click="toChange()" />
+          <img :src="this.$store.state.custImgHead" alt="头像" id="my-img" @click="toChange()" />
           <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
             <span style="color: #ebedee;font-size:4vw;">
               <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{data.userName}}</span>
