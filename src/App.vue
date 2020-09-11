@@ -12,6 +12,45 @@ export default {
     //
   }),
   created: function(){
+    var code;
+    var url = document.URL;
+    var that = this;
+    this.$axios
+      .get(
+        "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
+        {
+          headers: {
+            "X-APP-ID": "1",
+            "X-APP-KEY": "1",
+            "X-Request-ID": "1",
+          },
+        }
+      )
+      .then(function (res) {
+        var a = res.data.data;
+        that.ziti.push(a.CalligraphyTypes);
+        that.dataAuthor.push(a.Authors)
+        for(var i=0;i<a.Authors.length;i++){
+          that.author.push(a.Authors[i].authorName);
+        }
+      });
+    code = url.match(/=(\S*)&/)[1];
+    console.log(code);
+    this.code = code;
+    this.$axios
+      .get("/CalligraphyService/user/getOpenId", {
+        params: {
+          "X-Request-ID": "1",
+          code: this.code,
+        },
+      })
+      .then(function (res) {
+        console.log(res.data.data.openid);
+        that.openid = res.data.data.openid;
+        var id = res.data.data.openid;
+        that.setCookie("openid", id, 360);
+      });
+    // this.setCookie("openid",this.openid,360);
     var openid=this.getCookie('openid')
     this.$axios.post('/CalligraphyService/user/getUserInfo',
     {

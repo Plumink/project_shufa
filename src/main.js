@@ -40,6 +40,14 @@ Vue.prototype.getCookie = function (cname) {
   return ''
 }
 
+// 设置cookie
+Vue.prototype.setCookie=function (cname, cvalue, exdays) {
+  let d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
 
 var code;
 var url = document.URL;
