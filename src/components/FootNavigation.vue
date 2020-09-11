@@ -76,7 +76,7 @@ export default {
     };
   },
   mounted() {
-  var that = this
+    var that = this
     this.$axios
       .get(
         "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
