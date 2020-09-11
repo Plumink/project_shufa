@@ -15,25 +15,6 @@ export default {
     var code;
     var url = document.URL;
     var that = this;
-    this.$axios
-      .get(
-        "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
-        {
-          headers: {
-            "X-APP-ID": "1",
-            "X-APP-KEY": "1",
-            "X-Request-ID": "1",
-          },
-        }
-      )
-      .then(function (res) {
-        var a = res.data.data;
-        that.ziti.push(a.CalligraphyTypes);
-        that.dataAuthor.push(a.Authors)
-        for(var i=0;i<a.Authors.length;i++){
-          that.author.push(a.Authors[i].authorName);
-        }
-      });
     code = url.match(/=(\S*)&/)[1];
     console.log(code);
     this.code = code;
