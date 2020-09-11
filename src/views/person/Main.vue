@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div style="width:100%;height:10vh;">
+        <div style="width:100%;height:10vh;padding-left:20px" class="d-flex flex-row align-center justify-space-between">
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
