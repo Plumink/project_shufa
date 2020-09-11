@@ -56,7 +56,9 @@ export default {
               invalidTime: response.data.data.invalidTime,
               ifValid: response.data.data.ifValid,
             };
-            that.$store.commit("wechatLogin", userData);
+            console.log('调试由openid获取用户信息接口')
+            console.log(userData)
+            that.$store.commit("wechatLogin",userData);
           });
       });
 
