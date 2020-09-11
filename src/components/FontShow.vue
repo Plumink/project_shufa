@@ -193,7 +193,6 @@ export default {
 .popbox {
   width: 100%;
   height: 100%;
-  position: absolute;
   background-color: #f9f4e6;
   overflow: scroll;
   padding-top: 60px;

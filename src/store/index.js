@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+  
 export default new Vuex.Store({ 
   state: {
     // 手机号登陆
@@ -39,6 +39,22 @@ export default new Vuex.Store({
       state.userName = message.userName
     },
     wechatLogin(state,data){
+      localStorage.setItem('wechatLogin', JSON.stringify(data));
+      state.openid=data.openid
+      state.custId=data.custId
+      state.custTel-data.custTel
+      state.custName=data.custName
+      state.custPass=data.custPass
+      state.custImgHead=data.custImgHead
+      state.tag=data.tag
+      state.custLastTime=data.custLastTime
+      state.vipEffDate=data.vipEffDate
+      state.isVip=data.isVip
+      state.vipExpDate=data.vipExpDate
+      state.invalidTime=data.invalidTime
+      state.ifValid=data.ifValid
+    },
+    wechatClear(state,data){
       localStorage.setItem('wechatLogin', JSON.stringify(data));
       state.openid=data.openid
       state.custId=data.custId

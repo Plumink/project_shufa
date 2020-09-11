@@ -38,21 +38,21 @@
         </div>
         <div class="pay">
           <!-- <p>充值类型</p> -->
-          <div tabindex="1" class="pay_first">
+          <div tabindex="1" class="pay_first" @click="one()">
+            <p class="pay_second">1个月</p>
+            <p class="pay_third">￥15</p>
+          </div>
+          <div tabindex="2" class="pay_first" @click="two()">
+            <p class="pay_second">3个月</p>
+            <p class="pay_third">￥40</p>
+          </div>
+          <div tabindex="3" class="pay_first" @click="three()">
             <p class="pay_second">12个月</p>
             <p class="pay_third">￥88</p>
           </div>
-          <div tabindex="2" class="pay_first">
-            <p class="pay_second">1个 月</p>
-            <p class="pay_third">￥15</p>
-          </div>
-          <div tabindex="3" class="pay_first">
-            <p class="pay_second">连续包月</p>
-            <p class="pay_third">￥10</p>
-          </div>
         </div>
-        <div class="huiyuan">
-          <span @click="beVip()">成为会员</span>
+        <div class="huiyuan" @click="beVip()">
+          <span>成为会员</span>
         </div>
         <div class="show_main">
           <router-view />
@@ -82,9 +82,21 @@ export default {
       pwd: "",
       timeStamp: "",
       sign: "",
+      selects:'',
+      str1:'',
+      str2:''
     };
   },
   methods: {
+    one(){
+      this.selects='one'
+    },
+    two(){
+      this.selects='two'
+    },
+    three(){
+      this.selects='three'
+    },
     getCookie: function (cname) {
       let name = cname + "=";
       let ca = document.cookie.split(";");
@@ -113,11 +125,19 @@ export default {
       });
     },
     beVip() {
-      console.log("调试头像信息")
-      console.log(this.$store.state.customerImgHead)
-      console.log(this.$store.state.custImgHead)
-      let str1 = this.detail + this.num + "元";
-      let str2 = this.detail + "会员";
+      if(this.selects=='one'){
+          this.str1 = '一个月会员 15元'
+          this.str2 = '一个月会员'
+      }
+      else if(this.selects=='two'){
+        this.str1 = '三个月会员 40元'
+        this.str2 = '三个月会员'
+      }
+      else if(this.selects=='three'){
+        this.str1 = '十二个月会员 88元'
+        this.str2 = '十二个月会员'
+      }
+      console.log(this.str1,this.str2)
       var $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
       var maxPos = $chars.length;
 
@@ -147,7 +167,6 @@ export default {
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
-          console.log(res.data.data);
           this.package = res.data.data;
           var time = new Date().getTime();
           this.timeStamp = time;

@@ -80,17 +80,20 @@ export default {
       this.$router.push('./main')
     },
     topJump(name, url, login) {
-      var openid=this.getCookie('openid')
       if (name == "字典首页") {
         if (this.$route.path == url) {
         } else {
-          this.$router.push(url);
+          if ((login == false || login == null) && this.$store.state.openid=='') {
+            this.$router.push(url);
+          } else {
+            this.$router.push('/homelogin');
+          }
         }
       } 
       else if (name == "个人首页") {
         if (this.$route.path == url) {
         } else {
-          if ((login == false || login == null) && openid=='') {
+          if ((login == false || login == null) && this.$store.state.openid=='') {
             this.$message.error("尚未登陆,请登录");
           } else {
             this.$router.push(url);
@@ -116,7 +119,23 @@ export default {
               customerImgHead: "",
               id: "",
             };
+            var wechatClear={
+              custId: '',
+              custTel: '',
+              custName: '',
+              custPass: '',
+              custImgHead: '',
+              tag:'',
+              custLastTime: '',
+              vipEffDate: '',
+              openid: '',
+              isVip:'',
+              vipExpDate: '',
+              invalidTime: '',
+              ifValid: '',
+            }
             this.$store.commit("islogin", signOut);
+            this.$store.commit("wechatClear", wechatClear);
             this.$router.push(url);
           }
         }
