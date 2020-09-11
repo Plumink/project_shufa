@@ -76,10 +76,10 @@ export default {
     };
   },
   mounted() {
-    
+  var that = this
     this.$axios
       .get(
-        " /CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
+        "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
         {
           headers: {
             "X-APP-ID": "1",
@@ -90,7 +90,8 @@ export default {
         }
       )
       .then(function (res) {
-        var that = this;
+
+        console.log(res)
         var a = res.data.data.CalligraphyTypes;
         that.items_dictionaries = a;
         for(var i=0;i<a.length;i++){
