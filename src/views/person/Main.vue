@@ -9,7 +9,7 @@
           <img :src="this.$store.state.custImgHead||this.$store.state.custImgHead" alt="头像" id="my-img" @click="toChange()" />
           <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
             <span style="color: #ebedee;font-size:4vw;">
-              <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{data.userName}}</span>
+              <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{this.$store.state.custName||this.$store.state.userName}}</span>
               <br />
               <span style="color: #b8a18c;font-size:3vw;font-family:YouYuan;">升级到会员享受更多特权</span>
             </span>
@@ -202,6 +202,7 @@ export default {
     },
   },
   created() {
+
     this.$axios
       .post(
         "/CalligraphyService/user/getCatchInfo",
@@ -228,6 +229,7 @@ export default {
         for (var i = 0; i < n; i++) {
           this.follow.push(response.data.data[i]);
         }
+        console.log(this.follow)
       });
   },
   // mounted() {
