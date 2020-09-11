@@ -76,7 +76,7 @@ export default {
     };
   },
   mounted() {
-    var that = this;
+    
     this.$axios
       .get(
         " /CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
@@ -90,6 +90,7 @@ export default {
         }
       )
       .then(function (res) {
+        var that = this;
         var a = res.data.data.CalligraphyTypes;
         that.items_dictionaries = a;
         for(var i=0;i<a.length;i++){
@@ -103,7 +104,7 @@ export default {
       if (this.$route.path == item.link) {
       } else {
         this.$router.push({ path: item.link });
-        if( (this.$store.state.land==true) || (this.getCookie('openid')!=null)){
+        if( this.$store.state.land==true || this.getCookie('openid')!=null){
       this.$router.push(
             {path: '/homelogin'},
             onComplete => {},
