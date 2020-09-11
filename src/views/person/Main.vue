@@ -230,17 +230,17 @@ export default {
         }
       });
   },
-  mounted() {
-    $(".pay_first").on("click", function (e) {
-      this.num = $(this)[0].innerText.substring(7, 9);
-      this.detail = $(this)[0].innerText.substring(0, 4);
-      console.log(this.num);
-      console.log(this.detail);
-    });
-    $("#my-img").click(function () {
-      $("#img-upload").click();
-    });
-  },
+  // mounted() {
+  //   $(".pay_first").on("click", function (e) {
+  //     this.num = $(this)[0].innerText.substring(7, 9);
+  //     this.detail = $(this)[0].innerText.substring(0, 4);
+  //     console.log(this.num);
+  //     console.log(this.detail);
+  //   });
+  //   $("#my-img").click(function () {
+  //     $("#img-upload").click();
+  //   });
+  // },
   updated() {
     var path = $("#img-upload").files[0];
     var arr = path.split("\\");
