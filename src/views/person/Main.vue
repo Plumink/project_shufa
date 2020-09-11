@@ -163,19 +163,7 @@ export default {
               console.log(res);
               this.sign = res.data.data;
             });
-
-          if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-              document.addEventListener(
-                "WeixinJSBridgeReady",
-                onBridgeReady,
-                false
-              );
-            } else if (document.attachEvent) {
-              document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
-              document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
-            }
-          } else {
+          function onBridgeReady() {
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
@@ -196,6 +184,20 @@ export default {
               }
             );
           }
+          // if (typeof WeixinJSBridge == "undefined") {
+          //   if (document.addEventListener) {
+          //     document.addEventListener(
+          //       "WeixinJSBridgeReady",
+          //       onBridgeReady,
+          //       false
+          //     );
+          //   } else if (document.attachEvent) {
+          //     document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+          //     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+          //   }
+          // } else {
+            onBridgeReady();
+          // }
         });
     },
   },
