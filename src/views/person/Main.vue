@@ -171,10 +171,10 @@ export default {
               {
                 appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
                 timeStamp:"1599814562689", // 时间戳，自1970年以来的秒数
-                nonceStr: this.pwd, // 随机串
-                package: this.package,
+                nonceStr: "R6wcaAS6SMpaEkSy3zRH3W6mHWcRiixA", // 随机串
+                package: "prepay_id=wx201410272009395522657a690389285100",
                 signType: "RSA", // 微信签名方式：
-                paySign: res.data.paySign, // 微信签名
+                paySign: "wx111700378427904e1feabde8bb954d0000", // 微信签名
               },
               function (res) {
                 alert(JSON.stringify(res));
@@ -186,20 +186,20 @@ export default {
               }
             );
           }
-          // if (typeof WeixinJSBridge == "undefined") {
-          //   if (document.addEventListener) {
-          //     document.addEventListener(
-          //       "WeixinJSBridgeReady",
-          //       onBridgeReady,
-          //       false
-          //     );
-          //   } else if (document.attachEvent) {
-          //     document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
-          //     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
-          //   }
-          // } else {
+          if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+              document.addEventListener(
+                "WeixinJSBridgeReady",
+                onBridgeReady,
+                false
+              );
+            } else if (document.attachEvent) {
+              document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+              document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+            }
+          } else {
             onBridgeReady();
-          // }
+          }
         });
     },
   },
