@@ -41,6 +41,23 @@ Vue.prototype.getCookie = function (cname) {
 }
 
 
+var code;
+var url = document.URL;
+this.$axios
+  .get("/CalligraphyService/user/getOpenId", {
+    params: {
+      "X-Request-ID": "1",
+      code: this.code,
+    },
+  })
+  .then(function (res) {
+    console.log(res.data.data.openid);
+    that.openid = res.data.data.openid;
+    var id = res.data.data.openid;
+    that.setCookie("openid", id, 360);
+  });
+
+
 
 axios.defaults.baseURL = "https://www.mocking.space"
 

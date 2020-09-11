@@ -263,7 +263,7 @@ export default {
         var id = res.data.data.openid;
         that.setCookie("openid", id, 360);
       });
-    this.setCookie("openid",this.openid,360);
+    // this.setCookie("openid",this.openid,360);
   },
 };
 </script>
