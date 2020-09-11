@@ -6,7 +6,7 @@
       </div>
       <div class="all_second">
         <div style="width:100%;height:10vh;">
-          <img :src="this.$store.state.custImgHead||this.$store.state.custImgHead" alt="头像" id="my-img" @click="toChange()" />
+          <img :src="this.$store.state.customerImgHead||this.$store.state.custImgHead" alt="头像" id="my-img" @click="toChange()" />
           <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
             <span style="color: #ebedee;font-size:4vw;">
               <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{this.$store.state.custName||this.$store.state.userName}}</span>
@@ -113,6 +113,9 @@ export default {
       });
     },
     beVip() {
+      console.log("调试头像信息")
+      console.log(this.$store.state.customerImgHead)
+      console.log(this.$store.state.custImgHead)
       let str1 = this.detail + this.num + "元";
       let str2 = this.detail + "会员";
       var $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
@@ -223,12 +226,13 @@ export default {
         }
       )
       .then((response) => {
-        // console.log(response)
         var n = response.data.data.length;
         for (var i = 0; i < n; i++) {
           this.follow.push(response.data.data[i]);
         }
+        console.log('调试关注接口返回的数据')
         console.log(this.follow)
+        console.log(response)
       });
   },
   mounted() {

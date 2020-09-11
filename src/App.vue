@@ -41,8 +41,6 @@ export default {
             }
           )
           .then((response) => {
-            console.log('通过openid获取信息并打印')
-            console.log(response);
             var userData = {
               custId: response.data.data.custId,
               custTel: response.data.data.custTel,
@@ -61,8 +59,6 @@ export default {
             that.$store.commit("wechatLogin", userData);
           });
       });
-    console.log("从本地获取用户信息")
-    console.log(JSON.parse(localStorage.getItem("wechatLogin")).custName)
 
     if (this.$store.state.land == true || this.$store.state.openid != "") {
       if (this.$route.path == "/main") {
