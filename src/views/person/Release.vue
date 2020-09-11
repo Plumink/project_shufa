@@ -37,7 +37,7 @@
         <!-- 文件上传 -->
         <div class="filebox d-flex flex-column align-center justify-center">
           <span class="Calligraphy_icon_push" style="font-size:30px" />
-          <div class="file">
+           <div class="file">
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -49,6 +49,7 @@
             </v-textarea>
           </div>
           <div class="file" v-if="num>1">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -60,6 +61,7 @@
             </v-textarea>
           </div>
           <div class="file" v-if="num>2">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -71,6 +73,7 @@
             </v-textarea>
           </div>
           <div class="file" v-if="num>3">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -82,6 +85,7 @@
             </v-textarea>
           </div>
           <div class="file" v-if="num>4">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -93,6 +97,7 @@
             </v-textarea>
           </div>
           <div class="file" v-if="num>5">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -103,7 +108,8 @@
               </template>
             </v-textarea>
           </div>
-          <div class="file" v-if="num>6">
+          <div class="file" v-if="num>6" @click="num--">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
@@ -114,7 +120,8 @@
               </template>
             </v-textarea>
           </div>
-          <div class="file" v-if="num>7">
+          <div class="file" v-if="num>7" @click="num--">
+            <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F"></span>
             <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
             <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
               <template v-slot:label>
