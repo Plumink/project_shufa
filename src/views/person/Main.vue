@@ -163,8 +163,8 @@ export default {
         .then((res) => {
           console.log(res);
           this.package = res.data.data;
-          var time = new Date().getTime();
-          this.timeStamp = " + time + ";
+          var time = new Date().getTime().toString();
+          this.timeStamp = time;
           console.log(this.timeStamp);
           //前台调起支付入参
           let par = {
