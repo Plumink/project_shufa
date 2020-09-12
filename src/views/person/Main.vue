@@ -193,7 +193,7 @@ export default {
             console.log(json);
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
-              json,
+              JSON.stringify(info),
               function (res) {
                 alert(JSON.stringify(res));
                 if (res.err_msg === "get_brand_wcpay_request:ok") {
