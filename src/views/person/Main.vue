@@ -167,10 +167,10 @@ export default {
           this.timeStamp = time;
           //前台调起支付入参
           let par = {
-            appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-            timeStamp:this.timeStamp, // 时间戳，自1970年以来的秒数
-            nonceStr: this.pwd, // 随机串
-            package: "prepay_id=" + this.package,//
+            "appId": "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+            "timeStamp":this.timeStamp, // 时间戳，自1970年以来的秒数
+            "nonceStr": this.pwd, // 随机串
+            "package": "prepay_id=" + this.package,//
           };
 
           this.$axios
