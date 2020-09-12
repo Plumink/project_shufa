@@ -181,25 +181,31 @@ export default {
               this.sign = res.data.data;
               console.log(this.sign);
             });
-          function onBridgeReady() {
+          var that = this;
+          function onBridgeReady(that) {
+            console.log(that)
+            console.log(that.timeStamp)
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
               'appId': "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-              'timeStamp':this.timeStamp, // 时间戳，自1970年以来的秒数
-              'nonceStr': this.pwd, // 随机串
-              'package': "prepay_id=" + this.package,
+              'timeStamp':that.timeStamp, // 时间戳，自1970年以来的秒数
+              'nonceStr': that.pwd, // 随机串
+              'package': "prepay_id=" + that.package,
               'signType': "RSA", // 微信签名方式：
-              'paySign': this.sign, // 微信签名
+              'paySign': that.sign, // 微信签名
               },
               function (res) {
+                console.log("debug")
                 alert(JSON.stringify(res));
                 if (res.err_msg === "get_brand_wcpay_request:ok") {
                   console.log("success");
                 }
               }
             );
+
           }
+          
           // if (typeof WeixinJSBridge == "undefined") {
           //   if (document.addEventListener) {
           //     document.addEventListener(
@@ -212,7 +218,7 @@ export default {
           //     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
           //   }
           // } else {
-            onBridgeReady();
+            onBridgeReady(this);
           // }
         });
     },
