@@ -181,26 +181,26 @@ export default {
               this.sign = res.data.data;
               console.log(this.sign);
             });
-          //前台调起支付方法
-          // function onBridgeReady() {
-          //   window.WeixinJSBridge.invoke(
-          //     "getBrandWCPayRequest",
-          //     {
-          //     'appId': "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-          //     'timeStamp':"1599900737148", // 时间戳，自1970年以来的秒数
-          //     'nonceStr': "eD4fTDfDM3Jc7bs2xRw3kH6j6tG4Cdkw", // 随机串
-          //     'package': "prepay_id=wx12171142608172f4da9081189456d50000",
-          //     'signType': "RSA", // 微信签名方式：
-          //     'paySign': this.sign, // 微信签名
-          //     },
-          //     function (res) {
-          //       alert(JSON.stringify(res));
-          //       if (res.err_msg === "get_brand_wcpay_request:ok") {
-          //         console.log("success");
-          //       }
-          //     }
-          //   );
-          // }
+          前台调起支付方法
+          function onBridgeReady() {
+            window.WeixinJSBridge.invoke(
+              "getBrandWCPayRequest",
+              {
+              'appId': "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+              'timeStamp':this.timeStamp, // 时间戳，自1970年以来的秒数
+              'nonceStr': this.pwd, // 随机串
+              'package': "prepay_id=" + this.package,
+              'signType': "RSA", // 微信签名方式：
+              'paySign': this.sign, // 微信签名
+              },
+              function (res) {
+                alert(JSON.stringify(res));
+                if (res.err_msg === "get_brand_wcpay_request:ok") {
+                  console.log("success");
+                }
+              }
+            );
+          }
           // if (typeof WeixinJSBridge == "undefined") {
           //   if (document.addEventListener) {
           //     document.addEventListener(
@@ -213,7 +213,7 @@ export default {
           //     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
           //   }
           // } else {
-            // onBridgeReady();
+            onBridgeReady();
           // }
         });
     },
