@@ -191,9 +191,18 @@ export default {
             }
             var json = JSON.stringify(info);
             console.log(json);
+            var time="'"+this.timeStamp+"'"
+            console.log(time)
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
-              JSON.stringify(info),
+              {
+                 appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+              timeStamp:time, // 时间戳，自1970年以来的秒数
+              nonceStr: this.pwd, // 随机串
+              package: "prepay_id=" + this.package,
+              signType: "RSA", // 微信签名方式：
+              paySign: this.sign, // 微信签名
+              },
               function (res) {
                 alert(JSON.stringify(res));
                 if (res.err_msg === "get_brand_wcpay_request:ok") {
