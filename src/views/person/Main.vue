@@ -137,9 +137,8 @@ export default {
       }
       this.pwd = pwd;
       console.log(this.pwd);
-      //获取cookie
       
-
+      //下单的入参
       let params = {
         attach: "支付",
         body: this.str1,
@@ -147,14 +146,14 @@ export default {
         feeType: "CNY",
         limitPay: "no_credit",
         notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
-        openid: "ofnsC1pJNR_A1NF5gS1Zr9OwBZig",
+        openid: this.$store.state.openid,
         outTradeNo: this.out_trade_no,
         productId: this.proid,
         totalFee: this.str3,
         tradeType: "JSAPI",
       };
       console.log(params);
-
+      //调用下单接口，生成订单号
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
@@ -162,12 +161,12 @@ export default {
           this.package = res.data.data;
           var time = new Date().getTime();
           this.timeStamp = time;
-
+          //前台调起支付入参
           let par = {
             appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-            timeStamp:"1599814562689", // 时间戳，自1970年以来的秒数
+            timeStamp:this.timeStamp, // 时间戳，自1970年以来的秒数
             nonceStr: this.pwd, // 随机串
-            package: this.package,
+            package: "prepay_id=" + this.package,//
           };
 
           this.$axios
@@ -176,16 +175,17 @@ export default {
               console.log(res);
               this.sign = res.data.data;
             });
+          //前台调起支付方法
           function onBridgeReady() {
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
                 appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-                timeStamp:"1599814562689", // 时间戳，自1970年以来的秒数
-                nonceStr: "R6wcaAS6SMpaEkSy3zRH3W6mHWcRiixA", // 随机串
-                package: "prepay_id=wx201410272009395522657a690389285100",
+                timeStamp:this.timeStamp, // 时间戳，自1970年以来的秒数
+                nonceStr: this.pwd, // 随机串
+                package: "prepay_id=" + this.package,
                 signType: "RSA", // 微信签名方式：
-                paySign: "wx111700378427904e1feabde8bb954d0000", // 微信签名
+                paySign: this.sign, // 微信签名
               },
               function (res) {
                 alert(JSON.stringify(res));
