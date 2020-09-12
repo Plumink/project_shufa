@@ -181,16 +181,19 @@ export default {
             });
           //前台调起支付方法
           function onBridgeReady() {
+            var info = {
+              appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+              timeStamp:this.timeStamp, // 时间戳，自1970年以来的秒数
+              nonceStr: this.pwd, // 随机串
+              package: "prepay_id=" + this.package,
+              signType: "RSA", // 微信签名方式：
+              paySign: this.sign, // 微信签名
+            }
+            var json = JSON.stringify(info);
+            console.log(json);
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
-              {
-                "appId": "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-                "timeStamp":this.timeStamp, // 时间戳，自1970年以来的秒数
-                "nonceStr": this.pwd, // 随机串
-                "package": "prepay_id=" + this.package,
-                "signType": "RSA", // 微信签名方式：
-                "paySign": this.sign, // 微信签名
-              },
+              json,
               function (res) {
                 alert(JSON.stringify(res));
                 if (res.err_msg === "get_brand_wcpay_request:ok") {
