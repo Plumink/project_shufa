@@ -181,7 +181,6 @@ export default {
               this.sign = res.data.data;
               console.log(this.sign);
             });
-          前台调起支付方法
           function onBridgeReady() {
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
