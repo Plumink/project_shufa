@@ -198,7 +198,7 @@ export default {
               "getBrandWCPayRequest",
               {
               'appId': "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-              'timeStamp':"'1599900737148'", // 时间戳，自1970年以来的秒数
+              'timeStamp':"1599900737148", // 时间戳，自1970年以来的秒数
               'nonceStr': this.pwd, // 随机串
               'package': "prepay_id=" + this.package,
               'signType': "RSA", // 微信签名方式：
