@@ -156,7 +156,7 @@ export default {
         feeType: "CNY",
         limitPay: "no_credit",
         notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
-        openid: this.$store.state.openid,
+        openid: "ofnsC1pJNR_A1NF5gS1Zr9OwBZig",
         outTradeNo: this.out_trade_no,
         productId: "001",
         totalFee: "15",
@@ -167,6 +167,7 @@ export default {
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
+          console.log(res);
           this.package = res.data.data;
           var time = new Date().getTime();
           this.timeStamp = time;
@@ -198,8 +199,6 @@ export default {
               function (res) {
                 alert(JSON.stringify(res));
                 if (res.err_msg === "get_brand_wcpay_request:ok") {
-                  // 使用以上方式判断前端返回,微信团队郑重提示：
-                  // res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                   console.log("success");
                 }
               }
