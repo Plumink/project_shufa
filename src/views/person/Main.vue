@@ -97,23 +97,6 @@ export default {
     three(){
       this.selects='three'
     },
-    getCookie: function (cname) {
-      let name = cname + "=";
-      let ca = document.cookie.split(";");
-      // console.log("获取cookie,现在循环")
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        // console.log(c)
-        while (c.charAt(0) === " ") c = c.substring(1);
-        if (c.indexOf(name) !== -1) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return "";
-    },
-    clearCookie: function (cname) {
-      this.setCookie(cname, "", -1);
-    },
     updateImage() {
       var path = $("#img-upload")[0].value;
       var arr = path.split("\\");
@@ -125,41 +108,49 @@ export default {
       });
     },
     beVip() {
+      //获取金额和产品详细信息
       if(this.selects=='one'){
           this.str1 = '一个月会员 15元'
           this.str2 = '一个月会员'
+          this.str3 = '15'
+          this.proid = '001'
       }
       else if(this.selects=='two'){
         this.str1 = '三个月会员 40元'
         this.str2 = '三个月会员'
+        this.str3 = '40'
+        this.proid = '002'
       }
       else if(this.selects=='three'){
         this.str1 = '十二个月会员 88元'
         this.str2 = '十二个月会员'
+        this.str3 = '88'
+        this.proid = '003'
       }
-      console.log(this.str1,this.str2)
+      console.log(this.str1,this.str2,this.str3)
+      //生成随机字符串 pwd
       var $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
       var maxPos = $chars.length;
-
       var pwd = "";
       for (var i = 0; i < 32; i++) {
         pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
       }
       this.pwd = pwd;
-
       console.log(this.pwd);
-      // let oid = this.getCookie(openid);
+      //获取cookie
+      
+
       let params = {
         attach: "支付",
-        body: "一个月会员 15元",
-        detail: "一个月会员",
+        body: this.str1,
+        detail: this.str2,
         feeType: "CNY",
         limitPay: "no_credit",
         notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
         openid: "ofnsC1pJNR_A1NF5gS1Zr9OwBZig",
         outTradeNo: this.out_trade_no,
-        productId: "001",
-        totalFee: "15",
+        productId: this.proid,
+        totalFee: this.str3,
         tradeType: "JSAPI",
       };
       console.log(params);
