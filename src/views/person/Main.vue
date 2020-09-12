@@ -164,7 +164,8 @@ export default {
           console.log(res);
           this.package = res.data.data;
           var time = new Date().getTime();
-          this.timeStamp = time;
+          this.timeStamp = '"' + time + '"';
+          console.log(this.timeStamp);
           //前台调起支付入参
           let par = {
             "appId": "wx284c1a8307ed35ef", // 公众号名称，由商户传入
