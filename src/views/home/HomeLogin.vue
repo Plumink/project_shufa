@@ -17,21 +17,28 @@
         </template>
       </div>
       <div style="margin-top:15px">
-        
-      
         <div class="d-flex flex-row justify-space-around align-center" >
           <div style="width:30%">
-             <v-select
+             <!-- <v-select
               background-color="#fff"
               label="字体"
               class="ml-2 mr-2"
               :items="ziti[0]"
               v-model="fontId"
-              item-text="calligraphyName"
+              :item-text="calligraphyName"
               item-value="calligraphyId"
               outlined
               dense
-            >{{ziti.calligraphyName}}</v-select>
+            >{{ziti.calligraphyName}}</v-select> -->
+             <v-select
+              background-color="#fff"
+              label="字体"
+              class="ml-2 mr-2"
+              outlined
+              :items="zitiSelect"
+              v-model="initialZiti"
+              dense
+            ></v-select>
           </div>
            <div style="width:30%">
               <v-autocomplete v-model="first" :items="author" dense filled label="作者"> </v-autocomplete>
@@ -102,7 +109,7 @@
         />
       </p>
     </div>
-    <FootNavigation @fontChange="upFont" />
+    <FootNavigation/>
   </v-app>
 </template>
 
@@ -118,19 +125,20 @@ export default {
   },
   data() {
     return {
+      initialZiti:'',//初始化ziti，如果路由有传值的话，即字体双向数据绑定，默认选中字体
+      zitiSelect:[],//字体下拉选择
       overlayText: "输入有误",
       absolute: true,
       overlay: false,
       openid: "",
-      fontId: "",
+      fontId: "",//字体Id
       first: "",
       second: "",
       content: "",
-      font: "",
       dataAuthor:[],
       word: "",
       row_num: "4",
-      ziti: [],
+      ziti: [],//字体所有对象属性的数组
       author: [],
       code: "",
       items: [
@@ -155,17 +163,13 @@ export default {
     };
   },
   methods: {
-    upFont(title) {
-      this.font = title.calligraphyName;
-    },
     toChildren() {
-      
       console.log(this.first);
       console.log(this.second);
       if (this.content == "") {
         this.overlayText = "内容不为空";
         this.overlay = !this.overlay;
-      } else if (this.fontId == "") {
+      } else if (this.initialZiti == "") {
         this.overlayText = "请选择字体";
         this.overlay = !this.overlay;
       } else if (this.first == "") {
@@ -193,16 +197,22 @@ export default {
             break;
           }
         }
+        // 通过initalZiti寻找ziti（字体数组）中对应的字体Id
+        for(var i=0;i<this.ziti[0].length;i++){
+          if(this.initialZiti==this.ziti[0][i].calligraphyName){
+            this.fontId=this.ziti[0][i].calligraphyId
+          }
+        }
         console.log(
           this.row_num,
           this.content,
-          this.ziti[0][this.fontId - 1].calligraphyName,
+          this.fontId,
           firstAuthorId,
           secondAuthorId,
         );
         var message = {
           text: this.content,
-          calligraphyTypeId: this.ziti[0][this.fontId - 1].calligraphyId,
+          calligraphyTypeId: this.fontId,
           firstAuthorId: firstAuthorId,
           secondAuthorId: secondAuthorId,
           thirdAuthorId: "0",
@@ -217,7 +227,15 @@ export default {
       }
     },
   },
+  //监听路由的变化
+  watch:{
+  $route(to,from){
+        this.initialZiti=to.query.font
+        // 对路由变化作出响应...
+  }
+},
   mounted() {
+    this.initialZiti=this.$route.query.font
     var that = this;
     this.$axios.get(
         "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
@@ -233,6 +251,10 @@ export default {
         
         var a = res.data.data;
         that.ziti.push(a.CalligraphyTypes);
+        console.log(that.ziti)
+        for(var i=0;i<that.ziti[0].length;i++){
+          that.zitiSelect.push(that.ziti[0][i].calligraphyName);
+        }
         that.dataAuthor.push(a.Authors)
         for(var i=0;i<a.Authors.length;i++){
           that.author.push(a.Authors[i].authorName);

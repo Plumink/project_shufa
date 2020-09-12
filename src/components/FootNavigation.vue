@@ -13,7 +13,7 @@
           >
             <v-list-item-title>{{ item.calligraphyName }}</v-list-item-title>
           </v-list-item>
-        </v-list> 
+        </v-list>
       </v-menu>
     </v-btn>
     <v-btn value="recent" width="40vw" height="100%">
@@ -76,7 +76,7 @@ export default {
     };
   },
   mounted() {
-    var that = this
+    var that = this;
     this.$axios
       .get(
         "/CalligraphyService/common/getInitParameter?packageName=mobileHomePage",
@@ -90,41 +90,44 @@ export default {
         }
       )
       .then(function (res) {
-
-        console.log(res)
+        console.log(res);
         var a = res.data.data.CalligraphyTypes;
         that.items_dictionaries = a;
-        for(var i=0;i<a.length;i++){
-          a[i].link='/'
-        }
+        console.log(that.items_dictionaries);
       });
   },
   methods: {
     jump_dictionaries(item) {
-      this.$emit("fontChange", item);
-      if (this.$route.path == item.link) {
+      if (this.$route.path == item.link && this.$route.query.font==item.calligraphyName) {
       } else {
         this.$router.push({ path: item.link });
-        if( this.$store.state.land==true || this.getCookie('openid')!=null){
-      this.$router.push(
-            {path: '/homelogin'},
-            onComplete => {},
-            onAbort => {}
-         )
-    }
-    else{
-      this.$router.push({ path: item.link });
-    }
+        if (
+          this.$store.state.land == true ||
+          this.getCookie("openid") != null
+        ) {
+          this.$router.push({
+            path: "/homelogin",
+            query: {
+              font: item.calligraphyName,
+            },
+          });
+        } else {
+          this.$router.push({ path: item.link });
+        }
       }
     },
     jump_person(item) {
-        var openid=this.getCookie('openid')
+      var openid = this.getCookie("openid");
       if (this.$route.path == item.link) {
       } else {
         if (item.title == "微店入口") {
           window.location.href = item.link;
         } else {
-          if ((this.$store.state.land == null || this.$store.state.land==false) && openid=='' ) {
+          if (
+            (this.$store.state.land == null ||
+              this.$store.state.land == false) &&
+            openid == ""
+          ) {
             this.$message.error("尚未登陆");
           } else {
             this.$router.push({ path: item.link });

@@ -23,6 +23,8 @@ Vue.prototype.domtoimage = domtoimage
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5
 
+
+
 // 全局函数
 // 获取cookie
 Vue.prototype.getCookie = function (cname) {
@@ -48,7 +50,10 @@ Vue.prototype.setCookie=function (cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
-
+//清楚cookie
+Vue.prototype.clearCookie=function (cname) {
+  this.setCookie(cname, "", -1);
+},
 
 axios.defaults.baseURL = "https://www.mocking.space"
 
