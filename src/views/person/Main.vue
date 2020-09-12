@@ -173,17 +173,17 @@ export default {
             "nonceStr": this.pwd, // 随机串
             "package": "prepay_id=" + this.package,//
           };
-
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
-            .then((res) => {
+            .then(function(res) {
               console.log(res);
-              this.sign = res.data.data;
-              console.log(this.sign);
+              that.sign = res.data.data;
+              that.setCookie('sign',res.data.data,360)
             });
+            console.log(this.sign)
           var that = this;
           function onBridgeReady(that) {
-            console.log(that)
+            console.log(that.getCookie('sign'))
             console.log(that.timeStamp)
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
@@ -193,7 +193,7 @@ export default {
               'nonceStr': that.pwd, // 随机串
               'package': "prepay_id=" + that.package,
               'signType': "RSA", // 微信签名方式：
-              'paySign': that.sign, // 微信签名
+              'paySign': that.getCookie('sign'), // 微信签名
               },
               function (res) {
                 console.log("debug")
@@ -205,7 +205,6 @@ export default {
             );
 
           }
-          
           // if (typeof WeixinJSBridge == "undefined") {
           //   if (document.addEventListener) {
           //     document.addEventListener(
