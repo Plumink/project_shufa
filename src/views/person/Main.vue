@@ -108,6 +108,8 @@ export default {
       });
     },
     beVip() {
+
+      console.log(this.out_trade_no)
       //获取金额和产品详细信息
       if(this.selects=='one'){
           this.str1 = '一个月会员 15元'
@@ -138,6 +140,8 @@ export default {
       this.pwd = pwd;
       console.log(this.pwd);
       
+
+
       //下单的入参
       let params = {
         attach: "支付",
@@ -180,12 +184,12 @@ export default {
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
-                appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-                timeStamp:this.timeStamp, // 时间戳，自1970年以来的秒数
-                nonceStr: this.pwd, // 随机串
-                package: "prepay_id=" + this.package,
-                signType: "RSA", // 微信签名方式：
-                paySign: this.sign, // 微信签名
+                "appId": "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+                "timeStamp":this.timeStamp, // 时间戳，自1970年以来的秒数
+                "nonceStr": this.pwd, // 随机串
+                "package": "prepay_id=" + this.package,
+                "signType": "RSA", // 微信签名方式：
+                "paySign": this.sign, // 微信签名
               },
               function (res) {
                 alert(JSON.stringify(res));
