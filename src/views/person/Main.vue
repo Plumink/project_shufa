@@ -186,6 +186,7 @@ export default {
           console.log(this.sign)
           function onBridgeReady(that) {
             that.getCookie('sign')
+            console.log(that.getCookie('sign'))
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
@@ -194,7 +195,7 @@ export default {
               'nonceStr': that.pwd, // 随机串
               'package': "prepay_id=" + that.package,
               'signType': "RSA", // 微信签名方式：
-              'paySign': this.getCookie('sign'), // 微信签名
+              'paySign': that.getCookie('sign'), // 微信签名
               },
               function (res) {
                 console.log("debug")
