@@ -195,7 +195,7 @@ export default {
                     timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
                     nonceStr: that.pwd, // 随机串
                     package: "prepay_id=" + that.package,
-                    signType: "MD5", // 微信签名方式：
+                    signType: "SHA256withRSA", // 微信签名方式：
                     paySign: sign, // 微信签名
                   },
                   function (res) {

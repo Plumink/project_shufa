@@ -151,8 +151,8 @@ export default {
         (v) => !!v || "邮箱不为空",
         (v) => /.+@.+/.test(v) || "电子邮箱必须有效",
       ],
-      image: "",
-      bio: "",
+      image: [],
+      bio: [],
     };
   },
   methods: {
