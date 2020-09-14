@@ -32,7 +32,7 @@ export default {
         .post(
           "/CalligraphyService/user/unfollow",
           {
-            custId: this.$store.state.id||this.$store.state.custId,
+            custId: this.$store.state.id || this.$store.state.custId,
             followCatchId: item.customerId,
           },
           {
@@ -50,24 +50,28 @@ export default {
             for (var i = 0; i < this.follow.length; i++) {
               if (this.follow[i].customerId == item.customerId) {
                 this.follow.splice(i, 1);
+                this.$router.push({
+                  path: "/main/follow",
+                  query: {
+                    follownum: this.follow.length, //将路由参数传给mian，即关注人数少一
+                  },
+                });
               } else {
               }
             }
-          }
-          else{
-            alert('删除失败')
+          } else {
+            alert("删除失败");
           }
         });
       // console.log(item.customerId)
     },
   },
   created() {
-    console.log(this.$refs.guanzu)
     this.$axios
       .post(
         "/CalligraphyService/user/getCatchInfo",
         {
-          customerId: this.$store.state.id||this.$store.state.custId,
+          customerId: this.$store.state.id || this.$store.state.custId,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
           ifValid: 0,
@@ -85,9 +89,13 @@ export default {
       )
       .then((response) => {
         console.log(response);
-        var n = response.data.data.length;
-        for (var i = 0; i < n; i++) {
-          this.follow.push(response.data.data[i]);
+        
+        if (response.data.code == "-101") {
+        } else {
+          var n = response.data.data.length;
+          for (var i = 0; i < n; i++) {
+            this.follow.push(response.data.data[i]);
+          }
         }
       });
   },

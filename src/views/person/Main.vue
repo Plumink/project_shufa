@@ -30,7 +30,7 @@
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
-              <div class="shuzi" ref="guanzu">{{follow.length}}</div>
+              <div class="shuzi" ref="guanzu">{{length}}</div>
             </router-link>
           </div>
           <div class="main_little">
@@ -84,7 +84,7 @@ export default {
   data() {
     return {
       data: JSON.parse(localStorage.getItem("loginMessage")),
-      follow: [],
+      length:'',
       num: "",
       detail: "",
       out_trade_no: "",
@@ -233,7 +233,7 @@ export default {
       .post(
         "/CalligraphyService/user/getCatchInfo",
         {
-          customerId: this.$store.state.id,
+          customerId: this.$store.state.id||this.$store.state.custId,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
           ifValid: 0,
@@ -250,15 +250,22 @@ export default {
         }
       )
       .then((response) => {
-        var n = response.data.data.length;
-        for (var i = 0; i < n; i++) {
-          this.follow.push(response.data.data[i]);
+        console.log(response)
+        if(response.data.code=='-101'){
+          this.length=0
         }
-        console.log("调试关注接口返回的数据");
-        console.log(this.follow);
-        console.log(response);
+        else{
+           this.length = response.data.data.length;
+        }
       });
   },
+   //监听路由的变化
+  watch:{
+  $route(to,from){
+    // console.log(to.query.follownum)
+        this.length=to.query.follownum?to.query.follownum:this.length//获取子路由的关注人数
+  }
+},
   mounted() {
     //   $(".pay_first").on("click", function (e) {
     //     this.num = $(this)[0].innerText.substring(7, 9);
