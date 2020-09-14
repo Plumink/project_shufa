@@ -28,12 +28,11 @@ export default {
   },
   methods: {
     unfollow(item) {
-      console.log(item);
       this.$axios
         .post(
           "/CalligraphyService/user/unfollow",
           {
-            custId: this.$store.state.id,
+            custId: this.$store.state.id||this.$store.state.custId,
             followCatchId: item.customerId,
           },
           {
