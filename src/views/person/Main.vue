@@ -23,7 +23,10 @@
           </div>
         </div>
 
-        <div style="width:100%;height:38px;" class="d-flex flex-row align-center justify-space-between">
+        <div
+          style="width:100%;height:38px;"
+          class="d-flex flex-row align-center justify-space-between"
+        >
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
@@ -192,7 +195,7 @@ export default {
                     appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
                     timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
                     nonceStr: that.pwd, // 随机串
-                    package:  that.package,
+                    package: "prepay_id=" + that.package,
                     signType: "RSA", // 微信签名方式：
                     paySign: sign, // 微信签名
                   },
