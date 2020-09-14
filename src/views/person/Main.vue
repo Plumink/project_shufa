@@ -184,9 +184,8 @@ export default {
             });
           var that = this;
           console.log(this.sign)
-          function onBridgeReady(that) {
-            that.getCookie('sign')
-            console.log(that.getCookie('sign'))
+          function onBridgeReady(that,sign) {
+            console.log(sign)
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
@@ -195,7 +194,7 @@ export default {
               'nonceStr': that.pwd, // 随机串
               'package': "prepay_id=" + that.package,
               'signType': "RSA", // 微信签名方式：
-              'paySign': that.getCookie('sign'), // 微信签名
+              'paySign': sign, // 微信签名
               },
               function (res) {
                 console.log("debug")
@@ -218,7 +217,7 @@ export default {
               document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
             }
           } else {
-            onBridgeReady(this);
+            onBridgeReady(this,this.getCookie('sign'));
           }
         });
     },
