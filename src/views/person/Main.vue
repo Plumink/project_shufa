@@ -110,7 +110,7 @@ export default {
     beVip() {
       console.log('debug this')
       console.log(this.getCookie('sign'))
-      console.log(this)
+      console.log(this.sign)
       console.log(this.out_trade_no)
       //获取金额和产品详细信息
       if(this.selects=='one'){
@@ -180,9 +180,10 @@ export default {
             .then(function(res) {
               console.log(res);
               that.sign = res.data.data;
-              that.setCookie('sign',res.data.data,360)
+              // that.setCookie('sign',res.data.data,360)
             });
           var that = this;
+          console.log(this.sign)
           function onBridgeReady(that) {
             that.getCookie('sign')
             window.WeixinJSBridge.invoke(
