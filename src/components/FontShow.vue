@@ -1,6 +1,7 @@
 <template>
+  <div>
+    
   <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
-    <img :src="img" v-if="img" class="share" />
     <div
       class="d-flex flex-row-reverse justify-space-around"
       style="margin:0 auto;width:80%;height:80%"
@@ -28,10 +29,10 @@
           </v-badge>
         </div>
       </div>
-    </div>
-
-    <div style="width:100%;height:10vh;text-align: center;">
-      <el-button type="primary" @click="save()">保存作品</el-button>
+  </div>
+  </div>
+    <div style="width:100%;height:10vh;text-align: center;background-color:#f9f4e6">
+      <el-button type="primary" @click="save">保存作品</el-button>
     </div>
     <div class="popContainer d-flex justify-center align-center" v-if="pop">
       <div class="popbox d-flex align-center justify-center flex-column">
@@ -45,6 +46,15 @@
         <el-button type="primary" @click="pop=!pop">取消</el-button>
       </div>
     </div>
+
+    <div class="popContainer d-flex justify-center align-center" v-if="isimage">
+       <div class="popbox d-flex align-center justify-center flex-column">
+         <p style="font-size:13px">长按图片保存到本地</p>
+         <img :src="img" v-if="img" class="share" />
+         <el-button type="primary" @click="isimage=!isimage">返回</el-button>
+       </div>
+    </div>
+  
   </div>
 </template>
 
@@ -63,7 +73,8 @@ export default {
       otherfontpop: "",
       img: "",
       badges: "",
-      replacetext:''
+      replacetext:'',
+      isimage:false
     };
   },
   methods: {
@@ -76,7 +87,7 @@ export default {
       this.otherfontpop = Math.round(100 / (item.length / 5));
       this.pop = !this.pop;
     },
-    // a() {
+    // save() {
     //   //防止HTML2canvas截图不完整
     //    window.pageYOffset = 0
     //   document.documentElement.scrollTop = 0
@@ -86,16 +97,37 @@ export default {
     //     backgroundColor: null,
     //     tainttest: true,
     //     useCORS: true, // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题,
-    //     windowWidth: this.$refs.box.scrollWidth,
-    //     windowHeight: this.$refs.box.scrollHeight
+    //     // width: this.$refs.box.scrollWidth,
+    //     height: this.$refs.box.scrollHeight,
+    //     timeout:5000
     //   }).then((canvas) => {
     //     let url = canvas.toDataURL("image/png");
     //     this.img=url
     //   });
     // },
     save() {
+      this.isimage=true
         this.badges = '0';
-        var height = this.$refs.box.scrollHeight;
+        this.one()
+    },
+    one(){
+      var height = this.$refs.box.scrollHeight;
+        var width = document.body.scrollWidth;
+        console.log(height);
+        console.log(width);
+        this.domtoimage
+          .toPng(this.$refs.box, { width: width, height: height })
+          .then((dataUrl) => {
+            this.two()
+            // 在截完图后，徽章正常显示
+          })
+          .catch(function (error) {
+            console.error("oops, something went wrong!", error);
+          });
+    },
+    two(){
+      console.log('123')
+      var height = this.$refs.box.scrollHeight;
         var width = document.body.scrollWidth;
         console.log(height);
         console.log(width);
@@ -103,8 +135,8 @@ export default {
           .toPng(this.$refs.box, { width: width, height: height })
           .then((dataUrl) => {
             this.img = dataUrl;
-            //在截完图后，徽章正常显示
-            // this.badges = "";
+            // 在截完图后，徽章正常显示
+            this.badges = "";
           })
           .catch(function (error) {
             console.error("oops, something went wrong!", error);
