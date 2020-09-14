@@ -188,7 +188,7 @@ export default {
               that.sign = res.data.data;
               that.setCookie("sign", res.data.data, 360);
               function onBridgeReady(that, sign) {
-                console.log(sign);
+                console.log(that);
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
                   {
@@ -220,7 +220,7 @@ export default {
                   document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
                 }
               } else {
-                onBridgeReady(this, res.data.data);
+                onBridgeReady(that, res.data.data);
               }
             });
           var that = this;
