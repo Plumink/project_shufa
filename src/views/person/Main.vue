@@ -263,7 +263,7 @@ export default {
   watch:{
   $route(to,from){
     // console.log(to.query.follownum)
-        this.length=to.query.follownum?to.query.follownum:this.length//获取子路由的关注人数
+        this.length=(to.query.follownum+1)?to.query.follownum:this.length//获取子路由的关注人数
   }
 },
   mounted() {
