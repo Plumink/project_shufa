@@ -68,7 +68,7 @@ export default {
       .post(
         "/CalligraphyService/user/getCatchInfo",
         {
-          customerId: this.$store.state.id,
+          customerId: this.$store.state.id||this.$store.state.custId,
           customerImgHead: "string",
           customerLastTime: "2020-08-21T03:02:35.606Z",
           ifValid: 0,
