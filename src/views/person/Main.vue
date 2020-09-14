@@ -159,7 +159,7 @@ export default {
         limitPay: "no_credit",
         notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
         openid: this.$store.state.openid,
-        outTradeNo: new Date().getTime().toString(),
+        outTradeNo: new Date().getTime().toString() + "MS720",
         productId: this.proid,
         totalFee: this.str3,
         tradeType: "JSAPI",
