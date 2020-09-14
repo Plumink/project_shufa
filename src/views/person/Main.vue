@@ -22,9 +22,8 @@
             </span>
           </div>
         </div>
-
         <div
-          style="width:100%;height:38px;"
+          style="width:100%;height:38px"
           class="d-flex flex-row align-center justify-space-between"
         >
           <div class="main_little">
@@ -345,7 +344,7 @@ export default {
 
 .all_second {
   width: 90vw;
-  height: 20vh;
+  height: 21%;
   background-image: linear-gradient(to right, #232a44, #474d65);
   border-radius: 5vw;
   position: absolute;
@@ -407,7 +406,7 @@ export default {
 }
 
 .pay {
-  margin-top: 2vh;
+  margin-top: 10%;
   display: flex;
   width: 90vw;
   height: 30vh;
