@@ -178,6 +178,7 @@ export default {
             appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
             timeStamp: this.timeStamp, // 时间戳，自1970年以来的秒数
             nonceStr: this.pwd, // 随机串
+            signType: "MD5", // 微信签名方式：
             package: "prepay_id=" + this.package, //
           };
           this.$axios
@@ -195,7 +196,7 @@ export default {
                     timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
                     nonceStr: that.pwd, // 随机串
                     package: "prepay_id=" + that.package,
-                    signType: "SHA256withRSA", // 微信签名方式：
+                    signType: "MD5", // 微信签名方式：
                     paySign: sign, // 微信签名
                   },
                   function (res) {
