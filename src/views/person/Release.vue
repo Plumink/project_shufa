@@ -11,7 +11,7 @@
         </span>
         <span class="d-flex flex-column">
           <i style="font-size: 20px;" class="Calligraphy_icon_release"></i>
-          <p style="font-size:8px;margin:0px">发布</p>
+          <p style="font-size:8px;margin:0px" @click="release()">发布</p>
         </span>
       </div>
       <!-- 内容 -->
@@ -159,6 +159,38 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
+    release() {
+      let params = {
+        "release": {
+          "custId": this.$store.state.id || this.$store.state.custId,
+          "isShow": 0,
+          "releaseContent": this.bio,
+          "releaseId": new Date().getTime().toString(),
+          "releaseTime": new Date().getTime().toString(),
+          "releaseTitle": this.title
+        },
+        "releaseFonts": [
+          {
+            "releaseFontContent": "河北测试",
+            // "releaseFontId": 2,
+            "releaseFontUrl": "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
+            "releaseId": 0
+          }
+        ]
+      }
+      this.$axios.post("/CalligraphyService/release/uploadRelease",
+        params,
+        {
+          headers: {
+            "X-Request-ID": "1"
+          }
+        }
+      ).then(
+        (res) => {
+          console.log(res);
+        }
+      )
+    }
   },
 };
 </script>
