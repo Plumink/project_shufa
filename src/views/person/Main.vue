@@ -87,7 +87,7 @@ export default {
       follow: [],
       num: "",
       detail: "",
-      out_trade_no: new Date().getTime() + "MSSF720",
+      out_trade_no: "",
       package: "",
       pwd: "",
       timeStamp: "",
@@ -128,16 +128,19 @@ export default {
         this.str2 = "一个月会员";
         this.str3 = "15";
         this.proid = "001";
+        this.out_trade_no = new data().getTime() + "MS720";
       } else if (this.selects == "two") {
         this.str1 = "三个月会员 40元";
         this.str2 = "三个月会员";
         this.str3 = "40";
         this.proid = "002";
+        this.out_trade_no = new data().getTime() + "MS720";
       } else if (this.selects == "three") {
         this.str1 = "十二个月会员 88元";
         this.str2 = "十二个月会员";
         this.str3 = "88";
         this.proid = "003";
+        this.out_trade_no = new data().getTime() + "MS720";
       }
       console.log(this.str1, this.str2, this.str3);
       //生成随机字符串 pwd
