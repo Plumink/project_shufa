@@ -23,15 +23,7 @@
           </div>
         </div>
 
-<<<<<<< Updated upstream
-        <div
-          style="width:100%;height:38px;"
-          class="d-flex flex-row align-center justify-space-between"
-        >
-=======
         <div style="width:100%;height:38px;" class="d-flex flex-row align-center justify-space-between">
-
->>>>>>> Stashed changes
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
