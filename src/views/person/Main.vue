@@ -184,10 +184,7 @@ export default {
             });
           var that = this;
           function onBridgeReady(that) {
-            console.log(that)
-            console.log(that.prototype.sign)
-            
-            console.log(that.timeStamp)
+            that.getCookie('sign')
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
               {
