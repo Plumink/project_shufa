@@ -195,7 +195,7 @@ export default {
                     appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
                     timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
                     nonceStr: that.pwd, // 随机串
-                    package: "prepay_id=" + that.package,
+                    package:  that.package,
                     signType: "RSA", // 微信签名方式：
                     paySign: sign, // 微信签名
                   },
@@ -220,7 +220,7 @@ export default {
                   document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
                 }
               } else {
-                onBridgeReady(that, res.data.data);
+                onBridgeReady(that,res.data.data);
               }
             });
           var that = this;
