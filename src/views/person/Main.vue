@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div style="width:100%;height:38px;padding-left:20px" class="d-flex flex-row align-center justify-space-between">
+        <div style="width:100%;height:38px;" class="d-flex flex-row align-center justify-space-between">
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
@@ -356,6 +356,7 @@ export default {
   height: 100%;
   float: left;
   margin-left: 4vw;
+  text-align: center;
 }
 
 .jinzi {
@@ -365,9 +366,9 @@ export default {
   font-family: YouYuan;
 }
 .shuzi {
+  text-align: center;
   font-size: 4vw;
   color: #ebf1f5;
-  margin-top: 2vh;
   font-family: YouYuan;
 }
 
