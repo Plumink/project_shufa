@@ -344,7 +344,7 @@ export default {
 
 .all_second {
   width: 90vw;
-  height: 21%;
+  height: 22%;
   background-image: linear-gradient(to right, #232a44, #474d65);
   border-radius: 5vw;
   position: absolute;

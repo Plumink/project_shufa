@@ -117,10 +117,24 @@ export default {
       for(var i=0;i<this.show.length;i++){
         for(var n=0;n<this.show[i].length;n++){
           if(this.replacetext==this.show[i][n][0].text){
-            var fontone=this.show[i][n][item]
-            var fonttwo=this.show[i][n][0]
-            this.show[i][n][0]=fontone
-            this.show[i][n][item]=fonttwo
+            if(this.$store.state.isVip==1){//如果用户是vip，则可以随意更换字体
+              var fontone=this.show[i][n][item]
+              var fonttwo=this.show[i][n][0]
+              this.show[i][n][0]=fontone
+              this.show[i][n][item]=fonttwo
+            }
+            else{//否则，用户不是VIP
+               if(this.show[i][n][item].isVip==0){//如果字体不是VIP字体，且用户不是VIP，则可以更换字体
+                  var fontone=this.show[i][n][item]
+                  var fonttwo=this.show[i][n][0]
+                  this.show[i][n][0]=fontone
+                  this.show[i][n][item]=fonttwo
+              }
+              else{//否则，字体是VIP，用户不是，则提示用户充值
+                alert('您还不是Vip用户，请前往个人中心充值')
+              }
+            }
+           
           }
         }
       }
