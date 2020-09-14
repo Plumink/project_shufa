@@ -108,7 +108,9 @@ export default {
       });
     },
     beVip() {
-
+      console.log('debug this')
+      console.log(this.getCookie('sign'))
+      console.log(this)
       console.log(this.out_trade_no)
       //获取金额和产品详细信息
       if(this.selects=='one'){
@@ -180,10 +182,11 @@ export default {
               that.sign = res.data.data;
               that.setCookie('sign',res.data.data,360)
             });
-            console.log(this.sign)
           var that = this;
           function onBridgeReady(that) {
-            console.log(that.getCookie('sign'))
+            console.log(that)
+            console.log(that.prototype.sign)
+            
             console.log(that.timeStamp)
             window.WeixinJSBridge.invoke(
               "getBrandWCPayRequest",
@@ -193,7 +196,7 @@ export default {
               'nonceStr': that.pwd, // 随机串
               'package': "prepay_id=" + that.package,
               'signType': "RSA", // 微信签名方式：
-              'paySign': that.getCookie('sign'), // 微信签名
+              'paySign': this.getCookie('sign'), // 微信签名
               },
               function (res) {
                 console.log("debug")
