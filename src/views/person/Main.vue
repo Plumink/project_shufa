@@ -6,17 +6,27 @@
       </div>
       <div class="all_second">
         <div style="width:100%;height:10vh;">
-          <img :src="this.$store.state.customerImgHead||this.$store.state.custImgHead" alt="头像" id="my-img" @click="toChange()" />
+          <img
+            :src="this.$store.state.customerImgHead||this.$store.state.custImgHead"
+            alt="头像"
+            id="my-img"
+            @click="toChange()"
+          />
           <div style="float:left;margin-left:2vw;margin-top:2vh;font-family:YouYuan;">
             <span style="color: #ebedee;font-size:4vw;">
-              <span style="color: #ebedee;font-size:5vw;font-family:YouYuan;">{{this.$store.state.custName||this.$store.state.userName}}</span>
+              <span
+                style="color: #ebedee;font-size:5vw;font-family:YouYuan;"
+              >{{this.$store.state.custName||this.$store.state.userName}}</span>
               <br />
               <span style="color: #b8a18c;font-size:3vw;font-family:YouYuan;">升级到会员享受更多特权</span>
             </span>
           </div>
         </div>
 
-        <div style="width:100%;height:38px;" class="d-flex flex-row align-center justify-space-between">
+        <div
+          style="width:100%;height:38px;"
+          class="d-flex flex-row align-center justify-space-between"
+        >
           <div class="main_little">
             <span class="jinzi">我的关注</span>
             <router-link to="/main/follow">
@@ -82,20 +92,20 @@ export default {
       pwd: "",
       timeStamp: "",
       sign: "",
-      selects:'',
-      str1:'',
-      str2:''
+      selects: "",
+      str1: "",
+      str2: "",
     };
   },
   methods: {
-    one(){
-      this.selects='one'
+    one() {
+      this.selects = "one";
     },
-    two(){
-      this.selects='two'
+    two() {
+      this.selects = "two";
     },
-    three(){
-      this.selects='three'
+    three() {
+      this.selects = "three";
     },
     updateImage() {
       var path = $("#img-upload")[0].value;
@@ -108,30 +118,28 @@ export default {
       });
     },
     beVip() {
-      console.log('debug this')
-      console.log(this.getCookie('sign'))
-      console.log(this.sign)
-      console.log(this.out_trade_no)
+      console.log("debug this");
+      console.log(this.getCookie("sign"));
+      console.log(this.sign);
+      console.log(this.out_trade_no);
       //获取金额和产品详细信息
-      if(this.selects=='one'){
-          this.str1 = '一个月会员 15元'
-          this.str2 = '一个月会员'
-          this.str3 = '15'
-          this.proid = '001'
+      if (this.selects == "one") {
+        this.str1 = "一个月会员 15元";
+        this.str2 = "一个月会员";
+        this.str3 = "15";
+        this.proid = "001";
+      } else if (this.selects == "two") {
+        this.str1 = "三个月会员 40元";
+        this.str2 = "三个月会员";
+        this.str3 = "40";
+        this.proid = "002";
+      } else if (this.selects == "three") {
+        this.str1 = "十二个月会员 88元";
+        this.str2 = "十二个月会员";
+        this.str3 = "88";
+        this.proid = "003";
       }
-      else if(this.selects=='two'){
-        this.str1 = '三个月会员 40元'
-        this.str2 = '三个月会员'
-        this.str3 = '40'
-        this.proid = '002'
-      }
-      else if(this.selects=='three'){
-        this.str1 = '十二个月会员 88元'
-        this.str2 = '十二个月会员'
-        this.str3 = '88'
-        this.proid = '003'
-      }
-      console.log(this.str1,this.str2,this.str3)
+      console.log(this.str1, this.str2, this.str3);
       //生成随机字符串 pwd
       var $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
       var maxPos = $chars.length;
@@ -141,8 +149,6 @@ export default {
       }
       this.pwd = pwd;
       console.log(this.pwd);
-      
-
 
       //下单的入参
       let params = {
@@ -170,60 +176,59 @@ export default {
           console.log(this.timeStamp);
           //前台调起支付入参
           let par = {
-            "appId": "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-            "timeStamp":this.timeStamp, // 时间戳，自1970年以来的秒数
-            "nonceStr": this.pwd, // 随机串
-            "package": "prepay_id=" + this.package,//
+            appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+            timeStamp: this.timeStamp, // 时间戳，自1970年以来的秒数
+            nonceStr: this.pwd, // 随机串
+            package: "prepay_id=" + this.package, //
           };
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
-            .then(function(res) {
+            .then(function (res) {
               console.log(res);
               that.sign = res.data.data;
-              that.setCookie('sign',res.data.data,360)
+              that.setCookie("sign", res.data.data, 360);
+              function onBridgeReady(that, sign) {
+                console.log(sign);
+                window.WeixinJSBridge.invoke(
+                  "getBrandWCPayRequest",
+                  {
+                    appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
+                    timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
+                    nonceStr: that.pwd, // 随机串
+                    package: "prepay_id=" + that.package,
+                    signType: "RSA", // 微信签名方式：
+                    paySign: sign, // 微信签名
+                  },
+                  function (res) {
+                    console.log("debug");
+                    alert(JSON.stringify(res));
+                    if (res.err_msg === "get_brand_wcpay_request:ok") {
+                      console.log("success");
+                    }
+                  }
+                );
+              }
+              if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                  document.addEventListener(
+                    "WeixinJSBridgeReady",
+                    onBridgeReady,
+                    false
+                  );
+                } else if (document.attachEvent) {
+                  document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+                  document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+                }
+              } else {
+                onBridgeReady(this, res.data.data);
+              }
             });
           var that = this;
-          console.log(this.sign)
-          function onBridgeReady(that,sign) {
-            console.log(sign)
-            window.WeixinJSBridge.invoke(
-              "getBrandWCPayRequest",
-              {
-              'appId': "wx284c1a8307ed35ef", // 公众号名称，由商户传入
-              'timeStamp':that.timeStamp, // 时间戳，自1970年以来的秒数
-              'nonceStr': that.pwd, // 随机串
-              'package': "prepay_id=" + that.package,
-              'signType': "RSA", // 微信签名方式：
-              'paySign': sign, // 微信签名
-              },
-              function (res) {
-                console.log("debug")
-                alert(JSON.stringify(res));
-                if (res.err_msg === "get_brand_wcpay_request:ok") {
-                  console.log("success");
-                }
-              }
-            );
-          }
-          if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-              document.addEventListener(
-                "WeixinJSBridgeReady",
-                onBridgeReady,
-                false
-              );
-            } else if (document.attachEvent) {
-              document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
-              document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
-            }
-          } else {
-            onBridgeReady(this,this.getCookie('sign'));
-          }
+          console.log(this.sign);
         });
     },
   },
   created() {
-
     this.$axios
       .post(
         "/CalligraphyService/user/getCatchInfo",
@@ -249,18 +254,18 @@ export default {
         for (var i = 0; i < n; i++) {
           this.follow.push(response.data.data[i]);
         }
-        console.log('调试关注接口返回的数据')
-        console.log(this.follow)
-        console.log(response)
+        console.log("调试关注接口返回的数据");
+        console.log(this.follow);
+        console.log(response);
       });
   },
   mounted() {
-  //   $(".pay_first").on("click", function (e) {
-  //     this.num = $(this)[0].innerText.substring(7, 9);
-  //     this.detail = $(this)[0].innerText.substring(0, 4);
-  //     console.log(this.num);
-  //     console.log(this.detail);
-  //   });
+    //   $(".pay_first").on("click", function (e) {
+    //     this.num = $(this)[0].innerText.substring(7, 9);
+    //     this.detail = $(this)[0].innerText.substring(0, 4);
+    //     console.log(this.num);
+    //     console.log(this.detail);
+    //   });
     $("#my-img").click(function () {
       $("#img-upload").click();
     });
