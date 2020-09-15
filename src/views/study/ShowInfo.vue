@@ -2,9 +2,32 @@
   <v-app id="show">
     <div class="box">
       <div class="top d-flex justify-space-between align-center mb-6">
-        <span style="font-size:14px" @click="goBack()"><span class="Calligraphy_icon_fanhui"></span>返回</span>
-        <span><h3>作品详情</h3></span>
+        <span style="font-size:14px" @click="goBack()">
+          <span class="Calligraphy_icon_fanhui"></span>返回
+        </span>
+        <span>
+          <h3>作品详情</h3>
+        </span>
         <div style="width:40px;height:20px"></div>
+      </div>
+      <div class="container">
+        <div class="info_a">
+          <img class="avatar" src="../../../images/bac2.jpg" width="36" height="36" />
+          <div class="left">
+            <div class="name">用户</div>
+            <div class="date">发布时间</div>
+          </div>
+          <div class="right">
+            <span class="Calligraphy_icon_follow"></span>
+            关注
+          </div>
+        </div>
+        <!-- <div class="control">
+        <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
+          <span class="Calligraphy_icon_good"></span>
+          <span class="like-num">{{item.likeNum > 0 ? item.likeNum + '人赞' : '赞'}}</span>
+        </span>
+        </div>-->
       </div>
       <div class="d-flex flex-column content">
         <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt />
@@ -21,26 +44,21 @@
           <i class="iconfont icon-talk-line">
             <span style="color:grey">我来说两句</span>
           </i>
-          <span style="float:right;margin-right: 2vw;margin-top: 1vh;"> <span style="color:blues">{{number}}</span>条评论</span>
-          <el-input
-            type="textarea"
-            style="height:10vh"
-            placeholder="写下你的评论"
-            v-model="textarea1">
-          </el-input>
-          <el-button 
+          <span style="float:right;margin-right: 2vw;margin-top: 1vh;">
+            <span style="color:blues">{{number}}</span>条评论
+          </span>
+          <el-input type="textarea" style="height:10vh" placeholder="写下你的评论" v-model="textarea1"></el-input>
+          <el-button
             type="primary"
             size="mini"
             style="float:right;margin-top:0.5vh;margin-right:2vw;width:30vw"
-          >
-            评论
-          </el-button>
+          >评论</el-button>
         </div>
       </div>
       <div style="margin-top:4vh">
         <comment :comments="commentData" />
       </div>
-      <div style="margin-bottom:60px;border-radius:4vw">
+      <div style="margin-bottom:80px;border-radius:4vw">
         <v-pagination v-model="page" :length="3"></v-pagination>
       </div>
     </div>
@@ -58,8 +76,8 @@ export default {
     return {
       commentData: [],
       page: 1,
-      textarea1:'',
-      number: '3'
+      textarea1: "",
+      number: "3",
     };
   },
   methods: {
@@ -78,7 +96,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../../../public/scss/index";
 #show {
   width: 100%;
   height: 100%;
@@ -87,7 +106,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.top{
+.top {
   width: 100%;
   height: 6%;
 }
@@ -104,7 +123,7 @@ export default {
 .publisher_box {
   width: 90%;
   height: 80px;
-  background-color: #4DD0E1;
+  background-color: #4dd0e1;
   border-radius: 20px;
   margin: 20px;
   padding: 10px;
@@ -114,17 +133,44 @@ export default {
   height: 24vh;
   border-bottom: 1px dashed #bdbdbd;
 }
-.iconfont{
-  font-size:8vw;
+.iconfont {
+  font-size: 8vw;
   text-align: center;
   float: left;
-  margin-left:2vw;
+  margin-left: 2vw;
 }
-.iconfont span{
-  font-size:4vw;
-  margin-bottom:2vh;
+.iconfont span {
+  font-size: 4vw;
+  margin-bottom: 2vh;
   line-height: 20%;
   position: relative;
-  bottom:1vh;
+  bottom: 1vh;
+}
+
+.info_a {
+  display: flex;
+  align-items: center;
+  .avatar {
+    border-radius: 50%;
+  }
+  .left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    .name {
+      font-size: 16px;
+      color: $text-main;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .date {
+      font-size: 12px;
+      color: $text-minor;
+    }
+  }
+  .right{
+    width: 70%;
+    text-align: right;
+  }
 }
 </style>

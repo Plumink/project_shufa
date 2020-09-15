@@ -11,6 +11,7 @@ export default {
     openid:''
   }),
   created: function () {
+    console.log('123')
     var code;
     var url = document.URL;
     var that = this;

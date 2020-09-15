@@ -26,8 +26,6 @@ export default new Vuex.Store({
     vipExpDate:JSON.parse(localStorage.getItem("wechatLogin")) == null ? '' : JSON.parse(localStorage.getItem("wechatLogin")).vipExpDate,
     invalidTime:JSON.parse(localStorage.getItem("wechatLogin")) == null ? '' : JSON.parse(localStorage.getItem("wechatLogin")).invalidTime,
     ifValid:JSON.parse(localStorage.getItem("wechatLogin")) == null ? '' : JSON.parse(localStorage.getItem("wechatLogin")).ifValid,
-
-
   },
   mutations: {
     islogin(state,message){

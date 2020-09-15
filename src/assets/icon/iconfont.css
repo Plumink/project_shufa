@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'iconfont';  /* project id 1986717 */
-  src: url('//at.alicdn.com/t/font_1986717_xn930gw7qik.eot');
-  src: url('//at.alicdn.com/t/font_1986717_xn930gw7qik.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1986717_xn930gw7qik.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1986717_xn930gw7qik.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1986717_xn930gw7qik.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1986717_xn930gw7qik.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1986717_om7ywl066q.eot');
+  src: url('//at.alicdn.com/t/font_1986717_om7ywl066q.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1986717_om7ywl066q.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1986717_om7ywl066q.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1986717_om7ywl066q.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1986717_om7ywl066q.svg#iconfont') format('svg');
 }
 .iconfont,[class^="Calligraphy_icon_"],[class*=" Calligraphy_icon_"]{
   font-family: "iconfont" !important;
@@ -44,4 +44,7 @@
 }
 .Calligraphy_icon_delete:before{
   content: '\e714';
+}
+.Calligraphy_icon_follow:before{
+  content: '\e6df';
 }
