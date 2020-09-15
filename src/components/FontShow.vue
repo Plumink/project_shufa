@@ -1,9 +1,9 @@
 <template>
   <div>
-    
+
   <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
     <div
-      class="d-flex flex-row-reverse justify-space-around"
+      :class="this.$route.query.message.left?'d-flex flex-column justify-space-around':'d-flex flex-column-reverse justify-space-around'"
       style="margin:0 auto;width:80%;height:80%"
     >
       <div
@@ -16,8 +16,8 @@
           <v-badge
             color="green"
             :content="item.length-1"
-            offset-y="15"
-            offset-x="15"
+            offset-y="18"
+            offset-x="24"
             :value="badges==''?(item.length-1):0"
           >
             <img
@@ -105,7 +105,7 @@ export default {
     //     this.img=url
     //   });
     // },
-    save() {
+    save() {//截图功能
       this.isimage=true
         this.badges = '0';
         this.one()

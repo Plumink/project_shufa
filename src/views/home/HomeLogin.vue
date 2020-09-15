@@ -39,7 +39,7 @@
         </div>
       <div class="middle_l d-flex flex-row">
         <template>
-          <v-col
+          <v-col 
             class="d-flex flex-row"
             style="width: 20vw; padding-right: 0;"
             cols="12"
@@ -59,7 +59,7 @@
             </div>
             <div style="margin-left: 8vw;" class="d-flex flex-column justify-sm-space-around">
               <v-checkbox style="margin: 0; height: 5vh;" label="横排"></v-checkbox>
-              <v-checkbox style="margin: 0;" label="左起"></v-checkbox>
+              <v-checkbox style="margin: 0;" label="左起" v-model="left"></v-checkbox>
             </div>
           </v-col>
         </template>
@@ -130,6 +130,7 @@ export default {
       ziti: [],//字体所有对象属性的数组
       author: [],
       code: "",
+      left:false,
       items: [
         {
           src:
@@ -158,8 +159,7 @@ export default {
       })
     },
     toChildren() {
-      console.log(this.first);
-      console.log(this.second);
+      console.log(this.left);
       if (this.content == "") {
         this.overlayText = "内容不为空";
         this.overlay = !this.overlay;
@@ -211,6 +211,7 @@ export default {
           secondAuthorId: secondAuthorId,
           thirdAuthorId: "0",
           row_num: this.row_num,
+          left:this.left
         };
         this.$router.push({
           path: "/generate",

@@ -161,6 +161,7 @@ export default {
       image: [],
       bio: [],
       releaseId: this.$store.state.custId || this.$store.state.id + new Date().getTime(),
+      data:[]
     };
   },
   methods: {
@@ -186,24 +187,28 @@ export default {
         }).then(response =>{
           console.log(response.data.data);
           this.image[i] = response.data.data;
-          
-            this.$axios.post("/CalligraphyService/release/uploadRelease",{
+          this.data.push({
+                  "releaseFontContent": this.bio[i],
+                  "releaseFontUrl": this.image[i],
+                  "releaseId": 0
+                })
+          var params = {
               "release": {
                 "custId": this.$store.state.custId || this.$store.state.id,
                 "isShow": 0,
-                "releaseId": this.releaseId,
+                "releaseId": 0,
                 "releaseContent": this.bio[0],
                 "releaseTime": new Date().getTime(),
                 "releaseTitle": this.title
               },
-              "releaseFonts": [
-                {
-                  "releaseFontContent": this.bio[i],
-                  "releaseFontUrl": this.image[i],
-                  "releaseId": this.releaseId
-                }
-              ]
-          })
+              "releaseFonts":this.data
+          }
+            this.$axios.post("/CalligraphyService/release/uploadRelease",params,{
+              'X-Request-ID':'1'
+            })
+            .then((response)=>{
+              console.log(response)
+            })
           
           
         })

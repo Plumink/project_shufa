@@ -3,7 +3,7 @@
   <div class="container">
     <div class="comment" v-for="(item,index) in comments" :key="index">
       <div class="info_a">
-        <img class="avatar" :src="item.fromAvatar" width="36" height="36" />
+        <img class="avatar" :src="item.fromAvatar" width="36" height="36" @click="jumpOther()" />
         <div class="right">
           <div class="name">{{item.fromName}}</div>
           <div class="date">{{item.date}}</div>
@@ -39,6 +39,12 @@ export default {
   },
   computed: {},
   methods: {
+    // 跳转他人首页
+    jumpOther(){ 
+      this.$router.push({
+        path:'/otherhome'
+      })
+    },
     /**
      * 点赞
      */
