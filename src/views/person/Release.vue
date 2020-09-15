@@ -170,12 +170,11 @@ export default {
       this.$router.go(-1);
     },
     release() {
-      this.setCookie("pio",this.pio,360);
+      this.setCookie("pio",this.bio,360);
       for(var i=0;i<this.bio.length;i++){
         var file = [];
         file[i] = document.getElementsByClassName("upload_file")[i].files[0];
         console.log(this.bio[i])
-        console.log(typeof(file));
         var formdata1=new FormData();
         formdata1.append('uploadFile',file[i]);
         this.$axios.post("/CalligraphyService/common/uploadFile",formdata1,{
@@ -186,42 +185,40 @@ export default {
             'X-Request-ID':'1'
           }
         }).then((response)=>{
-          // var that = this;
-          // console.log(that.bio[i]);
-          // console.log(response.data.data);
-          // that.image[i] = response.data.data;
-         
-          // console.log(that.bio[i]);
-          var po = this.getCookie("pio");
-          this.data.push({
-                "releaseFontContent": po[i],
-                "releaseFontUrl": this.image[i],
-                "releaseId": 0
-              })
-          
-          var params = {
-              "release": {
-                "custId": this.$store.state.custId || this.$store.state.id,
-                "isShow": 0,
-                "releaseId": 0,
-                "releaseContent": this.bio[0],
-                "releaseTime": new Date().getTime(),
-                "releaseTitle": this.title
-              },
-              "releaseFonts":this.data
-          }
-            this.$axios.post("/CalligraphyService/release/uploadRelease",params,{
-              'X-Request-ID':'1'
-            })
-            .then((response)=>{
-              console.log(response)
-            })
-          
-          
+          console.log(response.data.data);
+          this.image.push(response.data.data);
         })
       }
+      for(var i=0;i<this.bio.length;i++){
+        this.data.push({
+          "releaseFontContent": this.bio[i],
+          "releaseFontUrl": this.image[i],
+          "releaseId": 0
+        })
+      }
+  
+      var params = {
+        "release": {
+          "custId": this.$store.state.custId || this.$store.state.id,
+          "isShow": 0,
+          "releaseId": 0,
+          "releaseContent": this.bio[0],
+          "releaseTime": new Date().getTime(),
+          "releaseTitle": this.title
+        },
+        "releaseFonts":this.data
+      }
+      this.$axios.post("/CalligraphyService/release/uploadRelease",params,{
+        'X-Request-ID':'1'
+      })
+      .then((response)=>{
+          console.log(response)
+        }
+      )
 
+      console.log(this.bio);
       console.log(this.image);
+      console.log(this.data);
     },
     mounted(){
       var a = document.getElementsByClassName("file");
