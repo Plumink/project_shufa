@@ -125,17 +125,17 @@ export default {
       if (this.selects == "one") {
         this.str1 = "一个月会员 15元";
         this.str2 = "一个月会员";
-        this.str3 = "15";
+        this.str3 = "1500";
         this.proid = "001";
       } else if (this.selects == "two") {
         this.str1 = "三个月会员 40元";
         this.str2 = "三个月会员";
-        this.str3 = "40";
+        this.str3 = "4000";
         this.proid = "002";
       } else if (this.selects == "three") {
         this.str1 = "十二个月会员 88元";
         this.str2 = "十二个月会员";
-        this.str3 = "88";
+        this.str3 = "8800";
         this.proid = "003";
       }
       console.log(this.str1, this.str2, this.str3);

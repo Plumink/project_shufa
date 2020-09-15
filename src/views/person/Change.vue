@@ -57,6 +57,7 @@ export default {
     },
     submit() {
       var file = document.getElementById("upload_file").files[0];
+      console.log(typeof(file));
       var formdata1=new FormData();
       formdata1.append('uploadFile',file);
       this.$axios.post("https://www.mocking.space/CalligraphyService/common/uploadFile",formdata1,{

@@ -38,8 +38,9 @@
         <div class="filebox d-flex flex-column align-center justify-center">
           <span class="Calligraphy_icon_push" style="font-size:30px" />
            <div class="file">
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[0]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[0]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -50,8 +51,9 @@
           </div>
           <div class="file" v-if="num>1">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[1]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[1]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -62,8 +64,9 @@
           </div>
           <div class="file" v-if="num>2">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[2]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[2]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -74,8 +77,9 @@
           </div>
           <div class="file" v-if="num>3">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[3]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[3]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -86,8 +90,9 @@
           </div>
           <div class="file" v-if="num>4">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[4]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[4]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -98,8 +103,9 @@
           </div>
           <div class="file" v-if="num>5">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F" @click="num--"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[5]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[5]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -110,8 +116,9 @@
           </div>
           <div class="file" v-if="num>6" @click="num--">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <input accept="image/*" name="img" class="upload_file" type="file">
+            <!-- <v-file-input class="img" v-model="image[6]" multiple label="上传图片"></v-file-input> -->
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[6]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -122,8 +129,8 @@
           </div>
           <div class="file" v-if="num>7" @click="num--">
             <span class="Calligraphy_icon_delete" style="font-size:15px;color:#D32F2F"></span>
-            <v-file-input v-model="image" multiple label="上传图片"></v-file-input>
-            <v-textarea style="margin:0px;paddinf:0px" v-model="bio" color="teal">
+            <v-file-input class="img" v-model="image[7]" multiple label="上传图片"></v-file-input>
+            <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[7]" color="teal">
               <template v-slot:label>
                 <div>
                   配文
@@ -133,7 +140,7 @@
             </v-textarea>
           </div>
           <div style="margin-top:10px">
-            <v-btn color="primary" dark @click="num=num+1" :disabled='num==8?true:false'>继续发布</v-btn>
+            <v-btn color="primary" dark @click="num=num+1" :disabled='num==8?true:false'>添加图片</v-btn>
           </div>
         </div>
       </div>
@@ -153,43 +160,60 @@ export default {
       ],
       image: [],
       bio: [],
+      releaseId: this.$store.state.custId || this.$store.state.id + new Date().getTime(),
     };
   },
   methods: {
+
     goBack() {
       this.$router.go(-1);
     },
     release() {
-      let params = {
-        "release": {
-          "custId": this.$store.state.id || this.$store.state.custId,
-          "isShow": 0,
-          "releaseContent": this.bio,
-          "releaseId": new Date().getTime().toString(),
-          "releaseTime": new Date().getTime().toString(),
-          "releaseTitle": this.title
-        },
-        "releaseFonts": [
-          {
-            "releaseFontContent": "河北测试",
-            // "releaseFontId": 2,
-            "releaseFontUrl": "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-            "releaseId": 0
+      for(var i=0;i<this.bio.length;i++){
+        var file = [];
+        file[i] = document.getElementsByClassName("upload_file")[i].files[0];
+        console.log(file[i])
+        console.log(typeof(file));
+        var formdata1=new FormData();
+        formdata1.append('uploadFile',file[i]);
+        this.$axios.post("/CalligraphyService/common/uploadFile",formdata1,{
+          headers:{
+            'Content-Type':'multipart/form-data',
+            'X-APP-ID':'1',
+            'X-APP-KEY':'1',
+            'X-Request-ID':'1'
           }
-        ]
+        }).then(response =>{
+          console.log(response.data.data);
+          this.image[i] = response.data.data;
+          
+            this.$axios.post("/CalligraphyService/release/uploadRelease",{
+              "release": {
+                "custId": this.$store.state.custId || this.$store.state.id,
+                "isShow": 0,
+                "releaseId": this.releaseId,
+                "releaseContent": this.bio[0],
+                "releaseTime": new Date().getTime(),
+                "releaseTitle": this.title
+              },
+              "releaseFonts": [
+                {
+                  "releaseFontContent": this.bio[i],
+                  "releaseFontUrl": this.image[i],
+                  "releaseId": this.releaseId
+                }
+              ]
+          })
+          
+          
+        })
       }
-      this.$axios.post("/CalligraphyService/release/uploadRelease",
-        params,
-        {
-          headers: {
-            "X-Request-ID": "1"
-          }
-        }
-      ).then(
-        (res) => {
-          console.log(res);
-        }
-      )
+
+      console.log(this.image);
+    },
+    mounted(){
+      var a = document.getElementsByClassName("file");
+      console.log(a)
     }
   },
 };
