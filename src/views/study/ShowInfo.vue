@@ -1,7 +1,7 @@
 <template>
   <v-app id="show">
     <div class="box">
-      <div class="top d-flex justify-space-between align-center mb-6">
+      <div class="top d-flex justify-space-between align-center">
         <span style="font-size:14px" @click="goBack()">
           <span class="Calligraphy_icon_fanhui"></span>返回
         </span>
@@ -10,18 +10,23 @@
         </span>
         <div style="width:40px;height:20px"></div>
       </div>
-      <div class="container">
-        <div class="info_a">
+        <div class="d-flex align-center justify-space-between info_a">
+          <div class="d-flex flex-row align-center justify-center">
           <img class="avatar" src="../../../images/bac2.jpg" width="36" height="36" />
           <div class="left">
             <div class="name">用户</div>
-            <div class="date">发布时间</div>
+            <div class="date">发布时间11111111111</div>
           </div>
-          <div class="right">
+          </div>
+          <div class="right" @click="follow()" v-if="!isfollow">
             <span class="Calligraphy_icon_follow"></span>
             关注
           </div>
-        </div>
+           <div class="right" @click="unfollow()" v-if="isfollow">
+            <span class="Calligraphy_icon_follow" style="color:red"></span>
+            取消关注
+          </div>
+        
         <!-- <div class="control">
         <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
           <span class="Calligraphy_icon_good"></span>
@@ -84,11 +89,58 @@ export default {
       page: 1,
       textarea1: "",
       number: "3",
+      isfollow:false //判断是否关注
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    follow(){//关注接口
+        let params={
+          custId:this.$store.state.id||this.$store.state.custId, //用户ID
+          followCatchId: this.$store.state.id || this.$store.state.custId //被关注者Id——待替换
+        }
+        this.$axios.post('/CalligraphyService/user/follow',params,{
+          headers:{
+            'X-Request-ID':'1'
+          }
+        })
+        .then((response)=>{
+          if(response.data.code=='0'){
+            this.isfollow=!this.isfollow
+          }
+          else{
+            alert('关注失败')
+          }
+        })
+    },
+   unfollow(item) { //取消关注
+      this.$axios
+        .post(
+          "/CalligraphyService/user/unfollow",
+          {
+            custId: this.$store.state.id || this.$store.state.custId,
+            followCatchId:  this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
+
+          },
+          {
+            headers: {
+              "X-APP-ID": "1",
+              "X-APP-KEY": "1",
+              "X-Request-ID": "1",
+            },
+          }
+        )
+        .then((response) => {
+           if(response.data.code='0'){
+             this.isfollow=!this.isfollow
+           }
+           else{
+              alert('关注关注失败')
+           }
+        });
+      // console.log(item.customerId)
     },
     comment(){//发布评论功能
     let params = {  //传参
@@ -118,7 +170,22 @@ export default {
   },
   created() {
     this.commentData = CommentData.comment.data;
-  },
+    let params={
+      custId:this.$store.state.id || this.$store.state.custId,
+      followCatchId: this.$store.state.id || this.$store.state.custId //被关注者Id——待替换
+    }
+    // 获取用户是否关注信息
+    this.$axios.post('/CalligraphyService/user/checkFollow',params,{
+      headers:{
+        'X-Request-ID':'1'
+      }
+    })
+    .then((response)=>{
+      if(response.data.data.ifFollow=='1'){
+        this.isfollow=true
+      }
+    })
+  }
 };
 </script>
 
@@ -174,15 +241,15 @@ export default {
 }
 
 .info_a {
-  display: flex;
-  align-items: center;
+  padding: 10px;
+  }
   .avatar {
     border-radius: 50%;
   }
   .left {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: 10px;}
     .name {
       font-size: 16px;
       color: $text-main;
@@ -193,10 +260,7 @@ export default {
       font-size: 12px;
       color: $text-minor;
     }
-  }
   .right{
-    width: 70%;
     text-align: right;
-  }
-}
+  } 
 </style>
