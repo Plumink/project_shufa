@@ -170,10 +170,11 @@ export default {
       this.$router.go(-1);
     },
     release() {
+      this.setCookie("pio",this.pio,360);
       for(var i=0;i<this.bio.length;i++){
         var file = [];
         file[i] = document.getElementsByClassName("upload_file")[i].files[0];
-        console.log(file[i])
+        console.log(this.bio[i])
         console.log(typeof(file));
         var formdata1=new FormData();
         formdata1.append('uploadFile',file[i]);
@@ -184,17 +185,16 @@ export default {
             'X-APP-KEY':'1',
             'X-Request-ID':'1'
           }
-        }).then(response =>{
-          console.log(response.data.data);
-          this.image[i] = response.data.data;
-          var bo = [];
-          for(var j=0;j<this.bio.length;j++){
-            console.log(this.bio[j])
-            bo[i]=this.bio[j]
-          }
-          
+        }).then((response)=>{
+          // var that = this;
+          // console.log(that.bio[i]);
+          // console.log(response.data.data);
+          // that.image[i] = response.data.data;
+         
+          // console.log(that.bio[i]);
+          var po = this.getCookie("pio");
           this.data.push({
-                "releaseFontContent": bo[i],
+                "releaseFontContent": po[i],
                 "releaseFontUrl": this.image[i],
                 "releaseId": 0
               })
