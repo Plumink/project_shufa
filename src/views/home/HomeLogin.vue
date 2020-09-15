@@ -58,7 +58,7 @@
               ></v-text-field>
             </div>
             <div style="margin-left: 8vw;" class="d-flex flex-column justify-sm-space-around">
-              <v-checkbox style="margin: 0; height: 5vh;" label="横排"></v-checkbox>
+              <v-checkbox style="margin: 0; height: 5vh;" label="横排" v-model="horizontal"></v-checkbox>
               <v-checkbox style="margin: 0;" label="左起" v-model="left"></v-checkbox>
             </div>
           </v-col>
@@ -131,6 +131,7 @@ export default {
       author: [],
       code: "",
       left:false,
+      horizontal:false,
       items: [
         {
           src:
@@ -197,13 +198,6 @@ export default {
             this.fontId=this.ziti[0][i].calligraphyId
           }
         }
-        console.log(
-          this.row_num,
-          this.content,
-          this.fontId,
-          firstAuthorId,
-          secondAuthorId,
-        );
         var message = {
           text: this.content,
           calligraphyTypeId: this.fontId,
@@ -211,7 +205,8 @@ export default {
           secondAuthorId: secondAuthorId,
           thirdAuthorId: "0",
           row_num: this.row_num,
-          left:this.left
+          left:this.left,
+          horizontal:this.horizontal
         };
         this.$router.push({
           path: "/generate",

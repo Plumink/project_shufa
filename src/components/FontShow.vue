@@ -1,36 +1,67 @@
 <template>
   <div>
-
-  <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
-    <div
-      :class="this.$route.query.message.left?'d-flex flex-column justify-space-around':'d-flex flex-column-reverse justify-space-around'"
-      style="margin:0 auto;width:80%;height:80%"
-    >
-      <div
-        class="d-flex flex-column mb-6"
-        v-for="(items,index) in show"
-        :key="index"
-        :style="{ width: width+ '%', height:height+'%' }"
+    <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
+      <div v-if="!this.$route.query.message.horizontal"
+        :class="this.$route.query.message.left?'d-flex flex-row justify-space-around':'d-flex flex-row-reverse justify-space-around'"
+        style="margin:0 auto;width:80%;height:80%"
       >
-        <div v-for="(item,index) in items" :key="index">
-          <v-badge
-            color="green"
-            :content="item.length-1"
-            offset-y="18"
-            offset-x="24"
-            :value="badges==''?(item.length-1):0"
-          >
-            <img
-              @click="showStore(item)"
-              :src="item[0].url"
-              alt
-              style=" width:100%;height:auto;background-color:#f9f4e6"
-            />
-          </v-badge>
+        <div
+          class="d-flex flex-column mb-6"
+          v-for="(items,index) in show"
+          :key="index"
+          :style="{ width: width+ '%', height:height+'%' }"
+        >
+          <div v-for="(item,index) in items" :key="index">
+            <v-badge
+              color="green"
+              :content="item.length-1"
+              offset-y="18"
+              offset-x="24"
+              :value="badges==''?(item.length-1):0"
+            >
+              <img
+                @click="showStore(item)"
+                :src="item[0].url"
+                alt
+                style=" width:100%;height:auto;background-color:#f9f4e6"
+              />
+            </v-badge>
+          </div>
         </div>
       </div>
-  </div>
-  </div>
+
+
+    <div
+        v-if="this.$route.query.message.horizontal"
+        class="d-flex flex-column justify-space-around"
+        style="margin:0 auto;width:80%;height:80%"
+      >
+        <div
+          :class="left?'d-flex flex-row mb-6':'d-flex flex-row-reverse mb-6'"
+          v-for="(items,index) in show"
+          :key="index"
+          style="width:100%;hight:100%"
+        >
+          <div v-for="(item,index) in items" :key="index">
+            <v-badge
+              color="green"
+              :content="item.length-1"
+              offset-y="18"
+              offset-x="24"
+              value=""
+            >
+              <img
+                @click="showStore(item)"
+                :src="item[0].url"
+                alt
+                style=" width:100%;height:auto;background-color:#f9f4e6"
+              />
+            </v-badge>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <div style="width:100%;height:10vh;text-align: center;background-color:#f9f4e6">
       <el-button type="primary" @click="save">保存作品</el-button>
     </div>
@@ -48,17 +79,17 @@
     </div>
 
     <div class="popContainer d-flex justify-center align-center" v-if="isimage">
-       <div class="popbox d-flex align-center justify-center flex-column">
-         <p style="font-size:13px">长按图片保存到本地</p>
-         <img :src="img" v-if="img" class="share" />
-         <el-button type="primary" @click="isimage=!isimage">返回</el-button>
-       </div>
+      <div class="popbox d-flex align-center justify-center flex-column">
+        <p style="font-size:13px">长按图片保存到本地</p>
+        <img :src="img" v-if="img" class="share" />
+        <el-button type="primary" @click="isimage=!isimage">返回</el-button>
+      </div>
     </div>
-  
   </div>
 </template>
 
 <script>
+import domtoimage from '../Function/dom-to-image'
 export default {
   data() {
     return {
@@ -73,8 +104,9 @@ export default {
       otherfontpop: "",
       img: "",
       badges: "",
-      replacetext:'',
-      isimage:false
+      replacetext: "",
+      isimage: false,
+      left:this.$route.query.message.left
     };
   },
   methods: {
@@ -83,7 +115,7 @@ export default {
     },
     showStore(item) {
       this.otherfont = item;
-      this.replacetext=item[0].text
+      this.replacetext = item[0].text;
       this.otherfontpop = Math.round(100 / (item.length / 5));
       this.pop = !this.pop;
     },
@@ -105,74 +137,77 @@ export default {
     //     this.img=url
     //   });
     // },
-    save() {//截图功能
-      this.isimage=true
-        this.badges = '0';
-        this.one()
+    save() {
+      //截图功能
+      this.isimage = true;
+      this.badges = "0";
+      console.log(domtoimage)
+      this.one();
     },
-    one(){
+    one() {
       var height = this.$refs.box.scrollHeight;
-        var width = document.body.scrollWidth;
-        console.log(height);
-        console.log(width);
-        this.domtoimage
-          .toPng(this.$refs.box, { width: width, height: height })
-          .then((dataUrl) => {
-            this.two()
-            // 在截完图后，徽章正常显示
-          })
-          .catch(function (error) {
-            console.error("oops, something went wrong!", error);
-          });
+      var width = document.body.scrollWidth;
+      console.log(height);
+      console.log(width);
+      domtoimage
+        .toPng(this.$refs.box, { width: width, height: height })
+        .then((dataUrl) => {
+          this.two();
+          // 在截完图后，徽章正常显示
+        })
+        .catch(function (error) {
+          console.error("oops, something went wrong!", error);
+        });
     },
-    two(){
-      console.log('123')
+    two() {
+      console.log("123");
       var height = this.$refs.box.scrollHeight;
-        var width = document.body.scrollWidth;
-        console.log(height);
-        console.log(width);
-        this.domtoimage
-          .toPng(this.$refs.box, { width: width, height: height })
-          .then((dataUrl) => {
-            this.img = dataUrl;
-            // 在截完图后，徽章正常显示
-            this.badges = "";
-          })
-          .catch(function (error) {
-            console.error("oops, something went wrong!", error);
-          });
+      var width = document.body.scrollWidth;
+      console.log(height);
+      console.log(width);
+      domtoimage
+        .toPng(this.$refs.box, { width: width, height: height })
+        .then((dataUrl) => {
+          this.img = dataUrl;
+          // 在截完图后，徽章正常显示
+          this.badges = "";
+        })
+        .catch(function (error) {
+          console.error("oops, something went wrong!", error);
+        });
     },
     // 替换字体
-    replace(item){
+    replace(item) {
       // 替换字体
       // 将选中的字体和数组中现在展示的字体替换位置即可
-      for(var i=0;i<this.show.length;i++){
-        for(var n=0;n<this.show[i].length;n++){
-          if(this.replacetext==this.show[i][n][0].text){
-            if(this.$store.state.isVip==1){//如果用户是vip，则可以随意更换字体
-              var fontone=this.show[i][n][item]
-              var fonttwo=this.show[i][n][0]
-              this.show[i][n][0]=fontone
-              this.show[i][n][item]=fonttwo
-            }
-            else{//否则，用户不是VIP
-               if(this.show[i][n][item].isVip==0){//如果字体不是VIP字体，且用户不是VIP，则可以更换字体
-                  var fontone=this.show[i][n][item]
-                  var fonttwo=this.show[i][n][0]
-                  this.show[i][n][0]=fontone
-                  this.show[i][n][item]=fonttwo
+      for (var i = 0; i < this.show.length; i++) {
+        for (var n = 0; n < this.show[i].length; n++) {
+          if (this.replacetext == this.show[i][n][0].text) {
+            if (this.$store.state.isVip == 1) {
+              //如果用户是vip，则可以随意更换字体
+              var fontone = this.show[i][n][item];
+              var fonttwo = this.show[i][n][0];
+              this.show[i][n][0] = fontone;
+              this.show[i][n][item] = fonttwo;
+            } else {
+              //否则，用户不是VIP
+              if (this.show[i][n][item].isVip == 0) {
+                //如果字体不是VIP字体，且用户不是VIP，则可以更换字体
+                var fontone = this.show[i][n][item];
+                var fonttwo = this.show[i][n][0];
+                this.show[i][n][0] = fontone;
+                this.show[i][n][item] = fonttwo;
+              } else {
+                //否则，字体是VIP，用户不是，则提示用户充值
+                alert("您还不是Vip用户，请前往个人中心充值");
               }
-              else{//否则，字体是VIP，用户不是，则提示用户充值
-                alert('您还不是Vip用户，请前往个人中心充值')
-              }
             }
-           
           }
         }
       }
       // 退出替换字体界面
       this.pop = !this.pop;
-    }
+    },
   },
   created() {
     var str = this.$route.query.message.text;
@@ -187,43 +222,80 @@ export default {
         },
       })
       .then((response) => {
-        var item = response.data.data;
-        for (var i = 0; i < arr.length; i++) {
-          for (var j = 0; j < item.length; j++) {
-            if (arr[i] === item[j].text) {
-              this.data.push(item[j]);
+        if (this.$route.query.message.horizontal == true) { //横排
+        console.log('123')
+          var item = response.data.data; //把数据库中的数据返回，所有数据，得进行分类
+          for (var i = 0; i < arr.length; i++) {
+            for (var j = 0; j < item.length; j++) {
+              if (arr[i] === item[j].text) {  //如果输入的第i个字与数据库中返回的字相同
+                this.data.push(item[j]);  //将接口返回的对象插入data数组
+              }
             }
+            this.store.push(this.data); //将接口返回的第i个字的所有对象传入store数组中
+            this.data = []; //清空data数组
           }
-          this.store.push(this.data);
-          this.data = [];
-        }
-        console.log(this.store);
-        for (var i = 0; i < this.$route.query.message.row_num; i++) {
-          var j = Math.ceil(
-            this.store.length / this.$route.query.message.row_num
-          );
-          console.log(j);
-          var a = [];
-          for (var n = i * j; n < (i + 1) * j; n++) {
-            if (this.store[n] == undefined) {
-              a.push([
-                {
-                  url:
-                    "https://www.mocking.space/zimg/ae5759b1e7d6bef4aed4a87806e739a4",
-                },
-              ]);
-            } else {
-              a.push(this.store[n]);
+          for (var i = 0; i < this.$route.query.message.row_num; i++) {  //横排的排数
+            var j = Math.ceil(
+              this.store.length / this.$route.query.message.row_num //横排的列数
+            );
+            var a = [];
+            for (var n = i * j; n < (i + 1) * j; n++) {  //每一排的字 i=0 j=4 i<4
+              if (this.store[n] == undefined) { //如果store中没有，则拿背景图补上
+                a.push([
+                  {
+                    url:
+                      "https://www.mocking.space/zimg/ae5759b1e7d6bef4aed4a87806e739a4",
+                  },
+                ]);
+              } else {
+                a.push(this.store[n]);
+              }
             }
+            this.show.push(a);
           }
-          this.show.push(a);
+          console.log(this.show);
+          this.width = Math.round(100 / this.show[0].length);
+          this.height = Math.round(100 / this.show.length);
+          console.log(this.width)
+          console.log(this.height)
+        } else {
+          var item = response.data.data;
+          for (var i = 0; i < arr.length; i++) {
+            for (var j = 0; j < item.length; j++) {
+              if (arr[i] === item[j].text) {
+                this.data.push(item[j]);
+              }
+            }
+            this.store.push(this.data);
+            this.data = [];
+          }
+          console.log(this.store);
+          for (var i = 0; i < this.$route.query.message.row_num; i++) {
+            var j = Math.ceil(
+              this.store.length / this.$route.query.message.row_num
+            );
+            console.log(j);
+            var a = [];
+            for (var n = i * j; n < (i + 1) * j; n++) {
+              if (this.store[n] == undefined) {
+                a.push([
+                  {
+                    url:
+                      "https://www.mocking.space/zimg/ae5759b1e7d6bef4aed4a87806e739a4",
+                  },
+                ]);
+              } else {
+                a.push(this.store[n]);
+              }
+            }
+            this.show.push(a);
+          }
+          console.log(this.show);
+          this.width = Math.round(100 / this.show.length);
+          this.height = Math.round(100 / this.show[0].length);
         }
-        console.log(this.show);
-        this.width = Math.round(100 / this.show.length);
-        this.height = Math.round(100 / this.show[0].length);
       });
   },
-  mounted: {},
 };
 </script>
 
