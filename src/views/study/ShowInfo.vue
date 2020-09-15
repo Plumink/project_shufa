@@ -52,6 +52,7 @@
             type="primary"
             size="mini"
             style="float:right;margin-top:0.5vh;margin-right:2vw;width:30vw"
+            @click="comment()"
           >评论</el-button>
         </div>
       </div>
@@ -72,6 +73,11 @@ import TopNavigation from "../../components/TopNavigation";
 import * as CommentData from "./mockdata";
 import comment from "../../components/Comment";
 export default {
+  components: {
+    FootNavigation,
+    TopNavigation,
+    comment,
+  },
   data() {
     return {
       commentData: [],
@@ -84,11 +90,31 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-  },
-  components: {
-    FootNavigation,
-    TopNavigation,
-    comment,
+    comment(){//发布评论功能
+    let params = {  //传参
+      commentContent:this.textarea1, //获取评论内容
+      commentId:'0',
+      commentTime:new Date().getTime(), //时间戳
+      custId:this.$store.state.id || this.$store.state.custId, //用户ID
+      isShow:0, //是否展示
+      releaseId:4 //发布Id——死值
+    }
+    this.$axios.post('/CalligraphyService/user/comment',params,
+      {
+        headers:{
+          "X-Request-ID": "1",
+        }
+      }
+    ).then((response)=>{
+      if(response.data.code=='0'){
+        alert('评论成功')
+        //如果评论成功，则调用获取评论内容接口，将新评论传入评论数组
+      }
+      else{
+        alert('评论失败')
+      }
+    })
+  }
   },
   created() {
     this.commentData = CommentData.comment.data;
