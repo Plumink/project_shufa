@@ -187,11 +187,18 @@ export default {
         }).then(response =>{
           console.log(response.data.data);
           this.image[i] = response.data.data;
+          var bo = [];
+          for(var j=0;j<this.bio.length;j++){
+            console.log(this.bio[j])
+            bo[i]=this.bio[j]
+          }
+          
           this.data.push({
-                  "releaseFontContent": this.bio[i],
-                  "releaseFontUrl": this.image[i],
-                  "releaseId": 0
-                })
+                "releaseFontContent": bo[i],
+                "releaseFontUrl": this.image[i],
+                "releaseId": 0
+              })
+          
           var params = {
               "release": {
                 "custId": this.$store.state.custId || this.$store.state.id,
