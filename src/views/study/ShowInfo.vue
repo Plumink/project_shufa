@@ -47,7 +47,7 @@
       <div class="pinglun">
         <div style="width:90%;height:18vh;margin:0 auto;border-radius: 2vw;">
           <i class="iconfont icon-talk-line">
-            <span style="color:grey">我来说两句</span>
+            
           </i>
           <span style="float:right;margin-right: 2vw;margin-top: 1vh;">
             <span style="color:blues">{{number}}</span>条评论

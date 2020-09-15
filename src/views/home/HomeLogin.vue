@@ -19,17 +19,6 @@
       <div style="margin-top:15px">
         <div class="d-flex flex-row justify-space-around align-center" >
           <div style="width:30%">
-             <!-- <v-select
-              background-color="#fff"
-              label="字体"
-              class="ml-2 mr-2"
-              :items="ziti[0]"
-              v-model="fontId"
-              :item-text="calligraphyName"
-              item-value="calligraphyId"
-              outlined
-              dense
-            >{{ziti.calligraphyName}}</v-select> -->
              <v-select
               background-color="#fff"
               label="字体"
@@ -163,6 +152,11 @@ export default {
     };
   },
   methods: {
+    imperfect(){//跳转到个人中心充值
+      this.$router.push({
+        path:'/main'
+      })
+    },
     toChildren() {
       console.log(this.first);
       console.log(this.second);
