@@ -185,11 +185,11 @@ export default {
             'X-Request-ID':'1'
           }
         }).then((response)=>{
-          console.log(response.data.data);
-          this.image.push(response.data.data);
+          this.data[i-1].releaseFontUrl=response.data.data
+          console.log(this.data[i-1])
         })
       }
-      console.log(Array.from(this.image))
+      console.log(this.data)
       var arr = Array.from(this.image);
       this.image = arr;
       for(var i=0;i<this.bio.length;i++){
