@@ -189,6 +189,9 @@ export default {
           this.image.push(response.data.data);
         })
       }
+      console.log(Array.from(this.image))
+      var arr = Array.from(this.image);
+      this.image = arr;
       for(var i=0;i<this.bio.length;i++){
         this.data.push({
           "releaseFontContent": this.bio[i],
@@ -211,13 +214,13 @@ export default {
       this.$axios.post("/CalligraphyService/release/uploadRelease",params,{
         'X-Request-ID':'1'
       })
-      .then((response)=>{
+      .then(function(response){
           console.log(response)
         }
       )
 
       console.log(this.bio);
-      console.log(this.image);
+      console.log(this.image[0]);
       console.log(this.data);
     },
     mounted(){
