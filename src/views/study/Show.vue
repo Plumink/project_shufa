@@ -4,17 +4,17 @@
     <Search />
     <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)" >
       <div class="box-left">
-        <img :src="item.image" alt />
+        <img :src="item.releaseFonts[0].releaseFontUrl" alt />
       </div>
       <div class="d-flex flex-column justify-space-around box-right">
         <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:14px">{{item.releaseId}}号 ：</span>
-          <h4 class="show_title">{{item.releaseTitle | title}}</h4>
+          <span style="font-size:14px">{{item.release.releaseId}}号 ：</span>
+          <h4 class="show_title">{{item.release.releaseTitle | title}}</h4>
         </div>
-        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.releaseContent | content}}</span>
+        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.release.releaseContent | content}}</span>
         <div class="d-flex flex-row justify-start align-center">
           <span style="font-size:12px;margin-right:20px">{{'发布者'}}</span>
-          <span style="font-size:12px">发布时间：{{item.releaseTime | time}}</span>
+          <span style="font-size:12px">发布时间：{{item.release.releaseTime | time}}</span>
         </div>
         
       </div>
@@ -106,8 +106,8 @@ export default {
       }
     })
     .then((response)=>{ //渲染页面
-      console.log(response.data.data.releases)
-      this.item=response.data.data.releases
+      console.log(response.data.data)
+      this.item=response.data.data
     })
   },
   watch:{
@@ -122,8 +122,8 @@ export default {
       }
     })
     .then((response)=>{ //渲染页面
-      console.log(response.data.data.releases)
-      this.item=response.data.data.releases
+      console.log(response.data.data)
+      this.item=response.data.data
     })
     }
   }
