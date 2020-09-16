@@ -166,6 +166,11 @@ export default {
     };
   },
   methods: {
+    goBack(){
+      this.$router.push({
+        path:'/homelogin'
+      })
+    },
     upload(str) {
       var file = document.getElementById(str).files[0];
       var formdata1=new FormData();

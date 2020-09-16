@@ -68,6 +68,7 @@
         <template>
           <div style="text-align: center;" class="my-2 mt-8">
             <v-btn small color="primary" @click="toChildren()">生成书法</v-btn>
+            <v-btn class="ml-8" small color="primary" @click="toRelease()">发布作品</v-btn>
             <v-overlay :value="overlay">
               <v-btn color="#616161" @click="overlay = false">{{overlayText}}</v-btn>
             </v-overlay>
@@ -157,6 +158,11 @@ export default {
     imperfect(){//跳转到个人中心充值
       this.$router.push({
         path:'/main'
+      })
+    },
+    toRelease() {
+      this.$router.push({
+        path:'/release'
       })
     },
     toChildren() {
