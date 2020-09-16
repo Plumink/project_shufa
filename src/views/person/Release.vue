@@ -9,9 +9,9 @@
         <span>
           <h3>发布作品</h3>
         </span>
-        <span class="d-flex flex-column">
+        <span class="d-flex flex-column" @click="release()">
           <i style="font-size: 20px;" class="Calligraphy_icon_release"></i>
-          <p style="font-size:8px;margin:0px" @click="release()">发布</p>
+          <p style="font-size:8px;margin:0px" >发布</p>
         </span>
       </div>
       <!-- 内容 -->
@@ -211,8 +211,14 @@ export default {
       this.$axios.post("/CalligraphyService/release/uploadRelease",params,{
         'X-Request-ID':'1'
       })
-      .then(function(response){
-          console.log(response)
+      .then((response)=>{
+          if(response.data.code=='0'){
+            console.log(this)
+            this.$router.push({ path: '/show' });
+          }
+          else{
+            alert('发布失败，请重新发布')
+          }
         }
       )
     }

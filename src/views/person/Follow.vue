@@ -88,7 +88,6 @@ export default {
         }
       )
       .then((response) => {
-        console.log(response);
         if (response.data.code == "-101") {
         } else {
           var n = response.data.data.length;
@@ -96,6 +95,7 @@ export default {
             this.follow.push(response.data.data[i]);
           }
         }
+        console.log(this.follow)
       });
   },
 };

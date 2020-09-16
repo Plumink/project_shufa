@@ -20,7 +20,6 @@ import Change from '../views/person/Change.vue'
 import Test from '../views/person/test.vue'
 import OtherHome from '../views/person/OtherHome.vue'
 import Release from '../views/person/Release.vue'
-import Te from '../views/person/te.vue'
 
 
 const originalPush = VueRouter.prototype.push
@@ -116,10 +115,6 @@ const routes = [
     path: '/test',
     component: Test
   },
-  {
-    path: '/te',
-    component: Te
-  }
 
 ]
 
