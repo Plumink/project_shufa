@@ -19,7 +19,7 @@
       </div>
     </div>
     <div style="margin-bottom:60px">
-      <v-pagination v-model="page" :length="6"></v-pagination>
+      <v-pagination v-model="page" :length="pageLength"></v-pagination>
     </div>
     <FootNavigation />
   </v-app>
@@ -94,6 +94,8 @@ export default {
         },
       ],
       page: 1,
+      pageLength:0,
+      releaseNum:''
     };
   },
   filters: {
@@ -116,6 +118,23 @@ export default {
     jump(id){
       this.$router.push({ path: `show/info` });
     },
+  },
+  created(){
+    this.$axios.post('/CalligraphyService/release/getReleaseNumber',{
+      headers:{
+        'X-Request-ID':'1'
+      }
+    })
+    .then((response)=>{
+      this.releaseNum=response.data.data
+      this.pageLength=Math.ceil(this.releaseNum/10)
+    })
+  },
+  watch:{
+    page:function(newdata){
+      
+      console.log("当前第"+newdata+"页")
+    }
   }
 };
 </script>
