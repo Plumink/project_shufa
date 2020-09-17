@@ -3,7 +3,7 @@
     <TopNavigation />
     <Search />
     <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId,item.release.custId,
-    item.release.releaseTime,item.release.custName,item.release.custImgHead)" >
+    item.release.releaseTime,item.release.custName,item.release.custImgHead,item.releaseFonts)" >
       <div class="box-left">
         <img :src="item.releaseFonts[0].releaseFontUrl" alt />
       </div>
@@ -69,7 +69,8 @@ export default {
     },
   },
   methods:{
-    jump(releaseid,custId,releaseTime,custName,custImgHead){
+    jump(releaseid,custId,releaseTime,custName,custImgHead,messageInfo){
+      console.log(messageInfo)
       this.$router.push({ 
         path: 'show/info',
         query:{
@@ -77,7 +78,8 @@ export default {
           custId:custId,  //发布者ID
           releaseTime:releaseTime,  //发布时间
           custName:custName,  //发布者昵称
-          custImgHead:custImgHead //发布者头像
+          custImgHead:custImgHead, //发布者头像
+          messageInfo:messageInfo
         }
      });
     },

@@ -12,19 +12,17 @@
       </div>
       <div class="d-flex align-center justify-space-between info_a">
         <div class="d-flex flex-row align-center justify-center">
-          <img class="avatar" :src="this.$route.query.custImgHead" width="36" height="36" />
+          <img class="avatar" :src="this.$route.query.custImgHead" width="36" height="36" @click="jumpOther()" />
           <div class="left">
             <div class="name">{{this.$route.query.custName}}</div>
             <div class="date">{{this.$route.query.releaseTime}}</div>
           </div>
         </div>
         <div class="right" @click="follow()" v-if="!isfollow">
-          <span class="Calligraphy_icon_follow"></span>
-          关注
+          <span class="Calligraphy_icon_follow" style="color:#BDBDBD">关注</span>
         </div>
         <div class="right" @click="unfollow()" v-if="isfollow">
-          <span class="Calligraphy_icon_follow" style="color:red"></span>
-          取消关注
+          <span class="Calligraphy_icon_follow" style="color:#F4511E">取消关注</span>
         </div>
 
         <!-- <div class="control">
@@ -34,14 +32,11 @@
         </span>
         </div>-->
       </div>
-      <div class="d-flex flex-column content">
-        <img src="https://s1.ax1x.com/2020/07/31/alrgsK.th.png" alt />
+      <div class="d-flex flex-column content" v-for="(item,index) in this.$route.query.messageInfo" :key="index">
+        <img :src="item.releaseFontUrl" alt />
         <br />
         <p class="poem">
-          故人西辞黄鹤楼，
-          烟花三月下扬州。
-          孤帆远影碧空尽，
-          不见长江滚滚来
+          {{item.releaseFontContent}}
         </p>
       </div>
       <div class="pinglun">
@@ -104,6 +99,18 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    // 跳转他人首页
+    jumpOther(){ 
+      console.log()
+      this.$router.push({
+        path:'/otherhome',
+        query:{
+          custId:this.$route.query.custId,
+          custImgHead:this.$route.query.custImgHead,
+          custName:this.$route.query.custName
+        }
+      })
     },
     //点赞或取消点赞接口
     good() {
@@ -364,7 +371,7 @@ export default {
 }
 .top {
   width: 100%;
-  height: 6%;
+  height: 60px;
 }
 .content {
   width: 100%;

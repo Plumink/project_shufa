@@ -1,15 +1,20 @@
 <template>
   <div>
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)">
+    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId,userMessage.custId,
+    item.release.releaseTime,item.release.releaseName,userMessage.custImgHead,item.releaseFonts)">
       <div class="box-left">
-        <img :src="item.image" alt />
+        <img :src="item.releaseFonts[0].releaseFontUrl" alt />
       </div>
       <div class="d-flex flex-column justify-space-around box-right">
         <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:14px">{{item.number}}号 ：</span>
-          <h4 class="show_title">{{item.title | title}}</h4>
+          <span style="font-size:14px">{{item.release.releaseId}}号 ：</span>
+          <h4 class="show_title">{{item.release.releaseTitle | title}}</h4>
         </div>
-        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.content | content}}</span>
+        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.release.releaseContent | content}}</span>
+        <div class="d-flex flex-row justify-start align-center">
+          <span style="font-size:12px;margin-right:20px">{{item.release.releaseName}}</span>
+          <span style="font-size:12px">发布时间：{{item.release.releaseTime}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -19,68 +24,49 @@
 export default {
   data(){
     return{
-      item: [
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        },
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        },
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        },
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        },
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        },
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        },
-      ],
+      item: [],
+      userMessage:{}//用户信息
     }
   },
+  
   methods:{
-    jump(id){
-      this.$router.push({ path: '/show/info' });
+    jump(releaseid,custId,releaseTime,custName,custImgHead,messageInfo){
+      this.$router.push({ 
+        path: '/show/info',
+        query:{
+          releaseid:releaseid,  //传给子页面发布id
+          custId:custId,  //发布者ID
+          releaseTime:releaseTime,  //发布时间
+          custName:custName,  //发布者昵称
+          custImgHead:custImgHead, //发布者头像
+          messageInfo:messageInfo
+        }
+     });
+    },
+  },
+  created(){
+    // 获取用户信息
+    this.userMessage={
+      custId: this.$store.state.id || this.$store.state.custId,
+      custImgHead:this.$store.state.custImgHead || this.$store.state.customerImgHead
     }
+    //获取用户的发布信息
+    this.$axios.post('/CalligraphyService/release/getRelease',{
+      beginNum:0,
+      custId:this.$store.state.id || this.$store.state.custId,
+      endNum:100,
+      thisTime:'2020-09-17T12:14:40.607Z'
+    },{
+      headers:{
+        "X-Request-ID":"1"
+      }
+    }).then((response)=>{
+      this.item=response.data.data
+      for(var i=0;i<this.item.length;i++){
+        this.item[i].release.releaseTime=this.formatTime(this.item[i].release.releaseTime)  //格式化时间
+        this.item[i].release.releaseName=this.$store.state.userName || this.$store.state.custName   //加上用户昵称，即发布者信息
+      }
+    })
   },
    filters: {
     title(value) {

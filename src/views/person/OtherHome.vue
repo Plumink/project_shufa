@@ -14,6 +14,14 @@
               <span style="color: #b8a18c;font-size:3vw;font-family:YouYuan;">{{this.$route.query.isVip?'会员爸爸':'未开通会员'}}</span>
             </span>
           </div>
+          <div style="float:right;height:100%;margin-right:20px" class="d-flex flex-row align-center justify-center">
+            <div class="right" @click="follow()" v-if="!isfollow">
+          <span class="Calligraphy_icon_follow" style="color:#BDBDBD">关注</span>
+        </div>
+        <div class="right" @click="unfollow()" v-if="isfollow">
+          <span class="Calligraphy_icon_follow" style="color:#F4511E"> 取消关注</span>
+        </div>
+          </div>
         </div>
         <div style="width:100%;height:8vh"></div>
         <p style="text-align:center;color:#b8a18c;margin:0">
@@ -21,7 +29,7 @@
           ~~发 布 作 品~~
           <span class="Calligraphy_icon_rightwing" />
           </p>
-        <Show />
+        <Show  :item="item" />
         <div style="width:100%;height:10vh"></div>
         <FootNavigation />
       </div>
@@ -40,7 +48,8 @@ export default {
   data() {
     return {
       data: JSON.parse(localStorage.getItem("loginMessage")),
-      follow:[]
+      isfollow: false, //判断是否关注,
+      item:[]
     };
   },
   methods:{
@@ -48,7 +57,52 @@ export default {
       var path = $('#img-upload')[0].value;
       var arr = path.split("\\");
       console.log(arr[arr.length-1]);
-       
+    },
+    follow() {
+      //关注接口
+      let params = {
+        custId: this.$store.state.id || this.$store.state.custId, //用户ID
+        followCatchId: this.$route.query.custId, //被关注者Id——待替换
+      };
+      this.$axios
+        .post("/CalligraphyService/user/follow", params, {
+          headers: {
+            "X-Request-ID": "1",
+          },
+        })
+        .then((response) => {
+          if (response.data.code == "0") {
+            this.isfollow = !this.isfollow;
+          } else {
+            alert("关注失败");
+          }
+        });
+    },
+    unfollow(item) {
+      //取消关注
+      this.$axios
+        .post(
+          "/CalligraphyService/user/unfollow",
+          {
+            custId: this.$store.state.id || this.$store.state.custId,
+            followCatchId: this.$route.query.custId, //被关注者Id——待替换
+          },
+          {
+            headers: {
+              "X-APP-ID": "1",
+              "X-APP-KEY": "1",
+              "X-Request-ID": "1",
+            },
+          }
+        )
+        .then((response) => {
+          if ((response.data.code = "0")) {
+            this.isfollow = !this.isfollow;
+          } else {
+            alert("取消关注失败");
+          }
+        });
+      // console.log(item.customerId)
     },
     toChange(){
       this.$router.push({
@@ -63,29 +117,43 @@ export default {
 
   },
   created() {
+
+    //获取用户发布信息
+     this.$axios.post('/CalligraphyService/release/getRelease',{
+      beginNum:0,
+      custId:this.$route.query.custId,
+      endNum:100,
+      thisTime:'2020-09-17T12:14:40.607Z'
+    },{
+      headers:{
+        "X-Request-ID":"1"
+      }
+    }).then((response)=>{
+      this.item=response.data.data
+      console.log(this.item)
+      for(var i=0;i<this.item.length;i++){
+        this.item[i].release.releaseTime=this.formatTime(this.item[i].release.releaseTime)  //格式化时间
+        this.item[i].release.custImgHead=this.$route.query.custImgHead //头像
+        this.item[i].release.custName=this.$route.query.custName
+      }
+    })
+
+
+      let params = {
+      custId: this.$store.state.id || this.$store.state.custId,
+      followCatchId: this.$route.query.custId, //被关注者Id——待替换
+    };
+       // 获取用户是否关注信息
     this.$axios
-      .post("/CalligraphyService/user/getCatchInfo", {
-          customerId: this.$store.state.id,
-          customerImgHead: "string",
-          customerLastTime: "2020-08-21T03:02:35.606Z",
-          ifValid: 0,
-          phoneNumber: "string",
-          sessionId: "string",
-          userName: "string",
-        },{
+      .post("/CalligraphyService/user/checkFollow", params, {
         headers: {
-          "X-APP-ID": "1",
-          "X-APP-KEY": "1",
           "X-Request-ID": "1",
         },
       })
       .then((response) => {
-        var n=response.data.data.length
-        for(var i=0;i<n;i++){
-          this.follow.push(response.data.data[i])
-          console.log(this.follow)
+        if (response.data.data.ifFollow == "1") {
+          this.isfollow = true;
         }
-
       });
   },
   mounted(){
