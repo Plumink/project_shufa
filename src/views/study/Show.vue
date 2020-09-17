@@ -73,11 +73,11 @@ export default {
       this.$router.push({ 
         path: 'show/info',
         query:{
-          releaseid:releaseid,
-          custId:custId,
-          releaseTime:releaseTime,
-          custName:custName,
-          custImgHead:custImgHead
+          releaseid:releaseid,  //传给子页面发布id
+          custId:custId,  //发布者ID
+          releaseTime:releaseTime,  //发布时间
+          custName:custName,  //发布者昵称
+          custImgHead:custImgHead //发布者头像
         }
      });
     },

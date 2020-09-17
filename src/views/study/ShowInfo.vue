@@ -102,7 +102,7 @@ export default {
       //关注接口
       let params = {
         custId: this.$store.state.id || this.$store.state.custId, //用户ID
-        followCatchId: this.$route.query.releaseid, //被关注者Id——待替换
+        followCatchId: this.$route.query.custId, //被关注者Id——待替换
       };
       this.$axios
         .post("/CalligraphyService/user/follow", params, {
@@ -125,7 +125,7 @@ export default {
           "/CalligraphyService/user/unfollow",
           {
             custId: this.$store.state.id || this.$store.state.custId,
-            followCatchId: this.$route.query.releaseid, //被关注者Id——待替换
+            followCatchId: this.$route.query.custId, //被关注者Id——待替换
           },
           {
             headers: {
@@ -273,7 +273,7 @@ export default {
     console.log(this.commentData);
     let params = {
       custId: this.$store.state.id || this.$store.state.custId,
-      followCatchId: this.$route.query.releaseid, //被关注者Id——待替换
+      followCatchId: this.$route.query.custId, //被关注者Id——待替换
     };
     // 获取用户是否关注信息
     this.$axios
