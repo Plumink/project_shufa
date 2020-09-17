@@ -10,23 +10,23 @@
         </span>
         <div style="width:40px;height:20px"></div>
       </div>
-        <div class="d-flex align-center justify-space-between info_a">
-          <div class="d-flex flex-row align-center justify-center">
+      <div class="d-flex align-center justify-space-between info_a">
+        <div class="d-flex flex-row align-center justify-center">
           <img class="avatar" src="../../../images/bac2.jpg" width="36" height="36" />
           <div class="left">
             <div class="name">用户</div>
             <div class="date">发布时间11111111111</div>
           </div>
-          </div>
-          <div class="right" @click="follow()" v-if="!isfollow">
-            <span class="Calligraphy_icon_follow"></span>
-            关注
-          </div>
-           <div class="right" @click="unfollow()" v-if="isfollow">
-            <span class="Calligraphy_icon_follow" style="color:red"></span>
-            取消关注
-          </div>
-        
+        </div>
+        <div class="right" @click="follow()" v-if="!isfollow">
+          <span class="Calligraphy_icon_follow"></span>
+          关注
+        </div>
+        <div class="right" @click="unfollow()" v-if="isfollow">
+          <span class="Calligraphy_icon_follow" style="color:red"></span>
+          取消关注
+        </div>
+
         <!-- <div class="control">
         <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
           <span class="Calligraphy_icon_good"></span>
@@ -46,8 +46,7 @@
       </div>
       <div class="pinglun">
         <div style="width:90%;height:18vh;margin:0 auto;border-radius: 2vw;">
-          <i class="iconfont icon-talk-line">
-          </i>
+          <i class="iconfont icon-talk-line"></i>
           <span style="float:right;margin-right: 2vw;margin-top: 1vh;">
             <span style="color:blues">{{number}}</span>条评论
           </span>
@@ -84,44 +83,47 @@ export default {
   },
   data() {
     return {
-      commentData: [],
+      commentData: [], //传入评论展示组件的信息
       page: 1,
       textarea1: "",
       number: "3",
-      isfollow:false //判断是否关注
+      isfollow: false, //判断是否关注
+      obj: {}, //辅助存储对象
+      index: "", //辅助下标
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
     },
-    follow(){//关注接口
-        let params={
-          custId:this.$store.state.id||this.$store.state.custId, //用户ID
-          followCatchId: this.$store.state.id || this.$store.state.custId //被关注者Id——待替换
-        }
-        this.$axios.post('/CalligraphyService/user/follow',params,{
-          headers:{
-            'X-Request-ID':'1'
-          }
+    follow() {
+      //关注接口
+      let params = {
+        custId: this.$store.state.id || this.$store.state.custId, //用户ID
+        followCatchId: this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
+      };
+      this.$axios
+        .post("/CalligraphyService/user/follow", params, {
+          headers: {
+            "X-Request-ID": "1",
+          },
         })
-        .then((response)=>{
-          if(response.data.code=='0'){
-            this.isfollow=!this.isfollow
+        .then((response) => {
+          if (response.data.code == "0") {
+            this.isfollow = !this.isfollow;
+          } else {
+            alert("关注失败");
           }
-          else{
-            alert('关注失败')
-          }
-        })
+        });
     },
-   unfollow(item) { //取消关注
+    unfollow(item) {
+      //取消关注
       this.$axios
         .post(
           "/CalligraphyService/user/unfollow",
           {
             custId: this.$store.state.id || this.$store.state.custId,
-            followCatchId:  this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
-
+            followCatchId: this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
           },
           {
             headers: {
@@ -132,59 +134,169 @@ export default {
           }
         )
         .then((response) => {
-           if(response.data.code='0'){
-             this.isfollow=!this.isfollow
-           }
-           else{
-              alert('关注关注失败')
-           }
+          if ((response.data.code = "0")) {
+            this.isfollow = !this.isfollow;
+          } else {
+            alert("关注关注失败");
+          }
         });
       // console.log(item.customerId)
     },
-    comment(){//发布评论功能
-    let params = {  //传参
-      commentContent:this.textarea1, //获取评论内容
-      commentId:'0',
-      commentTime:new Date().getTime(), //时间戳
-      custId:this.$store.state.id || this.$store.state.custId, //用户ID
-      isShow:0, //是否展示
-      releaseId:4 //发布Id——死值
-    }
-    this.$axios.post('/CalligraphyService/user/comment',params,
-      {
-        headers:{
-          "X-Request-ID": "1",
-        }
-      }
-    ).then((response)=>{
-      if(response.data.code=='0'){
-        alert('评论成功')
-        //如果评论成功，则调用获取评论内容接口，将新评论传入评论数组
-      }
-      else{
-        alert('评论失败')
-      }
-    })
-  }
+    comment() {
+      //发布评论功能
+      let params = {
+        //传参
+        commentContent: this.textarea1, //获取评论内容
+        commentId: "0",
+        commentTime: new Date().getTime(), //时间戳
+        custId: this.$store.state.id || this.$store.state.custId, //用户ID
+        isShow: 0, //是否展示
+        releaseId: this.$route.query.releaseid, //发布Id
+      };
+      this.$axios
+        .post("/CalligraphyService/user/comment", params, {
+          headers: {
+            "X-Request-ID": "1",
+          },
+        })
+        .then((response) => {
+          if (response.data.code == "0") {
+            alert("评论成功");
+            //如果评论成功，则调用获取评论内容接口，将新评论传入评论数组
+          } else {
+            alert("评论失败");
+          }
+        });
+    },
   },
   created() {
-    this.commentData = CommentData.comment.data;
-    let params={
-      custId:this.$store.state.id || this.$store.state.custId,
-      followCatchId: this.$store.state.id || this.$store.state.custId //被关注者Id——待替换
-    }
+    // this.commentData = CommentData.comment.data;
+    console.log(this.$route.query.releaseid);
+    let commentParams = {
+      releaseId: 1, //测试数据
+      // releaseId:this.$route.query.releaseid, 正式数据
+      commentContent: "string",
+      commentId: 0,
+      commentTime: "2020-09-17T01:41:42.232Z",
+      custId: 0,
+      isShow: 0,
+    };
+
+    // axios.get('../../WeChatMaterial/recommendationItem/list?'+'currentPage=1')
+    //     .then(function (response) {
+    //         var respData = response.data;
+    //         if (respData.result === 'ok') {
+    //             app.user_display = respData.userDisplay;
+    //             app.items = respData.data.list;
+    //             app.total_page = respData.data.pages;
+    //             app.current_page = respData.data.pageNum;
+    //             //遍历respData.data.list中的id
+    //             getGoodsList(0,app.items.length);
+    //             function getGoodsList(j,length) {
+    //                 var id = app.items[j].id;
+    //                 axios.get('../../WeChatMaterial/goodsList?id=' + id)
+    //                     .then(function (response) {
+    //                         var goodsList = response.data;
+    //                         app.goodsList.push(goodsList);
+    //                         if(++j < length) {
+    //                             getGoodsList(j, length);
+    //                         }
+    //                     });
+    //             }
+    //         }
+    //     });
+
+    this.$axios
+      .post("/CalligraphyService/user/getComment", commentParams, {
+        //请求评论的数据
+        headers: {
+          "X-Request-ID": "1",
+        },
+      })
+      .then((response) => {
+        console.log(response.data.data); //返回的评论数据，不包含用户信息
+        for (var i = 0; i < response.data.data.length; i++) {
+          //通过查询用户信息接口，将每个用户信息查询到
+          this.obj = {
+            custId: response.data.data[i].custId, //发布者Id
+            commentContent: response.data.data[i].commentContent, //发布内容
+            commentTime: response.data.data[i].commentTime, //发布时间
+            isShow: response.data.data[i].isShow, //是否展示
+            custName: "", //发布者姓名
+            custImgHead: "", //发布者头像
+            isVip: "", //发布者是否是VIP
+          };
+          this.commentData.push(this.obj);
+        }
+        console.log(this.commentData.length);
+        console.log(this)
+        getGoodsList(0,this.commentData.length,this);
+        function getGoodsList(j,length,that) {
+          console.log(that)
+          var custId = that.commentData[j].custId;
+          that.$axios
+            .post(
+              "/CalligraphyService/user/getUserInfo",
+              { custId: custId },
+              {
+                headers: {
+                  "X-Request-ID": "1",
+                },
+              }
+            )
+            .then((response) => {
+              that.commentData[j].custName = response.data.data.custName;
+              that.commentData[j].custImgHead = response.data.data.custImgHead;
+              that.commentData[j].isVip = response.data.data.isVip;
+              if (++j < length) {
+                getGoodsList(j, length,that);
+              }
+            });
+        }
+      })
+      //   for (var i = 0; i < this.commentData.length; i++) {
+      //     //循环commentData数组，获取用户信息
+      //     this.index = i;
+      //     console.log(i);
+      //     this.$axios
+      //       .post(
+      //         "/CalligraphyService/user/getUserInfo",
+      //         { custId: this.commentData[i].custId },
+      //         {
+      //           headers: {
+      //             "X-Request-ID": "1",
+      //           },
+      //         }
+      //       )
+      //       .then((response) => {
+      //         console.log(this.index);
+      //         this.commentData[this.index - 1].custName =
+      //           response.data.data.custName;
+      //         this.commentData[this.index - 1].custImgHead =
+      //           response.data.data.custImgHead;
+      //         this.commentData[this.index - 1].isVip = response.data.data.isVip;
+      //       });
+      //     console.log(this.commentData);
+      //   }
+      // });
+    console.log(this.commentData);
+    let params = {
+      custId: this.$store.state.id || this.$store.state.custId,
+      followCatchId: this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
+    };
     // 获取用户是否关注信息
-    this.$axios.post('/CalligraphyService/user/checkFollow',params,{
-      headers:{
-        'X-Request-ID':'1'
-      }
-    })
-    .then((response)=>{
-      if(response.data.data.ifFollow=='1'){
-        this.isfollow=true
-      }
-    })
-  }
+    this.$axios
+      .post("/CalligraphyService/user/checkFollow", params, {
+        headers: {
+          "X-Request-ID": "1",
+        },
+      })
+      .then((response) => {
+        if (response.data.data.ifFollow == "1") {
+          this.isfollow = true;
+        }
+      });
+  },
 };
 </script>
 
@@ -241,25 +353,26 @@ export default {
 
 .info_a {
   padding: 10px;
-  }
-  .avatar {
-    border-radius: 50%;
-  }
-  .left {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;}
-    .name {
-      font-size: 16px;
-      color: $text-main;
-      margin-bottom: 5px;
-      font-weight: 500;
-    }
-    .date {
-      font-size: 12px;
-      color: $text-minor;
-    }
-  .right{
-    text-align: right;
-  } 
+}
+.avatar {
+  border-radius: 50%;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.name {
+  font-size: 16px;
+  color: $text-main;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.date {
+  font-size: 12px;
+  color: $text-minor;
+}
+.right {
+  text-align: right;
+}
 </style>

@@ -38,7 +38,7 @@
         <div class="filebox d-flex flex-column align-center justify-center">
           <span class="Calligraphy_icon_push" style="font-size:30px" />
            <div class="file">
-            <input accept="image/*" name="img" class="upload_file" type="file" id="input1" @change="upload('input1')">
+               <input accept="image/*"  name="img" style="opacity:1" class="upload_file" type="file" id="input1" @change="upload('input1')">
             <!-- <v-file-input class="img" v-model="image[0]" multiple label="上传图片"></v-file-input> -->
             <v-textarea class="text" style="margin:0px;paddinf:0px" v-model="bio[0]" color="teal">
               <template v-slot:label>

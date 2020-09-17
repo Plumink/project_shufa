@@ -3,13 +3,13 @@
   <div class="container">
     <div class="comment" v-for="(item,index) in comments" :key="index">
       <div class="info_a">
-        <img class="avatar" :src="item.fromAvatar" width="36" height="36" @click="jumpOther()" />
+        <img class="avatar" :src="item.custImgHead" width="36" height="36" @click="jumpOther()" />
         <div class="right">
-          <div class="name">{{item.fromName}}</div>
-          <div class="date">{{item.date}}</div>
+          <div class="name">{{item.custName}}</div>
+          <div class="date">{{item.commentTime}}</div>
         </div>
       </div>
-      <div class="content">{{item.content}}</div>
+      <div class="content">{{item.commentContent}}</div> 
       <!-- <div class="control">
         <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
           <span class="Calligraphy_icon_good"></span>

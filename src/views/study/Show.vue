@@ -2,7 +2,7 @@
   <v-app id="show">
     <TopNavigation />
     <Search />
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.number)" >
+    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId)" >
       <div class="box-left">
         <img :src="item.releaseFonts[0].releaseFontUrl" alt />
       </div>
@@ -80,7 +80,12 @@ export default {
   },
   methods:{
     jump(id){
-      this.$router.push({ path: `show/info` });
+      this.$router.push({ 
+        path: 'show/info',
+        query:{
+          releaseid:id
+        }
+     });
     },
   },
   created(){
