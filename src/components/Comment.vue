@@ -3,7 +3,8 @@
   <div class="container">
     <div class="comment" v-for="(item,index) in comments" :key="index">
       <div class="info_a">
-        <img class="avatar" :src="item.custImgHead" width="36" height="36" @click="jumpOther()" />
+        <img class="avatar" :src="item.custImgHead" width="36" height="36" @click="jumpOther(item.custId,
+        item.custImgHead,item.custName)" />
         <div class="right">
           <div class="name">{{item.custName}}</div>
           <div class="date">{{item.commentTime}}</div>
@@ -40,9 +41,15 @@ export default {
   computed: {},
   methods: {
     // 跳转他人首页
-    jumpOther(){ 
+    jumpOther(custId,custImgHead,custName){ 
+      console.log(custId)
       this.$router.push({
-        path:'/otherhome'
+        path:'/otherhome',
+        query:{
+          custId:custId,
+          custImgHead:custImgHead,
+          custName:custName
+        }
       })
     },
     /**
@@ -60,10 +67,6 @@ export default {
         }
         item.isLike = !item.isLike;
       }
-    },
-
-    created() {
-      console.log(this.comments);
     },
   },
 };
