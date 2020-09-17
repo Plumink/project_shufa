@@ -48,9 +48,16 @@
         <div style="width:90%;height:18vh;margin:0 auto;border-radius: 2vw;">
           <i class="iconfont icon-talk-line"></i>
           <span style="float:right;margin-right: 2vw;margin-top: 1vh;">
-            <span style="color:blues">{{number}}</span>条评论
+            <span style="color:blues">{{commentData.length}}</span>条评论
           </span>
           <el-input type="textarea" style="height:10vh" placeholder="写下你的评论" v-model="textarea1"></el-input>
+          <div style="float:left;margin-top:0.5vh;margin-left:2vw;">
+            <span
+              class="Calligraphy_icon_good"
+              :style="isgood?'color:#FFEE58':'color:#BDBDBD'"
+              @click="good()"
+            >{{likesNumber}}</span>
+          </div>
           <el-button
             type="primary"
             size="mini"
@@ -62,9 +69,7 @@
       <div style="margin-top:4vh">
         <comment :comments="commentData" />
       </div>
-      <div style="margin-bottom:80px;border-radius:4vw">
-        <v-pagination v-model="page" :length="3"></v-pagination>
-      </div>
+      <div style="width:100%;height:60px"></div>
     </div>
     <FootNavigation />
   </v-app>
@@ -90,13 +95,59 @@ export default {
       isfollow: false, //判断是否关注
       obj: {}, //辅助存储对象
       index: "", //辅助下标
-      time:'',//发布时间
-      cust:{} //用户信息
+      time: "", //发布时间
+      cust: {}, //用户信息
+      likesNumber: "",
+      isgood: false,
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    //点赞或取消点赞接口
+    good() {
+      if (this.isgood == true) {
+        this.$axios
+          .post(
+            "/CalligraphyService/user/cancelLikes",
+            {
+              custId: this.$store.state.id || this.$store.state.custId,
+              releaseId: this.$route.query.releaseid,
+            },
+            {
+              headers: {
+                "X-Request-ID": "1",
+              },
+            }
+          )
+          .then((response) => {
+            if (response.data.code == "0") {
+              this.isgood = false;
+              --this.likesNumber;
+            }
+          });
+      } else {
+        this.$axios
+          .post(
+            "/CalligraphyService/user/good",
+            {
+              custId: this.$store.state.id || this.$store.state.custId,
+              releaseId: this.$route.query.releaseid,
+            },
+            {
+              headers: {
+                "X-Request-ID": "1",
+              },
+            }
+          )
+          .then((response) => {
+            if (response.data.code == "0") {
+              this.isgood = true;
+              ++this.likesNumber;
+            }
+          });
+      }
     },
     follow() {
       //关注接口
@@ -155,7 +206,7 @@ export default {
         isShow: 0, //是否展示
         releaseId: this.$route.query.releaseid, //发布Id
       };
-      this.time=params.time
+      this.time = params.time;
       this.$axios
         .post("/CalligraphyService/user/comment", params, {
           headers: {
@@ -167,16 +218,18 @@ export default {
             alert("评论成功");
             //如果评论成功，则调用获取评论内容接口，将新评论传入评论数组
             this.obj = {
-            custId:this.$store.state.id || this.$store.state.custId, //发布者Id
-            commentContent:this.textarea1 , //发布内容
-            commentTime: this.time, //发布时间
-            isShow: 0, //是否展示
-            custName: this.$store.state.custName, //发布者姓名
-            custImgHead: this.$store.state.customerImgHead || this.$store.state.custImgHead, //发布者头像
-            isVip: this.$store.state.isVip, //发布者是否是VIP
-          };
-          this.commentData.push(this.obj)
-          this.textarea1=''
+              custId: this.$store.state.id || this.$store.state.custId, //发布者Id
+              commentContent: this.textarea1, //发布内容
+              commentTime: this.time, //发布时间
+              isShow: 0, //是否展示
+              custName: this.$store.state.custName, //发布者姓名
+              custImgHead:
+                this.$store.state.customerImgHead ||
+                this.$store.state.custImgHead, //发布者头像
+              isVip: this.$store.state.isVip, //发布者是否是VIP
+            };
+            this.commentData.push(this.obj);
+            this.textarea1 = "";
           } else {
             alert("评论失败");
           }
@@ -186,7 +239,7 @@ export default {
   created() {
     // this.commentData = CommentData.comment.data;
     let commentParams = {
-      releaseId:this.$route.query.releaseid,
+      releaseId: this.$route.query.releaseid,
       commentContent: "string",
       commentId: 0,
       commentTime: "2020-09-17T01:41:42.232Z",
@@ -215,14 +268,14 @@ export default {
           };
           this.commentData.push(this.obj);
         }
-        if(response.data.data.length!=0){
-        var that=this
-        getGoodsList(0,this.commentData.length,that); 
-        }  //递归发送请求
-        function getGoodsList(j,length,that) {
-          console.log(that.commentData[j])
+        if (response.data.data.length != 0) {
+          var that = this;
+          getGoodsList(0, this.commentData.length, that);
+        } //递归发送请求
+        function getGoodsList(j, length, that) {
+          console.log(that.commentData[j]);
           var custId = that.commentData[j].custId;
-          console.log(custId)
+          console.log(custId);
           that.$axios
             .post(
               "/CalligraphyService/user/getUserInfo",
@@ -234,42 +287,17 @@ export default {
               }
             )
             .then((response) => {
-              console.log(that.commentData)
+              console.log(that.commentData);
               that.commentData[j].custName = response.data.data.custName;
               that.commentData[j].custImgHead = response.data.data.custImgHead;
               that.commentData[j].isVip = response.data.data.isVip;
-              
+
               if (++j < length) {
-                getGoodsList(j, length,that);
+                getGoodsList(j, length, that);
               }
             });
         }
-      })
-      //   for (var i = 0; i < this.commentData.length; i++) {
-      //     //循环commentData数组，获取用户信息
-      //     this.index = i;
-      //     console.log(i);
-      //     this.$axios
-      //       .post(
-      //         "/CalligraphyService/user/getUserInfo",
-      //         { custId: this.commentData[i].custId },
-      //         {
-      //           headers: {
-      //             "X-Request-ID": "1",
-      //           },
-      //         }
-      //       )
-      //       .then((response) => {
-      //         console.log(this.index);
-      //         this.commentData[this.index - 1].custName =
-      //           response.data.data.custName;
-      //         this.commentData[this.index - 1].custImgHead =
-      //           response.data.data.custImgHead;
-      //         this.commentData[this.index - 1].isVip = response.data.data.isVip;
-      //       });
-      //     console.log(this.commentData);
-      //   }
-      // });
+      });
     console.log(this.commentData);
     let params = {
       custId: this.$store.state.id || this.$store.state.custId,
@@ -285,6 +313,39 @@ export default {
       .then((response) => {
         if (response.data.data.ifFollow == "1") {
           this.isfollow = true;
+        }
+      });
+    //获取点赞数量
+    this.$axios
+      .post(
+        "/CalligraphyService/user/getLikesNumber",
+        { releaseId: this.$route.query.releaseid },
+        {
+          headers: {
+            "X-Request-ID": "1",
+          },
+        }
+      )
+      .then((response) => {
+        this.likesNumber = response.data.data.likesNumber;
+      });
+    //判断是否点赞
+    this.$axios
+      .post(
+        "/CalligraphyService/user/checkGood",
+        {
+          custId: this.$store.state.id || this.$store.state.custId,
+          releaseId: this.$route.query.releaseid,
+        },
+        {
+          headers: {
+            "X-Request-ID": "1",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.data.isGood == "1") {
+          this.isgood = true;
         }
       });
   },
