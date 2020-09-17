@@ -55,6 +55,14 @@ Vue.prototype.clearCookie=function (cname) {
   this.setCookie(cname, "", -1);
 },
 
+//格式化时间戳
+Vue.prototype.formatTime=function renderTime(date) {
+  var dateee = new Date(date).toJSON();
+  return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '') 
+}
+
+
+
 axios.defaults.baseURL = "https://www.mocking.space"
 
 new Vue({

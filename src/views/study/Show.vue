@@ -2,7 +2,8 @@
   <v-app id="show">
     <TopNavigation />
     <Search />
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId)" >
+    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId,item.release.custId,
+    item.release.releaseTime,item.release.custName,item.release.custImgHead)" >
       <div class="box-left">
         <img :src="item.releaseFonts[0].releaseFontUrl" alt />
       </div>
@@ -13,10 +14,9 @@
         </div>
         <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.release.releaseContent | content}}</span>
         <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:12px;margin-right:20px">{{'发布者'}}</span>
-          <span style="font-size:12px">发布时间：{{item.release.releaseTime | time}}</span>
+          <span style="font-size:12px;margin-right:20px">{{item.release.custName}}</span>
+          <span style="font-size:12px">发布时间：{{item.release.releaseTime}}</span>
         </div>
-        
       </div>
     </div>
     <div style="margin-bottom:60px">
@@ -38,17 +38,7 @@ export default {
   },
   data() {
     return {
-      item: [
-        {
-          image: "https://s1.ax1x.com/2020/07/31/alrgsK.th.png",
-          number: "70162",
-          title: "李商隐《锦瑟》草书版",
-          name: "吕峰",
-          read: "0",
-          content:
-            "锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃",
-        }
-      ],
+      item: [],
       page: 1,
       pageLength:0,
       releaseNum:'',
@@ -79,11 +69,15 @@ export default {
     },
   },
   methods:{
-    jump(id){
+    jump(releaseid,custId,releaseTime,custName,custImgHead){
       this.$router.push({ 
         path: 'show/info',
         query:{
-          releaseid:id
+          releaseid:releaseid,
+          custId:custId,
+          releaseTime:releaseTime,
+          custName:custName,
+          custImgHead:custImgHead
         }
      });
     },
@@ -112,7 +106,26 @@ export default {
     })
     .then((response)=>{ //渲染页面
       console.log(response.data.data)
-      this.item=response.data.data
+     this.item=response.data.data
+      var that=this
+      getGoodsList(0,response.data.data.length,that)
+      function getGoodsList(j,length,that){
+        var custId=that.item[j].release.custId
+        that.item[j].release.releaseTime=that.formatTime(that.item[j].release.releaseTime)
+        that.$axios.post('/CalligraphyService/user/getUserInfo',{custId:custId},{
+          headers:{
+            "X-Request-ID":"1"
+          }
+        }).then((response)=>{
+            that.item[j].release.custName=response.data.data.custName
+            that.item[j].release.custImgHead=response.data.data.custImgHead
+            that.item[j].release.custName=response.data.data.custName
+            that.item[j].release.isVip=response.data.data.isVip
+            if(++j < length){
+              getGoodsList(j, length,that);
+            }
+        })
+      }
     })
   },
   watch:{
@@ -127,8 +140,25 @@ export default {
       }
     })
     .then((response)=>{ //渲染页面
-      console.log(response.data.data)
-      this.item=response.data.data
+     this.item=response.data.data
+      var that=this
+      getGoodsList(0,response.data.data.length,that)
+      function getGoodsList(j,length,that){
+        var custId=that.item[j].release.custId
+        that.item[j].release.releaseTime=that.formatTime(that.item[j].release.releaseTime)
+        that.$axios.post('/CalligraphyService/user/getUserInfo',{custId:custId},{
+          headers:{
+            "X-Request-ID":"1"
+          }
+        }).then((response)=>{
+            that.item[j].release.custImgHead=response.data.data.custImgHead
+            that.item[j].release.custName=response.data.data.custName
+            that.item[j].release.isVip=response.data.data.isVip
+            if(++j < length){
+              getGoodsList(j, length,that);
+            }
+        })
+      }
     })
     }
   }

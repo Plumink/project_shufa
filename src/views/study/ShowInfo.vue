@@ -12,10 +12,10 @@
       </div>
       <div class="d-flex align-center justify-space-between info_a">
         <div class="d-flex flex-row align-center justify-center">
-          <img class="avatar" src="../../../images/bac2.jpg" width="36" height="36" />
+          <img class="avatar" :src="this.$route.query.custImgHead" width="36" height="36" />
           <div class="left">
-            <div class="name">用户</div>
-            <div class="date">发布时间11111111111</div>
+            <div class="name">{{this.$route.query.custName}}</div>
+            <div class="date">{{this.$route.query.releaseTime}}</div>
           </div>
         </div>
         <div class="right" @click="follow()" v-if="!isfollow">
@@ -91,6 +91,7 @@ export default {
       obj: {}, //辅助存储对象
       index: "", //辅助下标
       time:'',//发布时间
+      cust:{} //用户信息
     };
   },
   methods: {
@@ -101,7 +102,7 @@ export default {
       //关注接口
       let params = {
         custId: this.$store.state.id || this.$store.state.custId, //用户ID
-        followCatchId: this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
+        followCatchId: this.$route.query.releaseid, //被关注者Id——待替换
       };
       this.$axios
         .post("/CalligraphyService/user/follow", params, {
@@ -124,7 +125,7 @@ export default {
           "/CalligraphyService/user/unfollow",
           {
             custId: this.$store.state.id || this.$store.state.custId,
-            followCatchId: this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
+            followCatchId: this.$route.query.releaseid, //被关注者Id——待替换
           },
           {
             headers: {
@@ -184,7 +185,6 @@ export default {
   },
   created() {
     // this.commentData = CommentData.comment.data;
-    console.log(this.$route.query.releaseid);
     let commentParams = {
       releaseId:this.$route.query.releaseid,
       commentContent: "string",
@@ -207,7 +207,7 @@ export default {
           this.obj = {
             custId: response.data.data[i].custId, //发布者Id
             commentContent: response.data.data[i].commentContent, //发布内容
-            commentTime: response.data.data[i].commentTime, //发布时间
+            commentTime: this.formatTime(response.data.data[i].commentTime), //发布时间
             isShow: response.data.data[i].isShow, //是否展示
             custName: "", //发布者姓名
             custImgHead: "", //发布者头像
@@ -215,11 +215,12 @@ export default {
           };
           this.commentData.push(this.obj);
         }
-        console.log(this.commentData.length);
-        console.log(this)
-        getGoodsList(0,this.commentData.length,this);   //递归发送请求
+        if(response.data.data.length!=0){
+        var that=this
+        getGoodsList(0,this.commentData.length,that); 
+        }  //递归发送请求
         function getGoodsList(j,length,that) {
-          console.log(that)
+          console.log(that.commentData[j])
           var custId = that.commentData[j].custId;
           console.log(custId)
           that.$axios
@@ -233,9 +234,11 @@ export default {
               }
             )
             .then((response) => {
+              console.log(that.commentData)
               that.commentData[j].custName = response.data.data.custName;
               that.commentData[j].custImgHead = response.data.data.custImgHead;
               that.commentData[j].isVip = response.data.data.isVip;
+              
               if (++j < length) {
                 getGoodsList(j, length,that);
               }
@@ -270,7 +273,7 @@ export default {
     console.log(this.commentData);
     let params = {
       custId: this.$store.state.id || this.$store.state.custId,
-      followCatchId: this.$store.state.id || this.$store.state.custId, //被关注者Id——待替换
+      followCatchId: this.$route.query.releaseid, //被关注者Id——待替换
     };
     // 获取用户是否关注信息
     this.$axios
