@@ -186,8 +186,7 @@ export default {
     // this.commentData = CommentData.comment.data;
     console.log(this.$route.query.releaseid);
     let commentParams = {
-      releaseId: 1, //测试数据
-      // releaseId:this.$route.query.releaseid, 正式数据
+      releaseId:this.$route.query.releaseid,
       commentContent: "string",
       commentId: 0,
       commentTime: "2020-09-17T01:41:42.232Z",
@@ -222,6 +221,7 @@ export default {
         function getGoodsList(j,length,that) {
           console.log(that)
           var custId = that.commentData[j].custId;
+          console.log(custId)
           that.$axios
             .post(
               "/CalligraphyService/user/getUserInfo",
