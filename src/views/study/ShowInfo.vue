@@ -90,6 +90,7 @@ export default {
       isfollow: false, //判断是否关注
       obj: {}, //辅助存储对象
       index: "", //辅助下标
+      time:'',//发布时间
     };
   },
   methods: {
@@ -153,6 +154,7 @@ export default {
         isShow: 0, //是否展示
         releaseId: this.$route.query.releaseid, //发布Id
       };
+      this.time=params.time
       this.$axios
         .post("/CalligraphyService/user/comment", params, {
           headers: {
@@ -163,6 +165,17 @@ export default {
           if (response.data.code == "0") {
             alert("评论成功");
             //如果评论成功，则调用获取评论内容接口，将新评论传入评论数组
+            this.obj = {
+            custId:this.$store.state.id || this.$store.state.custId, //发布者Id
+            commentContent:this.textarea1 , //发布内容
+            commentTime: this.time, //发布时间
+            isShow: 0, //是否展示
+            custName: this.$store.state.custName, //发布者姓名
+            custImgHead: this.$store.state.customerImgHead || this.$store.state.custImgHead, //发布者头像
+            isVip: this.$store.state.isVip, //发布者是否是VIP
+          };
+          this.commentData.push(this.obj)
+          this.textarea1=''
           } else {
             alert("评论失败");
           }
@@ -181,31 +194,6 @@ export default {
       custId: 0,
       isShow: 0,
     };
-
-    // axios.get('../../WeChatMaterial/recommendationItem/list?'+'currentPage=1')
-    //     .then(function (response) {
-    //         var respData = response.data;
-    //         if (respData.result === 'ok') {
-    //             app.user_display = respData.userDisplay;
-    //             app.items = respData.data.list;
-    //             app.total_page = respData.data.pages;
-    //             app.current_page = respData.data.pageNum;
-    //             //遍历respData.data.list中的id
-    //             getGoodsList(0,app.items.length);
-    //             function getGoodsList(j,length) {
-    //                 var id = app.items[j].id;
-    //                 axios.get('../../WeChatMaterial/goodsList?id=' + id)
-    //                     .then(function (response) {
-    //                         var goodsList = response.data;
-    //                         app.goodsList.push(goodsList);
-    //                         if(++j < length) {
-    //                             getGoodsList(j, length);
-    //                         }
-    //                     });
-    //             }
-    //         }
-    //     });
-
     this.$axios
       .post("/CalligraphyService/user/getComment", commentParams, {
         //请求评论的数据
@@ -230,7 +218,7 @@ export default {
         }
         console.log(this.commentData.length);
         console.log(this)
-        getGoodsList(0,this.commentData.length,this);
+        getGoodsList(0,this.commentData.length,this);   //递归发送请求
         function getGoodsList(j,length,that) {
           console.log(that)
           var custId = that.commentData[j].custId;
