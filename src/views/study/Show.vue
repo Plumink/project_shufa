@@ -2,7 +2,7 @@
   <v-app id="show">
     <TopNavigation />
     <Search />
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId,item.release.custId,
+    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item.slice(0,10)" :key="index" @click="jump(item.release.releaseId,item.release.custId,
     item.release.releaseTime,item.release.custName,item.release.custImgHead,item.releaseFonts)" >
       <div class="box-left">
         <img :src="item.releaseFonts[0].releaseFontUrl" alt />
@@ -119,7 +119,6 @@ export default {
             "X-Request-ID":"1"
           }
         }).then((response)=>{
-            that.item[j].release.custName=response.data.data.custName
             that.item[j].release.custImgHead=response.data.data.custImgHead
             that.item[j].release.custName=response.data.data.custName
             that.item[j].release.isVip=response.data.data.isVip
@@ -136,12 +135,14 @@ export default {
       beginNum:(this.page-1)*10, //从数据库中获取第n页的第一条数据
       endNum:(this.page-1)*10+10 //从数据库中获取第n页的第十条数据
     }
-    this.$axios.post('/CalligraphyService/release/getRelease',params,{ //获取每页的发布信息
+    console.log(params)
+   this.$axios.post('/CalligraphyService/release/getRelease',params,{ //获取每页的发布信息
       headers:{
         'X-Request-ID':'1'
       }
     })
     .then((response)=>{ //渲染页面
+      console.log(response.data.data)
      this.item=response.data.data
       var that=this
       getGoodsList(0,response.data.data.length,that)
@@ -163,7 +164,10 @@ export default {
       }
     })
     }
-  }
+  },
+  beforeUpdate: function () {
+      
+  },
 };
 </script>
 

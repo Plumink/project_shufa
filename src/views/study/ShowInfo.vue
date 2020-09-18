@@ -33,7 +33,7 @@
         </div>-->
       </div>
       <div class="d-flex flex-column content" v-for="(item,index) in this.$route.query.messageInfo" :key="index">
-        <img :src="item.releaseFontUrl" alt />
+        <img :src="item.releaseFontUrl" style="max-width:100%;max-height:100%" alt />
         <br />
         <p class="poem">
           {{item.releaseFontContent}}
