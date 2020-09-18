@@ -41,7 +41,7 @@
         <template>
           <v-col 
             class="d-flex flex-row"
-            style="width: 20vw; padding-right: 0;"
+            style="width: 20vw; padding-right: 0;" 
             cols="12"
             sm="6"
             md="4"

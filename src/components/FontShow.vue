@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div style="width:100%;height:8px"></div>
     <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
       <div v-if="!this.$route.query.message.horizontal"
         :class="this.$route.query.message.left?'d-flex flex-row justify-space-around':'d-flex flex-row-reverse justify-space-around'"
@@ -34,21 +35,21 @@
     <div
         v-if="this.$route.query.message.horizontal"
         class="d-flex flex-column justify-space-around"
-        style="margin:0 auto;width:80%;height:80%"
+        style="margin:0 auto;width:80%;"
       >
         <div
           :class="left?'d-flex flex-row mb-6':'d-flex flex-row-reverse mb-6'"
           v-for="(items,index) in show"
           :key="index"
-          style="width:100%;hight:100%"
+          style="margin:0 auto;width:80%;height:80%"
         >
-          <div v-for="(item,index) in items" :key="index">
+          <div v-for="(item,index) in items" :key="index" :style="{ width: width+ '%', height:height+'%' }">
             <v-badge
               color="green"
               :content="item.length-1"
               offset-y="18"
               offset-x="24"
-              value=""
+              :value="badges==''?(item.length-1):0"
             >
               <img
                 @click="showStore(item)"
@@ -223,7 +224,6 @@ export default {
       })
       .then((response) => {
         if (this.$route.query.message.horizontal == true) { //横排
-        console.log('123')
           var item = response.data.data; //把数据库中的数据返回，所有数据，得进行分类
           for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < item.length; j++) {
@@ -234,12 +234,14 @@ export default {
             this.store.push(this.data); //将接口返回的第i个字的所有对象传入store数组中
             this.data = []; //清空data数组
           }
-          for (var i = 0; i < this.$route.query.message.row_num; i++) {  //横排的排数
-            var j = Math.ceil(
-              this.store.length / this.$route.query.message.row_num //横排的列数
-            );
+          var s = Math.ceil(  //横排的总行数
+              this.store.length / this.$route.query.message.row_num 
+          );
+          
+          for (var i = 0; i < s; i++) {   //每一行
+            var v=this.$route.query.message.row_num //横排的行数
             var a = [];
-            for (var n = i * j; n < (i + 1) * j; n++) {  //每一排的字 i=0 j=4 i<4
+            for (var n = i * v; n < (i + 1) * v; n++) {  //每一排的字 i=0 v=2 i<2
               if (this.store[n] == undefined) { //如果store中没有，则拿背景图补上
                 a.push([
                   {
