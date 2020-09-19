@@ -30,6 +30,7 @@
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
 import Search from "../../components/Search";
+
 export default {
   components: {
     FootNavigation,
@@ -129,6 +130,7 @@ export default {
       }
     })
   },
+
   watch:{
     page:function(newdata){       //监听当前页数，当前页数变化时，获取下一页的数据，重新渲染页面
       let params={

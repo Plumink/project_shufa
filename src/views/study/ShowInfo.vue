@@ -8,7 +8,12 @@
         <span>
           <h3>作品详情</h3>
         </span>
-        <div style="width:40px;height:20px"></div>
+        <span style="font-size:14px" v-if="!isCollection">
+          <span class="Calligraphy_icon_uncollection" style="color:#BDBDBD" @click="collection()">收藏</span>
+        </span>
+        <span style="font-size:14px" v-if="isCollection">
+          <span class="Calligraphy_icon_collection" style="color:#F4511E" @click="unCollection()">取消收藏</span>
+        </span>
       </div>
       <div class="d-flex align-center justify-space-between info_a">
         <div class="d-flex flex-row align-center justify-center">
@@ -93,7 +98,8 @@ export default {
       time: "", //发布时间
       cust: {}, //用户信息
       likesNumber: "",
-      isgood: false,
+      isgood: false, //是否点赞
+      isCollection: false //是否收藏
     };
   },
   methods: {
@@ -201,6 +207,34 @@ export default {
           }
         });
       // console.log(item.customerId)
+    },
+    //添加收藏
+    collection(){
+      this.$axios.post('/CalligraphyService/collection/doCollection',{
+        custId: this.$store.state.id || this.$store.state.custId,
+        releaseId: this.$route.query.releaseid,
+      },{
+        headers:{
+        "X-Request-ID":"1"
+      }
+      })
+      .then((response)=>{
+        this.isCollection=true
+      })
+    },
+    //取消收藏
+    unCollection(){
+      this.$axios.post('/CalligraphyService/collection/unCollection',{
+        custId: this.$store.state.id || this.$store.state.custId,
+        releaseId: this.$route.query.releaseid,
+      },{
+        headers:{
+        "X-Request-ID":"1"
+      }
+      })
+      .then((response)=>{
+        this.isCollection=false
+      })
     },
     comment() {
       //发布评论功能
@@ -355,6 +389,20 @@ export default {
           this.isgood = true;
         }
       });
+
+      //判断是否收藏
+      this.$axios.post('/CalligraphyService/collection/isCollection',{
+        custId: this.$store.state.id || this.$store.state.custId,
+          releaseId: this.$route.query.releaseid,
+      },{
+        headers:{
+          "X-Request-ID":"1"
+        }
+      })
+      .then((response)=>{
+        console.log(response)
+        this.isCollection=response.data.data.isCollection
+      })
   },
 };
 </script>
@@ -372,6 +420,7 @@ export default {
 .top {
   width: 100%;
   height: 60px;
+  padding: 6px;
 }
 .content {
   width: 100%;

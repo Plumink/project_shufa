@@ -2,10 +2,9 @@
   <v-app>
     <div class="total_gen">
       
-      <div style="width:100vw;height:10vh;position: fixed;z-index: 1000;background-color:#f9f4e6">
+      <div style="width:100vw;height:60px;position: fixed;z-index: 1000;background-color:#f9f4e6">
         <i class="iconfont icon-back icon-style" @click="backHome()"></i>
       </div>
-      <div style="height:10vh;width:100vw"></div>
       <!-- 生成也不发布，取消标题，放入发布页——release 张鑫涛 -->
       <!-- <div class="sec_input">
         <span>标题</span>

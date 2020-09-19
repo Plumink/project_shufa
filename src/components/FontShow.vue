@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="width:100%;height:8px"></div>
+    <div style="width:100%;height:70px"></div>
     <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
       <div v-if="!this.$route.query.message.horizontal"
         :class="this.$route.query.message.left?'d-flex flex-row justify-space-around':'d-flex flex-row-reverse justify-space-around'"
@@ -79,10 +79,13 @@
       </div>
     </div>
 
-    <div class="popContainer d-flex justify-center align-center" v-if="isimage">
+    <div class="popContainer d-flex flex-column justify-center align-center" v-if="isimage">
+      
       <div class="popbox d-flex align-center justify-center flex-column">
-        <p style="font-size:13px">长按图片保存到本地</p>
-        <img :src="img" v-if="img" class="share" />
+        <span style="margin-top:100px">长按图片保存到相册</span>
+        <div class="d-flex flex-column align-center justify-center">
+          <img :src="img" v-if="img" class="share" style="width:90%;height:100%;margin: 0 auto" />
+        </div>
         <el-button type="primary" @click="isimage=!isimage">返回</el-button>
       </div>
     </div>
@@ -315,6 +318,6 @@ export default {
   height: 100%;
   background-color: #f9f4e6;
   overflow: scroll;
-  padding-top: 60px;
+  padding-top: 10px;
 }
 </style>

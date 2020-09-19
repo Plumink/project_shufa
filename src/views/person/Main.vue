@@ -34,9 +34,9 @@
           </div>
           <div class="main_little">
             <span class="jinzi">我的收藏</span>
-            <router-link to="/main/colluction">
-              <div class="shuzi">23</div>
-            </router-link>
+            <!-- <router-link to="/main/colluction"> -->
+              <div class="shuzi" @click="jumpCollection()">{{collectionNum}}</div>
+            <!-- </router-link> -->
           </div>
           <div class="main_little">
             <span class="jinzi">我的发布</span>
@@ -94,9 +94,18 @@ export default {
       selects: "",
       str1: "",
       str2: "",
+      collectionNum:0 //收藏数量
     };
   },
   methods: {
+    jumpCollection(){
+      this.$router.push({
+        path:"/main/colluction",
+        query:{
+          length:this.collectionNum
+        }
+      })
+    },
     one() {
       this.selects = "one";
     },
@@ -258,6 +267,13 @@ export default {
            this.length = response.data.data.length;
         }
       });
+      //获取收藏数量
+      this.$axios.post("/CalligraphyService/collection/getCollectionNumber",{custId:this.$store.state.custId||this.$store.state.id},{
+        headers:{"X-Request-ID":"1"}
+      })
+      .then((response)=>{
+        this.collectionNum=response.data.data
+      })
   },
    //监听路由的变化
   watch:{
