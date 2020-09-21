@@ -212,7 +212,7 @@ export default {
                   function (res) {
                     console.log("debug");
                     console.log(that.outTradeNo);
-                    console.log(that);
+                    console.log(res);
                     alert(JSON.stringify(res));
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
