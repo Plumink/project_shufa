@@ -190,6 +190,7 @@ export default {
             signType: "MD5", // 微信签名方式：
             package: "prepay_id=" + this.package, //
           };
+          var that = this;
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
             .then(function (res) {
@@ -210,11 +211,13 @@ export default {
                   },
                   function (res) {
                     console.log("debug");
+                    console.log(that.outTradeNo);
+                    console.log(that);
                     alert(JSON.stringify(res));
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
                       console.log(this);
-                      console.log(this.outTradeNo);
+                      
                     }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
                       alert("订单取消！")
                     }
