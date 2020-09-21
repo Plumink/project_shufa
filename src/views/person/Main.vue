@@ -213,6 +213,8 @@ export default {
                     alert(JSON.stringify(res));
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
+                    }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
+                      alert("订单取消！")
                     }
                   }
                 );
@@ -283,12 +285,6 @@ export default {
   }
 },
   mounted() {
-    //   $(".pay_first").on("click", function (e) {
-    //     this.num = $(this)[0].innerText.substring(7, 9);
-    //     this.detail = $(this)[0].innerText.substring(0, 4);
-    //     console.log(this.num);
-    //     console.log(this.detail);
-    //   });
     $("#my-img").click(function () {
       $("#img-upload").click();
     });
