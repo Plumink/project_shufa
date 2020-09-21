@@ -213,6 +213,8 @@ export default {
                     alert(JSON.stringify(res));
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
+                      console.log(this);
+                      console.log(this.outTradeNo);
                     }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
                       alert("订单取消！")
                     }
