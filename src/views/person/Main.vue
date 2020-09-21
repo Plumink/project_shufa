@@ -94,8 +94,7 @@ export default {
       selects: "",
       str1: "",
       str2: "",
-      collectionNum:0, //收藏数量
-      outTradeNo: new Date().getTime().toString() + "MS720"
+      collectionNum:0 //收藏数量
     };
   },
   methods: {
@@ -130,26 +129,23 @@ export default {
       console.log("debug this");
       console.log(this.getCookie("sign"));
       console.log(this.sign);
-      console.log(this.outTradeNo);
+      console.log(this.out_trade_no);
       //获取金额和产品详细信息
       if (this.selects == "one") {
         this.str1 = "一个月会员 15元";
         this.str2 = "一个月会员";
         this.str3 = "1500";
         this.proid = "001";
-        this.str4 = 30;
       } else if (this.selects == "two") {
         this.str1 = "三个月会员 40元";
         this.str2 = "三个月会员";
         this.str3 = "4000";
         this.proid = "002";
-        this.str4 = 90; 
       } else if (this.selects == "three") {
         this.str1 = "十二个月会员 88元";
         this.str2 = "十二个月会员";
         this.str3 = "8800";
         this.proid = "003";
-        this.str4 = 360;     
       }
       console.log(this.str1, this.str2, this.str3);
       //生成随机字符串 pwd
@@ -171,7 +167,7 @@ export default {
         limitPay: "no_credit",
         notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
         openid: this.$store.state.openid,
-        outTradeNo: this.outTradeNo,
+        outTradeNo: new Date().getTime().toString() + "MS720",
         productId: this.proid,
         totalFee: this.str3,
         tradeType: "JSAPI",
@@ -214,23 +210,9 @@ export default {
                   },
                   function (res) {
                     console.log("debug");
-                    console.log(this.str4);
                     alert(JSON.stringify(res));
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
-                      // var para = {
-                      //    "customerId": 23,
-                      //     "effDate": new Date().getTime(),
-                      //     "expDate": new Date().getTime() + 24*60*60*1000,
-                      //     "openId": this.$store.state.openid,
-                      //     "outTradeNo": this.outTradeNo,
-                      //     "prodId": this.proid,
-                      //     "prodType": "vip",
-                      //     "remark": this.str2
-                      // }
-                      // this.$axios.post("/CalligraphyService/user/vipRecharge",)
-                    }else if(res.err_msg === "get_brand_wcpay_request:ok"){
-                      alert("交易取消！")
                     }
                   }
                 );
@@ -301,6 +283,12 @@ export default {
   }
 },
   mounted() {
+    //   $(".pay_first").on("click", function (e) {
+    //     this.num = $(this)[0].innerText.substring(7, 9);
+    //     this.detail = $(this)[0].innerText.substring(0, 4);
+    //     console.log(this.num);
+    //     console.log(this.detail);
+    //   });
     $("#my-img").click(function () {
       $("#img-upload").click();
     });
