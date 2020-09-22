@@ -227,13 +227,15 @@ export default {
     },
   },
   created(){
+    if(this.$route.query.message!=undefined){
     //初始化数据
-   this.first=this.$route.query.message.firstName||""
-   this.second=this.$route.query.message.secondName||""
-    this.content=this.$route.query.message.text||""
-    this.row_num=this.$route.query.message.row_num||""
-    this.left=this.$route.query.message.left||""
-    this.horizontal=this.$route.query.message.horizontal||""
+   this.first=this.$route.query.message.firstName
+   this.second=this.$route.query.message.secondName
+    this.content=this.$route.query.message.text
+    this.row_num=this.$route.query.message.row_num
+    this.left=this.$route.query.message.left
+    this.horizontal=this.$route.query.message.horizontal
+    }
   },
   //监听路由的变化
   watch:{

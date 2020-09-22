@@ -123,12 +123,12 @@ export default {
   methods: {
     backHome() {
       console.log(this.$route.query.message)
-      //  this.$router.push({
-      //   path:'/homelogin',
-      //   query:{
-      //     message:this.$route.query.message
-      //   }
-      // });
+       this.$router.push({
+        path:'/homelogin',
+        query:{
+          message:this.$route.query.message
+        }
+      });
     },
     showStore(item) {
       this.otherfont = item;
