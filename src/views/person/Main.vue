@@ -94,7 +94,8 @@ export default {
       selects: "",
       str1: "",
       str2: "",
-      collectionNum:0 //收藏数量
+      collectionNum:0,
+      outTradeNo: new Date().getTime().toString() + "MS720" //收藏数量
     };
   },
   methods: {
@@ -134,18 +135,21 @@ export default {
       if (this.selects == "one") {
         this.str1 = "一个月会员 15元";
         this.str2 = "一个月会员";
-        this.str3 = "1500";
+        this.str3 = "1";
         this.proid = "001";
+        this.str4 = 30;
       } else if (this.selects == "two") {
         this.str1 = "三个月会员 40元";
         this.str2 = "三个月会员";
         this.str3 = "4000";
         this.proid = "002";
+        this.str4 = 90;
       } else if (this.selects == "three") {
         this.str1 = "十二个月会员 88元";
         this.str2 = "十二个月会员";
         this.str3 = "8800";
         this.proid = "003";
+        this.str4 = 360;
       }
       console.log(this.str1, this.str2, this.str3);
       //生成随机字符串 pwd
@@ -167,7 +171,7 @@ export default {
         limitPay: "no_credit",
         notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
         openid: this.$store.state.openid,
-        outTradeNo: new Date().getTime().toString() + "MS720",
+        outTradeNo: this.outTradeNo,
         productId: this.proid,
         totalFee: this.str3,
         tradeType: "JSAPI",
@@ -217,6 +221,28 @@ export default {
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
                       console.log(that);
+                      that.$axios.post("/CalligraphyService/user/vipRecharge",{
+                        "customerId": that.$store.state.custId||that.$store.state.id,
+                        "effDate": new Date().getTime(),
+                        "expDate": new Date().getTime() + that.str4 * 24*60*60*1000,
+                        "openId": that.$store.state.openid,
+                        "outTradeNo": that.outTradeNo,
+                        "prodId": that.peoid,
+                        "prodType": "vip",
+                        "remark": that.str2
+                      },
+                      {
+                        headers: {
+                          "X-APP-ID": "1",
+                          "X-APP-KEY": "1",
+                          "X-Request-ID": "1",
+                        },
+                      }
+                      ).then(
+                        (res)=>{
+                          console.log(res);
+                        }
+                      )
                       
                     }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
                       alert("订单取消！")
