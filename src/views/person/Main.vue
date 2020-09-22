@@ -218,7 +218,7 @@ export default {
                     console.log(that);
                     console.log(res);
                     alert(JSON.stringify(res));
-                    if (res.err_msg === "没有此SDK或暂不支持此SDK模拟") {
+                    if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
                       console.log(that);
                       that.$axios.post("/CalligraphyService/user/vipRecharge",{
