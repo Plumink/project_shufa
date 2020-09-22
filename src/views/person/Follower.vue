@@ -1,5 +1,10 @@
 <template>
   <div>
+    <p style="text-align:center;color:#b8a18c;margin:0">
+          <span class="Calligraphy_icon_leftwing" />
+          ~~ 我 的 发 布 ~~
+          <span class="Calligraphy_icon_rightwing" />
+    </p>
     <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId,userMessage.custId,
     item.release.releaseTime,item.release.releaseName,userMessage.custImgHead,item.releaseFonts)">
       <div class="box-left">
