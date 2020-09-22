@@ -1,6 +1,12 @@
 <template>
   <div>
-    <div style="width:100%;height:70px"></div>
+    <div style="width:100vw;height:60px;background-color:#f9f4e6;padding:10px" class="d-flex flex-row justify-space-between align-center ">
+        <i class="iconfont icon-back icon-style" @click="backHome()">返回</i>
+        <v-switch
+          label="徽章"
+          v-model="isbadges"
+        ></v-switch>
+      </div>
     <div style="background-color:#f9f4e6;width:100vw;height:auto" ref="box">
       <div v-if="!this.$route.query.message.horizontal"
         :class="this.$route.query.message.left?'d-flex flex-row justify-space-around':'d-flex flex-row-reverse justify-space-around'"
@@ -110,12 +116,19 @@ export default {
       badges: "",
       replacetext: "",
       isimage: false,
-      left:this.$route.query.message.left
+      left:this.$route.query.message.left,
+      isbadges:true
     };
   },
   methods: {
     backHome() {
-      this.$router.push("/homelogin");
+      console.log(this.$route.query.message)
+       this.$router.push({
+        path:'/homelogin',
+        query:{
+          message:this.$route.query.message
+        }
+      });
     },
     showStore(item) {
       this.otherfont = item;
@@ -135,9 +148,10 @@ export default {
     //     useCORS: true, // 如果截图的内容里有图片,可能会有跨域的情况,加上这个参数,解决文件跨域问题,
     //     // width: this.$refs.box.scrollWidth,
     //     height: this.$refs.box.scrollHeight,
-    //     timeout:5000
+    //     timeout:8000
     //   }).then((canvas) => {
     //     let url = canvas.toDataURL("image/png");
+    //     this.isimage = true;
     //     this.img=url
     //   });
     // },
@@ -212,6 +226,17 @@ export default {
       // 退出替换字体界面
       this.pop = !this.pop;
     },
+  },
+
+  watch:{
+    isbadges:function(newdata){
+     if(newdata==false){
+       this.badges = "0";
+     }
+     else{
+       this.badges = ""
+     }
+    }
   },
   created() {
     var str = this.$route.query.message.text;
@@ -320,4 +345,9 @@ export default {
   overflow: scroll;
   padding-top: 10px;
 }
+.icon-style {
+  font-size: 16px;
+  color: grey;
+}
+
 </style>

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <p style="text-align:center;color:#b8a18c;margin:0">
+          <span class="Calligraphy_icon_collection2" />
+           我 的 收 藏 
+    </p>
     <div
       class="d-flex flex-row justify-space-around box"
       v-for="(item,index) in item"

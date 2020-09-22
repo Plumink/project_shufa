@@ -1,11 +1,15 @@
 <template>
   <div>
+    <p style="text-align:center;color:#b8a18c;margin:0">
+          <span class="Calligraphy_icon_eyes" />
+           我 的 关 注 
+    </p>
     <div class="follow_all" v-for="(item,index) in follow" :key="index">
       <img :src="item.customerImgHead" alt />
       <div style="padding-top:2vh;">
         <span class="ziti_follow" style="margin-left:2vw;">用户名：{{item.userName}}</span>
         <br />
-        <div style="width:50vw;float:left;">
+        <div style="width:50vw;float:left;"> 
           <span
             class="ziti_follow"
             style="margin-left:2vw;"
