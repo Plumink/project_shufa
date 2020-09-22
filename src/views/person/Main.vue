@@ -218,7 +218,7 @@ export default {
                     console.log(that);
                     console.log(res);
                     alert(JSON.stringify(res));
-                    if (res.err_msg === "get_brand_wcpay_request:ok") {
+                    if (res.err_msg === "没有此SDK或暂不支持此SDK模拟") {
                       console.log("success");
                       console.log(that);
                       that.$axios.post("/CalligraphyService/user/vipRecharge",{
@@ -227,7 +227,7 @@ export default {
                         "expDate": new Date().getTime() + that.str4 * 24*60*60*1000,
                         "openId": that.$store.state.openid,
                         "outTradeNo": that.outTradeNo,
-                        "prodId": that.peoid,
+                        "prodId": that.proid,
                         "prodType": "vip",
                         "remark": that.str2
                       },
