@@ -202,7 +202,6 @@ export default {
               that.sign = res.data.data;
               that.setCookie("sign", res.data.data, 360);
               function onBridgeReady(that, sign) {
-                console.log(that);
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
                   {
@@ -219,8 +218,7 @@ export default {
                     console.log(res);
                     alert(JSON.stringify(res));
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
-                      console.log("success");
-                      console.log(that);
+                     
                       that.$axios.post("/CalligraphyService/user/vipRecharge",{
                         "customerId": that.$store.state.custId||that.$store.state.id,
                         "effDate": new Date().getTime(),
@@ -245,6 +243,7 @@ export default {
                       )
                       
                     }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
+                       window.location.href ='&payStatus=ok';
                       alert("订单取消！")
                     }
                   }
