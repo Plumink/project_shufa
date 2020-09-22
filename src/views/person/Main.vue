@@ -221,11 +221,11 @@ export default {
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
                       console.log("success");
                       console.log(that);
-                      that.$axios.post("/CalligraphyService/user/vipRecharge",{
-                        "customerId": that.$store.state.custId||that.$store.state.id,
+                      this.$axios.post("/CalligraphyService/user/vipRecharge",{
+                        "customerId": this.$store.state.custId||this.$store.state.id,
                         "effDate": new Date().getTime(),
                         "expDate": new Date().getTime() + that.str4 * 24*60*60*1000,
-                        "openId": that.$store.state.openid,
+                        "openId": this.$store.state.openid,
                         "outTradeNo": that.outTradeNo,
                         "prodId": that.proid,
                         "prodType": "vip",
