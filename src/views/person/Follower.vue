@@ -82,7 +82,7 @@ export default {
       console.log(response.data.data);
       this.item=response.data.data
       for(var i=0;i<this.item.length;i++){
-        this.item[i].release.releaseTime=this.formatDate(new Date(this.item[i].release.releaseTime).getTime())  //格式化时间
+        this.item[i].release.releaseTime=this.formatDate(new Date((this.item[i].release.releaseTime).replace(/-/g, '/')).getTime())  //格式化时间
         this.item[i].release.releaseName=this.$store.state.userName || this.$store.state.custName   //加上用户昵称，即发布者信息
       }
     })
