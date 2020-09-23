@@ -81,8 +81,9 @@ export default {
     }).then((response)=>{
       console.log(response.data.data);
       this.item=response.data.data
+      console.log((this.formatTime((response.data.data[0].release.releaseTime))).replace(/-/g, '/'))
       for(var i=0;i<this.item.length;i++){
-        this.item[i].release.releaseTime=this.formatDate(new Date((this.item[i].release.releaseTime).replace(/-/g, '/')).getTime())  //格式化时间
+        this.item[i].release.releaseTime=(this.formatTime((this.item[i].release.releaseTime)).replace(/-/g, '/'))  //格式化时间
         this.item[i].release.releaseName=this.$store.state.userName || this.$store.state.custName   //加上用户昵称，即发布者信息
       }
     })
