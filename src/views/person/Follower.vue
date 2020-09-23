@@ -48,6 +48,19 @@ export default {
         }
      });
     },
+    formatDate(datetime) {
+        var date = new Date(datetime);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var year = date.getFullYear(),
+            month = ("0" + (date.getMonth() + 1)).slice(-2),
+            sdate = ("0" + date.getDate()).slice(-2),
+            hour = ("0" + date.getHours()).slice(-2),
+            minute = ("0" + date.getMinutes()).slice(-2),
+            second = ("0" + date.getSeconds()).slice(-2);
+        // 拼接
+        var result = year + "-"+ month +"-"+ sdate +" "+ hour +":"+ minute +":" + second;
+        // 返回
+        return result;
+    }
   },
   created(){
     // 获取用户信息
@@ -66,9 +79,10 @@ export default {
         "X-Request-ID":"1"
       }
     }).then((response)=>{
+      console.log(response.data.data);
       this.item=response.data.data
       for(var i=0;i<this.item.length;i++){
-        this.item[i].release.releaseTime=this.formatTime(this.item[i].release.releaseTime)  //格式化时间
+        this.item[i].release.releaseTime=this.formatDate(new Date(this.item[i].release.releaseTime).getTime())  //格式化时间
         this.item[i].release.releaseName=this.$store.state.userName || this.$store.state.custName   //加上用户昵称，即发布者信息
       }
     })
