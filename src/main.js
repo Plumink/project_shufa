@@ -13,6 +13,7 @@ import html2canvas from 'html2canvas'
 import cookie from 'vue-cookie'
 import domtoimage from 'dom-to-image';
 import wx from "weixin-js-sdk";
+
 Vue.prototype.wx=wx
 Vue.prototype.$cookie = cookie;
 Vue.use(ElementUI);

@@ -74,8 +74,8 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../../api/utils.js'
 import FootNavigation from "../../components/FootNavigation";
-// import wx from 'weixin-jsapi'
 export default {
   components: {
     FootNavigation,
@@ -135,7 +135,7 @@ export default {
       if (this.selects == "one") {
         this.str1 = "一个月会员 15元";
         this.str2 = "一个月会员";
-        this.str3 = "1";
+        this.str3 = "1500";
         this.proid = "001";
         this.str4 = 30;
       } else if (this.selects == "two") {
@@ -151,7 +151,6 @@ export default {
         this.proid = "003";
         this.str4 = 360;
       }
-      console.log(this.str1, this.str2, this.str3);
       //生成随机字符串 pwd
       var $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
       var maxPos = $chars.length;
@@ -159,7 +158,8 @@ export default {
       for (var i = 0; i < 32; i++) {
         pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
       }
-      this.pwd = pwd;
+      //加密
+      this.pwd = Encrypt(pwd);
       console.log(this.pwd);
 
       //下单的入参
@@ -190,7 +190,7 @@ export default {
           let par = {
             appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
             timeStamp: this.timeStamp, // 时间戳，自1970年以来的秒数
-            nonceStr: this.pwd, // 随机串
+            nonceStr: Decrypt(this.pwd), // 随机串
             signType: "MD5", // 微信签名方式：
             package: "prepay_id=" + this.package, //
           };
@@ -199,18 +199,18 @@ export default {
             .post("/CalligraphyService/common/paySign", par)
             .then(function (res) {
               console.log(res);
-              that.sign = res.data.data;
-              that.setCookie("sign", res.data.data, 360);
+              that.sign = Encrypt(res.data.data);
+              that.setCookie("sign", Encrypt(res.data.data), 360);
               function onBridgeReady(that, sign) {
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
                   {
                     appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
                     timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
-                    nonceStr: that.pwd, // 随机串
+                    nonceStr: Decrypt(that.pwd), // 随机串
                     package: "prepay_id=" + that.package,
                     signType: "MD5", // 微信签名方式：
-                    paySign: sign, // 微信签名
+                    paySign: Decrypt(sign), // 微信签名
                   },
                   function (res) {
                     console.log("debug");
