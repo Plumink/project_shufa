@@ -12,7 +12,7 @@ export default {
   methods: {
     become(){
       var s = Encrypt('吕锋');//加密
-      var a = Decrypt(s);//解密
+      var a = Decrypt('/W3d2lg/kz1RDXFcabptAKRztmel7zjlDyfMz34krNOIWvjgZX0vquyhMRC4NPRh');//解密
       console.log(s);
       console.log(a)
       

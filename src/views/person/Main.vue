@@ -181,8 +181,8 @@ export default {
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
-          console.log(JSON.parse(Decrypt(res)));
-          this.package = JSON.parse(Decrypt(res)).data.data;
+          console.log(Decrypt(res));
+          this.package = Decrypt(res).data.data;
           var time = new Date().getTime().toString();
           this.timeStamp = time;
           console.log(this.timeStamp);
