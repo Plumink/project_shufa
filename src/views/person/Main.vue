@@ -215,9 +215,9 @@ export default {
                   function (res) {
                     console.log("debug");
                     console.log(that);
-                    console.log(JSON.parse(Decrypt(res)));
-                    alert(JSON.stringify(JSON.parse(Decrypt(res))));
-                    if (JSON.parse(Decrypt(res)).err_msg === "get_brand_wcpay_request:ok") {
+                    console.log(res);
+                    alert(res);
+                    if (res.err_msg === "get_brand_wcpay_request:ok") {
                      
                       that.$axios.post("/CalligraphyService/user/vipRecharge",{
                         "customerId": that.$store.state.custId||that.$store.state.id,
