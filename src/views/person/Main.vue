@@ -261,7 +261,7 @@ export default {
                   document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
                 }
               } else {
-                onBridgeReady(that,JSON.parse(Decrypt(res)).data.data);
+                onBridgeReady(that,res.data.data);
               }
             });
           var that = this;
