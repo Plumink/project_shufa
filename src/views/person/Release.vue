@@ -149,6 +149,7 @@
   </v-app>
 </template>
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 export default {
   data() {
     return {
@@ -183,8 +184,8 @@ export default {
           'X-Request-ID':'1'
         }
       }).then(response =>{
-        console.log(response.data.data);
-        this.image.push(response.data.data);
+        console.log(JSON.parse(Decrypt(response)).data.data);
+        this.image.push(JSON.parse(Decrypt(response)).data.data);
       })
     },
     release() {
@@ -212,7 +213,7 @@ export default {
         'X-Request-ID':'1'
       })
       .then((response)=>{
-          if(response.data.code=='0'){
+          if(JSON.parse(Decrypt(response)).data.code=='0'){
             console.log(this)
             this.$router.push({ path: '/show' });
           }

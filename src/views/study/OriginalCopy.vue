@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 import TopNavigation from "../../components/TopNavigation";
 export default {
   components: {

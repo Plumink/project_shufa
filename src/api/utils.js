@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js/crypto-js'
 // 默认的 KEY 与 iv 如果没有给
-const KEY = CryptoJS.enc.Utf8.parse("0C0gPHHVSlPIkqi6");
-const IV = CryptoJS.enc.Utf8.parse('0C0gPHHVSlPIkqi6');
+const KEY = CryptoJS.enc.Utf8.parse("2020080810050511");
+const IV = CryptoJS.enc.Utf8.parse('0911789161903810');
 /**
  * AES加密 ：字符串 key iv  返回base64 
  */

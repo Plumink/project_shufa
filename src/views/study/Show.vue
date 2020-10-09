@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
 import Search from "../../components/Search";
@@ -92,7 +93,7 @@ export default {
       }
     })
     .then((response)=>{
-      this.releaseNum=response.data.data
+      this.releaseNum=JSON.parse(Decrypt(response)).data.data
       this.pageLength=Math.ceil(this.releaseNum/10) //每页展示10条数据，pageLength为页数
       if(this.pageLength==0){
         this.showPage=false
@@ -108,10 +109,10 @@ export default {
       }
     })
     .then((response)=>{ //渲染页面
-      console.log(response.data.data)
-     this.item=response.data.data
+      console.log(JSON.parse(Decrypt(response)).data.data)
+     this.item=JSON.parse(Decrypt(response)).data.data
       var that=this
-      getGoodsList(0,response.data.data.length,that)
+      getGoodsList(0,JSON.parse(Decrypt(response)).data.data.length,that)
       function getGoodsList(j,length,that){
         var custId=that.item[j].release.custId
         that.item[j].release.releaseTime=that.formatTime(that.item[j].release.releaseTime)
@@ -120,9 +121,9 @@ export default {
             "X-Request-ID":"1"
           }
         }).then((response)=>{
-            that.item[j].release.custImgHead=response.data.data.custImgHead
-            that.item[j].release.custName=response.data.data.custName
-            that.item[j].release.isVip=response.data.data.isVip
+            that.item[j].release.custImgHead=JSON.parse(Decrypt(response)).data.data.custImgHead
+            that.item[j].release.custName=JSON.parse(Decrypt(response)).data.data.custName
+            that.item[j].release.isVip=JSON.parse(Decrypt(response)).data.data.isVip
             if(++j < length){
               getGoodsList(j, length,that);
             }
@@ -144,10 +145,10 @@ export default {
       }
     })
     .then((response)=>{ //渲染页面
-      console.log(response.data.data)
-     this.item=response.data.data
+      console.log(JSON.parse(Decrypt(response)).data.data)
+     this.item=JSON.parse(Decrypt(response)).data.data
       var that=this
-      getGoodsList(0,response.data.data.length,that)
+      getGoodsList(0,JSON.parse(Decrypt(response)).data.data.length,that)
       function getGoodsList(j,length,that){
         var custId=that.item[j].release.custId
         that.item[j].release.releaseTime=that.formatTime(that.item[j].release.releaseTime)
@@ -156,9 +157,9 @@ export default {
             "X-Request-ID":"1"
           }
         }).then((response)=>{
-            that.item[j].release.custImgHead=response.data.data.custImgHead
-            that.item[j].release.custName=response.data.data.custName
-            that.item[j].release.isVip=response.data.data.isVip
+            that.item[j].release.custImgHead=JSON.parse(Decrypt(response)).data.data.custImgHead
+            that.item[j].release.custName=JSON.parse(Decrypt(response)).data.data.custName
+            that.item[j].release.isVip=JSON.parse(Decrypt(response)).data.data.isVip
             if(++j < length){
               getGoodsList(j, length,that);
             }

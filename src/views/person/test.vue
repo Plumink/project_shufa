@@ -11,7 +11,7 @@ import {Decrypt,Encrypt} from '../../api/utils.js'
 export default {
   methods: {
     become(){
-      var s = Encrypt(123189237);//加密
+      var s = Encrypt('吕锋');//加密
       var a = Decrypt(s);//解密
       console.log(s);
       console.log(a)

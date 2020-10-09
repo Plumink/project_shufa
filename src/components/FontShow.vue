@@ -100,6 +100,7 @@
 
 <script>
 import domtoimage from '../Function/dom-to-image'
+import {Decrypt,Encrypt} from '../api/utils'
 export default {
   data() {
     return {
@@ -242,6 +243,7 @@ export default {
     var str = this.$route.query.message.text;
     var arr = str.match(/[\u4e00-\u9fa5]/g);
     let params = this.$route.query.message;
+    console.log(params);
     this.$axios
       .post("/CalligraphyService/dictionaries/query", params, {
         headers: {
@@ -252,7 +254,7 @@ export default {
       })
       .then((response) => {
         if (this.$route.query.message.horizontal == true) { //横排
-          var item = response.data.data; //把数据库中的数据返回，所有数据，得进行分类
+          var item = JSON.parse(Decrypt(response.data.data)); //把数据库中的数据返回，所有数据，得进行分类
           for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < item.length; j++) {
               if (arr[i] === item[j].text) {  //如果输入的第i个字与数据库中返回的字相同
@@ -289,7 +291,7 @@ export default {
           console.log(this.width)
           console.log(this.height)
         } else {
-          var item = response.data.data;
+          var item = JSON.parse(Decrypt(response.data.data));
           for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < item.length; j++) {
               if (arr[i] === item[j].text) {

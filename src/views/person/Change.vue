@@ -42,6 +42,7 @@
   </v-app>
 </template>
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 import TopNavigation from '../../components/TopNavigation'
 export default {
   data() {
@@ -68,9 +69,9 @@ export default {
           'X-Request-ID':'1'
         }
       }).then(response =>{
-        console.log(response.data.data);
-        this.userImageHead = response.data.data;
-        if(response.data.data != ''){
+        console.log(JSON.parse(Decrypt(response)).data.data);
+        this.userImageHead = JSON.parse(Decrypt(response)).data.data;
+        if(JSON.parse(Decrypt(response)).data.data != ''){
           let params = {
             "customerId": this.userId,
             "customerImgHead": this.userImageHead,

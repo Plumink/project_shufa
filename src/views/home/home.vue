@@ -127,6 +127,7 @@
 <script>
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
+import {Decrypt,Encrypt} from '../../api/utils.js'
 export default {
   components: {
     FootNavigation,
@@ -168,7 +169,7 @@ export default {
         },
       })
       .then(function (res) {
-        var a = res.data.data;
+        var a = JSON.parse(Decrypt(res.data.data));
         that.ziti.push(a.CalligraphyTypes);
         that.author.push(a.Authors);
       });

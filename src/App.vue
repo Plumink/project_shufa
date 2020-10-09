@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../src/api/utils'
 export default {
   name: "app",
   data: () => ({
@@ -26,9 +27,9 @@ export default {
         },
       })
       .then(function (res) {
-        console.log(res.data.data.openid);
-        that.openid = res.data.data.openid;
-        var id = res.data.data.openid;
+        console.log(JSON.parse(Decrypt(res)).data.data.openid);
+        that.openid = JSON.parse(Decrypt(res)).data.data.openid;
+        var id = JSON.parse(Decrypt(res)).data.data.openid;
         that.setCookie("openid", id, 360);
         console.log('以获取openid，并写入cookie')
         that.$axios
@@ -43,19 +44,19 @@ export default {
           )
           .then((response) => {
             var userData = {
-              custId: response.data.data.custId,
-              custTel: response.data.data.custTel,
-              custName: response.data.data.custName,
-              custPass: response.data.data.custPass,
-              custImgHead: response.data.data.custImgHead,
-              tag: response.data.data.tag,
-              custLastTime: response.data.data.custLastTime,
-              vipEffDate: response.data.data.vipEffDate,
-              openid: response.data.data.openId,
-              isVip: response.data.data.isVip,
-              vipExpDate: response.data.data.vipExpDate,
-              invalidTime: response.data.data.invalidTime,
-              ifValid: response.data.data.ifValid,
+              custId: JSON.parse(Decrypt(response)).data.data.custId,
+              custTel: JSON.parse(Decrypt(response)).data.data.custTel,
+              custName: JSON.parse(Decrypt(response)).data.data.custName,
+              custPass: JSON.parse(Decrypt(response)).data.data.custPass,
+              custImgHead: JSON.parse(Decrypt(response)).data.data.custImgHead,
+              tag: JSON.parse(Decrypt(response)).data.data.tag,
+              custLastTime: JSON.parse(Decrypt(response)).data.data.custLastTime,
+              vipEffDate: JSON.parse(Decrypt(response)).data.data.vipEffDate,
+              openid: JSON.parse(Decrypt(response)).data.data.openId,
+              isVip: JSON.parse(Decrypt(response)).data.data.isVip,
+              vipExpDate: JSON.parse(Decrypt(response)).data.data.vipExpDate,
+              invalidTime: JSON.parse(Decrypt(response)).data.data.invalidTime,
+              ifValid: JSON.parse(Decrypt(response)).data.data.ifValid,
             };
             console.log('调试由openid获取用户信息接口')
             console.log(userData)

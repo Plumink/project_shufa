@@ -107,6 +107,7 @@
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
 import Cookies from "js-cookie";
+import {Decrypt,Encrypt} from '../../api/utils.js'
 
 export default {
   components: {
@@ -258,8 +259,8 @@ export default {
         }
       )
       .then(function (res) {
-        
-        var a = res.data.data;
+        console.log(res)
+        var a = JSON.parse(Decrypt(res.data.data));
         that.ziti.push(a.CalligraphyTypes);
         console.log(that.ziti)
         for(var i=0;i<that.ziti[0].length;i++){

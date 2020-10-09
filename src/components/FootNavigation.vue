@@ -49,6 +49,7 @@
 
 <script>
 import Vuetify from "vuetify";
+import {Decrypt,Encrypt} from '../api/utils.js'
 export default {
   vuetify: new Vuetify(),
   data() {
@@ -90,10 +91,8 @@ export default {
         }
       )
       .then(function (res) {
-        console.log(res);
-        var a = res.data.data.CalligraphyTypes;
+        var a = JSON.parse(Decrypt(res.data.data)).CalligraphyTypes;
         that.items_dictionaries = a;
-        console.log(that.items_dictionaries);
       });
   },
   methods: {

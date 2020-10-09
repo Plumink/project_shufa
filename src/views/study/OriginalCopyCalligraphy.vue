@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 import FootNavigation from "../../components/FootNavigation";
 export default {
   components: {

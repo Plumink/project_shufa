@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 import FootNavigation from "../../components/FootNavigation";
 import TopNavigation from "../../components/TopNavigation";
 import Search from "../../components/Search";

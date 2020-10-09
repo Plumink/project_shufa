@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import {Decrypt,Encrypt} from '../../api/utils'
 import FootNavigation from "../../components/FootNavigation";
 import Show from '../../components/Show'
 export default {
@@ -71,7 +72,7 @@ export default {
           },
         })
         .then((response) => {
-          if (response.data.code == "0") {
+          if (JSON.parse(Decrypt(response)).data.code == "0") {
             this.isfollow = !this.isfollow;
           } else {
             alert("关注失败");
@@ -96,7 +97,7 @@ export default {
           }
         )
         .then((response) => {
-          if ((response.data.code = "0")) {
+          if ((JSON.parse(Decrypt(response)).data.code = "0")) {
             this.isfollow = !this.isfollow;
           } else {
             alert("取消关注失败");
@@ -129,7 +130,7 @@ export default {
         "X-Request-ID":"1"
       }
     }).then((response)=>{
-      this.item=response.data.data
+      this.item=JSON.parse(Decrypt(response)).data.data
       console.log(this.item)
       for(var i=0;i<this.item.length;i++){
         this.item[i].release.releaseTime=this.formatTime(this.item[i].release.releaseTime)  //格式化时间
@@ -137,8 +138,6 @@ export default {
         this.item[i].release.custName=this.$route.query.custName
       }
     })
-
-
       let params = {
       custId: this.$store.state.id || this.$store.state.custId,
       followCatchId: this.$route.query.custId, //被关注者Id——待替换
@@ -151,7 +150,7 @@ export default {
         },
       })
       .then((response) => {
-        if (response.data.data.ifFollow == "1") {
+        if (JSON.parse(Decrypt(response)).data.data.ifFollow == "1") {
           this.isfollow = true;
         }
       });
@@ -191,7 +190,7 @@ export default {
 
         }
     }).then(response=>{
-      console.log(response)
+      console.log(JSON.parse(Decrypt(response)))
     })
     console.log('1')
   }

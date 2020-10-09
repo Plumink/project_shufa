@@ -181,8 +181,8 @@ export default {
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
-          console.log(res);
-          this.package = res.data.data;
+          console.log(JSON.parse(Decrypt(res)));
+          this.package = JSON.parse(Decrypt(res)).data.data;
           var time = new Date().getTime().toString();
           this.timeStamp = time;
           console.log(this.timeStamp);
@@ -198,9 +198,9 @@ export default {
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
             .then(function (res) {
-              console.log(res);
-              that.sign = Encrypt(res.data.data);
-              that.setCookie("sign", Encrypt(res.data.data), 360);
+              console.log(JSON.parse(Decrypt(res)));
+              that.sign = Encrypt(JSON.parse(Decrypt(res)).data.data);
+              that.setCookie("sign", Encrypt(JSON.parse(Decrypt(res)).data.data), 360);
               function onBridgeReady(that, sign) {
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
@@ -215,9 +215,9 @@ export default {
                   function (res) {
                     console.log("debug");
                     console.log(that);
-                    console.log(res);
-                    alert(JSON.stringify(res));
-                    if (res.err_msg === "get_brand_wcpay_request:ok") {
+                    console.log(JSON.parse(Decrypt(res)));
+                    alert(JSON.stringify(JSON.parse(Decrypt(res))));
+                    if (JSON.parse(Decrypt(res)).err_msg === "get_brand_wcpay_request:ok") {
                      
                       that.$axios.post("/CalligraphyService/user/vipRecharge",{
                         "customerId": that.$store.state.custId||that.$store.state.id,
@@ -238,7 +238,7 @@ export default {
                       }
                       ).then(
                         (res)=>{
-                          console.log(res);
+                          console.log(JSON.parse(Decrypt(res)));
                         }
                       )
                       
@@ -261,7 +261,7 @@ export default {
                   document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
                 }
               } else {
-                onBridgeReady(that,res.data.data);
+                onBridgeReady(that,JSON.parse(Decrypt(res)).data.data);
               }
             });
           var that = this;
@@ -291,12 +291,12 @@ export default {
         }
       )
       .then((response) => {
-        console.log(response)
-        if(response.data.code=='-101'){
+        console.log(JSON.parse(Decrypt(response)))
+        if(JSON.parse(Decrypt(response)).data.code=='-101'){
           this.length=0
         }
         else{
-           this.length = response.data.data.length;
+           this.length = JSON.parse(Decrypt(response)).length;
         }
       });
       //获取收藏数量
@@ -304,7 +304,7 @@ export default {
         headers:{"X-Request-ID":"1"}
       })
       .then((response)=>{
-        this.collectionNum=response.data.data
+        this.collectionNum=JSON.parse(Decrypt(response)).data.data
       })
   },
    //监听路由的变化
@@ -338,7 +338,7 @@ export default {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log(JSON.parse(Decrypt(response)));
       });
     console.log("1");
     this.$axios
@@ -354,10 +354,10 @@ export default {
         }
       )
       .then((response) => {
-        console.log(response);
-        var n = response.data.data.length;
+        console.log(JSON.parse(Decrypt(response)));
+        var n = JSON.parse(Decrypt(response)).data.data.length;
         for (var i = 0; i < n; i++) {
-          this.follow.push(response.data.data[i]);
+          this.follow.push(JSON.parse(Decrypt(response)).data.data[i]);
         }
       });
   },
