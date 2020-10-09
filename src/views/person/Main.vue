@@ -159,7 +159,7 @@ export default {
         pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
       }
       //加密
-      this.pwd = Encrypt(pwd);
+      this.pwd = pwd;
       console.log(this.pwd);
 
       //下单的入参
@@ -181,8 +181,8 @@ export default {
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
-          console.log(Decrypt(res));
-          this.package = Decrypt(res).data.data;
+          console.log(Decrypt(res.data.data));
+          this.package = Decrypt(res.data.data);
           var time = new Date().getTime().toString();
           this.timeStamp = time;
           console.log(this.timeStamp);
@@ -190,7 +190,7 @@ export default {
           let par = {
             appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
             timeStamp: this.timeStamp, // 时间戳，自1970年以来的秒数
-            nonceStr: Decrypt(this.pwd), // 随机串
+            nonceStr: this.pwd, // 随机串
             signType: "MD5", // 微信签名方式：
             package: "prepay_id=" + this.package, //
           };
@@ -198,16 +198,16 @@ export default {
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
             .then(function (res) {
-              console.log(JSON.parse(Decrypt(res)));
-              that.sign = Encrypt(JSON.parse(Decrypt(res)).data.data);
-              that.setCookie("sign", Encrypt(JSON.parse(Decrypt(res)).data.data), 360);
+              console.log(JSON.parse(Decrypt(res.data.data)));
+              that.sign = Encrypt(JSON.parse(Decrypt(res.data.data)));
+              that.setCookie("sign", Encrypt(JSON.parse(Decrypt(res.data.data))), 360);
               function onBridgeReady(that, sign) {
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
                   {
                     appId: "wx284c1a8307ed35ef", // 公众号名称，由商户传入
                     timeStamp: that.timeStamp, // 时间戳，自1970年以来的秒数
-                    nonceStr: Decrypt(that.pwd), // 随机串
+                    nonceStr: that.pwd, // 随机串
                     package: "prepay_id=" + that.package,
                     signType: "MD5", // 微信签名方式：
                     paySign: Decrypt(sign), // 微信签名
@@ -267,6 +267,7 @@ export default {
           var that = this;
           console.log(this.sign);
         });
+        console.log(this.package);
     },
   },
   created() {
