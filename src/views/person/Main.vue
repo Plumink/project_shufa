@@ -199,8 +199,8 @@ export default {
             .post("/CalligraphyService/common/paySign", par)
             .then(function (res) {
               console.log(JSON.parse(Decrypt(res.data.data)));
-              that.sign = Encrypt(JSON.parse(Decrypt(res.data.data)));
-              that.setCookie("sign", Encrypt(JSON.parse(Decrypt(res.data.data))), 360);
+              that.sign = JSON.parse(Decrypt(res.data.data));
+              that.setCookie("sign", JSON.parse(Decrypt(res.data.data)), 360);
               function onBridgeReady(that, sign) {
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
@@ -210,7 +210,7 @@ export default {
                     nonceStr: that.pwd, // 随机串
                     package: "prepay_id=" + that.package,
                     signType: "MD5", // 微信签名方式：
-                    paySign: Decrypt(sign), // 微信签名
+                    paySign: sign, // 微信签名
                   },
                   function (res) {
                     console.log("debug");
@@ -238,7 +238,7 @@ export default {
                       }
                       ).then(
                         (res)=>{
-                          console.log(JSON.parse(Decrypt(res)));
+                          console.log(res);
                         }
                       )
                       
