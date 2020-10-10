@@ -194,6 +194,7 @@ export default {
             signType: "MD5", // 微信签名方式：
             package: "prepay_id=" + this.package, //
           };
+          console.log(par);
           var that = this;
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
