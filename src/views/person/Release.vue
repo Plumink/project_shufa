@@ -184,8 +184,8 @@ export default {
           'X-Request-ID':'1'
         }
       }).then(response =>{
-        console.log(JSON.parse(Decrypt(response)).data.data);
-        this.image.push(JSON.parse(Decrypt(response)).data.data);
+        console.log(JSON.parse(Decrypt(response.data.data)));
+        this.image.push(JSON.parse(Decrypt(response.data.data)));
       })
     },
     release() {
@@ -213,7 +213,7 @@ export default {
         'X-Request-ID':'1'
       })
       .then((response)=>{
-          if(JSON.parse(Decrypt(response)).data.code=='0'){
+          if(response.data.code=='0'){
             console.log(this)
             this.$router.push({ path: '/show' });
           }

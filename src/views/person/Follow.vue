@@ -51,7 +51,7 @@ export default {
         .then((response) => {
           this.$emit("deleteFans");
           console.log(JSON.parse(Decrypt(response)));
-          if (JSON.parse(Decrypt(response)).data.code == "0") {
+          if (response.data.code == "0") {
             for (var i = 0; i < this.follow.length; i++) {
               if (this.follow[i].customerId == item.customerId) {
                 this.follow.splice(i, 1);
@@ -93,11 +93,11 @@ export default {
         }
       )
       .then((response) => {
-        if (JSON.parse(Decrypt(response)).data.code == "-101") {
+        if (response.data.code == "-101") {
         } else {
-          var n = JSON.parse(Decrypt(response)).data.data.length;
+          var n = JSON.parse(Decrypt(response.data.data)).length;
           for (var i = 0; i < n; i++) {
-            this.follow.push(JSON.parse(Decrypt(response)).data.data[i]);
+            this.follow.push(JSON.parse(Decrypt(response.data.data[i])));
           }
         }
         console.log(this.follow)

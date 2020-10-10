@@ -135,7 +135,7 @@ export default {
       if (this.selects == "one") {
         this.str1 = "一个月会员 15元";
         this.str2 = "一个月会员";
-        this.str3 = "1500";
+        this.str3 = "1";
         this.proid = "001";
         this.str4 = 30;
       } else if (this.selects == "two") {
@@ -181,8 +181,9 @@ export default {
       this.$axios
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
+          var reg = new RegExp('"',"g"); 
           console.log(Decrypt(res.data.data));
-          this.package = Decrypt(res.data.data);
+          this.package = Decrypt(res.data.data).replace(reg, "");
           var time = new Date().getTime().toString();
           this.timeStamp = time;
           console.log(this.timeStamp);
@@ -211,7 +212,7 @@ export default {
                     nonceStr: that.pwd, // 随机串
                     package: "prepay_id=" + that.package,
                     signType: "MD5", // 微信签名方式：
-                    paySign: sign, // 微信签名
+                    paySign: Decrypt(sign).replace(new RegExp('"',"g"), ""), // 微信签名
                   },
                   function (res) {
                     console.log("debug");
@@ -242,10 +243,9 @@ export default {
                           console.log(res);
                         }
                       )
-                      
                     }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
                        window.location.href ='&payStatus=ok';
-                      alert("订单取消！")
+                      // alert("订单取消！")
                     }
                   }
                 );

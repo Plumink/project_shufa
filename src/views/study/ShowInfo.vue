@@ -136,7 +136,7 @@ export default {
             }
           )
           .then((response) => {
-            if (JSON.parse(Decrypt(response)).data.code == "0") {
+            if (response.data.code == "0") {
               this.isgood = false;
               --this.likesNumber;
             }
@@ -156,7 +156,7 @@ export default {
             }
           )
           .then((response) => {
-            if (JSON.parse(Decrypt(response)).data.code == "0") {
+            if (response.data.code == "0") {
               this.isgood = true;
               ++this.likesNumber;
             }
@@ -176,7 +176,7 @@ export default {
           },
         })
         .then((response) => {
-          if (JSON.parse(Decrypt(response)).data.code == "0") {
+          if (response.data.code == "0") {
             this.isfollow = !this.isfollow;
           } else {
             alert("关注失败");
@@ -201,7 +201,7 @@ export default {
           }
         )
         .then((response) => {
-          if ((JSON.parse(Decrypt(response)).data.code = "0")) {
+          if (response.data.code = "0") {
             this.isfollow = !this.isfollow;
           } else {
             alert("关注关注失败");
@@ -256,7 +256,7 @@ export default {
           },
         })
         .then((response) => {
-          if (JSON.parse(Decrypt(response)).data.code == "0") {
+          if (response.data.code == "0") {
             alert("评论成功");
             //如果评论成功，则调用获取评论内容接口，将新评论传入评论数组
             this.obj = {
@@ -296,21 +296,21 @@ export default {
         },
       })
       .then((response) => {
-        console.log(JSON.parse(Decrypt(response)).data.data); //返回的评论数据，不包含用户信息
-        for (var i = 0; i < JSON.parse(Decrypt(response)).data.data.length; i++) {
+        console.log(JSON.parse(Decrypt(response.data.data))); //返回的评论数据，不包含用户信息
+        for (var i = 0; i < JSON.parse(Decrypt(response.data.data)).length; i++) {
           //通过查询用户信息接口，将每个用户信息查询到
           this.obj = {
-            custId: JSON.parse(Decrypt(response)).data.data[i].custId, //发布者Id
-            commentContent: JSON.parse(Decrypt(response)).data.data[i].commentContent, //发布内容
-            commentTime: this.formatTime(JSON.parse(Decrypt(response)).data.data[i].commentTime), //发布时间
-            isShow: JSON.parse(Decrypt(response)).data.data[i].isShow, //是否展示
+            custId: JSON.parse(Decrypt(response.data.data[i])).custId, //发布者Id
+            commentContent: JSON.parse(Decrypt(response.data.data[i])).commentContent, //发布内容
+            commentTime: this.formatTime(JSON.parse(Decrypt(response.data.data[i])).commentTime), //发布时间
+            isShow: JSON.parse(Decrypt(response.data.data[i])).isShow, //是否展示
             custName: "", //发布者姓名
             custImgHead: "", //发布者头像
             isVip: "", //发布者是否是VIP
           };
           this.commentData.push(this.obj);
         }
-        if (JSON.parse(Decrypt(response)).data.data.length != 0) {
+        if (JSON.parse(Decrypt(response.data.data)).length != 0) {
           var that = this;
           getGoodsList(0, this.commentData.length, that);
         } //递归发送请求
@@ -330,9 +330,9 @@ export default {
             )
             .then((response) => {
               console.log(that.commentData);
-              that.commentData[j].custName = JSON.parse(Decrypt(response)).data.data.custName;
-              that.commentData[j].custImgHead = JSON.parse(Decrypt(response)).data.data.custImgHead;
-              that.commentData[j].isVip = JSON.parse(Decrypt(response)).data.data.isVip;
+              that.commentData[j].custName = JSON.parse(Decrypt(response.data.data)).custName;
+              that.commentData[j].custImgHead = JSON.parse(Decrypt(response.data.data)).custImgHead;
+              that.commentData[j].isVip = JSON.parse(Decrypt(response.data.data)).isVip;
 
               if (++j < length) {
                 getGoodsList(j, length, that);
@@ -353,7 +353,7 @@ export default {
         },
       })
       .then((response) => {
-        if (JSON.parse(Decrypt(response)).data.data.ifFollow == "1") {
+        if (JSON.parse(Decrypt(response.data.data)).ifFollow == "1") {
           this.isfollow = true;
         }
       });
@@ -369,7 +369,7 @@ export default {
         }
       )
       .then((response) => {
-        this.likesNumber = JSON.parse(Decrypt(response)).data.data.likesNumber;
+        this.likesNumber = JSON.parse(Decrypt(response.data.data)).likesNumber;
       });
     //判断是否点赞
     this.$axios
@@ -386,7 +386,7 @@ export default {
         }
       )
       .then((response) => {
-        if (JSON.parse(Decrypt(response)).data.data.isGood == "1") {
+        if (JSON.parse(Decrypt(response.data.data)).isGood == "1") {
           this.isgood = true;
         }
       });
@@ -402,7 +402,7 @@ export default {
       })
       .then((response)=>{
         console.log(JSON.parse(Decrypt(response)))
-        this.isCollection=JSON.parse(Decrypt(response)).data.data.isCollection
+        this.isCollection=JSON.parse(Decrypt(response.data.data)).isCollection
       })
   },
 };
