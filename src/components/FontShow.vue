@@ -86,7 +86,7 @@
     </div>
 
     <div class="popContainer d-flex flex-column justify-center align-center" v-if="isimage">
-      
+
       <div class="popbox d-flex align-center justify-center flex-column">
         <span style="margin-top:100px">长按图片保存到相册</span>
         <div class="d-flex flex-column align-center justify-center">
@@ -254,7 +254,7 @@ export default {
       })
       .then((response) => {
         if (this.$route.query.message.horizontal == true) { //横排
-          var item = JSON.parse(Decrypt(response.data.data)); //把数据库中的数据返回，所有数据，得进行分类
+          var item = JSON.parse(Decrypt(response.data.data, response.data.iv)); //把数据库中的数据返回，所有数据，得进行分类
           for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < item.length; j++) {
               if (arr[i] === item[j].text) {  //如果输入的第i个字与数据库中返回的字相同
@@ -265,9 +265,9 @@ export default {
             this.data = []; //清空data数组
           }
           var s = Math.ceil(  //横排的总行数
-              this.store.length / this.$route.query.message.row_num 
+              this.store.length / this.$route.query.message.row_num
           );
-          
+
           for (var i = 0; i < s; i++) {   //每一行
             var v=this.$route.query.message.row_num //横排的行数
             var a = [];
@@ -291,7 +291,7 @@ export default {
           console.log(this.width)
           console.log(this.height)
         } else {
-          var item = JSON.parse(Decrypt(response.data.data));
+          var item = JSON.parse(Decrypt(response.data.data, response.data.iv));
           for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < item.length; j++) {
               if (arr[i] === item[j].text) {

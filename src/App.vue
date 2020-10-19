@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <script>
-import {Decrypt,Encrypt} from '../src/api/utils'
+import {Decrypt, Encrypt} from '../src/api/utils'
+
 export default {
   name: "app",
   data: () => ({
-    openid:''
+    openid: ''
   }),
   created: function () {
     console.log('123')
@@ -27,9 +28,9 @@ export default {
         },
       })
       .then(function (res) {
-        console.log(JSON.parse(Decrypt(res)).data.data.openid);
-        that.openid = JSON.parse(Decrypt(res)).data.data.openid;
-        var id = JSON.parse(Decrypt(res)).data.data.openid;
+        console.log(JSON.parse(Decrypt(res.data.data, res.data.iv)).openid);
+        that.openid = JSON.parse(Decrypt(res.data.data, res.data.iv)).openid;
+        var id = JSON.parse(Decrypt(res.data.data, res.data.iv)).openid;
         that.setCookie("openid", id, 360);
         console.log('以获取openid，并写入cookie')
         that.$axios
@@ -39,55 +40,63 @@ export default {
               openId: id,
             },
             {
-              headers: { "X-Request-ID": "1" },
+              headers: {"X-Request-ID": "1"},
             }
           )
           .then((response) => {
             var userData = {
-              custId: JSON.parse(Decrypt(response)).data.data.custId,
-              custTel: JSON.parse(Decrypt(response)).data.data.custTel,
-              custName: JSON.parse(Decrypt(response)).data.data.custName,
-              custPass: JSON.parse(Decrypt(response)).data.data.custPass,
-              custImgHead: JSON.parse(Decrypt(response)).data.data.custImgHead,
-              tag: JSON.parse(Decrypt(response)).data.data.tag,
-              custLastTime: JSON.parse(Decrypt(response)).data.data.custLastTime,
-              vipEffDate: JSON.parse(Decrypt(response)).data.data.vipEffDate,
-              openid: JSON.parse(Decrypt(response)).data.data.openId,
-              isVip: JSON.parse(Decrypt(response)).data.data.isVip,
-              vipExpDate: JSON.parse(Decrypt(response)).data.data.vipExpDate,
-              invalidTime: JSON.parse(Decrypt(response)).data.data.invalidTime,
-              ifValid: JSON.parse(Decrypt(response)).data.data.ifValid,
+              custId: JSON.parse(Decrypt(response.data.data, response.data.iv)).custId,
+              custTel: JSON.parse(Decrypt(response.data.data, response.data.iv)).custTel,
+              custName: JSON.parse(Decrypt(response.data.data, response.data.iv)).custName,
+              custPass: JSON.parse(Decrypt(response.data.data, response.data.iv)).custPass,
+              custImgHead: JSON.parse(Decrypt(response.data.data, response.data.iv)).custImgHead,
+              tag: JSON.parse(Decrypt(response.data.data, response.data.iv)).tag,
+              custLastTime: JSON.parse(Decrypt(response.data.data, response.data.iv)).custLastTime,
+              vipEffDate: JSON.parse(Decrypt(response.data.data, response.data.iv)).vipEffDate,
+              openid: JSON.parse(Decrypt(response.data.data, response.data.iv)).openId,
+              isVip: JSON.parse(Decrypt(response.data.data, response.data.iv)).isVip,
+              vipExpDate: JSON.parse(Decrypt(response.data.data, response.data.iv)).vipExpDate,
+              invalidTime: JSON.parse(Decrypt(response.data.data, response.data.iv)).invalidTime,
+              ifValid: JSON.parse(Decrypt(response.data.data, response.data.iv)).ifValid,
             };
             console.log('调试由openid获取用户信息接口')
             console.log(userData)
-            that.$store.commit("wechatLogin",userData);
+            that.$store.commit("wechatLogin", userData);
           });
       });
 
     if (this.$store.state.land == true || this.$store.state.openid != "") {
       if (this.$route.path == "/main") {
         this.$router.push(
-          { path: "/main" },
-          (onComplete) => {},
-          (onAbort) => {}
+          {path: "/main"},
+          (onComplete) => {
+          },
+          (onAbort) => {
+          }
         );
       } else if (this.$route.path == "/main/follow") {
         this.$router.push(
-          { path: "/main/follow" },
-          (onComplete) => {},
-          (onAbort) => {}
+          {path: "/main/follow"},
+          (onComplete) => {
+          },
+          (onAbort) => {
+          }
         );
       } else if (this.$route.path == "/main/follower") {
         this.$router.push(
-          { path: "/main/follower" },
-          (onComplete) => {},
-          (onAbort) => {}
+          {path: "/main/follower"},
+          (onComplete) => {
+          },
+          (onAbort) => {
+          }
         );
       } else {
         this.$router.push(
-          { path: "/homelogin" },
-          (onComplete) => {},
-          (onAbort) => {}
+          {path: "/homelogin"},
+          (onComplete) => {
+          },
+          (onAbort) => {
+          }
         );
       }
     } else {
@@ -98,9 +107,11 @@ export default {
       ) {
         this.$message.error("尚未登陆");
         this.$router.push(
-          { path: "/" },
-          (onComplete) => {},
-          (onAbort) => {}
+          {path: "/"},
+          (onComplete) => {
+          },
+          (onAbort) => {
+          }
         );
       }
     }

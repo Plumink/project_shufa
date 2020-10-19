@@ -35,11 +35,11 @@
             <div style="width:30%;margin-right:10px">
               <v-autocomplete v-model="second" :items="author" dense filled label="次选"> </v-autocomplete>
             </div>
-        </div>  
+        </div>
         </div>
       <div class="middle_l d-flex flex-row">
         <template>
-          <v-col 
+          <v-col
             class="d-flex flex-row"
             style="width: 20vw; padding-right: 0;"
             cols="12"
@@ -260,7 +260,7 @@ export default {
       )
       .then(function (res) {
         console.log(res)
-        var a = JSON.parse(Decrypt(res.data.data));
+        var a = JSON.parse(Decrypt(res.data.data, res.data.iv));
         that.ziti.push(a.CalligraphyTypes);
         console.log(that.ziti)
         for(var i=0;i<that.ziti[0].length;i++){

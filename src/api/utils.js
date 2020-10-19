@@ -2,15 +2,18 @@ import CryptoJS from 'crypto-js/crypto-js'
 // 默认的 KEY 与 iv 如果没有给
 const KEY = CryptoJS.enc.Utf8.parse("2020080810050511");
 const IV = CryptoJS.enc.Utf8.parse('0911789161903810');
+
 /**
- * AES加密 ：字符串 key iv  返回base64 
+ * AES加密 ：字符串 key iv  返回base64
  */
-export function Encrypt(word, keyStr, ivStr) {
+export function Encrypt(word, ivStr, keyStr) {
   let key = KEY
   let iv = IV
 
-  if (keyStr) {
+  if (keyStr && ivStr) {
     key = CryptoJS.enc.Utf8.parse(keyStr);
+    iv = CryptoJS.enc.Utf8.parse(ivStr);
+  } else if (ivStr) {
     iv = CryptoJS.enc.Utf8.parse(ivStr);
   }
 
@@ -23,15 +26,18 @@ export function Encrypt(word, keyStr, ivStr) {
   // console.log("-=-=-=-", encrypted.ciphertext)
   return CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
 }
+
 /**
- * AES 解密 ：字符串 key iv  返回base64  
+ * AES 解密 ：字符串 key iv  返回base64
  */
-export function Decrypt(word, keyStr, ivStr) {
+export function Decrypt(word, ivStr, keyStr) {
   let key = KEY
   let iv = IV
 
-  if (keyStr) {
+  if (keyStr && ivStr) {
     key = CryptoJS.enc.Utf8.parse(keyStr);
+    iv = CryptoJS.enc.Utf8.parse(ivStr);
+  } else if (ivStr) {
     iv = CryptoJS.enc.Utf8.parse(ivStr);
   }
 

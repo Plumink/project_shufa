@@ -2,14 +2,14 @@
   <div>
     <p style="text-align:center;color:#b8a18c;margin:0">
           <span class="Calligraphy_icon_eyes" />
-           我 的 关 注 
+           我 的 关 注
     </p>
     <div class="follow_all" v-for="(item,index) in follow" :key="index">
       <img :src="item.customerImgHead" alt />
       <div style="padding-top:2vh;">
         <span class="ziti_follow" style="margin-left:2vw;">用户名：{{item.userName}}</span>
         <br />
-        <div style="width:50vw;float:left;"> 
+        <div style="width:50vw;float:left;">
           <span
             class="ziti_follow"
             style="margin-left:2vw;"
@@ -68,7 +68,6 @@ export default {
             alert("删除失败");
           }
         });
-      // console.log(item.customerId)
     },
   },
   created() {
@@ -95,9 +94,9 @@ export default {
       .then((response) => {
         if (response.data.code == "-101") {
         } else {
-          var n = JSON.parse(Decrypt(response.data.data)).length;
+          var n = JSON.parse(Decrypt(response.data.data, response.data.iv)).length;
           for (var i = 0; i < n; i++) {
-            this.follow.push(JSON.parse(Decrypt(response.data.data[i])));
+            this.follow.push(JSON.parse(Decrypt(response.data.data, response.data.iv))[i]);
           }
         }
         console.log(this.follow)

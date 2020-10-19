@@ -2,7 +2,7 @@
   <div>
     <p style="text-align:center;color:#b8a18c;margin:0">
           <span class="Calligraphy_icon_collection2" />
-           我 的 收 藏 
+           我 的 收 藏
     </p>
     <div
       class="d-flex flex-row justify-space-around box"
@@ -49,7 +49,7 @@ export default {
   methods: {
     jump(releaseid,custId,releaseTime,custName,custImgHead,messageInfo){
       console.log(messageInfo)
-      this.$router.push({ 
+      this.$router.push({
         path: '/show/info',
         query:{
           releaseid:releaseid,  //传给子页面发布id
@@ -79,10 +79,10 @@ export default {
         }
       )
       .then((response) => {
-        if (JSON.parse(Decrypt(response)).data.data == []) {
+        if (JSON.parse(Decrypt(response.data.data, response.data.iv)) == []) {
         } else {
-          this.item=JSON.parse(Decrypt(response)).data.data
-           var that=this
+          this.item=JSON.parse(Decrypt(response.data.data, response.data.iv))
+           var that=this;
       getGoodsList(0,JSON.parse(Decrypt(response)).data.data.length,that)
       function getGoodsList(j,length,that){
         var custId=that.item[j].releaseResponse.release.custId
@@ -93,9 +93,9 @@ export default {
           }
         }).then((response)=>{
           console.log(response)
-            that.item[j].releaseResponse.release.custImgHead=JSON.parse(Decrypt(response)).data.data.custImgHead
-            that.item[j].releaseResponse.release.custName=JSON.parse(Decrypt(response)).data.data.custName
-            that.item[j].releaseResponse.release.isVip=JSON.parse(Decrypt(response)).data.data.isVip
+            that.item[j].releaseResponse.release.custImgHead=JSON.parse(Decrypt(response.data.data, response.data.iv)).custImgHead
+            that.item[j].releaseResponse.release.custName=JSON.parse(Decrypt(response.data.data, response.data.iv)).custName
+            that.item[j].releaseResponse.release.isVip=JSON.parse(Decrypt(response.data.data, response.data.iv)).isVip
             console.log(that.item[j])
             if(++j < length){
               getGoodsList(j, length,that);
@@ -118,7 +118,7 @@ export default {
         }
       )
       .then((response) => {
-        this.pageLength = Math.ceil(JSON.parse(Decrypt(response)).data.data / 10);
+        this.pageLength = Math.ceil(JSON.parse(Decrypt(response.data.data, response.data.iv)) / 10);
         //判断分页页数,如果只有一页则取消分页功能
         if (this.pageLength < 2) {
           this.showPage = false;
@@ -140,11 +140,11 @@ export default {
         }
       )
       .then((response) => {
-        if (JSON.parse(Decrypt(response)).data.data == []) {
+        if (JSON.parse(Decrypt(response.data.data, response.data.iv)) == []) {
         } else {
-          this.item=JSON.parse(Decrypt(response)).data.data
+          this.item=JSON.parse(Decrypt(response.data.data, response.data.iv))
            var that=this
-      getGoodsList(0,JSON.parse(Decrypt(response)).data.data.length,that)
+      getGoodsList(0,JSON.parse(Decrypt(response.data.data, response.data.iv)).length,that)
       function getGoodsList(j,length,that){
         var custId=that.item[j].releaseResponse.release.custId
         that.item[j].releaseResponse.release.releaseTime=that.formatTime(that.item[j].releaseResponse.release.releaseTime)
@@ -154,9 +154,9 @@ export default {
           }
         }).then((response)=>{
           console.log(response)
-            that.item[j].releaseResponse.release.custImgHead=JSON.parse(Decrypt(response)).data.data.custImgHead
-            that.item[j].releaseResponse.release.custName=JSON.parse(Decrypt(response)).data.data.custName
-            that.item[j].releaseResponse.release.isVip=JSON.parse(Decrypt(response)).data.data.isVip
+            that.item[j].releaseResponse.release.custImgHead=JSON.parse(Decrypt(response.data.data, response.data.iv)).custImgHead
+            that.item[j].releaseResponse.release.custName=JSON.parse(Decrypt(response.data.data, response.data.iv)).custName
+            that.item[j].releaseResponse.release.isVip=JSON.parse(Decrypt(response.data.data, response.data.iv)).isVip
             console.log(that.item[j])
             if(++j < length){
               getGoodsList(j, length,that);

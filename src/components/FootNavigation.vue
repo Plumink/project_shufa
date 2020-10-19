@@ -91,7 +91,7 @@ export default {
         }
       )
       .then(function (res) {
-        var a = JSON.parse(Decrypt(res.data.data)).CalligraphyTypes;
+        var a = JSON.parse(Decrypt(res.data.data, res.data.iv)).CalligraphyTypes;
         that.items_dictionaries = a;
       });
   },

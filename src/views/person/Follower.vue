@@ -5,20 +5,20 @@
           ~~ 我 的 发 布 ~~
           <span class="Calligraphy_icon_rightwing" />
     </p>
-    <div class="d-flex flex-row justify-space-around box" v-for="(item,index) in item" :key="index" @click="jump(item.release.releaseId,userMessage.custId,
-    item.release.releaseTime,item.release.releaseName,userMessage.custImgHead,item.releaseFonts)">
-      <div class="box-left">
-        <img :src="item.releaseFonts[0].releaseFontUrl" alt />
+    <div class="d-flex flex-row justify-space-around box" v-for="(items,index) in items" :key="index"  @click="jump(items.release.releaseId,userMessage.custId,
+    items.release.releaseTime,items.release.releaseName,userMessage.custImgHead,items.releaseFonts)">
+      <div  class="box-left">
+        <img :src="items.releaseFonts[0].releaseFontUrl" alt />
       </div>
       <div class="d-flex flex-column justify-space-around box-right">
         <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:14px">{{item.release.releaseId}}号 ：</span>
-          <h4 class="show_title">{{item.release.releaseTitle | title}}</h4>
+          <span style="font-size:14px">{{items.release.releaseId}}号 ：</span>
+          <h4 class="show_title">{{items.release.releaseTitle | title}}</h4>
         </div>
-        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{item.release.releaseContent | content}}</span>
+        <span style="font-size:14px;margin:0;color:#BDBDBD;">{{items.release.releaseContent | content}}</span>
         <div class="d-flex flex-row justify-start align-center">
-          <span style="font-size:12px;margin-right:20px">{{item.release.releaseName}}</span>
-          <span style="font-size:12px">发布时间：{{item.release.releaseTime}}</span>
+          <span style="font-size:12px;margin-right:20px">{{items.release.releaseName}}</span>
+          <span style="font-size:12px">发布时间：{{items.release.releaseTime}}</span>
         </div>
       </div>
     </div>
@@ -30,14 +30,14 @@ import {Decrypt,Encrypt} from '../../api/utils'
 export default {
   data(){
     return{
-      item: [],
+      items: [],
       userMessage:{}//用户信息
     }
   },
-  
+
   methods:{
     jump(releaseid,custId,releaseTime,custName,custImgHead,messageInfo){
-      this.$router.push({ 
+      this.$router.push({
         path: '/show/info',
         query:{
           releaseid:releaseid,  //传给子页面发布id
@@ -74,18 +74,17 @@ export default {
       beginNum:0,
       custId:this.$store.state.id || this.$store.state.custId,
       endNum:100,
-      thisTime:'2020-09-17T12:14:40.607Z'
+      thisTime:''
     },{
       headers:{
         "X-Request-ID":"1"
       }
     }).then((response)=>{
-      console.log(JSON.parse(Decrypt(response)).data.data);
-      this.item=JSON.parse(Decrypt(response)).data.data
-      console.log((this.formatTime((JSON.parse(Decrypt(response)).data.data[0].release.releaseTime))).replace(/-/g, '/'))
-      for(var i=0;i<this.item.length;i++){
-        this.item[i].release.releaseTime=(this.formatDate((new Date(this.item[i].release.releaseTime)).getTime())).replace(/-/g, '/')  //格式化时间
-        this.item[i].release.releaseName=this.$store.state.userName || this.$store.state.custName   //加上用户昵称，即发布者信息
+      console.log(JSON.parse(Decrypt(response.data.data, response.data.iv)));
+      this.items=JSON.parse(Decrypt(response.data.data, response.data.iv));
+      for(var i=0;i<this.items.length;i++){
+        this.items[i].release.releaseTime=(this.formatDate((new Date(this.items[i].release.releaseTime)).getTime()))  //格式化时间
+        this.items[i].release.releaseName=this.$store.state.userName || this.$store.state.custName   //加上用户昵称，即发布者信息
       }
     })
   },

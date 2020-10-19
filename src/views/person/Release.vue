@@ -184,8 +184,8 @@ export default {
           'X-Request-ID':'1'
         }
       }).then(response =>{
-        console.log(JSON.parse(Decrypt(response.data.data)));
-        this.image.push(JSON.parse(Decrypt(response.data.data)));
+        console.log(JSON.parse(Decrypt(response.data.data, response.data.iv)));
+        this.image.push(JSON.parse(Decrypt(response.data.data, response.data.iv)));
       })
     },
     release() {

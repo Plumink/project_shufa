@@ -72,7 +72,7 @@ export default {
           },
         })
         .then((response) => {
-          if (JSON.parse(Decrypt(response)).data.code == "0") {
+          if (response.data.code == "0") {
             this.isfollow = !this.isfollow;
           } else {
             alert("关注失败");
@@ -97,7 +97,7 @@ export default {
           }
         )
         .then((response) => {
-          if ((JSON.parse(Decrypt(response)).data.code = "0")) {
+          if (response.data.code = "0") {
             this.isfollow = !this.isfollow;
           } else {
             alert("取消关注失败");
@@ -130,7 +130,7 @@ export default {
         "X-Request-ID":"1"
       }
     }).then((response)=>{
-      this.item=JSON.parse(Decrypt(response)).data.data
+      this.item=JSON.parse(Decrypt(response.data.data, response.data.iv))
       console.log(this.item)
       for(var i=0;i<this.item.length;i++){
         this.item[i].release.releaseTime=this.formatTime(this.item[i].release.releaseTime)  //格式化时间
@@ -150,7 +150,7 @@ export default {
         },
       })
       .then((response) => {
-        if (JSON.parse(Decrypt(response)).data.data.ifFollow == "1") {
+        if (JSON.parse(Decrypt(response.data.data, response.data.iv)).ifFollow == "1") {
           this.isfollow = true;
         }
       });
@@ -194,7 +194,7 @@ export default {
     })
     console.log('1')
   }
-  
+
 };
 </script>
 

@@ -41,7 +41,7 @@
           <div class="main_little">
             <span class="jinzi">我的发布</span>
             <router-link to="/main/follower">
-              <div class="shuzi">100</div>
+              <div class="shuzi">{{releasenum}}</div>
             </router-link>
           </div>
         </div>
@@ -85,6 +85,7 @@ export default {
       data: JSON.parse(localStorage.getItem("loginMessage")),
       length:'',
       num: "",
+      releasenum:'',
       detail: "",
       out_trade_no: "",
       package: "",
@@ -169,7 +170,7 @@ export default {
         detail: this.str2,
         feeType: "CNY",
         limitPay: "no_credit",
-        notifyUrl: "https://www.mocking.space/CalligraphyService/WXPay/notify",
+        notifyUrl: "/CalligraphyService/WXPay/notify",
         openid: this.$store.state.openid,
         outTradeNo: this.outTradeNo,
         productId: this.proid,
@@ -182,8 +183,8 @@ export default {
         .post("/CalligraphyService/WXPay/unifiedOrder", params)
         .then((res) => {
           var reg = new RegExp('"',"g"); 
-          console.log(Decrypt(res.data.data));
-          this.package = Decrypt(res.data.data).replace(reg, "");
+          console.log(Decrypt(res.data.data, res.data.iv));
+          this.package = Decrypt(res.data.data, res.data.iv).replace(reg, "");
           var time = new Date().getTime().toString();
           this.timeStamp = time;
           console.log(this.timeStamp);
@@ -200,9 +201,9 @@ export default {
           this.$axios
             .post("/CalligraphyService/common/paySign", par)
             .then(function (res) {
-              console.log(JSON.parse(Decrypt(res.data.data)));
-              that.sign = JSON.parse(Decrypt(res.data.data));
-              that.setCookie("sign", JSON.parse(Decrypt(res.data.data)), 360);
+              console.log(JSON.parse(Decrypt(res.data.data, res.data.iv)));
+              that.sign = JSON.parse(Decrypt(res.data.data, res.data.iv));
+              that.setCookie("sign", JSON.parse(Decrypt(res.data.data, res.data.iv)), 360);
               function onBridgeReady(that, sign) {
                 window.WeixinJSBridge.invoke(
                   "getBrandWCPayRequest",
@@ -220,7 +221,7 @@ export default {
                     console.log(res);
                     alert(res);
                     if (res.err_msg === "get_brand_wcpay_request:ok") {
-                     
+
                       that.$axios.post("/CalligraphyService/user/vipRecharge",{
                         "customerId": that.$store.state.custId||that.$store.state.id,
                         "effDate": new Date().getTime(),
@@ -244,8 +245,8 @@ export default {
                         }
                       )
                     }else if(res.err_msg === "get_brand_wcpay_request:cancel"){
-                       window.location.href ='&payStatus=ok';
-                      // alert("订单取消！")
+                      //  window.location.href ='&payStatus=ok';
+                      alert("订单取消！")
                     }
                   }
                 );
@@ -306,7 +307,21 @@ export default {
         headers:{"X-Request-ID":"1"}
       })
       .then((response)=>{
-        this.collectionNum=JSON.parse(Decrypt(response)).data.data
+        this.collectionNum=JSON.parse(Decrypt(response.data.data, response.data.iv))
+      })
+      //获取关注数量
+      this.$axios.post("/CalligraphyService/user/getCatchNumber",{customerId:this.$store.state.custId||this.$store.state.id},{
+        headers:{"X-Request-ID":"1"}
+      })
+      .then((response)=>{
+        this.length=JSON.parse(Decrypt(response.data.data, response.data.iv)).catchNumber;
+      })
+      //获取发布数量
+      this.$axios.post("/CalligraphyService/release/getReleaseNumber",{custId:this.$store.state.custId||this.$store.state.id},{
+        headers:{"X-Request-ID":"1"}
+      })
+      .then((response)=>{
+        this.releasenum=JSON.parse(Decrypt(response.data.data, response.data.iv));
       })
   },
    //监听路由的变化

@@ -169,7 +169,7 @@ export default {
         },
       })
       .then(function (res) {
-        var a = JSON.parse(Decrypt(res.data.data));
+        var a = JSON.parse(Decrypt(res.data.data, res.data.iv));
         that.ziti.push(a.CalligraphyTypes);
         that.author.push(a.Authors);
       });

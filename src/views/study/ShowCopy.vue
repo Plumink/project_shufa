@@ -41,6 +41,11 @@ export default {
   data() {
     return {
       item: [],
+      its:[],
+      name:[],
+      num:[],
+      custImgHead:[],
+      isVip:[],
       page: 1,
       pageLength:0,
       releaseNum:'',
@@ -87,18 +92,58 @@ export default {
     },
   },
   created(){
-    this.$axios.post('/CalligraphyService/release/getReleaseNumber',{ //获取发布的总数
+    let param = {
+      "beginNum": 0,
+      "custId": 0,
+      "endNum": 1,
+    }
+    this.$axios.post('/CalligraphyService/release/getReleaseNumber',param,{ //获取发布的总数
       headers:{
         'X-Request-ID':'1'
       }
     })
     .then((response)=>{
       this.releaseNum=JSON.parse(Decrypt(response.data.data, response.data.iv))
-      this.pageLength=Math.ceil(this.releaseNum/10) //每页展示10条数据，pageLength为页数
-      if(this.pageLength==0){
-        this.showPage=false
+      // this.pageLength=Math.ceil(this.releaseNum/10) //每页展示10条数据，pageLength为页数
+      // if(this.pageLength==0){
+      //   this.showPage=false
+      // }
+      console.log(this.releaseNum)
+      let params={
+      beginNum:0, //从数据库中获取第n页的第一条数据
+      endNum:this.releaseNum //从数据库中获取第n页的第十条数据
+    }
+    this.$axios.post('/CalligraphyService/release/getRelease',params,{ //获取每页的发布信息
+      headers:{
+        'X-Request-ID':'1'
       }
     })
+    .then((response)=>{ //渲染页面
+      console.log(JSON.parse(Decrypt(response.data.data, response.data.iv))[0].release)
+      this.item=JSON.parse(Decrypt(response.data.data, response.data.iv));
+      console.log(this.item[0].release.custId);
+      for(var i=0;i<this.releaseNum;i++){
+        this.$axios.post('/CalligraphyService/user/getUserInfo',{custId:this.item[i].release.custId},{
+          headers:{
+            "X-Request-ID":"1"
+          }
+        }).then((response)=>{
+          this.name.push(JSON.parse(Decrypt(response.data.data, response.data.iv)).custName);
+          this.custImgHead.push(JSON.parse(Decrypt(response.data.data, response.data.iv)).custImgHead);
+          this.isVip.push(JSON.parse(Decrypt(response.data.data, response.data.iv)).isVip);
+        })
+      }
+      console.log(this.name)
+
+      for(var j=0;j<this.num.length;j++){
+        this.item[j].release.custImgHead=this.name[j]
+        this.item[j].release.custName=this.name[j]
+        this.item[j].release.isVip=this.name[j]
+      }
+      console.log(this.item)
+    })
+    })
+
     let params={
       beginNum:(this.page-1)*10, //从数据库中获取第n页的第一条数据
       endNum:(this.page-1)*10+10 //从数据库中获取第n页的第十条数据
@@ -112,7 +157,7 @@ export default {
       console.log(JSON.parse(Decrypt(response.data.data, response.data.iv)))
       this.item=JSON.parse(Decrypt(response.data.data, response.data.iv))
       var that=this;
-      getGoodsList(0,JSON.parse(Decrypt(response.data.data, response.data.iv)).length,that);
+
       function getGoodsList(j,length,that){
         var custId=that.item[j].release.custId;
         that.item[j].release.releaseTime=that.formatTime(that.item[j].release.releaseTime)
@@ -127,19 +172,23 @@ export default {
             if(++j < length){
               getGoodsList(j, length,that);
             }
+
         })
       }
-
+      getGoodsList(0,JSON.parse(Decrypt(response.data.data, response.data.iv)).length,that);
+      console.log(that.releaseNum)
     })
   },
 
   watch:{
-    page:function(newdata){       //监听当前页数，当前页数变化时，获取下一页的数据，重新渲染页面
+    page:function(newdata){
+      console.log(this.page)       //监听当前页数，当前页数变化时，获取下一页的数据，重新渲染页面
       let params={
       beginNum:(this.page-1)*10, //从数据库中获取第n页的第一条数据
       endNum:(this.page-1)*10+10 //从数据库中获取第n页的第十条数据
     }
     console.log(params)
+    this.item=[]
    this.$axios.post('/CalligraphyService/release/getRelease',params,{ //获取每页的发布信息
       headers:{
         'X-Request-ID':'1'
@@ -149,7 +198,6 @@ export default {
       console.log(JSON.parse(Decrypt(response.data.data, response.data.iv)))
      this.item=JSON.parse(Decrypt(response.data.data, response.data.iv))
       var that=this
-      getGoodsList(0,JSON.parse(Decrypt(response.data.data, response.data.iv)).length,that)
       function getGoodsList(j,length,that){
         var custId=that.item[j].release.custId
         that.item[j].release.releaseTime=that.formatTime(that.item[j].release.releaseTime)
@@ -166,6 +214,7 @@ export default {
             }
         })
       }
+      getGoodsList(0,JSON.parse(Decrypt(response.data.data, response.data.iv)).length,that)
     })
     }
   },
